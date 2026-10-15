@@ -1,0 +1,58 @@
+.section-one {
+  margin: 40px 0;
+}
+
+.section-one .inner-wrap {
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow:
+    rgba(0, 0, 0, 0.19) 0px 10px 20px,
+    rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+.section-one .button-change-color {
+  width: 100%;
+}
+
+.section-one .form-group {
+  position: relative;
+}
+.section-one .form-group .form-control {
+  min-height: 50px;
+}
+.section-one .form-group .icon-left,
+.section-one .form-group .icon-right {
+  position: absolute;
+  top: 45px;
+  left: 30px;
+}
+.section-one .form-group label {
+  font-weight: 500;
+  color: #00165a;
+  font-size: 17px;
+}
+
+.section-one .form-group .form-control {
+  min-height: 50px;
+  background-color: #e8f0fe;
+  padding: 15px 15px 15px 45px;
+}
+.section-one .form-group .form-control:focus {
+  box-shadow: none;
+  border: 2px solid black;
+}
+.section-one .login {
+  padding-top: 10px;
+}
+.section-one .login a {
+  color: #00165a;
+  font-weight: 700;
+}
+.section-one .title {
+  font-weight: 700;
+  color: #00165a;
+  padding-bottom: 20px;
+}

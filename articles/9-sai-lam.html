@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Trời ơi! Đừng có đọc hết cuốn Clean Code dày cộm đó nữa! Dùng 3 nguyên tắc
+      này là đủ - LetDiv
+    </title>
+    <link rel="icon" href="/assets/images/icon-logo-cropped.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/base.css" />
+    <link rel="stylesheet" href="/assets/css/header.css" />
+    <link rel="stylesheet" href="/assets/css/footer.css" />
+    <link rel="stylesheet" href="css/news-details.css" />
+  </head>
+  <body>
+    <!-- header -->
+    <header class="header">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="header-logo">
+            <a href="/index.html"
+              ><img src="/assets/images/LetDiv.webp" alt="logo"
+            /></a>
+          </div>
+          <div class="header-navbar">
+            <div class="navbar-menu">
+              <ul>
+                <li><a href="/index.html">Trang Chủ</a></li>
+                <li><a href="/courses/course.html">Khóa Học</a></li>
+                <li><a href="/articles/news.html">Tin Tức</a></li>
+                <li><a href="/about/introduce.html">Giới Thiệu</a></li>
+              </ul>
+              <div class="inner-btn">
+                <!-- Button trigger modal -->
+                <button
+                  type="button"
+                  class="btn btn-primary button"
+                  data-toggle="modal"
+                  data-target="#exampleModal"
+                >
+                  Tư Vấn Ngay
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="header-action">
+            <div class="action">
+              <div class="cart-shop">
+                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+              </div>
+              <!-- Button trigger modal -->
+              <div class="login">
+                <button
+                  type="button"
+                  class="btn"
+                  data-toggle="modal"
+                  data-target="#loginModal"
+                >
+                  <i class="fa-solid fa-user"></i>
+                </button>
+              </div>
+              <div class="navbar-icon"><i class="fa-solid fa-bars"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="header-modal">
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Liên hệ</h5>
+              <div class="btn-close">
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="btn-contact">
+                <button
+                  class="button-change-color"
+                  onclick="
+                    window.open('https://zalo.me/2219221277314619603', '_blank')
+                  "
+                >
+                  Nhắn tin Zalo OA
+                </button>
+                <button
+                  class="button-change-color"
+                  onclick="
+                    window.open(
+                      'https://www.facebook.com/letdiv.innovation',
+                      '_blank',
+                    )
+                  "
+                >
+                  Nhắn tin Facebook
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- login Modal -->
+    <div class="login-modal">
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="loginModal"
+        tabindex="-1"
+        aria-labelledby="loginModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="loginModalLabel">Đăng Nhập</h5>
+              <div class="btn-close">
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <form action="" method="post">
+                <div class="form-group">
+                  <label for="exampleInputText1" class="label"
+                    >Tài khoản <span style="color: red">*</span></label
+                  >
+                  <span class="icon"><i class="fa-solid fa-user"></i></span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="exampleInputText1"
+                    aria-describedby="textHelp"
+                    placeholder="Ví dụ: nguyenvana"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1" class="label"
+                    >Mật khẩu <span style="color: red">*</span></label
+                  >
+                  <span class="icon"><i class="fa-solid fa-lock"></i></span>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="exampleInputPassword1"
+                  />
+                </div>
+                <button class="button-change-color">Đăng nhập</button>
+              </form>
+              <div class="forgot-pass">
+                <a href="/auth/forgot-password.html">Quên mật khẩu ?</a>
+              </div>
+              <div class="register text-center">
+                Bạn chưa có tài khoản?
+                <a href="/auth/register.html">Đăng ký ngay</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- login Modal end-->
+
+    <!-- header end -->
+
+    <!-- section-one -->
+    <div class="section-one">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="inner-title">
+            <h1 class="title">
+              Trời ơi! Đừng có đọc hết cuốn Clean Code dày cộm đó nữa! Dùng 3
+              nguyên tắc này là đủ
+            </h1>
+          </div>
+          <div class="inner-image">
+            <img
+              src="/assets/images/anh-bia-9-sai-lam-pha-nat-su-nghiep-dev-1024x640.webp"
+              alt=""
+            />
+          </div>
+          <div class="inner-content">
+            <p>
+              Ngưng ảo tưởng rằng cứ ngồi lỳ trong công ty 5 năm, 10 năm thì
+              trình độ sẽ tự nhiên giỏi lên, rồi đến một ngày đẹp trời bạn sẽ
+              nghiễm nhiên trở thành Senior hay Leader.
+            </p>
+            <p>Đừng có mơ! Không bao giờ có chuyện đó đâu!</p>
+            <p>
+              Sự thật mất lòng: Trong ngành lập trình, chưa bao giờ có khái niệm
+              ‘sống lâu lên lão làng’.
+            </p>
+            <p>
+              Rất nhiều người ngoài kia mang tiếng đi làm 5-10 năm, nhưng tư duy
+              và kỹ năng lại mãi mắc kẹt ở vị trí Junior hoặc Mid, vĩnh viễn
+              không thể nào vươn tới được các vị trí cấp cao hơn.
+            </p>
+            <p>
+              Bạn nên ghi nhớ rằng: Không một công ty nào trả lương cao chỉ vì
+              bạn có nhiều năm đi làm. Thứ duy nhất quyết định thu nhập của bạn
+              chính là giá trị thực tế bạn mang lại cho doanh nghiệp.
+            </p>
+            <p>
+              Nhưng tại sao bạn cày cuốc bục mặt ra mà sự nghiệp vẫn mãi lẹt đẹt
+              giậm chân tại chỗ?
+            </p>
+            <p>
+              Nguyên nhân không phải vì bạn kém cỏi thiếu năng lực, mà vì bạn
+              đang mắc kẹt trong những cái bẫy do chính mình tạo ra.
+            </p>
+            <p>
+              Sau đây là 9 sai lầm chí mạng đang âm thầm phá nát sự nghiệp của
+              bạn. Đây là những bài học xương máu mà bạn nhất định phải lưu lại
+              và nhớ kỹ để cứu lấy sự nghiệp của mình trước khi quá muộn!
+            </p>
+            <h2 class="heading">1. Sai lầm 1: Cuồng công nghệ mới mù quáng</h2>
+            <div class="image">
+              <img
+                src="/assets/images/cuong-cong-nghe-moi-768x576.webp"
+                alt=""
+              />
+            </div>
+            <p>
+              Biểu hiện: Bạn vừa thấy một công nghệ hay framework mới nổi là lập
+              tức cuống cuồng chạy theo, bất chấp lãng phí đống thời gian cày
+              cuốc để học dù nó chưa từng được kiểm chứng ở bất kỳ dự án thực tế
+              nào.
+            </p>
+            <p>
+              Tệ hại hơn, bạn bắt đầu chê bai công nghệ hiện tại của công ty là
+              đồ cổ lỗi thời. Lúc nào cũng viện cớ đòi đập bỏ hệ thống đang chạy
+              cực kỳ ổn định để viết lại bằng công nghệ mới chỉ để… thỏa mãn cái
+              tôi cá nhân.
+            </p>
+            <p>
+              Thực tế phũ phàng: Nhồi nhét công nghệ mới chưa được kiểm chứng
+              vào dự án là tự đào hố chôn mình với những lỗi tiềm ẩn vô cùng
+              nguy hiểm.
+            </p>
+            <p>
+              Đừng quên, vô số hệ thống lớn ngoài kia vẫn đang vận hành trơn tru
+              dựa trên các nền tảng lâu năm như JavaScript, Java, .NET hay PHP.
+            </p>
+            <p>
+              Bài học: Ngừng đu trend mù quáng. Hãy chờ ít nhất 1 năm để cộng
+              đồng và thị trường kiểm chứng độ ổn định của công nghệ mới. Đừng
+              lãng phí hàng trăm giờ cày cuốc để rồi cay đắng nhìn nó bị khai tử
+              ngay năm sau!
+            </p>
+            <h2 class="heading">
+              2. Sai lầm 2: Tôn sùng Clean Code và nguyên tắc DRY một cách thái
+              quá
+            </h2>
+            <p>
+              Biểu hiện: Bạn bị ám ảnh thái quá về việc code luôn phải “sạch”.
+              Thấy hai đoạn code hơi giống nhau là lập tức tìm cách gộp chung
+              lại theo nguyên tắc DRY (Don’t Repeat Yourself).
+            </p>
+            <p>
+              Thực tế, bạn đang tự làm phức tạp hóa hệ thống bằng hàng tá tầng
+              lớp trung gian không cần thiết chỉ để tái sử dụng một đoạn xử lý
+              rất nhỏ.
+            </p>
+            <p>
+              Hậu quả: Dự án từ đơn giản biến thành một cấu trúc cồng kềnh phức
+              tạp. Tháng sau nhìn lại, đến bạn cũng phải e ngại khi cần chỉnh
+              sửa.
+            </p>
+            <p>
+              Bài học: Hãy áp dụng RUG (Repeat Until Good): Đừng sợ code bị
+              trùng lặp, cứ viết code bình thường đi. Chỉ khi nào bạn phải
+              copy-paste tới lần thứ 3 hoặc thứ 4 và bắt đầu thấy khó quản lý,
+              thì đó mới là lúc cần thiết để gom chúng lại thành một hàm chung.
+            </p>
+            <h2 class="heading">
+              3. Sai lầm 3: Thích viết code tỏ ra “thông minh”
+            </h2>
+            <p>
+              Biểu hiện: Cố tình viết code theo kiểu siêu ngắn như mấy cao thủ
+              trên LeetCode, biến những logic tính toán bình thường thành một
+              dòng code dài loằng ngoằng, khó đọc, chỉ để tỏ ra mình là người
+              trình độ cao.
+            </p>
+            <p>
+              Hậu quả: Gây khó khăn cho đồng nghiệp khi đọc hiểu code, đồng thời
+              trở thành gánh nặng cho cả team lẫn chính bạn mỗi khi hệ thống
+              phát sinh lỗi cần xử lý gấp.
+            </p>
+            <p>
+              Bài học: Code trước hết phải để con người đọc được. Trừ khi gặp
+              những trường hợp đặc biệt thì mới cần tối ưu, đừng cố viết code tỏ
+              ra “thông minh”.
+            </p>
+            <p>
+              Hãy viết sao cho ai nhìn vào cũng dễ hiểu ngay, đó mới là giá trị
+              thực sự của những dòng code chất lượng.
+            </p>
+            <h2 class="heading">4. Sai lầm 4: Công nghệ của tôi là NHẤT</h2>
+            <div class="image">
+              <img
+                src="/assets/images/tranh-cai-cong-nghe-nao-tot-nhat-768x576.webp"
+                alt=""
+              />
+            </div>
+            <p>
+              Biểu hiện: Luôn xem ngôn ngữ hoặc framework mình dùng là số một,
+              không tôn trọng và hạ thấp sự lựa chọn của những đồng nghiệp xung
+              quanh.
+            </p>
+            <p>
+              Hậu quả: Khiến tư duy bị thu hẹp, trở nên bảo thủ, rập khuôn và
+              đánh mất khả năng thích nghi trước sự thay đổi liên tục của công
+              nghệ.
+            </p>
+            <p>
+              Bài học: Mọi công nghệ đều có ưu và nhược điểm riêng. Một lập
+              trình viên giỏi là người biết lựa chọn và kết hợp linh hoạt các
+              công nghệ để giải quyết tốt nhất bài toán thực tế, chứ không phải
+              người tốn thời gian vào những cuộc tranh luận vô bổ để phân định
+              thắng thua xem công nghệ nào là số một.
+            </p>
+            <p>
+              <i class="fa-regular fa-hand-point-right"></i> Chắc chắn không có
+              công nghệ nào là tốt nhất. Nhưng hình thức học 1 Kèm 1 luôn là
+              hình thức giúp bạn tiếp thu tốt nhất khi học lập trình. Tham khảo
+              ngay các khóa học 1 kèm 1
+              <a href="/courses/course.html">tại đây</a> nhé!
+            </p>
+            <h2 class="heading">5. Sai lầm 5: Căn bệnh phức tạp hóa vấn đề</h2>
+            <p>
+              Biểu hiện: Cố tình áp dụng các kiến trúc phức tạp cỡ
+              Microservices, Kafka, hay Kubernetes vào dự án quy mô nhỏ, chỉ để
+              thỏa mãn mong muốn có một hệ thống hoành tráng giống hệt các tập
+              đoàn công nghệ lớn.
+            </p>
+            <p>
+              Hậu quả: Mất cả tháng trời chỉ để thiết lập hạ tầng cồng kềnh
+              khiến bạn cạn kiệt sức lực. Cuối cùng, dự án đành phải bỏ dở giữa
+              chừng khi mà ngay cả tính năng Đăng nhập cũng chưa viết xong.
+            </p>
+            <p>
+              Bài học: Shopee hay Amazon dùng kiến trúc phức tạp vì hệ thống của
+              họ phục vụ hàng triệu người. Ứng dụng của bạn quy mô nhỏ, nhu cầu
+              chưa cao, thì cứ chọn kiến trúc nguyên khối (Monolith) cho đơn
+              giản. Cách này vừa tiết kiệm chi phí, lại đỡ đau đầu khi bảo trì.
+            </p>
+            <h2 class="heading">6. Sai lầm 6: Tôi phải tối ưu 100% mã nguồn</h2>
+            <p>
+              Biểu hiện: Bạn cố sống cố chết tối ưu từng mili-giây cho một chức
+              năng xuất báo cáo mà cả năm chỉ dùng một lần bởi một người dùng
+              duy nhất…
+            </p>
+            <p>
+              Hậu quả: Tự gây lãng phí thời gian và sức lực vào những chức năng
+              không cần thiết phải tối ưu. Việc này sẽ vô tình làm chậm tiến độ
+              chung của cả dự án.
+            </p>
+            <p>
+              Bài học: Nguyên tắc là cứ ưu tiên cho ứng dụng chạy đúng đã. Sau
+              này, nếu có phát sinh điểm nghẽn (bottleneck) ở chỗ nào, thì lúc
+              đó bạn mới tập trung khoanh vùng và xử lý chỗ đó.
+            </p>
+            <h2 class="heading">
+              7. Sai lầm 7: Xem nhẹ các kiến thức nền tảng
+            </h2>
+            <div class="image">
+              <img
+                src="/assets/images/xem-nhe-kien-thuc-nen-tang-lap-trinh-768x576.webp"
+                alt=""
+              />
+            </div>
+            <p>
+              Biểu hiện: Nôn nóng chạy theo các công nghệ hot trend như AI hay
+              các framework phức tạp, nhưng lại thiếu hụt các kiến thức cơ bản
+              về biến, vòng lặp hay thuật toán và cấu trúc dữ liệu.
+            </p>
+            <p>
+              Quá lạm dụng việc sao chép mã nguồn có sẵn trên mạng mà không thực
+              sự hiểu bản chất dòng code đó hoạt động như thế nào.
+            </p>
+            <p>
+              Hậu quả: Khi hệ thống phát sinh lỗi lạ mà AI hoàn toàn bó tay, thì
+              bạn hoàn toàn rơi vào thế bị động và không biết bắt đầu điều tra
+              nguyên nhân từ đâu.
+            </p>
+            <p>
+              Đến khi tham gia các buổi phỏng vấn kỹ thuật, chỉ cần người tuyển
+              dụng hỏi kỹ vào tư duy logic hoặc nguyên lý vận hành là bạn sẽ trở
+              nên lúng túng và rớt phỏng vấn ngay lập tức.
+            </p>
+            <p>
+              Bài học: Công nghệ và framework thay đổi liên tục theo thời gian,
+              nhưng kiến thức nền tảng thì gần như bất biến. Làm chủ được kiến
+              thức nền tảng mới chính là bệ phóng giúp bạn tự tin học nhanh các
+              công nghệ mới sau này một cách dễ dàng.
+            </p>
+            <p>
+              <i class="fa-regular fa-hand-point-right"></i> Đây cũng chính là
+              triết lý dùng để xây dựng nên quy trình đào tạo bài bản của LetDiv
+              đã được kiểm chứng với hơn hàng nghìn học viên khắp toàn quốc. Nếu
+              quan tâm, bạn hãy tham khảo ngay các khóa học 1 kèm 1 của LetDiv
+              <a href="/courses/course.html">tại đây</a> nhé!
+            </p>
+            <h2 class="heading">8. Sai lầm 8: Trở thành nô lệ của AI</h2>
+            <p>
+              Biểu hiện: Quá phụ thuộc vào AI, phó mặc cho Claude hay ChatGPT tự
+              viết code toàn bộ tính năng mà không có bất kỳ sự kiểm chứng nào.
+            </p>
+            <p>
+              Hậu quả: Kỹ năng lập trình ngày càng thui chột. Đến khi AI sinh ra
+              một lỗi logic phức tạp ẩn sâu bên trong hệ thống, bạn sẽ hoàn toàn
+              bất lực và không biết cách nào để điều tra và sửa lỗi.
+            </p>
+            <p>
+              Bài học: AI chỉ là công cụ hỗ trợ chứ không thể suy nghĩ thay bạn.
+              Hãy luôn kiểm tra và làm chủ từng dòng code do AI tạo ra, đừng tự
+              biến mình thành nô lệ của AI.
+            </p>
+            <h2 class="heading">9. Sai lầm 9: Trầm cảm vì con nhà người ta</h2>
+            <p>
+              Biểu hiện: Thấy người khác khoe làm dự án AI kiếm nghìn đô hay
+              khởi nghiệp thành công khi còn rất trẻ (có khi tụi nó phông bạt
+              nên bạn đừng vội tin 🙂). Nhìn lại mình vẫn loay hoay chưa sửa
+              xong một cái lỗi giao diện cơ bản, dẫn đến tâm lý chán nản và muốn
+              bỏ cuộc.
+            </p>
+            <p>
+              Hậu quả: Đánh mất sự tự tin, tự tạo áp lực vô hình cho bản thân và
+              dần mất đi động lực trong học tập và công việc.
+            </p>
+            <p>
+              Bài học: Những gì xuất hiện trên mạng xã hội chỉ là phần nổi của
+              tảng băng chìm. Đơn giản là vì người ta chỉ thích khoe sự thành
+              công, còn những lần thất bại hay vấp ngã thì họ đều giữ lại cho
+              riêng mình.
+            </p>
+            <p>
+              Thước đo duy nhất bạn cần quan tâm lúc này là xem bản thân của
+              ngày hôm nay đã tiến bộ hơn chính mình của ngày hôm qua chưa.
+            </p>
+            <h2 class="heading">Lời Kết: Tỉnh táo lại để tiến xa hơn!</h2>
+            <p>
+              Lập trình chưa bao giờ là cuộc thi xem ai dùng công nghệ xịn nhất
+              hay viết code ngầu nhất. Thước đo duy nhất quyết định thu nhập của
+              bạn là giá trị thực tế bạn tạo ra.
+            </p>
+            <p>
+              9 sai lầm trên chính là những rào cản vô hình đang kéo lùi sự
+              nghiệp của bạn. Để bứt phá khỏi vị trí của một thợ gõ code thông
+              thường, hãy nhớ kỹ 3 nguyên tắc sau:
+            </p>
+            <ul>
+              <li>
+                Ưu tiên tính chính xác: Hãy làm cho ứng dụng chạy đúng logic
+                trước. Khi nào có dữ liệu người dùng thực tế và phát sinh điểm
+                nghẽn, bạn mới cần khoanh vùng và xử lý để tối ưu hiệu năng.
+              </li>
+              <li>
+                Làm chủ kiến thức cốt lõi: Kiến thức nền tảng luôn mang lại giá
+                trị lâu dài và thiết thực hơn việc mải mê chạy đua theo công
+                nghệ mới.
+              </li>
+              <li>
+                Sử dụng AI một cách tỉnh táo: Hãy khai thác AI như một trợ lý
+                đắc lực để tăng năng suất, tuyệt đối đừng phụ thuộc hoàn toàn mà
+                đánh mất đi tư duy cốt lõi của chính mình.
+              </li>
+            </ul>
+            <p>
+              Nếu bạn đang loay hoay mất định hướng, mất gốc kiến thức nền tảng
+              hay cần một Mentor thực chiến dẫn dắt,
+              <a href="/courses/course.html">các khóa học 1 Kèm 1</a> tại LetDiv
+              sẽ là bệ phóng giúp bạn đi nhanh và đúng hướng ngay từ đầu.
+            </p>
+            <p>Chúc bạn code ít bug và sớm thăng tiến trong sự nghiệp nhé!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- section-one end -->
+
+    <!-- footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="inner-addres">
+            <div class="img">
+              <a href=""><img src="/assets/images/LetDiv.webp" alt="" /></a>
+              <p class="content">
+                CÔNG TY TNHH LẬP TRÌNH LETDIV VIỆT NAM <br />
+                <strong>Mã số thuế:</strong> 0317429951 <br /><strong
+                  >Địa chỉ:</strong
+                >
+                5B Phổ Quang, Phường Tân Sơn Hòa, Hồ Chí Minh. <br /><strong
+                  >Điện thoại:</strong
+                >
+                0914 991 139 <br />
+                <strong>Email:</strong> letdiv.innovation@gmail.com
+              </p>
+            </div>
+          </div>
+          <div class="inner-info">
+            <h3>Thông Tin</h3>
+            <p><a href="/contact/contact.html">Liên hệ</a></p>
+            <p><a href="/about/introduce.html">Giới thiệu</a></p>
+            <p><a href="/policies/policy.html">Chính sách bảo mật</a></p>
+            <div class="img">
+              <a
+                href="https://www.dmca.com/Protection/Status.aspx?ID=5ed68dec-8566-4fcf-b1d7-70668621b032&refurl=https://letdiv.com/"
+                target="_blank"
+                ><img src="/assets/images/DMCA_logo-grn-btn120w.png" alt=""
+              /></a>
+            </div>
+          </div>
+          <div class="inner-social">
+            <h3>Mạng Xã Hội</h3>
+            <div class="icon">
+              <a
+                href="https://www.facebook.com/letdiv.innovation"
+                target="_blank"
+                ><i class="fa-brands fa-facebook"></i
+              ></a>
+              <a href="https://www.tiktok.com/@letdiv" target="_blank"
+                ><i class="fa-brands fa-tiktok"></i
+              ></a>
+              <a href="https://www.youtube.com/@letdiv" target="_blank"
+                ><i class="fa-brands fa-youtube"></i
+              ></a>
+            </div>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d31352.53490692094!2d106.66647100000002!3d10.806191000000002!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d7e2e9c2d4b1%3A0xa1e7de28f1b06563!2zQ8O0bmcgVHkgVE5ISCBM4bqtcCBUcsOsbmggTGV0RGl2!5e0!3m2!1sen!2sus!4v1789548029411!5m2!1sen!2sus"
+              width="100%"
+              height="300"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- footer end -->
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="/assets/bootstrap/jquery.slim.min.js"></script>
+    <script src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="js/format-code.js"></script>
+    <script src="/assets/js/header-auth.js"></script>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+.section-one {
+  padding: 50px 0px;
+}
+.section-one .container {
+  max-width: 720px;
+}
+.section-one .inner-wrap p {
+  font-size: 20px;
+}
+.section-one .inner-wrap ul {
+  padding: 0;
+  margin: 0px 0px 0px 20px;
+}
+.section-one .inner-wrap ul li {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.section-one .title {
+  font-size: 44px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 40px;
+}
+@media (max-width: 767.98px) {
+  .section-one .inner-wrap p {
+    font-size: 18px;
+  }
+  .section-one .inner-wrap ul li {
+    font-size: 18px;
+  }
+  .section-one .title {
+    font-size: 32px;
+  }
+}

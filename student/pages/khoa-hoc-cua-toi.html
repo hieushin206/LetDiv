@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Khóa học của tôi - LetDiv Student</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <link rel="stylesheet" href="../../admin/css/pages.css" />
+    <link rel="stylesheet" href="../css/pages-extra.css" />
+  </head>
+  <body>
+    <main class="page">
+      <div class="page-head">
+        <div>
+          <h1>Khóa học của tôi</h1>
+          <p>Các khóa học bạn đã mua thành công. Muốn mua thêm, hãy quay lại cửa hàng.</p>
+        </div>
+        <div class="page-actions">
+          <a class="btn btn-outline" href="/courses/course.html" target="_top"><i class="fa-solid fa-store"></i> Mua thêm khóa học</a>
+        </div>
+      </div>
+
+      <div id="notice"></div>
+      <div class="card" id="main-card">
+        <div class="toolbar">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="search" placeholder="Tìm theo tên khóa học..." />
+          </div>
+          <select id="filter-status" style="width: 180px">
+            <option value="">Mọi trạng thái</option>
+            <option value="learning">Đang học</option>
+            <option value="done">Hoàn thành</option>
+          </select>
+          <select id="sort" style="width: 220px">
+            <option value="bought-desc">Ngày mua: mới nhất</option>
+            <option value="bought-asc">Ngày mua: cũ nhất</option>
+            <option value="progress-desc">Tiến độ: cao → thấp</option>
+            <option value="progress-asc">Tiến độ: thấp → cao</option>
+          </select>
+        </div>
+        <div id="list-area"></div>
+      </div>
+      <div id="no-course"></div>
+    </main>
+
+    <!-- Chi tiết khóa học -->
+    <div class="modal-overlay" id="course-modal">
+      <div class="modal-box modal-lg">
+        <div class="modal-header">
+          <h3 id="course-title">Chi tiết khóa học</h3>
+          <button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body" id="course-body"></div>
+        <div class="modal-footer" id="course-footer"></div>
+      </div>
+    </div>
+
+    <script src="../../admin/js/seed-data.js"></script>
+    <script src="../../admin/js/store.js"></script>
+    <script src="../../assets/js/auth-store.js"></script>
+    <script src="../../admin/js/ui.js"></script>
+    <script src="../../assets/js/learning-store.js"></script>
+    <script src="../js/student-store.js"></script>
+    <script src="../js/student-ui.js"></script>
+    <script src="../js/khoa-hoc-cua-toi.js"></script>
+  </body>
+</html>

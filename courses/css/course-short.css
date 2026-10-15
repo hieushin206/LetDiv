@@ -1,0 +1,43 @@
+/* section-two */
+
+/* dropdown  */
+.card-header {
+  border-bottom: 2px solid #d1d7dc;
+}
+.card-header .btn {
+  text-decoration: none;
+  box-shadow: none;
+  color: #343a40;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+.card-body {
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
+.card-body ul {
+  padding-left: 34px;
+  margin: 0;
+}
+.card-body ul li {
+  margin-bottom: 8px;
+}
+.card-body .topic-details li {
+  margin-top: 10px;
+}
+
+.collapse-icon::before {
+  content: "\f107";
+  font-family: "Font Awesome 6 Free";
+  font-size: 15px;
+  padding-right: 10px;
+}
+
+.btn[aria-expanded="true"] .collapse-icon::before {
+  content: "\f106";
+  font-family: "Font Awesome 6 Free";
+}
+/*  end */
+
+/* section-two end*/

@@ -1,0 +1,208 @@
+/* =========================================================
+   pages-extra.css - Phần giao diện RIÊNG của Instructor
+   (dùng kèm admin/css/pages.css để giao diện giống trang Admin)
+   ========================================================= */
+
+/* ---------- Đường dẫn quay lại (breadcrumb) ---------- */
+.crumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.crumb a {
+  color: var(--color-one);
+  font-weight: 600;
+}
+.crumb a:hover {
+  color: var(--navy);
+}
+.crumb i {
+  font-size: 10px;
+}
+
+/* ---------- Ô thứ tự bài học ---------- */
+.order-pill {
+  display: inline-block;
+  min-width: 64px;
+  text-align: center;
+  padding: 4px 12px;
+  border-radius: 8px;
+  background: var(--blue-soft);
+  color: #1c7ed6;
+  font-weight: 700;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.th-sort {
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.th-sort:hover {
+  color: var(--color-one);
+}
+
+/* Link mở tab mới trong bảng */
+.link-cell {
+  color: var(--color-one) !important;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 230px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.link-cell:hover {
+  text-decoration: underline;
+}
+
+/* Điểm số */
+.score-pill {
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--navy);
+}
+.score-pill small {
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* Mô tả rút gọn 2 dòng trong ô bảng */
+.clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.cell-wide {
+  max-width: 340px;
+}
+.overdue-text {
+  color: #e03131;
+  font-weight: 600;
+}
+
+/* Thanh thông tin bài tập ở đầu trang bài nộp */
+.info-strip {
+  padding: 18px 22px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.info-strip .lb {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+  font-weight: 700;
+}
+.info-strip .vl {
+  font-weight: 700;
+  color: var(--navy);
+  margin-top: 2px;
+}
+
+/* Hộp đề bài trong modal chấm điểm */
+.quote-box {
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--color-one);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 13.5px;
+  white-space: pre-line;
+  margin-bottom: 16px;
+}
+.score-input {
+  max-width: 160px;
+}
+
+/* ---------- Tiến độ bài tập trong chi tiết học viên ---------- */
+.mini-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 6px;
+}
+.mini-stats > div {
+  background: #f8fafc;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+  text-align: center;
+}
+.mini-stats b {
+  display: block;
+  font-size: 22px;
+  color: var(--navy);
+}
+.mini-stats span {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 767.98px) {
+  .page {
+    padding: 18px 14px 30px;
+  }
+  .stat-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .grid-2,
+  .info-grid,
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Bổ sung kiểu cho các ô nhập mà admin/pages.css chưa có ---------- */
+input[type="datetime-local"],
+input[type="password"],
+input[type="url"],
+input[type="tel"] {
+  width: 100%;
+  border: 1px solid #cfd6df;
+  border-radius: 10px;
+  padding: 9px 12px;
+  background: #fff;
+  color: #212529;
+  transition: 0.2s;
+  outline: none;
+}
+input[type="datetime-local"]:focus,
+input[type="password"]:focus {
+  border-color: var(--color-one);
+  box-shadow: 0 0 0 3px rgba(34, 139, 230, 0.15);
+}
+/* Để thuộc tính hidden luôn ẩn được cả nút (.btn đang đặt display: inline-flex) */
+[hidden] {
+  display: none !important;
+}
+
+/* Danh sách xếp hạng KHÔNG tô vàng/bạc/đồng (dùng cho bài học: số = thứ tự bài) */
+.rank-list.plain .rank-item:nth-child(n) .rank-num {
+  background: var(--blue-soft);
+  color: #1c7ed6;
+}

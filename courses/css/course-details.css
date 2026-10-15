@@ -1,0 +1,291 @@
+/* section-one */
+.section-one {
+  background-color: var(--color-six);
+  padding: 36px;
+  margin-bottom: 30px;
+}
+.section-one .inner-wrap .inner-content {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  width: 65%;
+}
+.section-one .inner-wrap .inner-content h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+}
+.section-one .inner-wrap .inner-content p {
+  font-size: 20px;
+  margin: 0;
+}
+.section-one .inner-wrap .inner-content .course-element {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 30px;
+}
+.section-one .inner-wrap .inner-content .course-element .course-element-right {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid #fff;
+  padding-left: 10px;
+  font-weight: 600;
+}
+.section-one
+  .inner-wrap
+  .inner-content
+  .course-element
+  .course-element-right
+  span:first-child {
+  font-size: 14px;
+}
+@media (max-width: 991.98px) {
+  .section-one .inner-wrap .inner-content {
+    width: 100%;
+  }
+}
+/* section-one end */
+
+/* section-two */
+
+.section-two .inner-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+}
+.section-two .inner-wrap .inner-content {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+}
+.section-two .inner-wrap .inner-content .content-child p {
+  margin: 0;
+}
+.section-two .inner-wrap .inner-content .content-child {
+  border: 1px solid #d1d7dc;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+.section-two .inner-wrap .inner-content .item-3 {
+  border: none;
+  padding: 0;
+}
+.section-two .inner-wrap .inner-content .item-12 {
+  border: none;
+  padding: 0;
+}
+.section-two .inner-wrap .inner-content .item-13 {
+  border: none;
+  padding: 0;
+}
+
+.section-two .title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+.section-two .inner-content .video {
+  width: 100%;
+  border: none;
+}
+.section-two .inner-content .item-2 .lesson-content {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.section-two .inner-content .item-2 .lesson-content li {
+  display: flex;
+  column-gap: 8px;
+}
+.section-two .inner-content .item-2 .lesson-content .fa-check {
+  font-size: 12px;
+  padding-top: 5px;
+}
+/*  */
+.section-two .inner-box {
+  border: 1px solid transparent;
+  margin-bottom: 20px;
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 10px;
+}
+.section-two .inner-box:hover {
+  transform: scale(1.03);
+}
+.section-two .inner-box img {
+  width: 100%;
+  height: auto;
+}
+.section-two .inner-box .img {
+  border-radius: 15px 15px 0px 0px;
+  overflow: hidden;
+}
+.section-two .inner-box .content {
+  background-color: var(--color-four);
+  padding: 10px;
+  border-radius: 0px 0px 15px 15px;
+  overflow: hidden;
+
+  flex: 1;
+}
+.section-two .inner-box .content a {
+  font-weight: 600;
+  font-size: 20px;
+}
+/*  */
+.section-two .inner-content .content-padding {
+  padding-left: 20px;
+  margin: 0;
+}
+.section-two .inner-content .content-padding li {
+  margin-bottom: 10px;
+}
+.section-two .inner-content .item-11 .title {
+  color: var(--color-seven);
+}
+
+.section-two .inner-images .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.section-two .inner-images {
+  display: flex;
+  gap: 16px 100px;
+  flex-wrap: wrap;
+}
+.section-two .inner-images .image {
+  aspect-ratio: 3 / 2;
+  width: calc((100% - 200px) / 3);
+}
+
+.section-two .inner-content .avt span {
+  border-radius: 50%;
+  background-color: var(--color-six);
+  color: #fff;
+  padding: 10px;
+  font-size: 14px;
+}
+.section-two .inner-content .inner-review .profile {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+.section-two .inner-content .inner-review img {
+  width: 60%;
+  height: auto;
+}
+.section-two .inner-content .inner-review {
+  border-bottom: 1px solid #d1d7dc;
+  padding-bottom: 20px;
+}
+
+/* Box bên phải cố định khi cuộn */
+.section-two .inner-wrap .side-bar-sticky {
+  position: sticky;
+  grid-column: span 1;
+  top: 100px;
+  align-self: start;
+  height: fit-content;
+
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: #fff;
+  margin-top: -285px;
+  z-index: 10;
+  border-radius: 10px;
+}
+
+/*  */
+.section-two .side-bar-sticky .inner-images {
+  padding: 12px 12px 12px 12px;
+}
+.section-two .side-bar-sticky .inner-images img {
+  width: 100%;
+  height: auto;
+}
+/*  */
+.section-two .side-bar-sticky .inner-price {
+  padding: 5px 20px 20px 20px;
+}
+.section-two .side-bar-sticky .inner-price .price {
+  color: var(--color-seven);
+  font-weight: 700;
+  font-size: 20px;
+  padding-bottom: 10px;
+  text-align: center;
+}
+.section-two .side-bar-sticky .inner-price .price-del {
+  color: #8a8a8b;
+  font-size: 17px;
+  padding-left: 10px;
+}
+.section-two .side-bar-sticky .inner-price .button {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.section-two .side-bar-sticky .inner-price .cart {
+  background-color: #fff;
+  color: var(--color-one);
+  border: 2px solid var(--color-one);
+}
+
+.section-two .side-bar-sticky .inner-price .desc {
+  text-align: center;
+}
+.section-two .side-bar-sticky .inner-price .desc li {
+  margin-bottom: 5px;
+}
+.section-two .side-bar-sticky .inner-price .desc p {
+  font-weight: bold;
+  margin: 0;
+  padding: 7px 0px;
+  font-size: 18px;
+}
+.section-two .side-bar-sticky .inner-price .desc ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.section-two {
+  margin-bottom: 50px;
+}
+@media (max-width: 991.98px) {
+  .section-two .inner-wrap {
+    grid-template-columns: 1fr;
+  }
+  .section-two .inner-wrap .inner-content {
+    grid-column: span 1;
+    order: 2;
+  }
+  .section-two .inner-wrap .side-bar-sticky {
+    position: relative;
+    grid-column: span 1;
+    order: 1;
+    margin-top: 0;
+    z-index: 0;
+    top: 0;
+  }
+}
+@media (max-width: 767.98px) {
+  .section-two .inner-content .item-2 .lesson-content {
+    grid-template-columns: 1fr;
+  }
+  .section-two .inner-images {
+    gap: 20px 25px;
+  }
+  .section-two .inner-images .image {
+    width: calc((100% - 50px) / 2);
+  }
+}
+/* section-two end*/

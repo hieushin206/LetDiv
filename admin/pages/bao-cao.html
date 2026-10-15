@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Báo cáo - LetDiv Admin</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <link rel="stylesheet" href="../css/pages.css" />
+  </head>
+  <body>
+    <main class="page">
+      <div class="page-head">
+        <div>
+          <h1>Báo cáo thống kê</h1>
+          <p>Số liệu được tính trực tiếp từ các đơn hàng và học viên đã lưu.</p>
+        </div>
+        <div class="page-actions">
+          <select id="period" style="width: 200px">
+            <option value="3">3 tháng gần nhất</option>
+            <option value="6" selected>6 tháng gần nhất</option>
+            <option value="12">12 tháng gần nhất</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="stat-grid" id="stat-grid"></div>
+
+      <div class="card" style="margin-bottom: 18px">
+        <div class="card-head"><h2>Doanh thu theo tháng</h2><span class="text-muted" style="font-size: 13px">Chỉ tính đơn Hoàn thành</span></div>
+        <div class="card-body">
+          <div class="chart" id="revenue-chart"></div>
+          <div class="chart-labels" id="revenue-labels"></div>
+          <div class="table-wrap" style="margin-top: 18px" id="revenue-table"></div>
+        </div>
+      </div>
+
+      <div class="grid-2 equal">
+        <div class="card">
+          <div class="card-head"><h2>Đơn hàng theo trạng thái</h2></div>
+          <div class="card-body" id="status-box"></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h2>Danh mục có nhiều lượt mua</h2></div>
+          <div class="card-body" id="category-box"></div>
+        </div>
+      </div>
+
+      <div class="grid-2 equal">
+        <div class="card">
+          <div class="card-head"><h2>Khóa học bán chạy nhất</h2></div>
+          <div class="card-body" style="padding-top: 8px"><ul class="rank-list" id="top-courses"></ul></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h2>Học viên đăng ký mới</h2></div>
+          <div class="card-body">
+            <div class="chart sm" id="student-chart"></div>
+            <div class="chart-labels" id="student-labels"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="../js/seed-data.js"></script>
+    <script src="../js/store.js"></script>
+    <script src="../js/ui.js"></script>
+    <script src="../js/bao-cao.js"></script>
+  </body>
+</html>

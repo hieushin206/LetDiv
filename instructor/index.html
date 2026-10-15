@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Instructor - LetDiv</title>
+    <link rel="icon" href="/assets/images/icon-logo-cropped.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/base.css" />
+    <link rel="stylesheet" href="css/instructor.css" />
+    <link rel="stylesheet" href="/assets/css/notify.css" />
+    <script
+      src="/assets/js/role-guard.js"
+      data-role="instructor,admin"
+    ></script>
+  </head>
+  <body>
+    <!-- header -->
+    <header class="header">
+      <div class="container-fluid">
+        <div class="inner-wrap">
+          <div class="header-logo">
+            <a href="index.html"
+              ><h1>
+                <i class="fa-solid fa-graduation-cap"></i> LetDiv Instructor
+              </h1></a
+            >
+          </div>
+          <div class="header-action">
+            <div class="action">
+              <div class="cart-bell">
+                <button class="btn-bell">
+                  <i class="fa-regular fa-bell"></i>
+                </button>
+              </div>
+              <div class="cart-user">
+                <button class="btn-user">
+                  <i class="fa-regular fa-circle-user"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- header end -->
+
+    <!-- section-instructor -->
+    <div class="section-instructor">
+      <div class="instructor-layout">
+        <div class="side-bar">
+          <h2 class="title">GIẢNG DẠY</h2>
+          <div class="nav">
+            <a href="pages/tong-quan.html" target="content" class="active"
+              ><i class="fa-solid fa-sliders"></i><span>Tổng quan</span></a
+            >
+            <a href="pages/khoa-hoc-cua-toi.html" target="content"
+              ><i class="fa-solid fa-book-open"></i
+              ><span>Khóa học của tôi</span></a
+            >
+            <div class="nav-group" id="nav-lessons">
+              <a href="pages/ql-bai-hoc.html" target="content"
+                ><i class="fa-regular fa-pen-to-square"></i
+                ><span>Quản lý bài học</span></a
+              >
+              <div class="sub-nav">
+                <a
+                  href="#"
+                  target="content"
+                  class="disabled"
+                  data-page="ql-bai-tap.html"
+                  title="Hãy chọn một bài học trong Quản lý bài học trước"
+                  ><i class="fa-solid fa-list-check"></i
+                  ><span>Quản lý bài tập</span></a
+                >
+                <a
+                  href="#"
+                  target="content"
+                  class="disabled"
+                  data-page="bai-nop.html"
+                  title="Hãy chọn một bài tập trong Quản lý bài tập trước"
+                  ><i class="fa-solid fa-inbox"></i><span>Bài nộp</span></a
+                >
+              </div>
+            </div>
+            <a href="pages/hoc-vien.html" target="content"
+              ><i class="fa-regular fa-user"></i><span>Học viên</span></a
+            >
+          </div>
+        </div>
+        <div class="main-content">
+          <iframe
+            src="pages/tong-quan.html"
+            name="content"
+            title="Nội dung quản trị"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+    <!-- section-instructor end -->
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="/assets/bootstrap/jquery.slim.min.js"></script>
+    <script src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/notify.js" data-role="instructor"></script>
+    <script src="js/nav-highlight.js"></script>
+  </body>
+</html>

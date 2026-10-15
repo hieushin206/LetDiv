@@ -1,0 +1,1298 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Khóa Học Backend NodeJS (1 Kèm 1 Online) – Từ Cơ Bản Đến Nâng Cao - LetDiv
+    </title>
+    <link rel="icon" href="/assets/images/icon-logo-cropped.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/base.css" />
+    <link rel="stylesheet" href="/assets/css/header.css" />
+    <link rel="stylesheet" href="/assets/css/footer.css" />
+    <link rel="stylesheet" href="css/course-details.css" />
+    <link rel="stylesheet" href="css/course-short.css" />
+  </head>
+  <body>
+    <!-- header -->
+    <header class="header">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="header-logo">
+            <a href="/index.html"
+              ><img src="/assets/images/LetDiv.webp" alt="logo"
+            /></a>
+          </div>
+          <div class="header-navbar">
+            <div class="navbar-menu">
+              <ul>
+                <li><a href="/index.html">Trang Chủ</a></li>
+                <li><a href="/courses/course.html">Khóa Học</a></li>
+                <li><a href="/articles/news.html">Tin Tức</a></li>
+                <li><a href="/about/introduce.html">Giới Thiệu</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="header-action">
+            <div class="action">
+              <div class="cart-shop">
+                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+              </div>
+              <!-- Button trigger modal -->
+              <div class="login">
+                <button
+                  type="button"
+                  class="btn"
+                  data-toggle="modal"
+                  data-target="#loginModal"
+                >
+                  <i class="fa-solid fa-user"></i>
+                </button>
+              </div>
+              <div class="navbar-icon"><i class="fa-solid fa-bars"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="header-modal">
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Liên hệ</h5>
+              <div class="btn-close">
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="btn-contact">
+                <button
+                  class="button-change-color"
+                  onclick="
+                    window.open('https://zalo.me/2219221277314619603', '_blank')
+                  "
+                >
+                  Nhắn tin Zalo OA
+                </button>
+                <button
+                  class="button-change-color"
+                  onclick="
+                    window.open(
+                      'https://www.facebook.com/letdiv.innovation',
+                      '_blank',
+                    )
+                  "
+                >
+                  Nhắn tin Facebook
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- login Modal -->
+    <div class="login-modal">
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="loginModal"
+        tabindex="-1"
+        aria-labelledby="loginModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="loginModalLabel">Đăng Nhập</h5>
+              <div class="btn-close">
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <form action="" method="post">
+                <div class="form-group">
+                  <label for="exampleInputText1" class="label"
+                    >Tài khoản <span style="color: red">*</span></label
+                  >
+                  <span class="icon"><i class="fa-solid fa-user"></i></span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="exampleInputText1"
+                    aria-describedby="textHelp"
+                    placeholder="Ví dụ: nguyenvana"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1" class="label"
+                    >Mật khẩu <span style="color: red">*</span></label
+                  >
+                  <span class="icon"><i class="fa-solid fa-lock"></i></span>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="exampleInputPassword1"
+                  />
+                </div>
+                <button class="button-change-color">Đăng nhập</button>
+              </form>
+              <div class="forgot-pass">
+                <a href="/auth/forgot-password.html">Quên mật khẩu ?</a>
+              </div>
+              <div class="register text-center">
+                Bạn chưa có tài khoản?
+                <a href="/auth/register.html">Đăng ký ngay</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- login Modal end-->
+
+    <!-- header end -->
+
+    <!-- section-one -->
+    <div class="section-one">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="inner-content">
+            <h1>
+              Khóa Học Backend NodeJS (1 Kèm 1 Online) – Từ Cơ Bản Đến Nâng Cao
+            </h1>
+            <p>
+              Khóa học backend NodeJS sẽ trang bị cho bạn kiến thức toàn diện để
+              xây dựng một ứng dụng web từ con số 0. Bạn sẽ học cách sử dụng
+              NodeJS để quản lý server, kết nối cơ sở dữ liệu MySQL và áp dụng
+              mô hình MVC chuyên nghiệp.
+            </p>
+            <ul class="course-element">
+              <li>
+                <div class="course-element-right">
+                  <span>Ngày cập nhật</span>
+                  <span>01/2026</span>
+                </div>
+              </li>
+              <li>
+                <div class="course-element-right">
+                  <span>Học viên</span>
+                  <span>6077</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- section-one end -->
+
+    <!-- section-two -->
+    <div class="section-two">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="inner-content">
+            <div class="content-child item-1">
+              <h2 class="title">
+                Tại sao bạn học lập trình mãi không tiến bộ?
+              </h2>
+              <p>
+                Học lập trình hơn 1 năm nhưng bạn vẫn không thể tự viết nổi 10
+                dòng code. Nguyên nhân thật sự do đâu?
+              </p>
+
+              <iframe
+                class="video"
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/rw4ulxkF9K8?si=9wkZtuEjA7VUUeBQ"
+                title="YouTube video player"
+                frameborder="0"
+                allow="
+                  accelerometer;
+                  autoplay;
+                  clipboard-write;
+                  encrypted-media;
+                  gyroscope;
+                  picture-in-picture;
+                  web-share;
+                "
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="content-child item-2">
+              <h2 class="title">Bạn sẽ học được gì?</h2>
+              <ul class="lesson-content">
+                <li>
+                  <i class="fa-solid fa-check"></i>
+                  <span
+                    >Hiểu rõ cách hoạt động của NodeJS và cách áp dụng bất đồng
+                    bộ với Promise và Async/Await.</span
+                  >
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i>
+                  <span
+                    >Xây dựng và triển khai API RESTful với ExpressJS một cách
+                    chuyên nghiệp.</span
+                  >
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i
+                  ><span
+                    >Kết nối và quản lý cơ sở dữ liệu MySQL bằng ORM
+                    Sequelize.</span
+                  >
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i
+                  ><span
+                    >Sử dụng mô hình MVC (Model-View-Controller) để tổ chức và
+                    quản lý dự án một cách hiệu quả.</span
+                  >
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i
+                  ><span
+                    >Thực hiện xác thực người dùng với JSON Web Token (JWT) và
+                    quản lý phiên bằng cookie và session.</span
+                  >
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i
+                  ><span
+                    >Áp dụng các kỹ thuật bảo mật để bảo vệ ứng dụng khỏi các lỗ
+                    hổng thông thường.</span
+                  >
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i
+                  ><span
+                    >Xử lý upload ảnh với Multer để upload và quản lý ảnh an
+                    toàn, hiệu quả.</span
+                  >
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i
+                  ><span
+                    >Tích hợp thanh toán online với Stripe để xử lý giao dịch
+                    trực tuyến.</span
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="content-child item-3">
+              <h2 class="title">Nội dung khóa học</h2>
+              <div class="inner-dropdown">
+                <div class="accordion" id="accordionExample">
+                  <!-- 1 -->
+                  <div class="card">
+                    <div class="card-header" id="headingOne">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseOne"
+                          aria-expanded="true"
+                          aria-controls="collapseOne"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Giới thiệu cơ bản</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseOne"
+                      class="collapse show"
+                      aria-labelledby="headingOne"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>Node.js là gì:</strong> Khái niệm và vai trò
+                            của Node.js.
+                          </li>
+                          <li>
+                            <strong>Cài đặt Node.js và npm:</strong> Thiết lập
+                            môi trường với Node.js và npm.
+                          </li>
+                          <li>
+                            <strong>Kiến trúc non-blocking I/O:</strong> Hiểu
+                            cách Node.js xử lý I/O không chặn.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 2 -->
+                  <div class="card">
+                    <div class="card-header" id="headingTwo">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseTwo"
+                          aria-expanded="false"
+                          aria-controls="collapseTwo"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Làm việc với File trong Node.js</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseTwo"
+                      class="collapse"
+                      aria-labelledby="headingTwo"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>Đọc, ghi file đồng bộ:</strong> Xử lý file
+                            theo cách đồng bộ.
+                          </li>
+                          <li>
+                            <strong>Đọc, ghi file bất đồng bộ:</strong> Dùng bất
+                            đồng bộ để đọc/ghi file hiệu quả.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 3 -->
+                  <div class="card">
+                    <div class="card-header" id="headingThree">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseThree"
+                          aria-expanded="false"
+                          aria-controls="collapseThree"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Xây dựng API cơ bản với http module</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseThree"
+                      class="collapse"
+                      aria-labelledby="headingThree"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>Tạo server với http.createServer():</strong>
+                            Thiết lập server cơ bản.
+                          </li>
+                          <li>
+                            <strong>Dùng Postman:</strong> Hướng dẫn kiểm tra
+                            API với Postman.
+                          </li>
+                          <li>
+                            <strong>RESTful là gì:</strong> Giới thiệu khái niệm
+                            RESTful API.
+                          </li>
+                          <li>
+                            <strong>API lấy danh sách:</strong> Lấy dữ liệu từ
+                            file.
+                          </li>
+                          <li>
+                            <strong>API thêm dữ liệu:</strong> Thêm dữ liệu mới
+                            vào file.
+                          </li>
+                          <li>
+                            <strong>API cập nhật dữ liệu:</strong> Sửa dữ liệu
+                            trong file.
+                          </li>
+                          <li>
+                            <strong>API xóa dữ liệu:</strong> Xóa dữ liệu khỏi
+                            file.
+                          </li>
+                          <li>
+                            <strong>Đặt tên API:</strong> Tối ưu tên API để dễ
+                            bảo trì.
+                          </li>
+                          <li>
+                            <strong>Cấu hình CORS:</strong> Cho phép truy cập từ
+                            các nguồn khác.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 4 -->
+                  <div class="card">
+                    <div class="card-header" id="headingFour">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseFour"
+                          aria-expanded="false"
+                          aria-controls="collapseFour"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Giới thiệu và tạo API với Express.js</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseFour"
+                      class="collapse"
+                      aria-labelledby="headingFour"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>Express.js là gì:</strong> Giới thiệu
+                            framework Express.js.
+                          </li>
+                          <li>
+                            <strong>Cài đặt Express:</strong> Thiết lập dự án
+                            Express đầu tiên.
+                          </li>
+                          <li>
+                            <strong>Cấu trúc dự án:</strong> Tổ chức thư mục hợp
+                            lý.
+                          </li>
+                          <li>
+                            <strong>Import/export module:</strong> Dùng module
+                            trong Node.js.
+                          </li>
+                          <li>
+                            <strong>RESTful API với Express:</strong> Xây dựng
+                            CRUD bằng Express.
+                          </li>
+                          <li>
+                            <strong>Middleware:</strong> Tạo middleware kiểm tra
+                            request và xử lý lỗi.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 5 -->
+                  <div class="card">
+                    <div class="card-header" id="headingFive">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseFive"
+                          aria-expanded="false"
+                          aria-controls="collapseFive"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Sử dụng Sequelize kết nối database</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseFive"
+                      class="collapse"
+                      aria-labelledby="headingFive"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>Sequelize là gì:</strong> Giới thiệu và cài
+                            đặt Sequelize.
+                          </li>
+                          <li>
+                            <strong>CRUD cơ bản:</strong> Tạo, đọc, sửa, xóa dữ
+                            liệu với Sequelize.
+                          </li>
+                          <li>
+                            <strong>Xử lý lỗi & validation:</strong> Dùng
+                            middleware để kiểm tra và xử lý lỗi.
+                          </li>
+                          <li>
+                            <strong>Quan hệ bảng:</strong> Xử lý One-to-One,
+                            One-to-Many, Many-to-Many.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 6 -->
+                  <div class="card">
+                    <div class="card-header" id="headingSix">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseSix"
+                          aria-expanded="false"
+                          aria-controls="collapseSix"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Validation dữ liệu</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseSix"
+                      class="collapse"
+                      aria-labelledby="headingSix"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>Tầm quan trọng của validation:</strong> Lý
+                            do cần kiểm tra dữ liệu.
+                          </li>
+                          <li>
+                            <strong>Dùng express-validator:</strong> Cài đặt và
+                            sử dụng để validate.
+                          </li>
+                          <li>
+                            <strong>Validation cho route:</strong> Áp dụng
+                            validation vào các tuyến đường.
+                          </li>
+                          <li>
+                            <strong>Custom validation:</strong> Tạo quy tắc kiểm
+                            tra tùy chỉnh.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 7 -->
+                  <div class="card">
+                    <div class="card-header" id="headingSeven">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseSeven"
+                          aria-expanded="false"
+                          aria-controls="collapseSeven"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Mô hình MVC</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseSeven"
+                      class="collapse"
+                      aria-labelledby="headingSeven"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>MVC là gì:</strong> Khái niệm
+                            Model-View-Controller.
+                          </li>
+                          <li>
+                            <strong>Tổ chức dự án MVC:</strong> Chia dự án theo
+                            mô hình MVC.
+                          </li>
+                          <li>
+                            <strong>Tách Controller, Model, View:</strong> Phân
+                            chia chức năng rõ ràng.
+                          </li>
+                          <li>
+                            <strong>Tạo Controller:</strong> Xây dựng Controller
+                            và dùng với Route.
+                          </li>
+                          <li>
+                            <strong>Tạo Model:</strong> Liên kết Model với
+                            Controller.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 8 -->
+                  <div class="card">
+                    <div class="card-header" id="headingEight">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseEight"
+                          aria-expanded="false"
+                          aria-controls="collapseEight"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Authentication</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseEight"
+                      class="collapse"
+                      aria-labelledby="headingEight"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>JWT là gì:</strong> Giới thiệu JSON Web
+                            Token.
+                          </li>
+                          <li>
+                            <strong>Mã hóa password với bcrypt:</strong> Bảo mật
+                            mật khẩu người dùng.
+                          </li>
+                          <li>
+                            <strong>Tích hợp JWT:</strong> Dùng JWT để xác thực.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 9 -->
+                  <div class="card">
+                    <div class="card-header" id="headingNine">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseNine"
+                          aria-expanded="false"
+                          aria-controls="collapseNine"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Event Loop trong Node.js</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseNine"
+                      class="collapse"
+                      aria-labelledby="headingNine"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>Event Loop là gì:</strong> Khái niệm vòng
+                            lặp sự kiện.
+                          </li>
+                          <li>
+                            <strong>Callback, Promises, Async/Await:</strong>
+                            Các cách xử lý bất đồng bộ.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 10 -->
+                  <div class="card">
+                    <div class="card-header" id="headingTen">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseTen"
+                          aria-expanded="false"
+                          aria-controls="collapseTen"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Bảo mật và Xử lý Upload Ảnh</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseTen"
+                      class="collapse"
+                      aria-labelledby="headingTen"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>Dùng helmet.js:</strong> Bảo mật cơ bản với
+                            helmet.
+                          </li>
+                          <li>
+                            <strong>Rate Limiting:</strong> Dùng
+                            express-rate-limit để giới hạn truy cập.
+                          </li>
+                          <li>
+                            <strong>Upload Ảnh:</strong> Cấu hình Multer để
+                            upload ảnh, giới hạn kích thước, kiểm tra định dạng.
+                          </li>
+                          <li>
+                            <strong>Resize Ảnh:</strong> Dùng sharp để resize
+                            ảnh sau upload, tối ưu kích thước và hiệu suất.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 11 -->
+                  <div class="card">
+                    <div class="card-header" id="headingEleven">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseEleven"
+                          aria-expanded="false"
+                          aria-controls="collapseEleven"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Cookie & Session</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseEleven"
+                      class="collapse"
+                      aria-labelledby="headingEleven"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>Cookie & Session là gì:</strong> Giới thiệu
+                            và cài đặt.
+                          </li>
+                          <li>
+                            <strong>Tạo cookie:</strong> Quản lý cookie trong
+                            ứng dụng.
+                          </li>
+                          <li>
+                            <strong>Bảo mật cookie:</strong> Thiết lập thời gian
+                            sống và bảo mật.
+                          </li>
+                          <li>
+                            <strong>Cài express-session:</strong> Dùng session
+                            để quản lý phiên.
+                          </li>
+                          <li>
+                            <strong>Tích hợp đăng nhập:</strong> Kết hợp Session
+                            & Cookie vào hệ thống.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 12 -->
+                  <div class="card">
+                    <div class="card-header" id="headingTwelve">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseTwelve"
+                          aria-expanded="false"
+                          aria-controls="collapseTwelve"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Thanh toán Online bằng Stripe</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseTwelve"
+                      class="collapse"
+                      aria-labelledby="headingTwelve"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>Giới thiệu Stripe:</strong> Tổng quan về
+                            Stripe, vai trò trong xử lý thanh toán online.
+                          </li>
+                          <li>
+                            <strong>Cấu hình Stripe:</strong> Thiết lập tài
+                            khoản Stripe, tích hợp API key vào ứng dụng Node.js.
+                          </li>
+                          <li>
+                            <strong>Xử lý Thanh toán:</strong> Sử dụng Stripe để
+                            tạo phiên thanh toán, xử lý giao dịch thẻ tín dụng.
+                          </li>
+                          <li>
+                            <strong>Bảo mật và Xử lý Lỗi:</strong> Áp dụng
+                            webhook để xác nhận thanh toán, đảm bảo an toàn và
+                            xử lý lỗi giao dịch.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 13 -->
+                  <div class="card">
+                    <div class="card-header" id="headingThirteen">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseThirteen"
+                          aria-expanded="false"
+                          aria-controls="collapseThirteen"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Đồ Án Cuối Khóa</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseThirteen"
+                      class="collapse"
+                      aria-labelledby="headingThirteen"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li class="topic">
+                            Làm đồ án theo chủ đề tự chọn:
+                            <ul class="topic-details">
+                              <li>Ứng dụng thương mại điện tử (E-commerce)</li>
+                              <li>Ứng dụng đặt đồ ăn (Food Delivery)</li>
+                              <li>Ứng dụng học trực tuyến (E-learning)</li>
+                              <li>Ứng dụng quản lý sinh viên</li>
+                              <li>Hệ thống quản lý thư viện</li>
+                              <li>Blog cá nhân</li>
+                              <li>Hệ thống quản lý đặt phòng khách sạn</li>
+                              <li>
+                                Ứng dụng theo dõi sức khỏe (Health Tracker)
+                              </li>
+                              <li>Ứng dụng quản lý chi tiêu cá nhân</li>
+                              <li>Mạng xã hội mini</li>
+                              <li>
+                                <strong
+                                  >…hoặc bất kỳ chủ đề nào dựa trên ý tưởng của
+                                  học viên</strong
+                                >
+                              </li>
+                            </ul>
+                          </li>
+                          <li>
+                            Học viên làm đồ án theo sự hướng dẫn của giảng viên.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="content-child item-4">
+              <h2 class="title">Đối tượng học</h2>
+              <ul class="content-padding">
+                <li>
+                  Sinh viên CNTT mong muốn bổ túc kiến thức để đủ điều kiện đi
+                  làm công ty.
+                </li>
+                <li>Đang học lập trình nhưng mất gốc hoặc không tự tin.</li>
+                <li>
+                  Chưa có kiến thức lập trình (zero) và muốn bắt đầu học bài bản
+                  từ đầu.
+                </li>
+                <li>
+                  Làm trái ngành và mong muốn chuyển đổi sang lĩnh vực lập trình
+                  an toàn và hiệu quả.
+                </li>
+                <li>
+                  Đang đi làm nhưng muốn cải thiện kiến thức để tiến xa hơn
+                  trong sự nghiệp (senior).
+                </li>
+                <li>
+                  <strong>Đã có kiến thức cơ bản JavaScript.</strong> Nếu chưa
+                  nắm vững JavaScript, bạn nên học trước JavaScript
+                  <a href="">tại đây</a>.
+                </li>
+              </ul>
+            </div>
+            <div class="content-child item-5">
+              <h2 class="title">Học 1 Kèm 1 - Đảm bảo chất lượng Tốt Nhất</h2>
+              <ul class="content-padding">
+                <li>
+                  Bạn sẽ được theo sát và hỗ trợ 1-1 bởi giảng viên. Đảm bảo
+                  chất lượng học tập đạt kết quả tốt nhất.
+                </li>
+                <li>
+                  Nếu <strong>HỌC CHẬM</strong> bạn không cần lo lắng không theo
+                  kịp chương trình, giảng viên sẽ đi chậm để đảm bảo bạn nắm
+                  chắc 100% kiến thức.
+                </li>
+                <li>
+                  Nếu học nhanh, bạn có thể nhanh chóng kết thúc chương trình để
+                  đi làm công ty.
+                </li>
+              </ul>
+            </div>
+            <div class="content-child item-6">
+              <h2 class="title">Học online - Tiết kiệm thời gian di chuyển</h2>
+              <p>
+                Thay vì phải di chuyển vất vả trên đường giữa dòng người đông
+                đúc. Giờ đây, bạn chỉ cần mở laptop để bắt đầu học ngay tại nhà.
+                Tiết kiệm thời gian, tránh căng thẳng, và tập trung hoàn toàn
+                vào việc học!
+              </p>
+            </div>
+            <div class="content-child item-7">
+              <h2 class="title">Lịch học linh hoạt</h2>
+              <ul class="content-padding">
+                <li>
+                  LetDiv sắp xếp lịch học theo ý của bạn. Học đúng thời điểm mà
+                  bạn cảm thấy thoải mái nhất.
+                </li>
+                <li>
+                  Dễ dàng thay đổi lịch học trong khi học nếu bạn có việc bận.
+                  Không làm gián đoạn tiến độ học tập của bạn.
+                </li>
+                <li>
+                  LetDiv có thể sắp xếp thời gian học cho bạn từ 8h đến 23h, kể
+                  cả cuối tuần.
+                </li>
+              </ul>
+            </div>
+            <div class="content-child item-8">
+              <h2 class="title">Áp dụng Scaffolding Learning</h2>
+              <ul class="content-padding">
+                <li>Học dễ dàng từ cơ bản đến nâng cao qua từng bước nhỏ.</li>
+                <li>
+                  Cá nhân hóa lộ trình học tập, nắm chắc kiến thức ngay lập tức.
+                </li>
+                <li>
+                  Tiến bộ vượt bậc nhờ phương pháp sư phạm khoa học hiệu quả.
+                </li>
+              </ul>
+              <iframe
+                class="video"
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/S0Z21OXBRDA?si=QFjyoEl0-ZfBiLK6"
+                title="YouTube video player"
+                frameborder="0"
+                allow="
+                  accelerometer;
+                  autoplay;
+                  clipboard-write;
+                  encrypted-media;
+                  gyroscope;
+                  picture-in-picture;
+                  web-share;
+                "
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="content-child item-9">
+              <h2 class="title">Trải nghiệm thử buổi học</h2>
+              <p>
+                Bạn có thể tham khảo ngay một buổi học 1 Kèm 1 qua video sau, để
+                hiểu rõ hơn phong cách giảng dạy và quy trình đào tạo của LetDiv
+                sẽ diễn ra như thế nào:
+              </p>
+              <iframe
+                class="video"
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/pzPLKbW6whQ?si=X36o4TJv5a_cm9TC"
+                title="YouTube video player"
+                frameborder="0"
+                allow="
+                  accelerometer;
+                  autoplay;
+                  clipboard-write;
+                  encrypted-media;
+                  gyroscope;
+                  picture-in-picture;
+                  web-share;
+                "
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="content-child item-10">
+              <h2 class="title">Chính sách Hỗ trợ việc làm</h2>
+              <ul class="content-padding">
+                <li>
+                  Hỗ trợ chỉnh sửa CV giúp hồ sơ của bạn nổi bật hơn, gia tăng
+                  cơ hội nhận lời mời phỏng vấn.
+                </li>
+                <li>
+                  Hỗ trợ giới thiệu hồ sơ đến các công ty lập trình Việt Nam.
+                </li>
+                <li>
+                  Có cơ hội thực tập tại LetDiv, tham gia vào phát triển dự án
+                  eLearning.
+                </li>
+              </ul>
+            </div>
+            <div class="content-child item-11">
+              <h2 class="title">Chính sách hoàn tiền 100%</h2>
+              <ul class="content-padding">
+                <li>
+                  Cam kết <strong>hoàn tiền 100%</strong> nếu bạn không hài lòng
+                  với chất lượng đào tạo trong <strong>2 buổi đầu tiên</strong>.
+                </li>
+                <li>
+                  Quá trình hoàn tiền sẽ diễn ra nhanh chóng
+                  <strong>ngay trong ngày.</strong>
+                </li>
+              </ul>
+            </div>
+            <div class="content-child item-12">
+              <h2 class="title">Học viên LetDiv đang làm ở đâu?</h2>
+              <div class="inner-images">
+                <div class="image">
+                  <img src="/assets/images/fpt-software-logo.webp" alt="" />
+                </div>
+                <div class="image">
+                  <img src="/assets/images/kms-logo.webp" alt="" />
+                </div>
+                <div class="image">
+                  <img src="/assets/images/nashtech-logo.webp" alt="" />
+                </div>
+                <div class="image">
+                  <img src="/assets/images/niteco-logo.webp" alt="" />
+                </div>
+                <div class="image">
+                  <img src="/assets/images/teko-logo.webp" alt="" />
+                </div>
+                <div class="image">
+                  <img src="/assets/images/tyme-logo.webp" alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="content-child item-13">
+              <h2 class="title">Đánh giá của học viên</h2>
+              <div class="inner-review">
+                <div class="profile">
+                  <div class="avt"><span>NV</span></div>
+                  <div class="name">
+                    <span>Nguyễn Vũ</span>
+                    <div><img src="/assets/images/rating-5.webp" alt="" /></div>
+                  </div>
+                </div>
+                <div class="comment">
+                  <span
+                    >Khóa học NodeJS này thực sự rất chi tiết và dễ hiểu. Các ví
+                    dụ thực tế giúp mình nắm vững cách xây dựng API cũng như làm
+                    quen với các công cụ như Sequelize và JWT. Giảng viên rất
+                    nhiệt tình hỗ trợ học viên, mình cảm thấy tự tin hơn rất
+                    nhiều sau khóa học!</span
+                  >
+                </div>
+              </div>
+              <div class="inner-review">
+                <div class="profile">
+                  <div class="avt"><span>NT</span></div>
+                  <div class="name">
+                    <span>Trần Ngọc Thạch</span>
+                    <div><img src="/assets/images/rating-5.webp" alt="" /></div>
+                  </div>
+                </div>
+                <div class="comment">
+                  <span
+                    >Khóa học này thực sự giúp mình hiểu sâu hơn về cách hoạt
+                    động của NodeJS, từ bất đồng bộ đến cách quản lý cơ sở dữ
+                    liệu với MySQL. Giảng viên giải thích rất rõ ràng, đặc biệt
+                    là phần về mô hình MVC. Mình rất hài lòng và chắc chắn sẽ áp
+                    dụng kiến thức này vào dự án cá nhân.</span
+                  >
+                </div>
+              </div>
+              <div class="inner-review">
+                <div class="profile">
+                  <div class="avt"><span>VK</span></div>
+                  <div class="name">
+                    <span>Nguyễn Viết Kiên</span>
+                    <div><img src="/assets/images/rating-5.webp" alt="" /></div>
+                  </div>
+                </div>
+                <div class="comment">
+                  <span
+                    >Mình đã tham gia nhiều khóa học online về lập trình, nhưng
+                    khóa học NodeJS này vượt xa mong đợi của mình. Phần giải
+                    thích về cookie, session và JWT rất cụ thể. Nhờ khóa học,
+                    mình đã có thể tự xây dựng một API hoàn chỉnh và bảo mật hơn
+                    trước đây.</span
+                  >
+                </div>
+              </div>
+              <div class="inner-review">
+                <div class="profile">
+                  <div class="avt"><span>VĐ</span></div>
+                  <div class="name">
+                    <span>Việt Đức</span>
+                    <div><img src="/assets/images/rating-5.webp" alt="" /></div>
+                  </div>
+                </div>
+                <div class="comment">
+                  <span
+                    >Khóa học NodeJS & ExpressJS giúp mình hiểu rõ hơn về cấu
+                    trúc của một ứng dụng web chuyên nghiệp. Giảng viên đã hướng
+                    dẫn rất kỹ về cách kết nối với MySQL và áp dụng các tính
+                    năng bảo mật. Đây là khóa học rất đáng giá cho những ai muốn
+                    phát triển sự nghiệp trong lĩnh vực web development.</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="side-bar-sticky">
+            <div class="inner-images">
+              <img src="/assets/images/khoa-hoc-nodejs-1024x576.webp" alt="" />
+            </div>
+            <div class="inner-price">
+              <div class="price">
+                9.400.000 đ<span class="price-del"
+                  ><del>10.500.000 đ</del></span
+                >
+              </div>
+              <!-- Button trigger modal -->
+              <button
+                type="button"
+                class="btn btn-primary button"
+                data-toggle="modal"
+                data-target="#exampleModal"
+              >
+                Tư Vấn Ngay
+              </button>
+              <button class="button cart">Thêm Vào Giỏ</button>
+              <div class="desc">
+                <p>Khóa học này bao gồm</p>
+                <ul>
+                  <li>
+                    <i class="fa-regular fa-clock"></i> Thời lượng 18 buổi (3
+                    tháng)
+                  </li>
+                  <li>
+                    <i class="fa-regular fa-calendar"></i> 2-3 buổi/tuần (2.5
+                    tiếng/buổi)
+                  </li>
+                  <li><i class="fa-solid fa-code"></i> 50 bài tập thực hành</li>
+                  <li>
+                    <i class="fa-regular fa-circle-question"></i> Hỗ trợ riêng
+                    1-1
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- section-two end-->
+    <!-- footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="inner-addres">
+            <div class="img">
+              <a href=""><img src="/assets/images/LetDiv.webp" alt="" /></a>
+              <p class="content">
+                CÔNG TY TNHH LẬP TRÌNH LETDIV VIỆT NAM <br />
+                <strong>Mã số thuế:</strong> 0317429951 <br /><strong
+                  >Địa chỉ:</strong
+                >
+                5B Phổ Quang, Phường Tân Sơn Hòa, Hồ Chí Minh. <br /><strong
+                  >Điện thoại:</strong
+                >
+                0914 991 139 <br />
+                <strong>Email:</strong> letdiv.innovation@gmail.com
+              </p>
+            </div>
+          </div>
+          <div class="inner-info">
+            <h3>Thông Tin</h3>
+            <p><a href="/contact/contact.html">Liên hệ</a></p>
+            <p><a href="/about/introduce.html">Giới thiệu</a></p>
+            <p><a href="/policies/policy.html">Chính sách bảo mật</a></p>
+            <div class="img">
+              <a
+                href="https://www.dmca.com/Protection/Status.aspx?ID=5ed68dec-8566-4fcf-b1d7-70668621b032&refurl=https://letdiv.com/"
+                target="_blank"
+                ><img src="/assets/images/DMCA_logo-grn-btn120w.png" alt=""
+              /></a>
+            </div>
+          </div>
+          <div class="inner-social">
+            <h3>Mạng Xã Hội</h3>
+            <div class="icon">
+              <a
+                href="https://www.facebook.com/letdiv.innovation"
+                target="_blank"
+                ><i class="fa-brands fa-facebook"></i
+              ></a>
+              <a href="https://www.tiktok.com/@letdiv" target="_blank"
+                ><i class="fa-brands fa-tiktok"></i
+              ></a>
+              <a href="https://www.youtube.com/@letdiv" target="_blank"
+                ><i class="fa-brands fa-youtube"></i
+              ></a>
+            </div>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d31352.53490692094!2d106.66647100000002!3d10.806191000000002!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d7e2e9c2d4b1%3A0xa1e7de28f1b06563!2zQ8O0bmcgVHkgVE5ISCBM4bqtcCBUcsOsbmggTGV0RGl2!5e0!3m2!1sen!2sus!4v1789548029411!5m2!1sen!2sus"
+              width="100%"
+              height="300"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- footer end -->
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="/assets/bootstrap/jquery.slim.min.js"></script>
+    <script src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/header-auth.js"></script>
+  </body>
+</html>

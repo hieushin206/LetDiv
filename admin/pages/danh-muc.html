@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Danh mục - LetDiv Admin</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <link rel="stylesheet" href="../css/pages.css" />
+  </head>
+  <body>
+    <main class="page">
+      <div class="page-head">
+        <div>
+          <h1>Quản lý danh mục</h1>
+          <p>Phân nhóm khóa học, xem và thêm khóa học vào từng danh mục. Không thể xóa danh mục khi vẫn còn khóa học sử dụng.</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-primary" id="btn-add"><i class="fa-solid fa-plus"></i> Thêm danh mục</button>
+        </div>
+      </div>
+
+      <div id="uncat-alert"></div>
+      <div class="tabs" id="cat-tabs"></div>
+      <div class="cat-grid" id="cat-grid"></div>
+      <div id="uncat-panel" style="display: none"></div>
+    </main>
+
+    <!-- Modal thêm / sửa danh mục -->
+    <div class="modal-overlay" id="cat-modal" data-static>
+      <div class="modal-box">
+        <div class="modal-header">
+          <h3 id="cat-modal-title">Thêm danh mục</h3>
+          <button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Tên danh mục <span class="req">*</span></label>
+            <input type="text" id="f-name" maxlength="40" placeholder="VD: Mobile App" />
+            <div class="error-text" id="e-name"></div>
+          </div>
+          <div class="form-group" style="margin-bottom: 0">
+            <label>Mô tả</label>
+            <textarea id="f-description" maxlength="200" placeholder="Mô tả ngắn về nhóm khóa học này..."></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" data-close>Hủy</button>
+          <button class="btn btn-primary" id="btn-save"><i class="fa-solid fa-floppy-disk"></i> Lưu danh mục</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal chi tiết lượt mua của danh mục -->
+    <div class="modal-overlay" id="sales-modal">
+      <div class="modal-box modal-lg">
+        <div class="modal-header">
+          <h3 id="sales-title">Chi tiết lượt mua</h3>
+          <button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body" id="sales-body"></div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" data-close>Đóng</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal khóa học trong danh mục -->
+    <div class="modal-overlay" id="cc-modal">
+      <div class="modal-box modal-lg">
+        <div class="modal-header">
+          <h3 id="cc-title">Khóa học trong danh mục</h3>
+          <button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Thêm khóa học vào danh mục này</label>
+            <div class="promo-row">
+              <select id="cc-select" style="flex: 1"></select>
+              <button type="button" class="btn btn-primary" id="cc-add"><i class="fa-solid fa-plus"></i> Thêm</button>
+            </div>
+            <div class="hint">Khóa học đang ở danh mục khác sẽ được chuyển sang danh mục này.</div>
+          </div>
+          <h4 class="section-title" id="cc-count" style="margin-top: 4px"></h4>
+          <div id="cc-list"></div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" data-close>Đóng</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/seed-data.js"></script>
+    <script src="../js/store.js"></script>
+    <script src="../js/site-sync.js"></script>
+    <script src="../js/ui.js"></script>
+    <script src="../js/danh-muc.js"></script>
+  </body>
+</html>

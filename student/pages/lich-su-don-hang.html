@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lịch sử đơn hàng - LetDiv Student</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <link rel="stylesheet" href="../../admin/css/pages.css" />
+    <link rel="stylesheet" href="../css/pages-extra.css" />
+  </head>
+  <body>
+    <main class="page">
+      <div class="page-head">
+        <div>
+          <h1>Lịch sử đơn hàng</h1>
+          <p>Những khóa học bạn đã đặt mua. Chỉ đơn <b>Hoàn thành</b> mới được cấp quyền học.</p>
+        </div>
+        <div class="page-actions">
+          <a class="btn btn-primary" href="/courses/course.html" target="_top"><i class="fa-solid fa-store"></i> Quay lại cửa hàng</a>
+        </div>
+      </div>
+
+      <div class="card" id="main-card">
+        <div class="toolbar">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="search" placeholder="Tìm đơn hàng theo mã, VD: DH0012..." />
+          </div>
+        </div>
+        <div class="tabs" id="tabs"></div>
+        <div id="list-area"></div>
+        <div class="table-foot" id="pager"></div>
+      </div>
+    </main>
+
+    <!-- Chi tiết đơn hàng -->
+    <div class="modal-overlay" id="order-modal">
+      <div class="modal-box modal-lg">
+        <div class="modal-header">
+          <h3 id="order-title">Đơn hàng</h3>
+          <button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body" id="order-body"></div>
+        <div class="modal-footer"><button class="btn btn-primary" data-close>Đóng</button></div>
+      </div>
+    </div>
+
+    <script src="../../admin/js/seed-data.js"></script>
+    <script src="../../admin/js/store.js"></script>
+    <script src="../../assets/js/auth-store.js"></script>
+    <script src="../../admin/js/ui.js"></script>
+    <script src="../../assets/js/learning-store.js"></script>
+    <script src="../js/student-store.js"></script>
+    <script src="../js/student-ui.js"></script>
+    <script src="../js/lich-su-don-hang.js"></script>
+  </body>
+</html>

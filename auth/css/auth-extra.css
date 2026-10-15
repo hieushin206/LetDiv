@@ -1,0 +1,239 @@
+/* =========================================================
+   auth-extra.css - CSS bổ sung cho đăng ký / đăng nhập / quên mật khẩu
+   và menu người dùng ở header. (header-auth.js tự nạp file này)
+   ========================================================= */
+
+/* ---------- Thông báo lỗi dưới ô nhập ---------- */
+.auth-error {
+  color: #fa5252;
+  font-size: 13px;
+  margin-top: 5px;
+  font-weight: 500;
+}
+.form-control.auth-invalid {
+  border: 1px solid #fa5252 !important;
+  background-color: #fff5f5 !important;
+}
+.form-control.auth-invalid:focus {
+  border: 2px solid #fa5252 !important;
+}
+
+/* ---------- Hộp thông báo chung ---------- */
+.auth-alert {
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 14.5px;
+  font-weight: 500;
+  border: 1px solid transparent;
+}
+.auth-alert.error {
+  background: #fff0f0;
+  color: #c92a2a;
+  border-color: #ffc9c9;
+}
+.auth-alert.success {
+  background: #e6fcf5;
+  color: #087f5b;
+  border-color: #96f2d7;
+}
+.auth-alert.info {
+  background: #e7f5ff;
+  color: #1864ab;
+  border-color: #a5d8ff;
+}
+
+/* ---------- Quên mật khẩu: các bước ---------- */
+.fp-hidden {
+  display: none !important;
+}
+.fp-steps {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 22px;
+  position: relative;
+}
+.fp-steps::before {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 16%;
+  right: 16%;
+  height: 2px;
+  background: #d1d7dc;
+}
+.fp-step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+  font-size: 12.5px;
+  color: #868e96;
+  font-weight: 600;
+}
+.fp-step span {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  margin: 0 auto 6px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #d1d7dc;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  position: relative;
+}
+.fp-step.active {
+  color: var(--color-one, #228be6);
+}
+.fp-step.active span {
+  border-color: var(--color-one, #228be6);
+  background: var(--color-one, #228be6);
+  color: #fff;
+}
+.fp-step.done {
+  color: #12b886;
+}
+.fp-step.done span {
+  border-color: #12b886;
+  background: #12b886;
+  color: #fff;
+}
+
+.fake-mail {
+  border: 1px dashed #4dabf7;
+  background: #f1f8ff;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  overflow: hidden;
+}
+.fake-mail .fm-head {
+  background: #e7f1fd;
+  padding: 8px 14px;
+  font-size: 12.5px;
+  color: #1864ab;
+  font-weight: 600;
+}
+.fake-mail .fm-body {
+  padding: 12px 14px;
+  font-size: 14px;
+  color: #343a40;
+}
+.fake-mail .fm-code {
+  display: inline-block;
+  font-family: var(--font-two, monospace);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 6px;
+  color: #00165a;
+  background: #fff;
+  padding: 2px 12px;
+  border-radius: 8px;
+  border: 1px solid #a5d8ff;
+  margin: 6px 0;
+}
+.fake-mail .fm-note {
+  font-size: 12px;
+  color: #868e96;
+  margin-top: 4px;
+}
+.section-one .form-group .form-control.code-input {
+  letter-spacing: 8px;
+  font-size: 20px;
+  font-weight: 700;
+  font-family: var(--font-two, monospace);
+}
+.fp-timer {
+  font-size: 13.5px;
+  color: #495057;
+  margin: -4px 0 14px;
+}
+.fp-timer b {
+  color: #00165a;
+}
+.fp-timer.expired b {
+  color: #fa5252;
+}
+.fp-links {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 14px;
+  color: #868e96;
+}
+.link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--color-one, #228be6);
+  font-weight: 600;
+  cursor: pointer;
+}
+.link-btn:hover:not(:disabled) {
+  text-decoration: underline;
+}
+.link-btn:disabled {
+  color: #adb5bd;
+  cursor: not-allowed;
+}
+
+/* ---------- Menu người dùng ở header ---------- */
+.header .login .user-menu {
+  position: relative;
+}
+.header .login .user-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  font-weight: 600;
+  color: #212529;
+}
+.header .login .user-btn .user-name {
+  max-width: 110px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 15px;
+}
+.header .login .user-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 12px);
+  min-width: 230px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  z-index: 2000;
+}
+.header .login .user-menu.open .user-dropdown {
+  display: block;
+}
+.header .login .ud-info {
+  padding: 14px 16px;
+  background: #f1f3f5;
+  border-bottom: 1px solid #e6eaf0;
+}
+.header .login .ud-info b {
+  display: block;
+  color: #00165a;
+}
+.header .login .ud-info small {
+  color: #868e96;
+  word-break: break-all;
+}
+.header .login .ud-logout {
+  display: block;
+  padding: 12px 16px;
+  font-weight: 600;
+  color: #fa5252;
+}
+.header .login .ud-logout:hover {
+  background: #fff0f0;
+  color: #e03131;
+}
+.header .login .ud-logout i {
+  margin-right: 6px;
+  font-size: 14px !important;
+}

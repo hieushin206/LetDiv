@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tổng quan - LetDiv Student</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <link rel="stylesheet" href="../../admin/css/pages.css" />
+    <link rel="stylesheet" href="../css/pages-extra.css" />
+  </head>
+  <body>
+    <main class="page">
+      <div class="page-head">
+        <div>
+          <h1>Tổng quan học tập</h1>
+          <p id="greeting">Chào mừng bạn quay lại.</p>
+        </div>
+      </div>
+
+      <div id="content">
+        <div id="continue-box"></div>
+        <div class="stat-grid" id="stat-grid"></div>
+
+        <div class="grid-2 equal">
+          <div class="card">
+            <div class="card-head"><h2>Khóa học học gần đây</h2><a href="khoa-hoc-cua-toi.html">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a></div>
+            <div class="card-body" id="recent-courses"></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h2>Bài tập sắp đến hạn</h2><a href="bai-tap-cua-toi.html">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a></div>
+            <div class="card-body" id="due-list"></div>
+          </div>
+        </div>
+
+        <div class="grid-2 equal">
+          <div class="card">
+            <div class="card-head"><h2>Tiến độ từng khóa học</h2></div>
+            <div class="card-body" id="progress-list"></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h2>Hoạt động gần đây</h2></div>
+            <div class="card-body" id="activity-list"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="../../admin/js/seed-data.js"></script>
+    <script src="../../admin/js/store.js"></script>
+    <script src="../../assets/js/auth-store.js"></script>
+    <script src="../../admin/js/ui.js"></script>
+    <script src="../../assets/js/learning-store.js"></script>
+    <script src="../js/student-store.js"></script>
+    <script src="../js/student-ui.js"></script>
+    <script src="../js/tong-quan.js"></script>
+  </body>
+</html>

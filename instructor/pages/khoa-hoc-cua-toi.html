@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Khóa học của tôi - LetDiv Instructor</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <!-- Dùng chung giao diện với trang Admin + phần bổ sung riêng của Instructor -->
+    <link rel="stylesheet" href="../../admin/css/pages.css" />
+    <link rel="stylesheet" href="../css/pages-extra.css" />
+  </head>
+  <body>
+
+    <main class="page">
+      <div class="page-head">
+        <div>
+          <h1>Khóa học của tôi</h1>
+          <p>Các khóa học do bạn phụ trách giảng dạy.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="search" placeholder="Tìm theo tên hoặc mã khóa học..." />
+          </div>
+          <div class="view-toggle">
+            <button id="view-card" title="Dạng thẻ"><i class="fa-solid fa-table-cells-large"></i></button>
+            <button id="view-table" title="Dạng bảng"><i class="fa-solid fa-table-list"></i></button>
+          </div>
+        </div>
+        <div id="list-area"></div>
+        <div class="table-foot" id="pager"></div>
+      </div>
+    </main>
+
+    <script src="../../admin/js/seed-data.js"></script>
+    <script src="../../admin/js/store.js"></script>
+    <script src="../../assets/js/auth-store.js"></script>
+    <script src="../../admin/js/ui.js"></script>
+    <script src="../../assets/js/learning-store.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/khoa-hoc-cua-toi.js"></script>
+  </body>
+</html>

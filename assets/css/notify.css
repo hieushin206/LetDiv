@@ -1,0 +1,126 @@
+/* Chuông thông báo - đi kèm assets/js/notify.js */
+.cart-bell .btn-bell {
+  position: relative;
+}
+.notif-badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  background: #fa5252;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 18px;
+  text-align: center;
+  font-family: inherit;
+  pointer-events: none;
+}
+
+.notif-box {
+  position: fixed;
+  z-index: 5000;
+  background: #fff;
+  color: #212529;
+  border: 1px solid var(--color-two, #d1d7dc);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 0.15s, transform 0.15s, visibility 0.15s;
+}
+.notif-box.show {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+.notif-head {
+  padding: 12px 16px;
+  font-weight: 700;
+  font-size: 16px;
+  border-bottom: 1px solid var(--color-four, #f1f3f5);
+}
+/* mỗi thông báo cao 76px => khung cao 380px = vừa đúng 5 thông báo, còn lại cuộn */
+.notif-list {
+  max-height: 380px;
+  overflow-y: auto;
+}
+.notif-item {
+  display: flex;
+  gap: 12px;
+  height: 76px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--color-four, #f1f3f5);
+  color: inherit;
+  text-decoration: none;
+  background: #fff;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.notif-item:hover {
+  background: #f8f9fa;
+  color: inherit;
+  text-decoration: none;
+}
+.notif-item.unread {
+  background: #dbe9fb; /* thông báo chưa xem: nền đậm hơn */
+}
+.notif-item.unread:hover {
+  background: #cfe0f8;
+}
+.notif-icon {
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #e7f1ff;
+  color: #228be6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+}
+.notif-item.unread .notif-icon {
+  background: #fff;
+}
+.notif-body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.notif-title {
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.notif-text {
+  font-size: 13px;
+  color: #495057;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.notif-time {
+  font-size: 12px;
+  color: #868e96;
+  margin-top: 2px;
+}
+.notif-empty {
+  padding: 28px 16px;
+  text-align: center;
+  color: #868e96;
+  font-size: 14px;
+}
+.notif-empty i {
+  display: block;
+  font-size: 28px;
+  margin-bottom: 8px;
+}

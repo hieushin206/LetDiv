@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Trời ơi! Đừng có đọc hết cuốn Clean Code dày cộm đó nữa! Dùng 3 nguyên tắc
+      này là đủ - LetDiv
+    </title>
+    <link rel="icon" href="/assets/images/icon-logo-cropped.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/base.css" />
+    <link rel="stylesheet" href="/assets/css/header.css" />
+    <link rel="stylesheet" href="/assets/css/footer.css" />
+    <link rel="stylesheet" href="css/news-details.css" />
+  </head>
+  <body>
+    <!-- header -->
+    <header class="header">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="header-logo">
+            <a href="/index.html"
+              ><img src="/assets/images/LetDiv.webp" alt="logo"
+            /></a>
+          </div>
+          <div class="header-navbar">
+            <div class="navbar-menu">
+              <ul>
+                <li><a href="/index.html">Trang Chủ</a></li>
+                <li><a href="/courses/course.html">Khóa Học</a></li>
+                <li><a href="/articles/news.html">Tin Tức</a></li>
+                <li><a href="/about/introduce.html">Giới Thiệu</a></li>
+              </ul>
+              <div class="inner-btn">
+                <!-- Button trigger modal -->
+                <button
+                  type="button"
+                  class="btn btn-primary button"
+                  data-toggle="modal"
+                  data-target="#exampleModal"
+                >
+                  Tư Vấn Ngay
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="header-action">
+            <div class="action">
+              <div class="cart-shop">
+                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+              </div>
+              <!-- Button trigger modal -->
+              <div class="login">
+                <button
+                  type="button"
+                  class="btn"
+                  data-toggle="modal"
+                  data-target="#loginModal"
+                >
+                  <i class="fa-solid fa-user"></i>
+                </button>
+              </div>
+              <div class="navbar-icon"><i class="fa-solid fa-bars"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="header-modal">
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Liên hệ</h5>
+              <div class="btn-close">
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="btn-contact">
+                <button
+                  class="button-change-color"
+                  onclick="
+                    window.open('https://zalo.me/2219221277314619603', '_blank')
+                  "
+                >
+                  Nhắn tin Zalo OA
+                </button>
+                <button
+                  class="button-change-color"
+                  onclick="
+                    window.open(
+                      'https://www.facebook.com/letdiv.innovation',
+                      '_blank',
+                    )
+                  "
+                >
+                  Nhắn tin Facebook
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- login Modal -->
+    <div class="login-modal">
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="loginModal"
+        tabindex="-1"
+        aria-labelledby="loginModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="loginModalLabel">Đăng Nhập</h5>
+              <div class="btn-close">
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <form action="" method="post">
+                <div class="form-group">
+                  <label for="exampleInputText1" class="label"
+                    >Tài khoản <span style="color: red">*</span></label
+                  >
+                  <span class="icon"><i class="fa-solid fa-user"></i></span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="exampleInputText1"
+                    aria-describedby="textHelp"
+                    placeholder="Ví dụ: nguyenvana"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1" class="label"
+                    >Mật khẩu <span style="color: red">*</span></label
+                  >
+                  <span class="icon"><i class="fa-solid fa-lock"></i></span>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="exampleInputPassword1"
+                  />
+                </div>
+                <button class="button-change-color">Đăng nhập</button>
+              </form>
+              <div class="forgot-pass">
+                <a href="/auth/forgot-password.html">Quên mật khẩu ?</a>
+              </div>
+              <div class="register text-center">
+                Bạn chưa có tài khoản?
+                <a href="/auth/register.html">Đăng ký ngay</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- login Modal end-->
+
+    <!-- header end -->
+
+    <!-- section-one -->
+    <div class="section-one">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="inner-title">
+            <h1 class="title">
+              Trời ơi! Đừng có đọc hết cuốn Clean Code dày cộm đó nữa! Dùng 3
+              nguyên tắc này là đủ
+            </h1>
+          </div>
+          <div class="inner-image">
+            <img
+              src="/assets/images/anh-bia-3-nguyen-tac-clean-code-thuc-chien-1024x577.webp"
+              alt=""
+            />
+          </div>
+          <div class="inner-content">
+            <p>
+              Thật đó! Bạn đừng nghĩ rằng cứ phải đọc hết cuốn sách Clean Code
+              thì mới áp dụng được nhé.
+            </p>
+            <p>
+              Ai học clean code mà chẳng biết cuốn sách kinh điển:
+              <strong
+                >Clean Code: A Handbook of Agile Software Craftsmanship.</strong
+              >
+            </p>
+            <p>
+              Nhưng để nuốt trọn đống lý thuyết trong cuốn sách này
+              <strong>chua lắm</strong> à nhang! Mấy ông dev đi làm 3-4 năm kinh
+              nghiệm đọc nhiều chỗ còn <strong>lớ ngớ</strong> chứ chẳng đùa.
+            </p>
+            <p>
+              Thôi, mới học lập trình cứ nắm cho mình 3 nguyên tắc clean code
+              <strong></strong>
+              này trước đi. Đảm bảo áp dụng được ngay cho 95% dự án thực tế
+              luôn.
+            </p>
+            <p>
+              Cứ code cho lên tay đi, rồi sau này quay lại cày cuốc, nghiên cứu
+              quyển Clean Code kia sau cũng chẳng muộn.
+            </p>
+            <h2 class="heading">1. Tránh lồng ghép quá sâu</h2>
+            <p>
+              Khi bạn nhồi nhét quá nhiều tầng
+              <span class="highlight">if/else</span>, người đọc code sẽ phải
+              luôn <strong>trong trạng thái căng não</strong> để hiểu và ghi nhớ
+              một chuỗi điều kiện dài dằng dặc.
+            </p>
+            <p>
+              Đến khi mò được vào đến phần logic cốt lõi ở tận cùng rồi, họ đã
+              <strong>trở nên lú lẫn</strong> vì phải vừa đọc vừa nhớ xem mình
+              đang ở tầng điều kiện nào.
+            </p>
+            <p><strong>Bad code (Lồng ghép sâu, gây rối mắt):</strong></p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                  function placeOrder(shop, cart, user) {
+                  if (shop.isOpen) {
+                    if (cart.items.length > 0) {
+                      if (user.balance >= cart.totalPrice) {
+                        // Logic chính
+                        let invoice = createInvoice(cart);
+                        return invoice;
+                      } else {
+                        return "Tài khoản không đủ tiền rồi";
+                      }
+                    } else {
+                      return "Giỏ hàng trống trơn kìa";
+                    }
+                  } else {
+                    return "Quán đóng cửa rồi, ngủ đi";
+                  }
+                }
+              </script>
+            </div>
+
+            <p><strong>Good code (Viết lại gọn gàng hơn):</strong></p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                  function placeOrder(shop, cart, user) {
+                  // Xử lý bắt các trường hợp lỗi ngay từ đầu
+                  if (!shop.isOpen) {
+                    return "Quán đóng cửa rồi, ngủ đi";
+                  }
+
+                  if (cart.items.length === 0) {
+                    return "Giỏ hàng trống trơn kìa";
+                  }
+
+                  if (user.balance < cart.totalPrice) {
+                    return "Tài khoản không đủ tiền rồi";
+                  }
+
+                  // Logic xử lý chính không còn bị lồng ghép nữa
+                  let invoice = createInvoice(cart);
+                  return invoice;
+                }
+              </script>
+            </div>
+            <p>
+              Bạn có thể thấy, đoạn code sau khi điều chỉnh đã trở nên
+              <strong>phẳng hơn</strong>
+              và dễ đọc hơn rất nhiều.
+            </p>
+            <p>
+              Chìa khóa ở đây chính là áp dụng kỹ thuật
+              <strong>Return early.</strong>
+            </p>
+            <p>
+              Hiểu một cách đơn giản là dùng từ khóa
+              <span class="highlight">return</span> để thoát hàm ngay lập tức
+              nhằm <strong>tránh việc phải lồng ghép code quá sâu.</strong>
+            </p>
+            <p>
+              Như ở ví dụ trên, thay vì kiểm tra điều kiện
+              <strong>ĐÚNG</strong> để lồng code vào
+              <strong>sâu bên trong</strong>, chúng ta ưu tiên kiểm tra các điều
+              kiện <strong>SAI</strong> trước, rồi dùng return để thoát hàm ngay
+              lập tức.
+            </p>
+            <h2 class="heading">2. Tránh lặp lại code (Nguyên tắc DRY)</h2>
+            <p>
+              Đây chính là nguyên tắc
+              <strong>DRY (Don’t Repeat Yourself)</strong> nổi tiếng.
+            </p>
+            <p>
+              Hãy xem ví dụ dưới đây: Logic lấy token từ
+              <span class="highlight">localStorage</span> và gán vào header đang
+              <strong>bị lặp lại.</strong>
+            </p>
+            <p>
+              Giả sử bạn copy-paste logic này cho 20 hàm fetch dữ liệu khác
+              nhau, khi có yêu cầu thay đổi code, bạn phải mò mẫm và sửa lại
+              đúng 20 chỗ đó. Rất mất thời gian và rủi ro sửa sót cực kỳ cao.
+            </p>
+            <p><strong>Bad code:</strong></p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                  function fetchUserProfile(){
+                  const token = localStorage.getItem('token');
+                  const headers = { 'Authorization': `Bearer ${token}` };
+
+                  return fetch('/api/profile', { headers });
+                }
+
+                function fetchUserOrders(){
+                  // Lặp lại logic lấy token & gán vào header
+                  const token = localStorage.getItem('token');
+                  const headers = { 'Authorization': `Bearer ${token}` };
+
+                  return fetch('/api/orders', { headers });
+                }
+              </script>
+            </div>
+            <p><strong>Good code:</strong></p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                // Gom những đoạn code lặp lại vào một hàm dùng chung
+                  function fetchWithAuth(url){
+                    const token = localStorage.getItem('token');
+                    const headers = { 'Authorization': `Bearer ${token}` };
+                    return fetch(url, { headers });
+                  }
+
+                  // Ở các hàm gọi API, giờ chỉ cần truyền mỗi URL là xong:
+                  function fetchUserProfile(){
+                    return fetchWithAuth('/api/profile');
+                  }
+
+                  function fetchUserOrders(){
+                    return fetchWithAuth('/api/orders');
+                  }
+              </script>
+            </div>
+            <p>
+              Thay vì copy-paste khắp nơi, chúng ta gom những đoạn code lặp lại
+              vào <strong>một hàm dùng chung</strong>. Nếu có thay đổi, bạn chỉ
+              cần sửa ở đúng một chỗ là toàn bộ hệ thống được cập nhật.
+            </p>
+            <p><strong>Nhớ là đừng lạm dụng DRY!</strong></p>
+            <p>
+              Đúng là DRY rất tốt, nhưng
+              <strong>đừng áp dụng nó một cách bừa bãi.</strong>
+            </p>
+            <p>
+              Nhiều bạn mới biết đến nguyên tắc này thường mắc hội chứng
+              <strong>“ám ảnh trùng lặp”</strong>, cứ thấy code giống nhau chỉ
+              1-2 nơi là vội vàng tách hàm.
+            </p>
+            <p>
+              Hậu quả là code bị xé vụn ra, báo hại người đọc phải nhảy qua chục
+              file mới hiểu nổi một luồng xử lý đơn giản.
+            </p>
+            <p>
+              Đây cũng chính là một trong
+              <a href="9-sai-lam.html"
+                >9 sai lầm chí mạng đang âm thầm kéo lùi sự nghiệp</a
+              >
+              của bạn.
+            </p>
+            <p>
+              <strong>Kinh nghiệm thực chiến:</strong> Chỉ khi nào phải
+              copy-paste một đoạn code
+              <strong>tới lần thứ 3 hoặc thứ 4</strong> và thực sự bắt đầu thấy
+              khó quản lý, thì đó mới là lúc cần thiết để gom chúng lại thành
+              một hàm dùng chung.
+            </p>
+            <h2 class="heading">
+              3. Đừng đặt tên theo kiểu “Chỉ mình tui biết”
+            </h2>
+            <p>
+              Nếu không muốn trở thành <strong>tội đồ</strong> trong mắt đồng
+              nghiệp, đừng mắc sai lầm này.
+            </p>
+            <p>
+              Việc bạn dùng các biến a, b, c hoặc viết tắt ngẫu nhiên không giúp
+              chương trình chạy nhanh hơn, nó chỉ làm cả team
+              <strong>lãng phí thêm thời gian</strong> để giải mã ý đồ của bạn.
+            </p>
+            <p><strong>Bad code:</strong></p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                  function calc(d, u) {
+                  let t = 0;
+
+                  if (u === 1) {
+                    t = d * 0.1;
+                  }
+
+                  return d + t;
+                }
+              </script>
+            </div>
+            <p>
+              <strong>Good code (Tên biến truyền tải trọn vẹn ý nghĩa):</strong>
+            </p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                  function calculateTotalWithTax(orderAmount, userType) {
+                  let taxAmount = 0;
+                  const PREMIUM_USER_TYPE = 1;
+                  const TAX_RATE = 0.1;
+
+                  if (userType === PREMIUM_USER_TYPE) {
+                    taxAmount = orderAmount * TAX_RATE;
+                  }
+
+                  return orderAmount + taxAmount;
+                }
+              </script>
+            </div>
+            <p>
+              Nguyên lý rất đơn giản: Đặt tên sao cho người khác nhìn vào là
+              biết ngay biến này <strong>chứa gì</strong>, hàm này làm
+              <strong>nhiệm vụ gì.</strong>
+            </p>
+            <p>
+              Làm được điều này, code của bạn sẽ tự động trở nên sạch sẽ và
+              chuyên nghiệp hơn rất nhiều lập trình viên ngoài kia rồi đấy.
+            </p>
+            <h2 class="heading">Hãy viết code tử tế để tiến xa hơn</h2>
+            <p>
+              Những nguyên tắc trên tuy đơn giản nhưng sẽ tạo ra
+              <strong>bước ngoặt cực lớn</strong> cho chất lượng dự án và cả con
+              đường sự nghiệp của bạn.
+            </p>
+            <p>
+              Nếu bạn đang đối mặt với <strong>quá nhiều kiến thức</strong> và
+              chưa biết bắt đầu từ đâu, hoặc tự học mãi mà vẫn
+              <strong>không thể tự code</strong> được một dự án thực tế, thì đã
+              đến lúc bạn cần một hướng đi <strong>rõ ràng hơn.</strong>
+            </p>
+            <p>
+              Việc có Mentor <strong>cầm tay chỉ việc 1-1</strong> ngay từ những
+              ngày đầu sẽ giúp bạn
+              <strong
+                >đi đúng hướng, tiết kiệm thời gian và tự tin bứt phá </strong
+              >trên con đường sự nghiệp của mình.
+            </p>
+            <p>
+              <i class="fa-solid fa-hand-point-right"></i>Đừng chờ đợi gì nữa,
+              hãy tham khảo ngay
+              <a href="">các khóa học lập trình 1 kèm 1 của LetDiv</a> nhé!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- section-one end -->
+
+    <!-- footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="inner-addres">
+            <div class="img">
+              <a href=""><img src="/assets/images/LetDiv.webp" alt="" /></a>
+              <p class="content">
+                CÔNG TY TNHH LẬP TRÌNH LETDIV VIỆT NAM <br />
+                <strong>Mã số thuế:</strong> 0317429951 <br /><strong
+                  >Địa chỉ:</strong
+                >
+                5B Phổ Quang, Phường Tân Sơn Hòa, Hồ Chí Minh. <br /><strong
+                  >Điện thoại:</strong
+                >
+                0914 991 139 <br />
+                <strong>Email:</strong> letdiv.innovation@gmail.com
+              </p>
+            </div>
+          </div>
+          <div class="inner-info">
+            <h3>Thông Tin</h3>
+            <p><a href="/contact/contact.html">Liên hệ</a></p>
+            <p><a href="/about/introduce.html">Giới thiệu</a></p>
+            <p><a href="/policies/policy.html">Chính sách bảo mật</a></p>
+            <div class="img">
+              <a
+                href="https://www.dmca.com/Protection/Status.aspx?ID=5ed68dec-8566-4fcf-b1d7-70668621b032&refurl=https://letdiv.com/"
+                target="_blank"
+                ><img src="/assets/images/DMCA_logo-grn-btn120w.png" alt=""
+              /></a>
+            </div>
+          </div>
+          <div class="inner-social">
+            <h3>Mạng Xã Hội</h3>
+            <div class="icon">
+              <a
+                href="https://www.facebook.com/letdiv.innovation"
+                target="_blank"
+                ><i class="fa-brands fa-facebook"></i
+              ></a>
+              <a href="https://www.tiktok.com/@letdiv" target="_blank"
+                ><i class="fa-brands fa-tiktok"></i
+              ></a>
+              <a href="https://www.youtube.com/@letdiv" target="_blank"
+                ><i class="fa-brands fa-youtube"></i
+              ></a>
+            </div>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d31352.53490692094!2d106.66647100000002!3d10.806191000000002!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d7e2e9c2d4b1%3A0xa1e7de28f1b06563!2zQ8O0bmcgVHkgVE5ISCBM4bqtcCBUcsOsbmggTGV0RGl2!5e0!3m2!1sen!2sus!4v1789548029411!5m2!1sen!2sus"
+              width="100%"
+              height="300"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- footer end -->
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="/assets/bootstrap/jquery.slim.min.js"></script>
+    <script src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="js/format-code.js"></script>
+    <script src="/assets/js/header-auth.js"></script>
+  </body>
+</html>

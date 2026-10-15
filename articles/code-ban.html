@@ -1,0 +1,973 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Đừng để Code Bẩn trở thành DẤU CHẤM HẾT cho sự nghiệp Dev của bạn! -
+      LetDiv
+    </title>
+    <link rel="icon" href="/assets/images/icon-logo-cropped.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/base.css" />
+    <link rel="stylesheet" href="/assets/css/header.css" />
+    <link rel="stylesheet" href="/assets/css/footer.css" />
+    <link rel="stylesheet" href="css/news-details.css" />
+  </head>
+  <body>
+    <!-- header -->
+    <header class="header">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="header-logo">
+            <a href="/index.html"
+              ><img src="/assets/images/LetDiv.webp" alt="logo"
+            /></a>
+          </div>
+          <div class="header-navbar">
+            <div class="navbar-menu">
+              <ul>
+                <li><a href="/index.html">Trang Chủ</a></li>
+                <li><a href="/courses/course.html">Khóa Học</a></li>
+                <li><a href="/articles/news.html">Tin Tức</a></li>
+                <li><a href="/about/introduce.html">Giới Thiệu</a></li>
+              </ul>
+              <div class="inner-btn">
+                <!-- Button trigger modal -->
+                <button
+                  type="button"
+                  class="btn btn-primary button"
+                  data-toggle="modal"
+                  data-target="#exampleModal"
+                >
+                  Tư Vấn Ngay
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="header-action">
+            <div class="action">
+              <div class="cart-shop">
+                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+              </div>
+              <!-- Button trigger modal -->
+              <div class="login">
+                <button
+                  type="button"
+                  class="btn"
+                  data-toggle="modal"
+                  data-target="#loginModal"
+                >
+                  <i class="fa-solid fa-user"></i>
+                </button>
+              </div>
+              <div class="navbar-icon"><i class="fa-solid fa-bars"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="header-modal">
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Liên hệ</h5>
+              <div class="btn-close">
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="btn-contact">
+                <button
+                  class="button-change-color"
+                  onclick="
+                    window.open('https://zalo.me/2219221277314619603', '_blank')
+                  "
+                >
+                  Nhắn tin Zalo OA
+                </button>
+                <button
+                  class="button-change-color"
+                  onclick="
+                    window.open(
+                      'https://www.facebook.com/letdiv.innovation',
+                      '_blank',
+                    )
+                  "
+                >
+                  Nhắn tin Facebook
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- login Modal -->
+    <div class="login-modal">
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="loginModal"
+        tabindex="-1"
+        aria-labelledby="loginModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="loginModalLabel">Đăng Nhập</h5>
+              <div class="btn-close">
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <form action="" method="post">
+                <div class="form-group">
+                  <label for="exampleInputText1" class="label"
+                    >Tài khoản <span style="color: red">*</span></label
+                  >
+                  <span class="icon"><i class="fa-solid fa-user"></i></span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="exampleInputText1"
+                    aria-describedby="textHelp"
+                    placeholder="Ví dụ: nguyenvana"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1" class="label"
+                    >Mật khẩu <span style="color: red">*</span></label
+                  >
+                  <span class="icon"><i class="fa-solid fa-lock"></i></span>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="exampleInputPassword1"
+                  />
+                </div>
+                <button class="button-change-color">Đăng nhập</button>
+              </form>
+              <div class="forgot-pass">
+                <a href="/auth/forgot-password.html">Quên mật khẩu ?</a>
+              </div>
+              <div class="register text-center">
+                Bạn chưa có tài khoản?
+                <a href="/auth/register.html">Đăng ký ngay</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- login Modal end-->
+
+    <!-- header end -->
+
+    <!-- section-one -->
+    <div class="section-one">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="inner-title">
+            <h1 class="title">
+              Đừng để Code Bẩn trở thành DẤU CHẤM HẾT cho sự nghiệp Dev của bạn!
+            </h1>
+          </div>
+          <div class="inner-image">
+            <img
+              src="/assets/images/ky-thuat-clean-code-thuc-chien-cho-dev-1024x576.webp"
+              alt=""
+            />
+          </div>
+          <div class="inner-content">
+            <p>
+              Đừng để Code Bẩn trở thành DẤU CHẤM HẾT cho sự nghiệp lập trình
+              của bạn!
+            </p>
+            <p>
+              Bạn đã từng bao giờ mất cả ngày trời để đọc lại đống code do chính
+              mình viết cách đây 10 ngày, chỉ để sửa một lỗi nhỏ chưa?
+            </p>
+            <p>
+              Tệ hơn nữa, bạn sửa chỗ này lại phát sinh lỗi ở hàng loạt chỗ
+              khác. Trang web ngày càng bất ổn, lỗi lặt vặt xuất hiện khắp nơi,
+              deadline cận kề mà công việc vẫn dậm chân tại chỗ, còn sếp thì hối
+              thúc tin nhắn liên tục.
+            </p>
+            <p>
+              Bạn bắt đầu cảm thấy căng thẳng, bất lực và bực bội. Tinh thần dần
+              kiệt quệ, niềm đam mê với lập trình gần như đã biến mất. Công việc
+              không còn mang lại niềm vui, mà giờ như là một cuộc chiến mỗi
+              ngày.
+            </p>
+            <p>Đây chính là hậu quả điển hình của Code Bẩn.</p>
+            <p>
+              Mình hiểu cảm giác đó, vì mình cũng đã từng trải qua giống như
+              bạn.
+            </p>
+            <p>Vậy làm sao để code trở nên dễ đọc, dễ bảo trì, và mở rộng?</p>
+            <p>
+              Sau hơn 10 năm làm việc và đọc qua nhiều cuốn sách về Clean Code,
+              mình đã tổng hợp được những kỹ thuật thực chiến nhất mà bạn có thể
+              áp dụng ngay vào dự án của mình sau khi xem xong bài viết này.
+            </p>
+            <p>Okay, giờ thì chúng ta bắt đầu thôi.</p>
+            <h2 class="heading">1. Đặt tên (Naming)</h2>
+            <p>
+              Trước tiên, mình sẽ giới thiệu cho bạn kỹ thuật cơ bản nhất nhưng
+              cũng là quan trọng nhất trong các kỹ thuật Clean Code đó là Cách
+              đặt tên.
+            </p>
+            <p>
+              Khi mới học lập trình, hầu hết chúng ta đều có thói quen đặt tên
+              biến rất tùy hứng. Thậm chí, ngay cả nhiều lập trình viên đã đi
+              làm đôi khi vẫn mắc phải những lỗi này.
+            </p>
+            <p>
+              Nhìn vào đoạn code sau, bạn có hiểu nó đang thực hiện chức năng gì
+              không?
+            </p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                function processData(arr) {
+                  let temp = 0;
+                  arr.forEach(el => {
+                    if (el.type === 'vip' && el.amount > 50) {
+                      temp += el.price * el.amount * 0.9;
+                    } else {
+                      temp += el.price * el.amount;
+                    }
+                  });
+                  return temp;
+                }
+              </script>
+            </div>
+            <p>
+              Gần như rất khó để hình dung chức năng cụ thể của hàm này là gì
+              nếu chỉ nhìn lướt qua.
+            </p>
+            <p>
+              Bạn phải đọc từng dòng lệnh, phân tích logic, và chạy chương trình
+              nhiều lần mới lờ mờ đoán được là “hình như nó đang tính tổng cái
+              gì đó…”.
+            </p>
+            <p>
+              Nếu mình không tiết lộ rằng hàm này dùng để tính doanh thu dựa
+              trên danh sách đơn hàng, thì có lẽ bạn sẽ mất rất nhiều thời gian
+              tìm hiểu.
+            </p>
+            <p>
+              Và tệ hơn, khi bạn cần sửa code, việc không hiểu rõ luồng logic cũ
+              sẽ rất dễ dẫn đến việc tạo ra thêm nhiều lỗi khác.
+            </p>
+            <p>
+              Để giải quyết vấn đề này, chúng ta cần tuân thủ 3 nguyên tắc cốt
+              lõi sau đây trong việc đặt tên.
+            </p>
+            <h3>
+              <strong>Nguyên tắc 1 – Tên phải thể hiện mục đích rõ ràng</strong>
+            </h3>
+            <p>
+              Đây là nguyên tắc quan trọng nhất. Khi nhìn vào tên biến, tên hàm,
+              tên class,… nó phải cho chúng ta biết được ngay mục đích dùng để
+              làm gì?
+            </p>
+            <p>
+              Bây giờ, mình sẽ áp dụng quy tắc này để sửa lại đoạn code sau.
+            </p>
+            <p>
+              Hiện tại, tên hàm <span class="highlight">processData</span> có ý
+              nghĩa quá chung chung. Nên mình sẽ đổi tên thành
+              <span class="highlight">calculateTotalRevenue</span>, tạm dịch là
+              tính tổng doanh thu.
+            </p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                // Trước
+                function processData(arr) {
+                  // ...
+                }
+
+                // Sau
+                function calculateTotalRevenue(arr) {
+                  // ...
+                }
+              </script>
+            </div>
+            <p>
+              Để đổi tên một cách an toàn và đồng bộ, bạn nên dùng chức năng
+              <strong>Rename Symbol</strong> của VS Code để toàn bộ nơi đang gọi
+              hàm được cập nhật cùng lúc.
+            </p>
+            <p>
+              Như vậy, những nơi nào đang gọi hàm này trong dự án đều sẽ được tự
+              động cập nhật theo. Mình sẽ không cần tốn nhiều thời gian để đi rà
+              soát hay sửa thủ công từng chỗ.
+            </p>
+            <p>
+              Dù tên hàm hơi dài một chút, nhưng miễn sao nó thể hiện đúng mục
+              đích là được
+            </p>
+            <p>
+              Bạn nên nhớ rằng: Nguyên tắc của Clean Code là ưu tiên sự rõ ràng
+              hơn độ dài của tên.
+            </p>
+            <p>
+              Tiếp theo là tham số <span class="highlight">arr</span>. Tại vì nó
+              dùng để chứa danh sách các đơn hàng, nên mình sẽ đổi tên lại với
+              mục đích rõ ràng hơn là <span class="highlight">orders</span>.
+            </p>
+            <p>
+              Còn biến <span class="highlight">temp</span> dùng để tính tổng giá
+              trị của tất cả đơn hàng, nên mình sẽ đổi tên thành
+              <span class="highlight">totalRevenue</span>:
+            </p>
+            <p>
+              Biến <span class="highlight">el</span> trong vòng lặp
+              <span class="highlight">forEach</span> tương ứng với mỗi đơn hàng
+              trong mảng <span class="highlight">orders</span>, nên mình sẽ đổi
+              tên thành <span class="highlight">order</span> dưới dạng số ít.
+            </p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                // Trước
+                function processData(arr) {
+                  let temp = 0;
+                  arr.forEach(el => {
+                    // ...
+                  });
+                  return temp;
+                }
+
+                // Sau
+                function calculateTotalRevenue(orders) {
+                  let totalRevenue = 0;
+                  orders.forEach(order => {
+                    // ...
+                  });
+                  return totalRevenue;
+                }
+              </script>
+            </div>
+            <p>
+              Như vậy, sau khi áp dụng nguyên tắc thứ nhất, code của chúng ta đã
+              trông rõ ràng hơn rất nhiều.
+            </p>
+            <p>
+              Mình có thể dễ dàng nắm bắt được logic tính tổng doanh thu như
+              sau:
+            </p>
+            <ul>
+              <li>
+                Nếu đơn hàng nào thuộc loại VIP và có số lượng trên 50, thì tổng
+                tiền của đơn hàng đó sẽ được giảm 10%.
+              </li>
+              <li>
+                Ngược lại, nếu không thỏa điều kiện này thì giữ nguyên giá gốc.
+                Đến đây code đã khá ổn rồi. Tuy nhiên, nó vẫn còn một vấn đề nhỏ
+                cần tối ưu. Đây là lúc mình cần sử dụng đến nguyên tắc thứ 2:
+                Loại bỏ Magic Number.
+              </li>
+            </ul>
+            <h3><strong>Nguyên tắc thứ 2 – Loại bỏ Magic Number</strong></h3>
+            <p>Vậy Magic Number là gì?</p>
+            <p>
+              Hiện tại trong mã nguồn có 2 con số 50 và 0.9. Chúng chính là
+              Magic Number.
+            </p>
+            Điều này khiến người đọc code nhìn vào sẽ không hiểu tại sao lại có
+            con số đó và ý nghĩa của nó là gì. Để loại bỏ Magic number, mình sẽ
+            đặt tên cho chúng.
+            <p>
+              Hiểu đơn giản, Magic Number là những con số được gán cứng trong mã
+              nguồn mà không có tên gọi cụ thể.
+            </p>
+            <p>
+              Điều này khiến người đọc code nhìn vào sẽ không hiểu tại sao lại
+              có con số đó và ý nghĩa của nó là gì. Để loại bỏ Magic number,
+              mình sẽ đặt tên cho chúng.
+            </p>
+            <p>
+              Số 50 có ý nghĩa là số lượng mua tối thiểu để được giảm giá, nên
+              mình sẽ khai báo một một hằng số có tên là MIN_ORDER_FOR_DISCOUNT
+              để chứa giá trị 50.
+            </p>
+            <p>
+              Tương tự, 0.9 là tỉ lệ giá sau khi đã giảm 10% cho đơn hàng VIP,
+              nên mình sẽ khai báo một hằng số có tên là VIP_DISCOUNT_RATE để
+              chứa giá trị 0.9.
+            </p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                // Trước
+                if (order.type === 'vip' && order.amount > 50) {
+                  totalRevenue += order.price * order.amount * 0.9;
+                }
+
+                // Sau
+                const MIN_ORDER_FOR_DISCOUNT = 50;
+                const VIP_DISCOUNT_RATE = 0.9;
+
+                if (order.type === 'vip' && order.amount > MIN_ORDER_FOR_DISCOUNT) {
+                  totalRevenue += order.price * order.amount * VIP_DISCOUNT_RATE;
+                }
+              </script>
+            </div>
+            <p>
+              Câu lệnh điều kiện bây giờ đã trở nên tường minh hơn rất nhiều.
+            </p>
+            <p>
+              Cách này không chỉ giúp code dễ đọc, mà còn cực kỳ dễ bảo trì. Sau
+              này nếu cần thay đổi mức giảm giá hay số lượng, mình chỉ cần sửa
+              đúng một chỗ tại vị trí khai báo biến, những nơi khác sử dụng các
+              biến này cũng sẽ tự động được cập nhật theo.
+            </p>
+            <h3><strong>Nguyên tắc số 3 – Tên hàm phải là động từ</strong></h3>
+            <p>
+              Vì hàm đại diện cho một hành động cụ thể, nên tên của nó nhất định
+              phải là động từ.
+            </p>
+            <p>
+              Ví dụ, hàm calculateTotalRevenue có tên là một động từ, và thể
+              hiện đúng mục đích là dùng để tính tổng doanh thu.
+            </p>
+            <p>Ngược lại, tên biến, tên class,… thì nên là danh từ.</p>
+            <p>
+              Như vậy, chúng ta đã đi qua 3 nguyên tắc quan trọng nhất của kỹ
+              thuật đặt tên biến. Chỉ cần nắm vững và thực hành thành thạo 3
+              nguyên tắc đặt tên này, code của bạn sẽ trở nên dễ đọc và chuyên
+              nghiệp hơn 80% so với trước đây rồi đấy!
+            </p>
+            <p>
+              <i class="fa-regular fa-hand-point-right"></i> Xem thông tin chi
+              tiết các khóa học <a href="/courses/course.html">Tại đây</a>
+            </p>
+            <h2 class="heading">2. Tách hàm</h2>
+            <p>
+              “Sửa gấp giúp anh hiển thị ngày tháng trong hệ thống để phù hợp
+              với định dạng bên Nhật nhé, 1 tiếng sau anh phải họp với đối tác
+              rồi!” – Sếp vội vã chỉ tay vào màn hình và nói.
+            </p>
+            <p>
+              “Okay, 30 phút sau có ngay cho anh ạ!” – Bạn trả lời một cách đầy
+              tự tin. Sau đó mở ứng dụng VS Code lên, rồi nhanh chóng bắt tay
+              vào công việc.
+            </p>
+            <p>
+              Bỗng nhiên bạn khựng lại, 2 tay ôm lấy đầu, miệng há hốc vì biết
+              mình đang gặp một vấn đề nghiêm trọng:
+            </p>
+            <p>
+              “Chết rồi! Nếu muốn sửa định dạng ngày tháng, mình phải sửa lại
+              code của màn hình danh sách sản phẩm, chi tiết sản phẩm, giỏ
+              hàng,… và rất nhiều màn hình khác nữa…”
+            </p>
+            <p>
+              Với một hệ thống có hơn hàng trăm màn hình, bạn ước lượng làm một
+              ngày chưa chắc đã xong, 1 tiếng sao mà kịp… Tệ hơn, bạn có thể sửa
+              thiếu hoặc vô tình sửa nhầm logic của chức năng khác.
+            </p>
+            <p>
+              Bạn nhận ra hệ thống đang vi phạm nguyên tắc code bị trùng lặp ở
+              nhiều nơi. Mỗi lần cần chỉnh sửa đơn giản đều biến thành một nhiệm
+              vụ tốn thời gian, và tiềm ẩn đầy rủi ro.
+            </p>
+            <p>
+              Giải pháp ở đây, bạn chỉ cần tách các đoạn code trùng lặp ra thành
+              một hàm tiện ích dùng chung. Những nơi nào cần sử dụng thì chỉ cần
+              gọi hàm tiện ích này ra.
+            </p>
+            <p>
+              Sau này cần chỉnh sửa, bạn chỉ cần chỉnh sửa bên trong hàm tiện
+              ích này, các nơi khác sẽ tự động được cập nhật theo.
+            </p>
+            <p>Để giúp bạn dễ hình dung, mình có một ví dụ đơn giản như sau:</p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                // Giả lập cơ sở dữ liệu
+                const users = [{ id: 1, name: "An", balance: 500, isActive: true }];
+                const products = [{ id: 101, name: "Laptop", price: 200, stock: 5 }];
+
+                // 1. Chức năng thanh toán
+                function thanhToanDonHang(userId, items) {
+                    const user = users.find(u => u.id === userId);
+                    if (!user) return "Lỗi: Không tìm thấy người dùng";
+                    if (!user.isActive) return "Lỗi: Tài khoản bị khóa";
+
+                    let tongTien = 0;
+                    for (let i = 0; i < items.length; i++) {
+                        const product = products.find(p => p.id === items[i].id);
+                        if (!product || product.stock < items[i].quantity) {
+                            return "Lỗi: Sản phẩm " + items[i].id + " không đủ hàng";
+                        }
+                        tongTien += product.price * items[i].quantity;
+                    }
+
+                    if (user.balance < tongTien) return "Lỗi: Không đủ tiền";
+                    user.balance -= tongTien;
+                    return "Thanh toán thành công!";
+                }
+
+                // 2. Chức năng hủy đơn (Để hoàn tiền)
+                function huyDonHang(userId, totalRefund) {
+                    const user = users.find(u => u.id === userId);
+                    if (!user) return "Lỗi: Không tìm thấy người dùng";
+                    if (!user.isActive) return "Lỗi: Tài khoản bị khóa";
+
+                    user.balance += totalRefund;
+                    return "Hủy đơn thành công!";
+                }
+              </script>
+            </div>
+            <p>
+              Ở đây có một vấn đề rất rõ: logic kiểm tra user hợp lệ đang bị lặp
+              ở cả thanhToanDonHang và huyDonHang.
+            </p>
+            <p>
+              Khi nghiệp vụ đổi, bạn sẽ phải sửa nhiều chỗ, rất dễ quên và gây
+              lỗi.
+            </p>
+            <h3>Phần code bị lặp</h3>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                // Bị lặp trong thanhToanDonHang
+                const user = users.find(u => u.id === userId);
+                if (!user) return "Lỗi: Không tìm thấy người dùng";
+                if (!user.isActive) return "Lỗi: Tài khoản bị khóa";
+
+                // Bị lặp trong huyDonHang
+                const user = users.find(u => u.id === userId);
+                if (!user) return "Lỗi: Không tìm thấy người dùng";
+                if (!user.isActive) return "Lỗi: Tài khoản bị khóa";
+              </script>
+            </div>
+            <h3>Giải pháp: Tách logic dùng chung</h3>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                function layThongTinUserHopLe(userId) {
+                  const user = users.find(u => u.id === userId);
+
+                  if (!user) throw new Error("Không tìm thấy người dùng");
+                  if (!user.isActive) throw new Error("Tài khoản bị khóa");
+
+                  return user;
+                }
+              </script>
+            </div>
+            <p>Hàm này chỉ làm đúng một việc:</p>
+            <ul>
+              <li>Nhận userId</li>
+              <li>Kiểm tra điều kiện user hợp lệ</li>
+              <li>Trả về user để các hàm khác dùng lại</li>
+            </ul>
+            <h3>Áp dụng vào các nơi sử dụng</h3>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                function thanhToanDonHang(userId, items) {
+                  const user = layThongTinUserHopLe(userId);
+
+                  let tongTien = 0;
+                  for (let i = 0; i < items.length; i++) {
+                    const product = products.find(p => p.id === items[i].id);
+                    if (!product || product.stock < items[i].quantity) {
+                      return "Lỗi: Sản phẩm " + items[i].id + " không đủ hàng";
+                    }
+                    tongTien += product.price * items[i].quantity;
+                  }
+
+                  if (user.balance < tongTien) return "Lỗi: Không đủ tiền";
+                  user.balance -= tongTien;
+                  return "Thanh toán thành công!";
+                }
+
+                function huyDonHang(userId, totalRefund) {
+                  const user = layThongTinUserHopLe(userId);
+
+                  user.balance += totalRefund;
+                  return "Hủy đơn thành công!";
+                }
+              </script>
+            </div>
+            <h3>Khi có yêu cầu mới</h3>
+            <p>
+              Giả sử cần kiểm tra thêm email đã xác thực hay chưa, bạn chỉ cần
+              sửa đúng một nơi:
+            </p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                function layThongTinUserHopLe(userId) {
+                  const user = users.find(u => u.id === userId);
+
+                  if (!user) throw new Error("Không tìm thấy người dùng");
+                  if (!user.isActive) throw new Error("Tài khoản bị khóa");
+                  if (!user.isEmailVerified) throw new Error("Chưa xác thực email");
+
+                  return user;
+                }
+              </script>
+            </div>
+            <p>Nhờ tách hàm, bạn sẽ có các lợi ích rất rõ:</p>
+            <ul>
+              <li>Chỉ sửa một chỗ khi nghiệp vụ thay đổi</li>
+              <li>Giảm rủi ro sửa thiếu</li>
+              <li>Code ngắn hơn, dễ đọc hơn</li>
+              <li>Dễ viết test cho từng phần</li>
+            </ul>
+            <p>
+              Tóm lại, nếu trong mã nguồn có logic bị lặp ở nhiều nơi, hãy ưu
+              tiên tách thành hàm riêng để tái sử dụng.
+            </p>
+            <h2 class="heading">3. Thống nhất định dạng chung (Formatting)</h2>
+            <p>
+              10 giờ đêm, bạn đang chuẩn bị tắt máy thì bỗng nhiên nhận được
+              cuộc gọi gấp từ Sếp:
+            </p>
+            <p>
+              “Chức năng giảm giá của hệ thống đang chạy sai cho hàng trăm đơn
+              của khách hàng rồi. Em sửa gấp giúp anh trong hôm nay”.
+            </p>
+            <p>
+              Bạn vội vả mở file code, nhìn vào logic giảm giá mà mình vừa mới
+              viết xong ngày hôm qua:
+            </p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                function applyDiscount(order){
+                if(order.isVip)
+                {if(order.total>1000)
+                return order.total*0.8
+                else
+                return order.total*0.9}
+                else{return order.total}
+                }
+              </script>
+            </div>
+            <p>
+              Mắt bạn dò từng dòng code. Bộ não bắt đầu làm việc quay cuồng chỉ
+              để trả lời câu hỏi: Cái else này thuộc về if nào? Đơn hàng của
+              khách hàng trên 1000 là giảm 20% hay 10%?
+            </p>
+            <p>
+              Bạn thật sự không ngờ rằng, mình lại đang khá vất vả để hiểu đoạn
+              code vừa mới viết xong.
+            </p>
+            <p>
+              Vấn đề ở đây không phải bạn không hiểu rõ logic giảm giá như thế
+              nào, mà do cấu trúc code khá lộn xộn, khiến bạn nhìn vào không
+              phân biệt được đoạn code nào nằm bên trong đoạn code nào.
+            </p>
+            <p>
+              Vậy làm thế nào để định dạng code trở nên rõ ràng và dễ đọc hơn?
+            </p>
+            <p>
+              Dưới đây là 3 nguyên tắc CƠ BẢN NHẤT mà bạn có thể áp dụng ngay
+              nếu muốn code của mình rõ ràng và dễ đọc:
+            </p>
+            <h3>Nguyên tắc 1 – Nhất quán thụt lề</h3>
+            <p>Bạn hãy nhìn đoạn code sau:</p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                if (isValid) {
+                if (hasPermission) {
+                        processOrder();
+                }
+                }
+              </script>
+            </div>
+            <p>
+              Ở đây có hai câu lệnh if lồng nhau, nhưng do câu lệnh if bên trong
+              không thụt lề vào nên cấu trúc rất khó nhìn.
+            </p>
+            <p>
+              Dẫn đến là bạn có thể sẽ không biết câu lệnh if bên trong là con
+              của câu lệnh if bên ngoài, rồi hiểu sai logic.
+            </p>
+            <p>
+              Để cải thiện, mình chỉnh lại câu lệnh if bên trong thụt lề vào:
+            </p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                if (isValid) {
+                  if (hasPermission) {
+                    processOrder();
+                  }
+                }
+              </script>
+            </div>
+            <p>
+              Lúc này, bạn nhìn vào là thấy ngay đoạn code nào là con và đoạn
+              code nào là cha, và dễ dàng hiểu đúng logic hơn.
+            </p>
+            <p>
+              Nói chung các đoạn code con phải thụt lề vào để cấu trúc trở nên
+              rõ ràng.
+            </p>
+            <h3>Nguyên tắc 2 – Tách khối code theo ý nghĩa</h3>
+            <p>Hãy nhìn vào hàm checkout này:</p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                function checkout(order) {
+                  if (!order || !order.items?.length) {
+                    throw new Error('Order is invalid');
+                  }
+                  const subtotal = order.items.reduce((sum, item) => sum + item.price * item.qty, 0);
+                  const discount = order.isVip ? subtotal * 0.1 : 0;
+                  const finalTotal = subtotal - discount;
+                  return finalTotal;
+                }
+              </script>
+            </div>
+            <p>
+              Vấn đề ở đây là các câu lệnh đang dính liền một khối với nhau, bạn
+              sẽ rất khó nhận biết nhanh logic tổng quan là gì.
+            </p>
+            <p>
+              Sau một tháng nhìn lại, bạn sẽ cảm thấy khá ngợp tại vì không biết
+              đâu là phần kiểm tra ràng buộc? Đâu là phần tính tiền?
+            </p>
+            <p>
+              Cách đơn giản để cải thiện vấn đề này là mình sẽ tách các câu lệnh
+              liên quan thành từng khối riêng biệt. Mỗi khối sẽ ngăn cách với
+              nhau bằng một dấu khoảng cách.
+            </p>
+            <p>Giả sử ở đây, mình có thể chia thành 3 khối.</p>
+            <p>
+              Khối thứ nhất là các câu lệnh liên quan đến logic kiểm tra ràng
+              buộc:
+            </p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                function checkout(order) {
+                  if (!order || !order.items?.length) {
+                    throw new Error('Order is invalid');
+                  }
+                }
+              </script>
+            </div>
+            <p>Khối thứ hai là các câu lệnh liên quan đến logic tính tiền:</p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                function checkout(order) {
+                  if (!order || !order.items?.length) {
+                    throw new Error('Order is invalid');
+                  }
+
+                  const subtotal = order.items.reduce((sum, item) => sum + item.price * item.qty, 0);
+                  const discount = order.isVip ? subtotal * 0.1 : 0;
+                  const finalTotal = subtotal - discount;
+                }
+              </script>
+            </div>
+            <p>Và khối thứ ba là câu lệnh trả về kết quả cuối cùng:</p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                function checkout(order) {
+                  if (!order || !order.items?.length) {
+                    throw new Error('Order is invalid');
+                  }
+
+                  const subtotal = order.items.reduce((sum, item) => sum + item.price * item.qty, 0);
+                  const discount = order.isVip ? subtotal * 0.1 : 0;
+                  const finalTotal = subtotal - discount;
+
+                  return finalTotal;
+                }
+              </script>
+            </div>
+            <p>
+              Như bạn thấy, sau khi tách cách các câu lệnh liên quan thành từng
+              khối riêng biệt, nội dung code đã trở nên tương minh hơn so với
+              trước đó.
+            </p>
+            <h3>Nguyên tắc 3 – Định dạng điều kiện phức tạp</h3>
+            <p>
+              Hãy nhìn vào câu lệnh if này: Các điều kiện đang nằm cùng 1 dòng,
+              trông rất rối mắt:
+            </p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                if (order.isPaid && (order.type === 'vip' || order.total > 2000) && !order.isRefunded) {
+                  sendInvoice(order.id);
+                }
+              </script>
+            </div>
+            <p>
+              Bạn sẽ gặp khó khăn trong việc nhận biết có tổng cộng bao nhiêu
+              điều kiện và thứ tự thực thi của chúng như thế nào.
+            </p>
+            <p>
+              Nếu cần chỉnh sửa hay bổ sung thêm điều kiện mới thì cũng rất dễ
+              mắc sai sót.
+            </p>
+            <p>
+              Để giải quyết vấn đề này, rất đơn giản. Nếu có nhiều điều kiện,
+              bạn chỉ cần định dạng lại cho mỗi điều kiện nằm trên một dòng
+              riêng như sau:
+            </p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                if (
+                  order.isPaid &&
+                  (order.type === 'vip' || order.total > 2000) &&
+                  !order.isRefunded
+                ) {
+                  sendInvoice(order.id);
+                }
+              </script>
+            </div>
+            <p>
+              Lúc này, bạn sẽ dễ dàng nhận biết được có những điều kiện gì, và
+              khi cần chỉnh sửa hoặc bổ sung thì mọi thứ cũng trở nên thuận tiện
+              hơn.
+            </p>
+            <p>
+              Như vậy, bạn đã làm quen qua 3 nguyên tắc định dạng cơ bản nhất
+              của Clean code.
+            </p>
+            <p>
+              Ngoài ra, còn rất nhiều nguyên tắc định dạng khác nữa. Ví dụ như:
+              Giới hạn độ dài trên một dòng, xuống dòng khi gọi hàm có nhiều
+              tham số, thứ tự các câu lệnh import,…
+            </p>
+            <p>
+              Nhưng tin vui là bạn không cần phải nhớ hết tất cả mọi thứ, chúng
+              ta sẽ dùng công cụ để hỗ trợ một cách tự động. Nhờ vậy, mà cả nhóm
+              sẽ thống nhất với nhau một định dạng chung khi làm việc.
+            </p>
+            <h2 class="heading">4. Kết luận</h2>
+            <p>
+              Hy vọng qua bài viết này, bạn đã nắm được những kiến thức nền tảng
+              quan trọng nhất về Clean Code.
+            </p>
+            <p>
+              Khi áp dụng Clean Code mỗi ngày, bạn sẽ thấy code của mình đã trở
+              nên dễ dàng kiểm soát và ít lỗi hơn so với trước đó.
+            </p>
+            <p>
+              Sếp và đồng nghiệp bắt đầu tin tưởng, và giao thêm cho bạn các dự
+              án quan trọng hơn trong tương lai.
+            </p>
+            <p>
+              Tuy nhiên, nếu bạn cho rằng: Trong thời đại AI thì cần gì học
+              Clean Code cho tốn thời gian, thì đó là một sai lầm.
+            </p>
+            <p>
+              AI chỉ giúp bạn viết code nhanh hơn. Nếu không có tư duy Clean
+              Code, bạn sẽ rất khó kiểm soát và sửa lỗi trên một đống code khổng
+              lồ do AI tạo ra.
+            </p>
+            <p>
+              Để thực sự làm chủ kỹ năng lập trình, và nhanh chóng xây dựng được
+              một hệ thống hoàn chỉnh từ con số 0; bạn có thể tham khảo các khóa
+              học <a href="/courses/course.html">1 kèm 1 của LetDiv</a> nhé:
+            </p>
+            <p>
+              <i class="fa-regular fa-hand-point-right"></i> Xem thông tin chi
+              tiết các khóa học <a href="/courses/course.html">Tại đây</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- section-one end -->
+
+    <!-- footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="inner-addres">
+            <div class="img">
+              <a href=""><img src="/assets/images/LetDiv.webp" alt="" /></a>
+              <p class="content">
+                CÔNG TY TNHH LẬP TRÌNH LETDIV VIỆT NAM <br />
+                <strong>Mã số thuế:</strong> 0317429951 <br /><strong
+                  >Địa chỉ:</strong
+                >
+                5B Phổ Quang, Phường Tân Sơn Hòa, Hồ Chí Minh. <br /><strong
+                  >Điện thoại:</strong
+                >
+                0914 991 139 <br />
+                <strong>Email:</strong> letdiv.innovation@gmail.com
+              </p>
+            </div>
+          </div>
+          <div class="inner-info">
+            <h3>Thông Tin</h3>
+            <p><a href="/contact/contact.html">Liên hệ</a></p>
+            <p><a href="/about/introduce.html">Giới thiệu</a></p>
+            <p><a href="/policies/policy.html">Chính sách bảo mật</a></p>
+            <div class="img">
+              <a
+                href="https://www.dmca.com/Protection/Status.aspx?ID=5ed68dec-8566-4fcf-b1d7-70668621b032&refurl=https://letdiv.com/"
+                target="_blank"
+                ><img src="/assets/images/DMCA_logo-grn-btn120w.png" alt=""
+              /></a>
+            </div>
+          </div>
+          <div class="inner-social">
+            <h3>Mạng Xã Hội</h3>
+            <div class="icon">
+              <a
+                href="https://www.facebook.com/letdiv.innovation"
+                target="_blank"
+                ><i class="fa-brands fa-facebook"></i
+              ></a>
+              <a href="https://www.tiktok.com/@letdiv" target="_blank"
+                ><i class="fa-brands fa-tiktok"></i
+              ></a>
+              <a href="https://www.youtube.com/@letdiv" target="_blank"
+                ><i class="fa-brands fa-youtube"></i
+              ></a>
+            </div>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d31352.53490692094!2d106.66647100000002!3d10.806191000000002!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d7e2e9c2d4b1%3A0xa1e7de28f1b06563!2zQ8O0bmcgVHkgVE5ISCBM4bqtcCBUcsOsbmggTGV0RGl2!5e0!3m2!1sen!2sus!4v1789548029411!5m2!1sen!2sus"
+              width="100%"
+              height="300"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- footer end -->
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="/assets/bootstrap/jquery.slim.min.js"></script>
+    <script src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="js/format-code.js"></script>
+    <script src="/assets/js/header-auth.js"></script>
+  </body>
+</html>

@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Khóa Học Lập Trình - LetDiv</title>
+    <link rel="icon" href="assets/images/icon-logo-cropped.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="assets/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/header.css" />
+    <link rel="stylesheet" href="assets/css/footer.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <!-- header -->
+    <header class="header">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="header-logo">
+            <a href="index.html"
+              ><img src="assets/images/LetDiv.webp" alt="logo"
+            /></a>
+          </div>
+          <div class="header-navbar">
+            <div class="navbar-menu">
+              <ul>
+                <li><a href="index.html">Trang Chủ</a></li>
+                <li><a href="courses/course.html">Khóa Học</a></li>
+                <li><a href="articles/news.html">Tin Tức</a></li>
+                <li><a href="about/introduce.html">Giới Thiệu</a></li>
+              </ul>
+              <div class="inner-btn">
+                <!-- Button trigger modal -->
+                <button
+                  type="button"
+                  class="btn btn-primary button"
+                  data-toggle="modal"
+                  data-target="#exampleModal"
+                >
+                  Tư Vấn Ngay
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="header-action">
+            <div class="action">
+              <div class="cart-shop">
+                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+              </div>
+              <!-- Button trigger modal -->
+              <div class="login">
+                <button
+                  type="button"
+                  class="btn"
+                  data-toggle="modal"
+                  data-target="#loginModal"
+                >
+                  <i class="fa-solid fa-user"></i>
+                </button>
+              </div>
+              <div class="navbar-icon"><i class="fa-solid fa-bars"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="header-modal">
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Liên hệ</h5>
+              <div class="btn-close">
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="btn-contact">
+                <button
+                  class="button-change-color"
+                  onclick="
+                    window.open('https://zalo.me/2219221277314619603', '_blank')
+                  "
+                >
+                  Nhắn tin Zalo OA
+                </button>
+                <button
+                  class="button-change-color"
+                  onclick="
+                    window.open(
+                      'https://www.facebook.com/letdiv.innovation',
+                      '_blank',
+                    )
+                  "
+                >
+                  Nhắn tin Facebook
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- login Modal -->
+    <div class="login-modal">
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="loginModal"
+        tabindex="-1"
+        aria-labelledby="loginModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="loginModalLabel">Đăng Nhập</h5>
+              <div class="btn-close">
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <form action="" method="post">
+                <div class="form-group">
+                  <label for="exampleInputText1" class="label"
+                    >Tài khoản <span style="color: red">*</span></label
+                  >
+                  <span class="icon"><i class="fa-solid fa-user"></i></span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="exampleInputText1"
+                    aria-describedby="textHelp"
+                    placeholder="Ví dụ: nguyenvana"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1" class="label"
+                    >Mật khẩu <span style="color: red">*</span></label
+                  >
+                  <span class="icon"><i class="fa-solid fa-lock"></i></span>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="exampleInputPassword1"
+                  />
+                </div>
+                <button class="button-change-color">Đăng nhập</button>
+              </form>
+              <div class="forgot-pass">
+                <a href="auth/forgot-password.html">Quên mật khẩu ?</a>
+              </div>
+              <div class="register text-center">
+                Bạn chưa có tài khoản?
+                <a href="auth/register.html">Đăng ký ngay</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- login Modal end-->
+
+    <!-- header end -->
+
+    <!-- section-one -->
+    <div class="section-one">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="row">
+            <div class="inner-content col-xl-7 col-lg-7 col-md-7 col-sm-12">
+              <h1 class="content-title">Học Lập Trình Đảm Bảo</h1>
+              <p class="content-desc">
+                Chúng tôi cam kết sẽ giúp bạn dễ dàng nắm vững 100% các kiến
+                thức lập trình từ cơ bản đến nâng cao.
+              </p>
+              <button class="button">
+                <a href="courses/course.html">Bắt Đầu Ngay</a>
+              </button>
+            </div>
+            <div class="inner-img col-xl-5 col-lg-5 col-md-5 col-sm-12">
+              <img src="assets/images/student-1.webp" alt="student-1" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- section-one end -->
+
+    <!-- section-two -->
+    <div class="section-two">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="inner-title">
+            <h2 class="title">Khóa Học <span>Phổ Biến</span></h2>
+          </div>
+          <div class="row">
+            <div class="inner-box col-xl-3 col-lg-3 col-md-4 col-sm-12">
+              <div class="img">
+                <a href="courses/full-stack-chuan.html"
+                  ><img
+                    src="assets/images/lo-trinh-fullstack-1024x576.webp"
+                    alt=""
+                /></a>
+              </div>
+              <div class="content">
+                <p>
+                  <a href="courses/full-stack-chuan.html"
+                    >Khóa Học Full Stack (Chuẩn Kỹ Sư)</a
+                  >
+                </p>
+                <p><i class="fa-solid fa-user"></i> 2254 học viên</p>
+              </div>
+            </div>
+            <div class="inner-box col-xl-3 col-lg-3 col-md-4 col-sm-12">
+              <div class="img">
+                <a href="courses/back-end-chuan.html"
+                  ><img src="assets/images/khoa-hoc-backend.webp" alt=""
+                /></a>
+              </div>
+              <div class="content">
+                <p>
+                  <a href="courses/back-end-chuan.html"
+                    >Khóa Học Backend (Chuẩn Kỹ Sư)</a
+                  >
+                </p>
+                <p><i class="fa-solid fa-user"></i> 4573 học viên</p>
+              </div>
+            </div>
+            <div class="inner-box col-xl-3 col-lg-3 col-md-4 col-sm-12">
+              <div class="img">
+                <a href="courses/frontend-chuan.html"
+                  ><img
+                    src="assets/images/khoa-hoc-lap-trinh-frontend.png"
+                    alt=""
+                /></a>
+              </div>
+              <div class="content">
+                <p>
+                  <a href="courses/frontend-chuan.html"
+                    >Khóa Học Frontend (Chuẩn Kỹ Sư)</a
+                  >
+                </p>
+                <p><i class="fa-solid fa-user"></i> 4871 học viên</p>
+              </div>
+            </div>
+            <div class="inner-box col-xl-3 col-lg-3 col-md-4 col-sm-12">
+              <div class="img">
+                <a href="courses/full-stack-gon.html"
+                  ><img
+                    src="assets/images/lo-trinh-fullstack-1024x576.webp"
+                    alt=""
+                /></a>
+              </div>
+              <div class="content">
+                <p>
+                  <a href="courses/full-stack-gon.html"
+                    >Khóa Học Full Stack (Rút Gọn)</a
+                  >
+                </p>
+                <p><i class="fa-solid fa-user"></i> 1157 học viên</p>
+              </div>
+            </div>
+            <div class="inner-box col-xl-3 col-lg-3 col-md-4 col-sm-12">
+              <div class="img">
+                <a href="courses/back-end-gon.html"
+                  ><img src="assets/images/khoa-hoc-backend.webp" alt=""
+                /></a>
+              </div>
+              <div class="content">
+                <p>
+                  <a href="courses/back-end-gon.html"
+                    >Khóa Học Backend (Rút Gọn)</a
+                  >
+                </p>
+                <p><i class="fa-solid fa-user"></i> 2963 học viên</p>
+              </div>
+            </div>
+            <div class="inner-box col-xl-3 col-lg-3 col-md-4 col-sm-12">
+              <div class="img">
+                <a href="courses/frontend-gon.html"
+                  ><img
+                    src="assets/images/khoa-hoc-lap-trinh-frontend.png"
+                    alt=""
+                /></a>
+              </div>
+              <div class="content">
+                <p>
+                  <a href="courses/frontend-gon.html"
+                    >Khóa Học Frontend (Rút Gọn)</a
+                  >
+                </p>
+                <p><i class="fa-solid fa-user"></i> 3105 học viên</p>
+              </div>
+            </div>
+            <div class="inner-box col-xl-3 col-lg-3 col-md-4 col-sm-12">
+              <div class="img">
+                <a href="courses/JavaScript.html"
+                  ><img src="assets/images/khoa-hoc-javascript.jpg" alt=""
+                /></a>
+              </div>
+              <div class="content">
+                <p><a href="courses/JavaScript.html">Khóa Học JavaScript</a></p>
+                <p><i class="fa-solid fa-user"></i> 6573 học viên</p>
+              </div>
+            </div>
+            <div class="inner-box col-xl-3 col-lg-3 col-md-4 col-sm-12">
+              <div class="img">
+                <a href="courses/React.html"
+                  ><img src="assets/images/khoa-hoc-react.png" alt=""
+                /></a>
+              </div>
+              <div class="content">
+                <p><a href="courses/React.html">Khóa Học React</a></p>
+                <p><i class="fa-solid fa-user"></i> 4395 học viên</p>
+              </div>
+            </div>
+          </div>
+          <div class="inner-btn text-center">
+            <button class="button">
+              <a href="courses/course.html">Xem Thêm</a>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- section-two end -->
+
+    <!-- section-three -->
+    <div class="section-three">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="inner-title">
+            <h2 class="title">Tin Tức <span>Mới Nhất</span></h2>
+          </div>
+          <div class="row">
+            <div class="inner-news col-xl-4 col-lg-4 col-md-6 col-sm-12">
+              <div class="image">
+                <a href="articles/javascript-news.html"
+                  ><img
+                    src="assets/images/10-tinh-nang-javascript-moi-nhat-2026-1024x577.webp"
+                    alt=""
+                /></a>
+              </div>
+              <div class="content">
+                <p>
+                  <a href="articles/javascript-news.html"
+                    >Đến AI cũng BÓ TAY! 10 Tính năng JavaScript mới CỰC ĐỈNH
+                    2026</a
+                  >
+                </p>
+              </div>
+            </div>
+            <div class="inner-news col-xl-4 col-lg-4 col-md-6 col-sm-12">
+              <div class="image">
+                <a href="articles/clean-code-news.html"
+                  ><img
+                    src="assets/images/anh-bia-3-nguyen-tac-clean-code-thuc-chien-1024x577.webp"
+                    alt=""
+                /></a>
+              </div>
+              <div class="content">
+                <p>
+                  <a href="articles/clean-code-news.html"
+                    >Trời ơi! Đừng có đọc hết cuốn Clean Code dày cộm đó nữa!
+                    Dùng 3 nguyên tắc này là đủ</a
+                  >
+                </p>
+              </div>
+            </div>
+            <div class="inner-news col-xl-4 col-lg-4 col-md-6 col-sm-12">
+              <div class="image">
+                <a href="articles/9-sai-lam.html"
+                  ><img
+                    src="assets/images/anh-bia-9-sai-lam-pha-nat-su-nghiep-dev-1024x640.webp"
+                    alt=""
+                /></a>
+              </div>
+              <div class="content">
+                <p>
+                  <a href="articles/9-sai-lam.html"
+                    >Sự nghiệp coi như NÁT nếu mắc 9 sai lầm sau đây – Bài học
+                    xương máu cho ae dev</a
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- section-three end -->
+
+    <!-- section-four -->
+    <div class="section-four">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="inner-title">
+            <h2 class="title text-center">
+              Tại Sao Chọn <span>Let</span><span>Div</span>
+            </h2>
+          </div>
+          <div class="inner-box">
+            <div class="box">
+              <div class="image">
+                <img
+                  src="assets/images/giao-an-qn4om10ppgh72hbm3kyrzol8ccmw6ukqphgrq7jvg2.webp"
+                  alt=""
+                />
+              </div>
+              <h3>Cập Nhật Liên Tục</h3>
+              <p>
+                <span
+                  >Giáo án luôn phù hợp với nhu cầu của thị trường tuyển
+                  dụng</span
+                >
+              </p>
+            </div>
+            <div class="box">
+              <div class="image">
+                <img
+                  src="assets/images/lo-trinh-nhanh-chong-1-qn4om10ppgh72hbm3kyrzol8ccmw6ukqphgrq7jvc6.webp"
+                  alt=""
+                />
+              </div>
+              <h3>Nhanh Chóng</h3>
+              <p>
+                <span
+                  >Tăng tốc độ học lên gấp 5 lần với sự hỗ trợ của chuyên
+                  gia</span
+                >
+              </p>
+            </div>
+            <div class="box">
+              <div class="image">
+                <img
+                  src="assets/images/bai-tap-da-dang-qn4om10ppgh72hbm3kyrzol8ccmw6ukqphgrq7jv9y.webp"
+                  alt=""
+                />
+              </div>
+              <h3>Bài Tập Đa Dạng</h3>
+              <p>
+                <span>Hơn 1000 bài tập rèn luyện từ cơ bản đến nâng cao</span>
+              </p>
+            </div>
+            <div class="box">
+              <div class="image">
+                <img
+                  src="assets/images/quy-trinh-1-kem-1-qn4om10ppgh72hbm3kyrzol8ccmw6ukqphgrq7jv9o.webp"
+                  alt=""
+                />
+              </div>
+              <h3>Quy Trình 1 Kèm 1</h3>
+              <p>
+                <span>Cam kết nắm chắc 100% kiến thức sau khi học</span>
+              </p>
+            </div>
+            <div class="box">
+              <div class="image">
+                <img src="assets/images/hoc-lai-mien-phi.webp" alt="" />
+              </div>
+              <h3>Thi Lại Miễn Phí</h3>
+              <p>
+                <span>Nếu thi rớt, bạn sẽ được hỗ trợ thi lại miễn phí</span>
+              </p>
+            </div>
+            <div class="box">
+              <div class="image">
+                <img
+                  src="assets/images/ho-tro-viec-lam-qn4om10ppgh72hbm3kyrzol8ccmw6ukqphgrq7jvbc.webp"
+                  alt=""
+                />
+              </div>
+              <h3>Hỗ Trợ Việc Làm</h3>
+              <p>
+                <span>Hỗ trợ giới thiệu hồ sơ sau khi tốt nghiệp</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- section-four end -->
+
+    <!-- footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="inner-addres">
+            <div class="img">
+              <a href=""><img src="assets/images/LetDiv.webp" alt="" /></a>
+              <p class="content">
+                CÔNG TY TNHH LẬP TRÌNH LETDIV VIỆT NAM <br />
+                <strong>Mã số thuế:</strong> 0317429951 <br /><strong
+                  >Địa chỉ:</strong
+                >
+                5B Phổ Quang, Phường Tân Sơn Hòa, Hồ Chí Minh. <br /><strong
+                  >Điện thoại:</strong
+                >
+                0914 991 139 <br />
+                <strong>Email:</strong> letdiv.innovation@gmail.com
+              </p>
+            </div>
+          </div>
+          <div class="inner-info">
+            <h3>Thông Tin</h3>
+            <p><a href="contact/contact.html">Liên hệ</a></p>
+            <p><a href="about/introduce.html">Giới thiệu</a></p>
+            <p><a href="policies/policy.html">Chính sách bảo mật</a></p>
+            <div class="img">
+              <a
+                href="https://www.dmca.com/Protection/Status.aspx?ID=5ed68dec-8566-4fcf-b1d7-70668621b032&refurl=https://letdiv.com/"
+                target="_blank"
+                ><img src="assets/images/DMCA_logo-grn-btn120w.png" alt=""
+              /></a>
+            </div>
+          </div>
+          <div class="inner-social">
+            <h3>Mạng Xã Hội</h3>
+            <div class="icon">
+              <a
+                href="https://www.facebook.com/letdiv.innovation"
+                target="_blank"
+                ><i class="fa-brands fa-facebook"></i
+              ></a>
+              <a href="https://www.tiktok.com/@letdiv" target="_blank"
+                ><i class="fa-brands fa-tiktok"></i
+              ></a>
+              <a href="https://www.youtube.com/@letdiv" target="_blank"
+                ><i class="fa-brands fa-youtube"></i
+              ></a>
+            </div>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d31352.53490692094!2d106.66647100000002!3d10.806191000000002!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d7e2e9c2d4b1%3A0xa1e7de28f1b06563!2zQ8O0bmcgVHkgVE5ISCBM4bqtcCBUcsOsbmggTGV0RGl2!5e0!3m2!1sen!2sus!4v1789548029411!5m2!1sen!2sus"
+              width="100%"
+              height="300"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- footer end -->
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="assets/bootstrap/jquery.slim.min.js"></script>
+    <script src="assets/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/highlight-menu.js"></script>
+    <script src="assets/js/header-auth.js"></script>
+  </body>
+</html>

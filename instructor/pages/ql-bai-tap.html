@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý bài tập - LetDiv Instructor</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <!-- Dùng chung giao diện với trang Admin + phần bổ sung riêng của Instructor -->
+    <link rel="stylesheet" href="../../admin/css/pages.css" />
+    <link rel="stylesheet" href="../css/pages-extra.css" />
+  </head>
+  <body>
+    <main class="page">
+      <div class="crumb" id="crumb"></div>
+      <div class="page-head">
+        <div>
+          <h1>Quản lý bài tập</h1>
+          <p id="lesson-text"></p>
+        </div>
+        <div class="page-actions">
+          <a class="btn btn-outline" id="btn-back" href="ql-bai-hoc.html"
+            ><i class="fa-solid fa-arrow-left"></i> Về danh sách bài học</a
+          >
+          <button class="btn btn-primary" id="btn-add">
+            <i class="fa-solid fa-plus"></i> Thêm bài tập
+          </button>
+        </div>
+      </div>
+
+      <div class="card" id="main-card">
+        <div id="list-area"></div>
+      </div>
+    </main>
+
+    <!-- Modal thêm / sửa bài tập -->
+    <div class="modal-overlay" id="as-modal" data-static>
+      <div class="modal-box modal-lg">
+        <div class="modal-header">
+          <h3 id="as-modal-title">Thêm bài tập</h3>
+          <button class="modal-close" data-close>
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Mã bài tập</label>
+              <input type="text" id="f-id" readonly />
+            </div>
+            <div class="form-group">
+              <label>Bài học</label>
+              <input type="text" id="f-lesson" readonly />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Tên bài tập <span class="req">*</span></label>
+            <input
+              type="text"
+              id="f-name"
+              maxlength="120"
+              placeholder="VD: Xây dựng form đăng ký tài khoản"
+            />
+            <div class="error-text" id="e-name"></div>
+          </div>
+          <div class="form-group">
+            <label>Đề bài <span class="req">*</span></label>
+            <textarea
+              id="f-description"
+              style="min-height: 120px"
+              placeholder="Yêu cầu chi tiết học viên cần thực hiện..."
+            ></textarea>
+            <div class="error-text" id="e-description"></div>
+          </div>
+          <div class="form-group">
+            <label>Hướng dẫn / gợi ý (không bắt buộc)</label>
+            <textarea id="f-guide" placeholder="Gợi ý cách làm..."></textarea>
+            <div class="error-text" id="e-guide"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Hạn nộp <span class="req">*</span></label>
+              <input type="datetime-local" id="f-deadline" />
+              <div class="error-text" id="e-deadline"></div>
+            </div>
+            <div class="form-group">
+              <label>Điểm tối đa</label>
+              <input type="number" id="f-maxScore" min="1" max="10" step="1" />
+              <div class="hint">Mặc định 10 điểm.</div>
+              <div class="error-text" id="e-maxScore"></div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" data-close>Hủy</button>
+          <button class="btn btn-primary" id="btn-save">
+            <i class="fa-solid fa-floppy-disk"></i> Lưu bài tập
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../../admin/js/seed-data.js"></script>
+    <script src="../../admin/js/store.js"></script>
+    <script src="../../assets/js/auth-store.js"></script>
+    <script src="../../admin/js/ui.js"></script>
+    <script src="../../assets/js/learning-store.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/ql-bai-tap.js"></script>
+  </body>
+</html>

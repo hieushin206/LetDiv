@@ -1,0 +1,1404 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Khóa Học Cơ Sở Dữ Liệu MySQL (1 Kèm 1 Online) – Từ Cơ Bản Đến Nâng Cao -
+      LetDiv
+    </title>
+    <link rel="icon" href="/assets/images/icon-logo-cropped.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/base.css" />
+    <link rel="stylesheet" href="/assets/css/header.css" />
+    <link rel="stylesheet" href="/assets/css/footer.css" />
+    <link rel="stylesheet" href="css/course-details.css" />
+    <link rel="stylesheet" href="css/course-short.css" />
+  </head>
+  <body>
+    <!-- header -->
+    <header class="header">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="header-logo">
+            <a href="/index.html"
+              ><img src="/assets/images/LetDiv.webp" alt="logo"
+            /></a>
+          </div>
+          <div class="header-navbar">
+            <div class="navbar-menu">
+              <ul>
+                <li><a href="/index.html">Trang Chủ</a></li>
+                <li><a href="/courses/course.html">Khóa Học</a></li>
+                <li><a href="/articles/news.html">Tin Tức</a></li>
+                <li><a href="/about/introduce.html">Giới Thiệu</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="header-action">
+            <div class="action">
+              <div class="cart-shop">
+                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+              </div>
+              <!-- Button trigger modal -->
+              <div class="login">
+                <button
+                  type="button"
+                  class="btn"
+                  data-toggle="modal"
+                  data-target="#loginModal"
+                >
+                  <i class="fa-solid fa-user"></i>
+                </button>
+              </div>
+              <div class="navbar-icon"><i class="fa-solid fa-bars"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="header-modal">
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Liên hệ</h5>
+              <div class="btn-close">
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="btn-contact">
+                <button
+                  class="button-change-color"
+                  onclick="
+                    window.open('https://zalo.me/2219221277314619603', '_blank')
+                  "
+                >
+                  Nhắn tin Zalo OA
+                </button>
+                <button
+                  class="button-change-color"
+                  onclick="
+                    window.open(
+                      'https://www.facebook.com/letdiv.innovation',
+                      '_blank',
+                    )
+                  "
+                >
+                  Nhắn tin Facebook
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- login Modal -->
+    <div class="login-modal">
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="loginModal"
+        tabindex="-1"
+        aria-labelledby="loginModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="loginModalLabel">Đăng Nhập</h5>
+              <div class="btn-close">
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <form action="" method="post">
+                <div class="form-group">
+                  <label for="exampleInputText1" class="label"
+                    >Tài khoản <span style="color: red">*</span></label
+                  >
+                  <span class="icon"><i class="fa-solid fa-user"></i></span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="exampleInputText1"
+                    aria-describedby="textHelp"
+                    placeholder="Ví dụ: nguyenvana"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1" class="label"
+                    >Mật khẩu <span style="color: red">*</span></label
+                  >
+                  <span class="icon"><i class="fa-solid fa-lock"></i></span>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="exampleInputPassword1"
+                  />
+                </div>
+                <button class="button-change-color">Đăng nhập</button>
+              </form>
+              <div class="forgot-pass">
+                <a href="/auth/forgot-password.html">Quên mật khẩu ?</a>
+              </div>
+              <div class="register text-center">
+                Bạn chưa có tài khoản?
+                <a href="/auth/register.html">Đăng ký ngay</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- login Modal end-->
+
+    <!-- header end -->
+
+    <!-- section-one -->
+    <div class="section-one">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="inner-content">
+            <h1>
+              Khóa Học Cơ Sở Dữ Liệu MySQL (1 Kèm 1 Online) – Từ Cơ Bản Đến Nâng
+              Cao
+            </h1>
+            <p>
+              Khóa học MySQL giúp bạn nắm vững các kỹ năng quản lý cơ sở dữ liệu
+              quan hệ: từ cài đặt cho đến viết các câu lệnh truy vấn SQL và tối
+              ưu hóa hiệu suất. Đây là nền tảng quan trọng cho việc phát triển
+              ứng dụng và xử lý dữ liệu hiệu quả.
+            </p>
+            <ul class="course-element">
+              <li>
+                <div class="course-element-right">
+                  <span>Ngày cập nhật</span>
+                  <span>03/2026</span>
+                </div>
+              </li>
+              <li>
+                <div class="course-element-right">
+                  <span>Học viên</span>
+                  <span>5156</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- section-one end -->
+
+    <!-- section-two -->
+    <div class="section-two">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="inner-content">
+            <div class="content-child item-1">
+              <h2 class="title">
+                Tại sao bạn học lập trình mãi không tiến bộ?
+              </h2>
+              <p>
+                Học lập trình hơn 1 năm nhưng bạn vẫn không thể tự viết nổi 10
+                dòng code. Nguyên nhân thật sự do đâu?
+              </p>
+
+              <iframe
+                class="video"
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/rw4ulxkF9K8?si=9wkZtuEjA7VUUeBQ"
+                title="YouTube video player"
+                frameborder="0"
+                allow="
+                  accelerometer;
+                  autoplay;
+                  clipboard-write;
+                  encrypted-media;
+                  gyroscope;
+                  picture-in-picture;
+                  web-share;
+                "
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="content-child item-2">
+              <h2 class="title">Bạn sẽ học được gì?</h2>
+              <ul class="lesson-content">
+                <li>
+                  <i class="fa-solid fa-check"></i>
+                  <span
+                    >Hiểu cơ bản về hệ quản trị cơ sở dữ liệu quan hệ
+                    (RDBMS).</span
+                  >
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i>
+                  <span
+                    >Cài đặt và sử dụng MySQL Server và MySQL Workbench.</span
+                  >
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i
+                  ><span
+                    >Viết các câu lệnh SQL cơ bản (SELECT, INSERT, UPDATE,
+                    DELETE).</span
+                  >
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i
+                  ><span>Sử dụng các mệnh đề WHERE, GROUP BY, ORDER BY.</span>
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i
+                  ><span>Tạo và quản lý bảng, mối quan hệ giữa các bảng.</span>
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i
+                  ><span>Tối ưu hóa truy vấn và quản lý chỉ mục (index).</span>
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i
+                  ><span
+                    >Làm việc với JOIN và các hàm tổng hợp (COUNT, SUM,
+                    AVG).</span
+                  >
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i
+                  ><span>Quản lý quyền người dùng và bảo mật dữ liệu.</span>
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i
+                  ><span
+                    >Tạo View để đơn giản hóa truy vấn và tăng bảo mật dữ
+                    liệu.</span
+                  >
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i
+                  ><span
+                    >Sử dụng Trigger để tự động hóa tác vụ khi có sự kiện dữ
+                    liệu.</span
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="content-child item-3">
+              <h2 class="title">Nội dung khóa học</h2>
+              <div class="inner-dropdown">
+                <div class="accordion" id="accordionExample">
+                  <!-- 1 -->
+                  <div class="card">
+                    <div class="card-header" id="headingOne">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseOne"
+                          aria-expanded="true"
+                          aria-controls="collapseOne"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Giới Thiệu & Cài Đặt</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseOne"
+                      class="collapse show"
+                      aria-labelledby="headingOne"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>Database, DBMS & SQL:</strong> Khái niệm cơ
+                            bản về cơ sở dữ liệu và SQL.
+                          </li>
+                          <li>
+                            <strong>Cài MySQL trên Windows:</strong> Thiết lập
+                            MySQL trên hệ điều hành Windows.
+                          </li>
+                          <li>
+                            <strong>Cài MySQL trên MacOS:</strong> Thiết lập
+                            MySQL trên hệ điều hành MacOS.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 2 -->
+                  <div class="card">
+                    <div class="card-header" id="headingTwo">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseTwo"
+                          aria-expanded="false"
+                          aria-controls="collapseTwo"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Tạo Database & Bảng</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseTwo"
+                      class="collapse"
+                      aria-labelledby="headingTwo"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>Tạo Database:</strong> Tạo một cơ sở dữ liệu
+                            mới.
+                          </li>
+                          <li>
+                            <strong>Quy tắc đặt tên:</strong> Cách đặt tên
+                            database hợp lệ.
+                          </li>
+                          <li>
+                            <strong>Thực thi câu lệnh SQL:</strong> Các cách
+                            chạy lệnh SQL.
+                          </li>
+                          <li>
+                            <strong>Ghi chú:</strong> Thêm chú thích trong SQL.
+                          </li>
+                          <li>
+                            <strong>Xóa Database:</strong> Xóa cơ sở dữ liệu khi
+                            cần.
+                          </li>
+                          <li>
+                            <strong>Bảng là gì:</strong> Khái niệm về bảng trong
+                            database.
+                          </li>
+                          <li>
+                            <strong>Tạo bảng:</strong> Tạo bảng với các cột cơ
+                            bản.
+                          </li>
+                          <li>
+                            <strong>Kiểu dữ liệu:</strong> Giới thiệu kiểu dữ
+                            liệu trong MySQL.
+                          </li>
+                          <li>
+                            <strong>Xóa bảng:</strong> Xóa bảng khỏi database.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 3 -->
+                  <div class="card">
+                    <div class="card-header" id="headingThree">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseThree"
+                          aria-expanded="false"
+                          aria-controls="collapseThree"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Thêm Dữ Liệu Vào Bảng</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseThree"
+                      class="collapse"
+                      aria-labelledby="headingThree"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>Lệnh INSERT:</strong> Thêm một dòng dữ liệu.
+                          </li>
+                          <li>
+                            <strong>Thêm nhiều dữ liệu:</strong> Chèn nhiều dòng
+                            cùng lúc.
+                          </li>
+                          <li>
+                            <strong>Giá trị NULL:</strong> Hiểu và dùng giá trị
+                            NULL.
+                          </li>
+                          <li>
+                            <strong>Giá trị mặc định:</strong> Đặt giá trị mặc
+                            định với DEFAULT.
+                          </li>
+                          <li>
+                            <strong>Khóa chính:</strong> Thiết lập PRIMARY KEY
+                            cho bảng.
+                          </li>
+                          <li>
+                            <strong>AUTO INCREMENT:</strong> Tự động tăng giá
+                            trị khóa chính.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 4 -->
+                  <div class="card">
+                    <div class="card-header" id="headingFour">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseFour"
+                          aria-expanded="false"
+                          aria-controls="collapseFour"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Các Lệnh CRUD</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseFour"
+                      class="collapse"
+                      aria-labelledby="headingFour"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>Lệnh SELECT:</strong> Lấy dữ liệu từ bảng.
+                          </li>
+                          <li>
+                            <strong>WHERE:</strong> Lọc dữ liệu theo điều kiện.
+                          </li>
+                          <li>
+                            <strong>ALIAS:</strong> Đặt tên tạm cho cột hoặc
+                            bảng.
+                          </li>
+                          <li>
+                            <strong>Lệnh UPDATE:</strong> Cập nhật dữ liệu trong
+                            bảng.
+                          </li>
+                          <li>
+                            <strong>Lệnh DELETE:</strong> Xóa dữ liệu khỏi bảng.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 5 -->
+                  <div class="card">
+                    <div class="card-header" id="headingFive">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseFive"
+                          aria-expanded="false"
+                          aria-controls="collapseFive"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Toán Tử & Mệnh Đề</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseFive"
+                      class="collapse"
+                      aria-labelledby="headingFive"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li><strong>!= và <>:</strong> So sánh khác nhau.</li>
+                          <li>
+                            <strong>LIKE & NOT LIKE:</strong> Tìm kiếm theo mẫu.
+                          </li>
+                          <li><strong>> và >=:</strong> So sánh lớn hơn.</li>
+                          <li><strong>< và <=:</strong> So sánh nhỏ hơn.</li>
+                          <li>
+                            <strong>AND:</strong> Kết hợp nhiều điều kiện.
+                          </li>
+                          <li>
+                            <strong>OR:</strong> Chọn một trong các điều kiện.
+                          </li>
+                          <li>
+                            <strong>Thứ tự ưu tiên:</strong> Quy tắc xử lý toán
+                            tử logic.
+                          </li>
+                          <li>
+                            <strong>BETWEEN:</strong> Lọc trong khoảng giá trị.
+                          </li>
+                          <li>
+                            <strong>IN:</strong> Kiểm tra giá trị trong danh
+                            sách.
+                          </li>
+                          <li>
+                            <strong>CASE:</strong> Xử lý điều kiện trong truy
+                            vấn.
+                          </li>
+                          <li>
+                            <strong>IS NULL & IS NOT NULL:</strong> Kiểm tra giá
+                            trị NULL.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 6 -->
+                  <div class="card">
+                    <div class="card-header" id="headingSix">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseSix"
+                          aria-expanded="false"
+                          aria-controls="collapseSix"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>String Functions</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseSix"
+                      class="collapse"
+                      aria-labelledby="headingSix"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>CONCAT:</strong> Nối các chuỗi lại với nhau.
+                          </li>
+                          <li>
+                            <strong>SUBSTRING:</strong> Cắt một phần chuỗi.
+                          </li>
+                          <li><strong>REPLACE:</strong> Thay thế chuỗi con.</li>
+                          <li><strong>REVERSE:</strong> Đảo ngược chuỗi.</li>
+                          <li>
+                            <strong>UPPER & LOWER:</strong> Chuyển đổi chữ
+                            hoa/thường.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 7 -->
+                  <div class="card">
+                    <div class="card-header" id="headingSeven">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseSeven"
+                          aria-expanded="false"
+                          aria-controls="collapseSeven"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Lọc & Sắp Xếp Dữ Liệu</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseSeven"
+                      class="collapse"
+                      aria-labelledby="headingSeven"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>DISTINCT:</strong> Loại bỏ dữ liệu trùng
+                            lặp.
+                          </li>
+                          <li>
+                            <strong>LIMIT:</strong> Giới hạn số dòng trả về.
+                          </li>
+                          <li>
+                            <strong>ORDER BY:</strong> Sắp xếp dữ liệu theo cột.
+                          </li>
+                          <li>
+                            <strong>ORDER BY nhiều cột:</strong> Sắp xếp theo
+                            nhiều tiêu chí.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 8 -->
+                  <div class="card">
+                    <div class="card-header" id="headingEight">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseEight"
+                          aria-expanded="false"
+                          aria-controls="collapseEight"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Hàm Tổng Hợp</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseEight"
+                      class="collapse"
+                      aria-labelledby="headingEight"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>COUNT:</strong> Đếm số dòng hoặc giá trị.
+                          </li>
+                          <li>
+                            <strong>COUNT với DISTINCT:</strong> Đếm giá trị duy
+                            nhất.
+                          </li>
+                          <li>
+                            <strong>GROUP BY:</strong> Nhóm dữ liệu theo cột.
+                          </li>
+                          <li>
+                            <strong>GROUP BY nhiều cột:</strong> Nhóm theo nhiều
+                            tiêu chí.
+                          </li>
+                          <li>
+                            <strong>MIN, MAX:</strong> Tìm giá trị nhỏ nhất/lớn
+                            nhất.
+                          </li>
+                          <li><strong>SUM:</strong> Tính tổng các giá trị.</li>
+                          <li>
+                            <strong> HAVING:</strong> Lọc nhóm dữ liệu sau GROUP
+                            BY.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 9 -->
+                  <div class="card">
+                    <div class="card-header" id="headingNine">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseNine"
+                          aria-expanded="false"
+                          aria-controls="collapseNine"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Ràng Buộc & Thay Đổi Bảng</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseNine"
+                      class="collapse"
+                      aria-labelledby="headingNine"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>UNIQUE:</strong> Đảm bảo giá trị duy nhất
+                            trong cột.
+                          </li>
+                          <li>
+                            <strong>CHECK:</strong> Thêm điều kiện kiểm tra giá
+                            trị.
+                          </li>
+                          <li>
+                            <strong>Thêm cột:</strong> Dùng ALTER TABLE để thêm
+                            cột.
+                          </li>
+                          <li>
+                            <strong>Xóa cột:</strong> Xóa cột bằng ALTER TABLE.
+                          </li>
+                          <li>
+                            <strong>Đổi tên cột:</strong> Sửa tên cột với ALTER
+                            TABLE.
+                          </li>
+                          <li>
+                            <strong>Thay đổi kiểu dữ liệu: </strong>Điều chỉnh
+                            kiểu dữ liệu cột.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 10 -->
+                  <div class="card">
+                    <div class="card-header" id="headingTen">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseTen"
+                          aria-expanded="false"
+                          aria-controls="collapseTen"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Mối Quan Hệ One-to-One (1-1)</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseTen"
+                      class="collapse"
+                      aria-labelledby="headingTen"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>Khái niệm & ứng dụng:</strong> Hiểu quan hệ
+                            1-1 và khi nào dùng.
+                          </li>
+                          <li>
+                            <strong>Tạo quan hệ 1-1:</strong> Dùng khóa ngoại và
+                            UNIQUE.
+                          </li>
+                          <li>
+                            <strong>Ví dụ ứng dụng:</strong> Chia bảng để bảo
+                            mật hoặc chi tiết hóa.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 11 -->
+                  <div class="card">
+                    <div class="card-header" id="headingEleven">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseEleven"
+                          aria-expanded="false"
+                          aria-controls="collapseEleven"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Mối Quan Hệ One-to-Many (1-N)</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseEleven"
+                      class="collapse"
+                      aria-labelledby="headingEleven"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>Khái niệm & ứng dụng:</strong> Hiểu quan hệ
+                            1-N phổ biến.
+                          </li>
+                          <li>
+                            <strong>Foreign Keys:</strong> Tạo liên kết bằng
+                            khóa ngoại.
+                          </li>
+                          <li>
+                            <strong>Inner Join:</strong> Kết hợp bản ghi khớp ở
+                            cả hai bảng.
+                          </li>
+                          <li>
+                            <strong>Left Join:</strong> Lấy toàn bộ bảng trái và
+                            bản ghi khớp bên phải.
+                          </li>
+                          <li>
+                            <strong>Right Join:</strong> Lấy toàn bộ bảng phải
+                            và bản ghi khớp bên trái.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 12 -->
+                  <div class="card">
+                    <div class="card-header" id="headingTwelve">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseTwelve"
+                          aria-expanded="false"
+                          aria-controls="collapseTwelve"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Mối Quan Hệ Many-to-Many</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseTwelve"
+                      class="collapse"
+                      aria-labelledby="headingTwelve"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>Khái niệm & ứng dụng:</strong> Hiểu quan hệ
+                            phức tạp và bảng trung gian.
+                          </li>
+                          <li>
+                            <strong>Tạo quan hệ:</strong> Dùng Junction Table để
+                            liên kết.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 13 -->
+                  <div class="card">
+                    <div class="card-header" id="headingThirteen">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseThirteen"
+                          aria-expanded="false"
+                          aria-controls="collapseThirteen"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Database Normalization</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseThirteen"
+                      class="collapse"
+                      aria-labelledby="headingThirteen"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>1NF:</strong> Đạt dạng chuẩn thứ nhất.
+                          </li>
+                          <li><strong>2NF:</strong> Đạt dạng chuẩn thứ hai.</li>
+                          <li><strong>3NF:</strong> Đạt dạng chuẩn thứ ba.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 14 -->
+                  <div class="card">
+                    <div class="card-header" id="headingFourteen">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseFourteen"
+                          aria-expanded="false"
+                          aria-controls="collapseFourteen"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Views & Triggers</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseFourteen"
+                      class="collapse"
+                      aria-labelledby="headingFourteen"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>Tìm hiểu Views:</strong> Nắm khái niệm bảng
+                            ảo, hỗ trợ truy vấn đơn giản và bảo mật.
+                          </li>
+                          <li>
+                            <strong>Làm việc với Views:</strong> Tạo bằng CREATE
+                            VIEW, sửa với ALTER VIEW, xóa qua DROP VIEW, hiểu
+                            giới hạn cập nhật.
+                          </li>
+                          <li>
+                            <strong>Tìm hiểu Triggers:</strong> Hiểu Trigger tự
+                            động chạy với INSERT, UPDATE, DELETE.
+                          </li>
+                          <li>
+                            <strong>Quản lý Triggers:</strong> Tạo bằng CREATE
+                            TRIGGER, xử lý DELIMITER, xem qua SHOW TRIGGERS, xóa
+                            với DROP TRIGGER.
+                          </li>
+                          <li>
+                            <strong>Ứng dụng thực tế:</strong> Dùng View báo cáo
+                            tồn kho, Trigger ghi log giá và ngăn xóa sản phẩm
+                            còn hàng.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 15 -->
+                  <div class="card">
+                    <div class="card-header" id="headingFifteen">
+                      <h2 class="mb-0">
+                        <button
+                          class="btn btn-link btn-block text-left collapsed"
+                          type="button"
+                          data-toggle="collapse"
+                          data-target="#collapseFifteen"
+                          aria-expanded="false"
+                          aria-controls="collapseFifteen"
+                        >
+                          <span class="collapse-icon"></span>
+                          <span>Window Functions</span>
+                        </button>
+                      </h2>
+                    </div>
+                    <div
+                      id="collapseFifteen"
+                      class="collapse"
+                      aria-labelledby="headingFifteen"
+                      data-parent="#accordionExample"
+                    >
+                      <div class="card-body">
+                        <ul>
+                          <li>
+                            <strong>Tìm hiểu Window Functions:</strong> Hiểu
+                            khái niệm, lợi ích và sự khác biệt so với GROUP BY
+                            trong phân tích dữ liệu.
+                          </li>
+                          <li>
+                            <strong>Làm việc với OVER():</strong> Sử dụng OVER()
+                            và PARTITION BY để xác định cửa sổ, tính toán trên
+                            từng phân vùng.
+                          </li>
+                          <li>
+                            <strong>Xếp hạng dữ liệu:</strong> Áp dụng
+                            ROW_NUMBER, RANK, DENSE_RANK để xếp hạng trong phân
+                            vùng.
+                          </li>
+                          <li>
+                            <strong>Truy xuất hàng lân cận:</strong> Dùng LAG,
+                            LEAD, FIRST_VALUE, LAST_VALUE để lấy giá trị
+                            trước/sau, đầu/cuối.
+                          </li>
+                          <li>
+                            <strong>Phân nhóm với NTILE:</strong> Chia dữ liệu
+                            thành các nhóm bằng nhau để phân tích phân vị.
+                          </li>
+                          <li>
+                            <strong>Ứng dụng thực tế:</strong> Tính lương trung
+                            bình phòng ban, xếp hạng nhân viên, phân tích xu
+                            hướng lương.
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="content-child item-4">
+              <h2 class="title">Đối tượng học</h2>
+              <ul class="content-padding">
+                <li>
+                  Sinh viên CNTT mong muốn bổ túc kiến thức để đủ điều kiện đi
+                  làm công ty.
+                </li>
+                <li>Đang học lập trình nhưng mất gốc hoặc không tự tin.</li>
+                <li>
+                  Chưa có kiến thức lập trình (zero) và muốn bắt đầu học bài bản
+                  từ đầu.
+                </li>
+                <li>
+                  Làm trái ngành và mong muốn chuyển đổi sang lĩnh vực lập trình
+                  an toàn và hiệu quả.
+                </li>
+                <li>
+                  Đang đi làm nhưng muốn cải thiện kiến thức để tiến xa hơn
+                  trong sự nghiệp (senior).
+                </li>
+              </ul>
+            </div>
+            <div class="content-child item-5">
+              <h2 class="title">Học 1 Kèm 1 - Đảm bảo chất lượng Tốt Nhất</h2>
+              <ul class="content-padding">
+                <li>
+                  Bạn sẽ được theo sát và hỗ trợ 1-1 bởi giảng viên. Đảm bảo
+                  chất lượng học tập đạt kết quả tốt nhất.
+                </li>
+                <li>
+                  Nếu <strong>HỌC CHẬM</strong> bạn không cần lo lắng không theo
+                  kịp chương trình, giảng viên sẽ đi chậm để đảm bảo bạn nắm
+                  chắc 100% kiến thức.
+                </li>
+                <li>
+                  Nếu học nhanh, bạn có thể nhanh chóng kết thúc chương trình để
+                  đi làm công ty.
+                </li>
+              </ul>
+            </div>
+            <div class="content-child item-6">
+              <h2 class="title">Học online - Tiết kiệm thời gian di chuyển</h2>
+              <p>
+                Thay vì phải di chuyển vất vả trên đường giữa dòng người đông
+                đúc. Giờ đây, bạn chỉ cần mở laptop để bắt đầu học ngay tại nhà.
+                Tiết kiệm thời gian, tránh căng thẳng, và tập trung hoàn toàn
+                vào việc học!
+              </p>
+            </div>
+            <div class="content-child item-7">
+              <h2 class="title">Lịch học linh hoạt</h2>
+              <ul class="content-padding">
+                <li>
+                  LetDiv sắp xếp lịch học theo ý của bạn. Học đúng thời điểm mà
+                  bạn cảm thấy thoải mái nhất.
+                </li>
+                <li>
+                  Dễ dàng thay đổi lịch học trong khi học nếu bạn có việc bận.
+                  Không làm gián đoạn tiến độ học tập của bạn.
+                </li>
+                <li>
+                  LetDiv có thể sắp xếp thời gian học cho bạn từ 8h đến 23h, kể
+                  cả cuối tuần.
+                </li>
+              </ul>
+            </div>
+            <div class="content-child item-8">
+              <h2 class="title">Áp dụng Scaffolding Learning</h2>
+              <ul class="content-padding">
+                <li>Học dễ dàng từ cơ bản đến nâng cao qua từng bước nhỏ.</li>
+                <li>
+                  Cá nhân hóa lộ trình học tập, nắm chắc kiến thức ngay lập tức.
+                </li>
+                <li>
+                  Tiến bộ vượt bậc nhờ phương pháp sư phạm khoa học hiệu quả.
+                </li>
+              </ul>
+              <iframe
+                class="video"
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/S0Z21OXBRDA?si=QFjyoEl0-ZfBiLK6"
+                title="YouTube video player"
+                frameborder="0"
+                allow="
+                  accelerometer;
+                  autoplay;
+                  clipboard-write;
+                  encrypted-media;
+                  gyroscope;
+                  picture-in-picture;
+                  web-share;
+                "
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="content-child item-9">
+              <h2 class="title">Trải nghiệm thử buổi học</h2>
+              <p>
+                Bạn có thể tham khảo ngay một buổi học 1 Kèm 1 qua video sau, để
+                hiểu rõ hơn phong cách giảng dạy và quy trình đào tạo của LetDiv
+                sẽ diễn ra như thế nào:
+              </p>
+              <iframe
+                class="video"
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/pzPLKbW6whQ?si=X36o4TJv5a_cm9TC"
+                title="YouTube video player"
+                frameborder="0"
+                allow="
+                  accelerometer;
+                  autoplay;
+                  clipboard-write;
+                  encrypted-media;
+                  gyroscope;
+                  picture-in-picture;
+                  web-share;
+                "
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="content-child item-10">
+              <h2 class="title">Chính sách Hỗ trợ việc làm</h2>
+              <ul class="content-padding">
+                <li>
+                  Hỗ trợ chỉnh sửa CV giúp hồ sơ của bạn nổi bật hơn, gia tăng
+                  cơ hội nhận lời mời phỏng vấn.
+                </li>
+                <li>
+                  Hỗ trợ giới thiệu hồ sơ đến các công ty lập trình Việt Nam.
+                </li>
+                <li>
+                  Có cơ hội thực tập tại LetDiv, tham gia vào phát triển dự án
+                  eLearning.
+                </li>
+              </ul>
+            </div>
+            <div class="content-child item-11">
+              <h2 class="title">Chính sách hoàn tiền 100%</h2>
+              <ul class="content-padding">
+                <li>
+                  Cam kết <strong>hoàn tiền 100%</strong> nếu bạn không hài lòng
+                  với chất lượng đào tạo trong <strong>2 buổi đầu tiên</strong>.
+                </li>
+                <li>
+                  Quá trình hoàn tiền sẽ diễn ra nhanh chóng
+                  <strong>ngay trong ngày.</strong>
+                </li>
+              </ul>
+            </div>
+            <div class="content-child item-12">
+              <h2 class="title">Học viên LetDiv đang làm ở đâu?</h2>
+              <div class="inner-images">
+                <div class="image">
+                  <img src="/assets/images/fpt-software-logo.webp" alt="" />
+                </div>
+                <div class="image">
+                  <img src="/assets/images/kms-logo.webp" alt="" />
+                </div>
+                <div class="image">
+                  <img src="/assets/images/nashtech-logo.webp" alt="" />
+                </div>
+                <div class="image">
+                  <img src="/assets/images/niteco-logo.webp" alt="" />
+                </div>
+                <div class="image">
+                  <img src="/assets/images/teko-logo.webp" alt="" />
+                </div>
+                <div class="image">
+                  <img src="/assets/images/tyme-logo.webp" alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="content-child item-13">
+              <h2 class="title">Đánh giá của học viên</h2>
+              <div class="inner-review">
+                <div class="profile">
+                  <div class="avt"><span>NV</span></div>
+                  <div class="name">
+                    <span>Nguyễn Vũ</span>
+                    <div><img src="/assets/images/rating-5.webp" alt="" /></div>
+                  </div>
+                </div>
+                <div class="comment">
+                  <span
+                    >Khóa học MySQL này thật sự quá chất lượng! Giảng viên giải
+                    thích dễ hiểu, bài tập thực hành phong phú giúp em nắm vững
+                    kiến thức từ cơ bản đến nâng cao. Em tự tin hơn rất nhiều
+                    trong việc làm việc với cơ sở dữ liệu.</span
+                  >
+                </div>
+              </div>
+              <div class="inner-review">
+                <div class="profile">
+                  <div class="avt"><span>NT</span></div>
+                  <div class="name">
+                    <span>Trần Ngọc Thạch</span>
+                    <div><img src="/assets/images/rating-5.webp" alt="" /></div>
+                  </div>
+                </div>
+                <div class="comment">
+                  <span
+                    >Em rất hài lòng với khóa học. Giảng viên nhiệt tình, hỗ trợ
+                    giải đáp mọi thắc mắc. Tài liệu học tập chi tiết, rõ ràng.
+                    Sau khóa học, em đã có thể áp dụng MySQL vào dự án cá nhân
+                    của mình.</span
+                  >
+                </div>
+              </div>
+              <div class="inner-review">
+                <div class="profile">
+                  <div class="avt"><span>VK</span></div>
+                  <div class="name">
+                    <span>Nguyễn Viết Kiên</span>
+                    <div><img src="/assets/images/rating-5.webp" alt="" /></div>
+                  </div>
+                </div>
+                <div class="comment">
+                  <span
+                    >Khóa học MySQL này vượt ngoài mong đợi của mình. Không chỉ
+                    học về lý thuyết, mình còn được thực hành trên các dự án
+                    thực tế, giúp mình hiểu rõ hơn về ứng dụng của MySQL trong
+                    công việc. Cảm ơn giảng viên và đội ngũ hỗ trợ!</span
+                  >
+                </div>
+              </div>
+              <div class="inner-review">
+                <div class="profile">
+                  <div class="avt"><span>VĐ</span></div>
+                  <div class="name">
+                    <span>Việt Đức</span>
+                    <div><img src="/assets/images/rating-5.webp" alt="" /></div>
+                  </div>
+                </div>
+                <div class="comment">
+                  <span
+                    >Em đã từng rất sợ học về cơ sở dữ liệu, nhưng khóa học này
+                    đã thay đổi suy nghĩ của em. Giảng viên truyền đạt kiến thức
+                    một cách thú vị, dễ tiếp thu. Em cảm thấy tự tin hơn rất
+                    nhiều khi làm việc với MySQL.</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="side-bar-sticky">
+            <div class="inner-images">
+              <img src="/assets/images/khoa-hoc-mysql-1024x576.webp" alt="" />
+            </div>
+            <div class="inner-price">
+              <div class="price">
+                4.900.000 đ<span class="price-del"><del>5.600.000 đ</del></span>
+              </div>
+              <!-- Button trigger modal -->
+              <button
+                type="button"
+                class="btn btn-primary button"
+                data-toggle="modal"
+                data-target="#exampleModal"
+              >
+                Tư Vấn Ngay
+              </button>
+              <button class="button cart">Thêm Vào Giỏ</button>
+              <div class="desc">
+                <p>Khóa học này bao gồm</p>
+                <ul>
+                  <li>
+                    <i class="fa-regular fa-clock"></i> Thời lượng 8 buổi (1
+                    tháng)
+                  </li>
+                  <li>
+                    <i class="fa-regular fa-calendar"></i> 2-3 buổi/tuần (2.5
+                    tiếng/buổi)
+                  </li>
+                  <li><i class="fa-solid fa-code"></i> 30 bài tập thực hành</li>
+                  <li>
+                    <i class="fa-regular fa-circle-question"></i> Hỗ trợ riêng
+                    1-1
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- section-two end-->
+    <!-- footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="inner-addres">
+            <div class="img">
+              <a href=""><img src="/assets/images/LetDiv.webp" alt="" /></a>
+              <p class="content">
+                CÔNG TY TNHH LẬP TRÌNH LETDIV VIỆT NAM <br />
+                <strong>Mã số thuế:</strong> 0317429951 <br /><strong
+                  >Địa chỉ:</strong
+                >
+                5B Phổ Quang, Phường Tân Sơn Hòa, Hồ Chí Minh. <br /><strong
+                  >Điện thoại:</strong
+                >
+                0914 991 139 <br />
+                <strong>Email:</strong> letdiv.innovation@gmail.com
+              </p>
+            </div>
+          </div>
+          <div class="inner-info">
+            <h3>Thông Tin</h3>
+            <p><a href="/contact/contact.html">Liên hệ</a></p>
+            <p><a href="/about/introduce.html">Giới thiệu</a></p>
+            <p><a href="/policies/policy.html">Chính sách bảo mật</a></p>
+            <div class="img">
+              <a
+                href="https://www.dmca.com/Protection/Status.aspx?ID=5ed68dec-8566-4fcf-b1d7-70668621b032&refurl=https://letdiv.com/"
+                target="_blank"
+                ><img src="/assets/images/DMCA_logo-grn-btn120w.png" alt=""
+              /></a>
+            </div>
+          </div>
+          <div class="inner-social">
+            <h3>Mạng Xã Hội</h3>
+            <div class="icon">
+              <a
+                href="https://www.facebook.com/letdiv.innovation"
+                target="_blank"
+                ><i class="fa-brands fa-facebook"></i
+              ></a>
+              <a href="https://www.tiktok.com/@letdiv" target="_blank"
+                ><i class="fa-brands fa-tiktok"></i
+              ></a>
+              <a href="https://www.youtube.com/@letdiv" target="_blank"
+                ><i class="fa-brands fa-youtube"></i
+              ></a>
+            </div>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d31352.53490692094!2d106.66647100000002!3d10.806191000000002!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d7e2e9c2d4b1%3A0xa1e7de28f1b06563!2zQ8O0bmcgVHkgVE5ISCBM4bqtcCBUcsOsbmggTGV0RGl2!5e0!3m2!1sen!2sus!4v1789548029411!5m2!1sen!2sus"
+              width="100%"
+              height="300"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- footer end -->
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="/assets/bootstrap/jquery.slim.min.js"></script>
+    <script src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/header-auth.js"></script>
+  </body>
+</html>

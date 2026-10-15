@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Học viên - LetDiv Instructor</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <!-- Dùng chung giao diện với trang Admin + phần bổ sung riêng của Instructor -->
+    <link rel="stylesheet" href="../../admin/css/pages.css" />
+    <link rel="stylesheet" href="../css/pages-extra.css" />
+  </head>
+  <body>
+
+    <main class="page">
+      <div class="page-head">
+        <div>
+          <h1>Học viên</h1>
+          <p>Học viên mà admin đã phân vào các đợt học của bạn.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="search" placeholder="Tìm theo tên hoặc email..." />
+          </div>
+          <select id="filter-course" style="width: 260px; max-width: 100%"></select>
+          <select id="filter-batch" style="width: 240px; max-width: 100%"></select>
+          <select id="filter-status" style="width: 180px">
+            <option value="">Mọi trạng thái</option>
+            <option value="completed">Đang học</option>
+            <option value="cancelled">Đã hủy</option>
+          </select>
+        </div>
+        <div id="list-area"></div>
+        <div class="table-foot" id="pager"></div>
+      </div>
+    </main>
+
+    <!-- Modal chi tiết học viên -->
+    <div class="modal-overlay" id="detail-modal">
+      <div class="modal-box modal-lg">
+        <div class="modal-header">
+          <h3>Chi tiết học viên</h3>
+          <button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body" id="detail-body"></div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" data-close>Đóng</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../../admin/js/seed-data.js"></script>
+    <script src="../../admin/js/store.js"></script>
+    <script src="../../assets/js/auth-store.js"></script>
+    <script src="../../admin/js/ui.js"></script>
+    <script src="../../assets/js/learning-store.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/hoc-vien.js"></script>
+  </body>
+</html>

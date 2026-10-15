@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tổng quan - LetDiv Admin</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <link rel="stylesheet" href="../css/pages.css" />
+  </head>
+  <body>
+    <main class="page">
+      <div class="page-head">
+        <div>
+          <h1>Tổng quan</h1>
+          <p id="today-text">Chào mừng bạn quay lại trang quản trị LetDiv.</p>
+        </div>
+      </div>
+
+      <!-- Cảnh báo đơn chờ xử lý -->
+      <div id="pending-alert"></div>
+
+      <!-- 4 thẻ thống kê -->
+      <div class="stat-grid" id="stat-grid"></div>
+
+      <div class="grid-2">
+        <!-- Đơn hàng gần đây -->
+        <div class="card">
+          <div class="card-head">
+            <h2>Đơn hàng gần đây</h2>
+            <a href="don-hang.html">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <div class="card-body" style="padding-top: 8px; padding-left: 0; padding-right: 0; padding-bottom: 6px">
+            <div class="table-wrap" id="recent-orders"></div>
+          </div>
+        </div>
+
+        <!-- Khóa học nổi bật -->
+        <div class="card">
+          <div class="card-head">
+            <h2>Khóa học nổi bật</h2>
+            <a href="san-pham.html">Quản lý <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <div class="card-body" style="padding-top: 8px">
+            <ul class="rank-list" id="top-courses"></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="note">
+        <span>
+          <i class="fa-solid fa-circle-info"></i>
+          Doanh thu chỉ tính các đơn <b>Hoàn thành</b>. Dữ liệu lưu trong localStorage của trình duyệt này.
+        </span>
+      </div>
+    </main>
+
+    <script src="../js/seed-data.js"></script>
+    <script src="../js/store.js"></script>
+    <script src="../js/site-sync.js"></script>
+    <script src="../js/ui.js"></script>
+    <script src="../js/tong-quan.js"></script>
+  </body>
+</html>

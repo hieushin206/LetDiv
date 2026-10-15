@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - LetDiv</title>
+    <link rel="icon" href="/assets/images/icon-logo-cropped.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/base.css" />
+    <link rel="stylesheet" href="css/admin.css" />
+    <link rel="stylesheet" href="/assets/css/notify.css" />
+    <script src="/assets/js/role-guard.js" data-role="admin"></script>
+  </head>
+  <body>
+    <!-- header -->
+    <header class="header">
+      <div class="container-fluid">
+        <div class="inner-wrap">
+          <div class="header-logo">
+            <a href="index.html"
+              ><h1>
+                <i class="fa-solid fa-graduation-cap"></i> LetDiv Admin
+              </h1></a
+            >
+          </div>
+          <div class="header-action">
+            <div class="action">
+              <div class="cart-bell">
+                <button class="btn-bell">
+                  <i class="fa-regular fa-bell"></i>
+                </button>
+              </div>
+              <div class="cart-user">
+                <button class="btn-user">
+                  <i class="fa-regular fa-circle-user"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- header end -->
+
+    <!-- section-admin -->
+    <div class="section-admin">
+      <div class="admin-layout">
+        <div class="side-bar">
+          <h2 class="title">MENU QUẢN TRỊ</h2>
+          <div class="nav">
+            <a href="pages/tong-quan.html" target="content" class="active"
+              ><i class="fa-solid fa-sliders"></i><span>Tổng quan</span></a
+            >
+            <a href="pages/san-pham.html" target="content"
+              ><i class="fa-solid fa-cubes"></i><span>Khóa học</span></a
+            >
+            <a href="pages/dot-hoc.html" target="content"
+              ><i class="fa-solid fa-calendar-days"></i><span>Đợt học</span></a
+            >
+            <a href="pages/don-hang.html" target="content"
+              ><i class="fa-solid fa-cart-shopping"></i><span>Đơn hàng</span></a
+            >
+            <a href="pages/khach-hang.html" target="content"
+              ><i class="fa-solid fa-user-graduate"></i><span>Học viên</span></a
+            >
+            <a href="pages/danh-muc.html" target="content"
+              ><i class="fa-solid fa-tags"></i><span>Danh mục</span></a
+            >
+            <a href="pages/khuyen-mai.html" target="content"
+              ><i class="fa-solid fa-ticket"></i><span>Khuyến mãi</span></a
+            >
+            <a href="pages/bao-cao.html" target="content"
+              ><i class="fa-solid fa-chart-line"></i><span>Báo cáo</span></a
+            >
+          </div>
+        </div>
+        <div class="main-content">
+          <iframe
+            src="pages/tong-quan.html"
+            name="content"
+            title="Nội dung quản trị"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+    <!-- section-admin end -->
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="/assets/bootstrap/jquery.slim.min.js"></script>
+    <script src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/notify.js" data-role="admin"></script>
+    <script src="js/highligh-nav.js"></script>
+  </body>
+</html>

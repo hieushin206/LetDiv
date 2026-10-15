@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap");
+:root {
+  --color-one: #228be6;
+  --color-two: #d1d7dc;
+  --color-three: #495057;
+  --color-four: #f1f3f5;
+  --color-five: #5cc6a7;
+  --color-six: #343a40;
+  --color-seven: #fa5252;
+  --font-one: "Inter", sans-serif;
+  --font-two: "Source Code Pro", monospace;
+}
+code {
+  font-family: var(--font-two);
+}
+body {
+  font-family: var(--font-one);
+}
+a {
+  text-decoration: none;
+  color: #212529;
+}
+a:hover {
+  text-decoration: none;
+  color: #212529;
+}
+.button {
+  color: #fff;
+  background-color: var(--color-one);
+  border: 1px solid transparent;
+  border-radius: 30px;
+  min-height: 50px;
+  padding: 0 15px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+.button:hover {
+  transform: scale(1.03);
+}
+.button-change-color {
+  color: #fff;
+  background-color: var(--color-one);
+  border: 3px solid transparent;
+  border-radius: 30px;
+  min-height: 50px;
+  padding: 0 15px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+.button-change-color:hover {
+  color: var(--color-one);
+  background-color: #fff;
+  border-color: var(--color-one);
+  font-weight: 500;
+}
+@media (max-width: 1199.98px) {
+  .container {
+    max-width: none;
+  }
+}
+@media (max-width: 767.98px) {
+  .button:hover {
+    transform: none;
+  }
+  .button {
+    transition: none;
+  }
+}

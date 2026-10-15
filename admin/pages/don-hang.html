@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đơn hàng - LetDiv Admin</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <link rel="stylesheet" href="../css/pages.css" />
+  </head>
+  <body>
+    <main class="page">
+      <div class="page-head">
+        <div>
+          <h1>Quản lý đơn hàng</h1>
+          <p>Theo dõi các lượt mua khóa học và phân học viên vào lớp của giảng viên.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="search" placeholder="Tìm theo mã đơn, học viên, khóa học..." />
+          </div>
+          <div class="field-inline">
+            Từ <input type="date" id="date-from" style="width: 155px" />
+            đến <input type="date" id="date-to" style="width: 155px" />
+          </div>
+          <button class="btn btn-outline" id="btn-clear"><i class="fa-solid fa-filter-circle-xmark"></i> Xóa lọc</button>
+        </div>
+        <div class="tabs" id="status-tabs"></div>
+
+        <div id="list-area"></div>
+        <div class="table-foot" id="pager"></div>
+      </div>
+    </main>
+
+    <!-- Modal chi tiết đơn hàng -->
+    <div class="modal-overlay" id="detail-modal">
+      <div class="modal-box modal-lg">
+        <div class="modal-header">
+          <h3 id="detail-title">Đơn hàng</h3>
+          <button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body" id="detail-body"></div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" data-close>Đóng</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/seed-data.js"></script>
+    <script src="../js/store.js"></script>
+    <script src="../js/ui.js"></script>
+    <script src="../../assets/js/auth-store.js"></script>
+    <script src="../js/don-hang.js"></script>
+  </body>
+</html>

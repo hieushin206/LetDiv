@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Học viên & tài khoản - LetDiv Admin</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <link rel="stylesheet" href="../css/pages.css" />
+    <style>
+      /* pages.css chưa định kiểu cho ô mật khẩu nên bổ sung ở đây */
+      input[type="password"] {
+        width: 100%;
+        border: 1px solid #cfd6df;
+        border-radius: 10px;
+        padding: 9px 40px 9px 12px;
+        background: #fff;
+        color: #212529;
+        transition: 0.2s;
+        outline: none;
+      }
+      input[type="password"]:focus,
+      input.pw-visible:focus {
+        border-color: var(--color-one);
+        box-shadow: 0 0 0 3px rgba(34, 139, 230, 0.15);
+      }
+      .pw-wrap {
+        position: relative;
+      }
+      .pw-wrap input {
+        padding-right: 40px;
+      }
+      .pw-wrap .pw-eye {
+        position: absolute;
+        right: 4px;
+        top: 4px;
+        width: 34px;
+        height: 34px;
+        border: none;
+        background: transparent;
+        color: var(--muted);
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      .pw-wrap .pw-eye:hover {
+        background: var(--color-four);
+        color: var(--color-one);
+      }
+      .role-note {
+        display: flex;
+        gap: 10px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        background: var(--blue-soft);
+        color: #1c6fd1;
+        font-size: 13px;
+        margin-top: 4px;
+      }
+      .role-note i {
+        margin-top: 2px;
+      }
+      .me-tag {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--color-one);
+        background: var(--blue-soft);
+        padding: 1px 8px;
+        border-radius: 20px;
+        margin-left: 6px;
+      }
+      .cell-user-name {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .no-access {
+        text-align: center;
+        padding: 80px 20px;
+        color: var(--muted);
+      }
+      .no-access i {
+        font-size: 44px;
+        color: var(--color-seven);
+        margin-bottom: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <div class="page-head">
+        <div>
+          <h1>Quản lý học viên & tài khoản</h1>
+          <p>
+            Tài khoản khách hàng đăng ký công khai. Quyền Giảng viên chỉ do admin tạo hoặc cấp tại đây.
+            Tài khoản chỉ bị vô hiệu hóa, không xóa để giữ lịch sử đơn hàng.
+          </p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-primary" id="btn-create"><i class="fa-solid fa-user-plus"></i> Thêm tài khoản</button>
+        </div>
+      </div>
+
+      <div class="stat-grid" id="stat-grid"></div>
+
+      <div class="card">
+        <div class="toolbar">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="search" placeholder="Tìm theo mã, họ tên, tài khoản, email, số điện thoại..." />
+          </div>
+          <div class="field-inline">
+            <span>Quyền:</span>
+            <select id="role-filter" style="width: auto">
+              <option value="all">Tất cả quyền</option>
+              <option value="customer">Khách hàng</option>
+              <option value="instructor">Giảng viên</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div>
+        </div>
+        <div class="tabs" id="status-tabs"></div>
+
+        <div id="list-area"></div>
+        <div class="table-foot" id="pager"></div>
+      </div>
+    </main>
+
+    <!-- Modal thêm tài khoản (admin chọn quyền) -->
+    <div class="modal-overlay" id="create-modal" data-static>
+      <div class="modal-box">
+        <div class="modal-header">
+          <h3>Thêm tài khoản mới</h3>
+          <button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <form id="create-form" novalidate autocomplete="off">
+            <div class="form-group">
+              <label for="f-role">Quyền <span class="req">*</span></label>
+              <select id="f-role">
+                <option value="instructor">Giảng viên</option>
+                <option value="customer">Khách hàng</option>
+                <option value="admin">Admin</option>
+              </select>
+              <div class="role-note" id="role-note"></div>
+            </div>
+            <div class="form-group">
+              <label for="f-fullName">Họ và tên <span class="req">*</span></label>
+              <input type="text" id="f-fullName" maxlength="50" placeholder="Nguyễn Văn A" />
+              <div class="error-text" id="e-fullName"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="f-username">Tên tài khoản <span class="req">*</span></label>
+                <input type="text" id="f-username" maxlength="20" placeholder="nguyenvana" />
+                <div class="error-text" id="e-username"></div>
+              </div>
+              <div class="form-group">
+                <label for="f-phone">Số điện thoại <span class="req">*</span></label>
+                <input type="text" id="f-phone" placeholder="0986348952" />
+                <div class="error-text" id="e-phone"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="f-email">Email <span class="req">*</span></label>
+              <input type="email" id="f-email" placeholder="email@gmail.com" />
+              <div class="error-text" id="e-email"></div>
+            </div>
+            <div class="form-group">
+              <label for="f-password">Mật khẩu <span class="req">*</span></label>
+              <div class="pw-wrap">
+                <input type="password" id="f-password" placeholder="Từ 6 ký tự, không có khoảng trắng" autocomplete="new-password" />
+                <button type="button" class="pw-eye" id="pw-eye" aria-label="Hiện / ẩn mật khẩu"><i class="fa-regular fa-eye"></i></button>
+              </div>
+              <div class="error-text" id="e-password"></div>
+              <div class="hint">Hãy gửi mật khẩu này cho người dùng; họ có thể tự đổi trong trang Hồ sơ.</div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <span class="spacer"></span>
+          <button class="btn btn-outline" data-close>Hủy</button>
+          <button class="btn btn-primary" id="btn-save-create"><i class="fa-solid fa-check"></i> Tạo tài khoản</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal đổi quyền -->
+    <div class="modal-overlay" id="role-modal" data-static>
+      <div class="modal-box modal-sm">
+        <div class="modal-header">
+          <h3>Đổi quyền tài khoản</h3>
+          <button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body" id="role-body"></div>
+        <div class="modal-footer">
+          <span class="spacer"></span>
+          <button class="btn btn-outline" data-close>Hủy</button>
+          <button class="btn btn-primary" id="btn-save-role"><i class="fa-solid fa-check"></i> Lưu quyền</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal chi tiết học viên -->
+    <div class="modal-overlay" id="detail-modal">
+      <div class="modal-box modal-lg">
+        <div class="modal-header">
+          <h3 id="detail-title">Chi tiết học viên</h3>
+          <button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body" id="detail-body"></div>
+        <div class="modal-footer" id="detail-footer"></div>
+      </div>
+    </div>
+
+    <script src="../js/seed-data.js"></script>
+    <script src="../js/store.js"></script>
+    <script src="../js/ui.js"></script>
+    <script src="../../assets/js/auth-store.js"></script>
+    <script src="../js/khach-hang.js"></script>
+  </body>
+</html>

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý bài học - LetDiv Instructor</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <!-- Dùng chung giao diện với trang Admin + phần bổ sung riêng của Instructor -->
+    <link rel="stylesheet" href="../../admin/css/pages.css" />
+    <link rel="stylesheet" href="../css/pages-extra.css" />
+  </head>
+  <body>
+
+    <main class="page">
+      <div class="page-head">
+        <div>
+          <h1>Quản lý bài học</h1>
+          <p>Chọn khóa học và đợt học bạn phụ trách. Bài học của mỗi đợt riêng biệt: thêm, sửa, xóa ở đợt này không ảnh hưởng đợt khác.</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-primary" id="btn-add"><i class="fa-solid fa-plus"></i> Thêm bài học</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar">
+          <select id="course-select" style="width: 300px; max-width: 100%"></select>
+          <select id="batch-select" style="width: 270px; max-width: 100%"></select>
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="search" placeholder="Tìm bài học theo tên..." />
+          </div>
+        </div>
+        <div class="tabs" id="status-tabs"></div>
+        <div id="list-area"></div>
+        <div class="table-foot" id="pager"></div>
+      </div>
+    </main>
+
+    <!-- Modal thêm / sửa bài học -->
+    <div class="modal-overlay" id="lesson-modal" data-static>
+      <div class="modal-box modal-lg">
+        <div class="modal-header">
+          <h3 id="lesson-modal-title">Thêm bài học</h3>
+          <button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Mã bài học</label>
+              <input type="text" id="f-id" readonly />
+            </div>
+            <div class="form-group">
+              <label>Khóa học · Đợt học</label>
+              <input type="text" id="f-course" readonly />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Tên bài học <span class="req">*</span></label>
+            <input type="text" id="f-name" maxlength="120" placeholder="VD: Vòng lặp trong JavaScript" />
+            <div class="error-text" id="e-name"></div>
+          </div>
+          <div class="form-group">
+            <label>Mô tả ngắn</label>
+            <input type="text" id="f-description" maxlength="300" placeholder="Giới thiệu ngắn về nội dung bài học" />
+            <div class="error-text" id="e-description"></div>
+          </div>
+          <div class="form-group">
+            <label>Nội dung bài học</label>
+            <textarea id="f-content" style="min-height: 130px" placeholder="Văn bản / nội dung hướng dẫn của bài học..."></textarea>
+            <div class="error-text" id="e-content"></div>
+          </div>
+          <div class="form-group">
+            <label>Đường dẫn video bài giảng (nếu có)</label>
+            <input type="text" id="f-videoUrl" placeholder="https://www.youtube.com/watch?v=..." />
+            <div class="hint">Chỉ lưu đường dẫn (link YouTube, Google Drive...), không tải video lên website.</div>
+            <div class="error-text" id="e-videoUrl"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group" style="margin-bottom: 0">
+              <label>Thứ tự bài học <span class="req">*</span></label>
+              <input type="number" id="f-order" min="1" step="1" />
+              <div class="hint">Nếu trùng, các bài phía sau sẽ tự dời xuống.</div>
+              <div class="error-text" id="e-order"></div>
+            </div>
+            <div class="form-group" style="margin-bottom: 0">
+              <label>Trạng thái</label>
+              <select id="f-status">
+                <option value="visible">Hiển thị cho học viên</option>
+                <option value="hidden">Ẩn</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" data-close>Hủy</button>
+          <button class="btn btn-primary" id="btn-save"><i class="fa-solid fa-floppy-disk"></i> Lưu bài học</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../../admin/js/seed-data.js"></script>
+    <script src="../../admin/js/store.js"></script>
+    <script src="../../assets/js/auth-store.js"></script>
+    <script src="../../admin/js/ui.js"></script>
+    <script src="../../assets/js/learning-store.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/ql-bai-hoc.js"></script>
+  </body>
+</html>

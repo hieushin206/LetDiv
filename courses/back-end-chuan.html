@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Khóa Học Lập Trình Backend Chuẩn Kỹ Sư (1 Kèm 1 Online) - Từ Con Số 0 -
+      LetDiv
+    </title>
+    <link rel="icon" href="/assets/images/icon-logo-cropped.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/base.css" />
+    <link rel="stylesheet" href="/assets/css/header.css" />
+    <link rel="stylesheet" href="/assets/css/footer.css" />
+    <link rel="stylesheet" href="css/course-details.css" />
+  </head>
+  <body>
+    <!-- header -->
+    <header class="header">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="header-logo">
+            <a href="/index.html"
+              ><img src="/assets/images/LetDiv.webp" alt="logo"
+            /></a>
+          </div>
+          <div class="header-navbar">
+            <div class="navbar-menu">
+              <ul>
+                <li><a href="/index.html">Trang Chủ</a></li>
+                <li><a href="/courses/course.html">Khóa Học</a></li>
+                <li><a href="/articles/news.html">Tin Tức</a></li>
+                <li><a href="/about/introduce.html">Giới Thiệu</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="header-action">
+            <div class="action">
+              <div class="cart-shop">
+                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+              </div>
+              <!-- Button trigger modal -->
+              <div class="login">
+                <button
+                  type="button"
+                  class="btn"
+                  data-toggle="modal"
+                  data-target="#loginModal"
+                >
+                  <i class="fa-solid fa-user"></i>
+                </button>
+              </div>
+              <div class="navbar-icon"><i class="fa-solid fa-bars"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="header-modal">
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Liên hệ</h5>
+              <div class="btn-close">
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="btn-contact">
+                <button
+                  class="button-change-color"
+                  onclick="
+                    window.open('https://zalo.me/2219221277314619603', '_blank')
+                  "
+                >
+                  Nhắn tin Zalo OA
+                </button>
+                <button
+                  class="button-change-color"
+                  onclick="
+                    window.open(
+                      'https://www.facebook.com/letdiv.innovation',
+                      '_blank',
+                    )
+                  "
+                >
+                  Nhắn tin Facebook
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- login Modal -->
+    <div class="login-modal">
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="loginModal"
+        tabindex="-1"
+        aria-labelledby="loginModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="loginModalLabel">Đăng Nhập</h5>
+              <div class="btn-close">
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <form action="" method="post">
+                <div class="form-group">
+                  <label for="exampleInputText1" class="label"
+                    >Tài khoản <span style="color: red">*</span></label
+                  >
+                  <span class="icon"><i class="fa-solid fa-user"></i></span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="exampleInputText1"
+                    aria-describedby="textHelp"
+                    placeholder="Ví dụ: nguyenvana"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1" class="label"
+                    >Mật khẩu <span style="color: red">*</span></label
+                  >
+                  <span class="icon"><i class="fa-solid fa-lock"></i></span>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="exampleInputPassword1"
+                  />
+                </div>
+                <button class="button-change-color">Đăng nhập</button>
+              </form>
+              <div class="forgot-pass">
+                <a href="/auth/forgot-password.html">Quên mật khẩu ?</a>
+              </div>
+              <div class="register text-center">
+                Bạn chưa có tài khoản?
+                <a href="/auth/register.html">Đăng ký ngay</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- login Modal end-->
+
+    <!-- header end -->
+
+    <!-- section-one -->
+    <div class="section-one">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="inner-content">
+            <h1>
+              Khóa Học Lập Trình Backend Chuẩn Kỹ Sư (1 Kèm 1 Online) – Từ Con
+              Số 0
+            </h1>
+            <p>
+              Khóa học Backend dành cho người mới bắt đầu. Hệ thống bài tập khoa
+              học đa dạng từ cơ bản đến nâng cao.
+            </p>
+            <ul class="course-element">
+              <li>
+                <div class="course-element-right">
+                  <span>Ngày cập nhật</span>
+                  <span>02/2026</span>
+                </div>
+              </li>
+              <li>
+                <div class="course-element-right">
+                  <span>Học viên</span>
+                  <span>5753</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- section-one end -->
+
+    <!-- section-two -->
+    <div class="section-two">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="inner-content">
+            <div class="content-child item-1">
+              <h2 class="title">
+                Tại sao bạn học lập trình mãi không tiến bộ?
+              </h2>
+              <p>
+                Học lập trình hơn 1 năm nhưng bạn vẫn không thể tự viết nổi 10
+                dòng code. Nguyên nhân thật sự do đâu?
+              </p>
+              <iframe
+                class="video"
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/rw4ulxkF9K8?si=9wkZtuEjA7VUUeBQ"
+                title="YouTube video player"
+                frameborder="0"
+                allow="
+                  accelerometer;
+                  autoplay;
+                  clipboard-write;
+                  encrypted-media;
+                  gyroscope;
+                  picture-in-picture;
+                  web-share;
+                "
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="content-child item-2">
+              <h2 class="title">Bạn sẽ học được gì?</h2>
+              <ul class="lesson-content">
+                <li>
+                  <i class="fa-solid fa-check"></i>
+                  <span
+                    >Biết cách xây dựng hệ thống web với đầy đủ các chức năng từ
+                    con số 0, từ việc thiết kế cơ sở dữ liệu cho đến triển khai
+                    lên máy chủ.</span
+                  >
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i>
+                  <span
+                    >Trang bị đầy đủ kiến thức Thuật Toán & Cấu Trúc Dữ Liệu, tự
+                    tin chinh phục mọi câu hỏi phỏng vấn.</span
+                  >
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i>
+                  <span
+                    >Hiểu biết tường tận các nguyên lý Lập Trình Hướng Đối
+                    Tượng, giúp bạn dễ dàng bảo trì và mở rộng hệ thống.</span
+                  >
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i>
+                  <span
+                    >Thành thạo JavaScript/TypeScript từ cơ bản đến chuyên sâu,
+                    giúp bạn xây dựng các chức năng phức tạp cho các ứng dụng
+                    web.</span
+                  >
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i
+                  ><span
+                    >Hiểu rõ về Database và SQL (MySQL), giúp bạn thiết kế, truy
+                    vấn và quản lý dữ liệu cho trang web của mình với quy mô
+                    doanh nghiệp.</span
+                  >
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i
+                  ><span
+                    >Hiểu rõ kiến trúc NodeJS và sử dụng thành thạo framework
+                    ExpressJS.</span
+                  >
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i
+                  ><span
+                    >Áp dụng kiến thức Git vào trong dự án thực tế, giúp quản lý
+                    source code một cách chuyên nghiệp và hiệu quả.</span
+                  >
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i
+                  ><span
+                    >Thành thạo HTML & CSS, thiết kế và phát triển giao diện web
+                    hiển thị tốt trên nhiều thiết bị.</span
+                  >
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i>
+                  <span
+                    >Học cách tối ưu hóa tốc độ xử lý cho ứng dụng web, cải
+                    thiện hiệu suất của hệ thống và trải nghiệm người
+                    dùng.</span
+                  >
+                </li>
+                <li>
+                  <i class="fa-solid fa-check"></i>
+                  <span
+                    >Trang bị kiến thức để phát hiện và xử lý các lỗ hổng bảo
+                    mật phổ biến trong các ứng dụng web.</span
+                  >
+                </li>
+              </ul>
+            </div>
+            <div class="content-child item-3">
+              <h2 class="title">Nội dung khóa học</h2>
+              <div class="inner-course">
+                <div class="row">
+                  <div class="inner-box col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <div class="img">
+                      <a href="JavaScript.html"
+                        ><img
+                          src="/assets/images/khoa-hoc-javascript.jpg"
+                          alt=""
+                      /></a>
+                    </div>
+                    <div class="content">
+                      <p><a href="JavaScript.html">Khóa Học JavaScript</a></p>
+                    </div>
+                  </div>
+                  <div class="inner-box col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <div class="img">
+                      <a href="TypeScript.html"
+                        ><img
+                          src="/assets/images/khoa-hoc-typescript-thumbnail-1024x577.webp"
+                          alt=""
+                      /></a>
+                    </div>
+                    <div class="content">
+                      <p><a href="TypeScript.html">Khóa Học TypeScript</a></p>
+                    </div>
+                  </div>
+                  <div class="inner-box col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <div class="img">
+                      <a href="Algorithm.html"
+                        ><img
+                          src="/assets/images/khoa-hoc-thuat-toan-cau-truc-du-lieu-1024x576.webp"
+                          alt=""
+                      /></a>
+                    </div>
+                    <div class="content">
+                      <p>
+                        <a href="Algorithm.html"
+                          >Khóa Học Thuật Toán & Cấu Trúc Dữ Liệu</a
+                        >
+                      </p>
+                    </div>
+                  </div>
+                  <div class="inner-box col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <div class="img">
+                      <a href="OOP.html"
+                        ><img
+                          src="/assets/images/khoa-hoc-lap-trinh-huong-doi-tuong-1024x576.webp"
+                          alt=""
+                      /></a>
+                    </div>
+                    <div class="content">
+                      <p>
+                        <a href="OOP.html"
+                          >Khóa Học Lập Trình Hướng Đối Tượng</a
+                        >
+                      </p>
+                    </div>
+                  </div>
+                  <div class="inner-box col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <div class="img">
+                      <a href="MySQL.html"
+                        ><img
+                          src="/assets/images/khoa-hoc-mysql-1024x576.webp"
+                          alt=""
+                      /></a>
+                    </div>
+                    <div class="content">
+                      <p><a href="MySQL.html">Khóa Học MySQL</a></p>
+                    </div>
+                  </div>
+                  <div class="inner-box col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <div class="img">
+                      <a href="Git-GitHub.html"
+                        ><img
+                          src="/assets/images/anh-nen-khoa-hoc-git.webp"
+                          alt=""
+                      /></a>
+                    </div>
+                    <div class="content">
+                      <p><a href="Git-GitHub.html">Khóa Học Git & GitHub</a></p>
+                    </div>
+                  </div>
+                  <div class="inner-box col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <div class="img">
+                      <a href="HTML-CSS.html"
+                        ><img src="/assets/images/khoa-hoc-html-css.jpg" alt=""
+                      /></a>
+                    </div>
+                    <div class="content">
+                      <p><a href="HTML-CSS.html">Khóa Học HTML & CSS</a></p>
+                    </div>
+                  </div>
+                  <div class="inner-box col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <div class="img">
+                      <a href="NodeJS.html"
+                        ><img
+                          src="/assets/images/khoa-hoc-nodejs-1024x576.webp"
+                          alt=""
+                      /></a>
+                    </div>
+                    <div class="content">
+                      <p><a href="NodeJS.html">Khóa Học NodeJS</a></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="content-child item-4">
+              <h2 class="title">Đối tượng học</h2>
+              <ul class="content-padding">
+                <li>
+                  Sinh viên CNTT mong muốn bổ túc kiến thức để đủ điều kiện đi
+                  làm công ty.
+                </li>
+                <li>Đang học lập trình nhưng mất gốc hoặc không tự tin.</li>
+                <li>
+                  Chưa có kiến thức lập trình (zero) và muốn bắt đầu học bài bản
+                  từ đầu.
+                </li>
+                <li>
+                  Làm trái ngành và mong muốn chuyển đổi sang lĩnh vực lập trình
+                  an toàn và hiệu quả.
+                </li>
+                <li>
+                  Đang đi làm nhưng muốn cải thiện kiến thức để tiến xa hơn
+                  trong sự nghiệp (senior).
+                </li>
+              </ul>
+            </div>
+            <div class="content-child item-5">
+              <h2 class="title">Học 1 Kèm 1 - Đảm bảo chất lượng Tốt Nhất</h2>
+              <ul class="content-padding">
+                <li>
+                  Bạn sẽ được theo sát và hỗ trợ 1-1 bởi giảng viên. Đảm bảo
+                  chất lượng học tập đạt kết quả tốt nhất.
+                </li>
+                <li>
+                  Nếu <strong>HỌC CHẬM</strong> bạn không cần lo lắng không theo
+                  kịp chương trình, giảng viên sẽ đi chậm để đảm bảo bạn nắm
+                  chắc 100% kiến thức.
+                </li>
+                <li>
+                  Nếu học nhanh, bạn có thể nhanh chóng kết thúc chương trình để
+                  đi làm công ty.
+                </li>
+              </ul>
+            </div>
+            <div class="content-child item-6">
+              <h2 class="title">Học online - Tiết kiệm thời gian di chuyển</h2>
+              <p>
+                Thay vì phải di chuyển vất vả trên đường giữa dòng người đông
+                đúc. Giờ đây, bạn chỉ cần mở laptop để bắt đầu học ngay tại nhà.
+                Tiết kiệm thời gian, tránh căng thẳng, và tập trung hoàn toàn
+                vào việc học!
+              </p>
+            </div>
+            <div class="content-child item-7">
+              <h2 class="title">Lịch học linh hoạt</h2>
+              <ul class="content-padding">
+                <li>
+                  LetDiv sắp xếp lịch học theo ý của bạn. Học đúng thời điểm mà
+                  bạn cảm thấy thoải mái nhất.
+                </li>
+                <li>
+                  Dễ dàng thay đổi lịch học trong khi học nếu bạn có việc bận.
+                  Không làm gián đoạn tiến độ học tập của bạn.
+                </li>
+                <li>
+                  LetDiv có thể sắp xếp thời gian học cho bạn từ 8h đến 23h, kể
+                  cả cuối tuần.
+                </li>
+              </ul>
+            </div>
+            <div class="content-child item-8">
+              <h2 class="title">Áp dụng Scaffolding Learning</h2>
+              <ul class="content-padding">
+                <li>Học dễ dàng từ cơ bản đến nâng cao qua từng bước nhỏ.</li>
+                <li>
+                  Cá nhân hóa lộ trình học tập, nắm chắc kiến thức ngay lập tức.
+                </li>
+                <li>
+                  Tiến bộ vượt bậc nhờ phương pháp sư phạm khoa học hiệu quả.
+                </li>
+              </ul>
+              <iframe
+                class="video"
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/S0Z21OXBRDA?si=QFjyoEl0-ZfBiLK6"
+                title="YouTube video player"
+                frameborder="0"
+                allow="
+                  accelerometer;
+                  autoplay;
+                  clipboard-write;
+                  encrypted-media;
+                  gyroscope;
+                  picture-in-picture;
+                  web-share;
+                "
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="content-child item-9">
+              <h2 class="title">Trải nghiệm thử buổi học</h2>
+              <p>
+                Bạn có thể tham khảo ngay một buổi học 1 Kèm 1 qua video sau, để
+                hiểu rõ hơn phong cách giảng dạy và quy trình đào tạo của LetDiv
+                sẽ diễn ra như thế nào:
+              </p>
+              <iframe
+                class="video"
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/pzPLKbW6whQ?si=X36o4TJv5a_cm9TC"
+                title="YouTube video player"
+                frameborder="0"
+                allow="
+                  accelerometer;
+                  autoplay;
+                  clipboard-write;
+                  encrypted-media;
+                  gyroscope;
+                  picture-in-picture;
+                  web-share;
+                "
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="content-child item-10">
+              <h2 class="title">Chính sách Hỗ trợ việc làm</h2>
+              <ul class="content-padding">
+                <li>
+                  Hỗ trợ chỉnh sửa CV giúp hồ sơ của bạn nổi bật hơn, gia tăng
+                  cơ hội nhận lời mời phỏng vấn.
+                </li>
+                <li>
+                  Hỗ trợ giới thiệu hồ sơ đến các công ty lập trình Việt Nam.
+                </li>
+                <li>
+                  Có cơ hội thực tập tại LetDiv, tham gia vào phát triển dự án
+                  eLearning.
+                </li>
+              </ul>
+            </div>
+            <div class="content-child item-11">
+              <h2 class="title">Chính sách hoàn tiền 100%</h2>
+              <ul class="content-padding">
+                <li>
+                  Cam kết <strong>hoàn tiền 100%</strong> nếu bạn không hài lòng
+                  với chất lượng đào tạo trong <strong>2 buổi đầu tiên</strong>.
+                </li>
+                <li>
+                  Quá trình hoàn tiền sẽ diễn ra nhanh chóng
+                  <strong>ngay trong ngày.</strong>
+                </li>
+              </ul>
+            </div>
+            <div class="content-child item-12">
+              <h2 class="title">Học viên LetDiv đang làm ở đâu?</h2>
+              <div class="inner-images">
+                <div class="image">
+                  <img src="/assets/images/fpt-software-logo.webp" alt="" />
+                </div>
+                <div class="image">
+                  <img src="/assets/images/kms-logo.webp" alt="" />
+                </div>
+                <div class="image">
+                  <img src="/assets/images/nashtech-logo.webp" alt="" />
+                </div>
+                <div class="image">
+                  <img src="/assets/images/niteco-logo.webp" alt="" />
+                </div>
+                <div class="image">
+                  <img src="/assets/images/teko-logo.webp" alt="" />
+                </div>
+                <div class="image">
+                  <img src="/assets/images/tyme-logo.webp" alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="content-child item-13">
+              <h2 class="title">Đánh giá của học viên</h2>
+              <div class="inner-review">
+                <div class="profile">
+                  <div class="avt"><span>NV</span></div>
+                  <div class="name">
+                    <span>Nguyễn Vũ</span>
+                    <div><img src="/assets/images/rating-5.webp" alt="" /></div>
+                  </div>
+                </div>
+                <div class="comment">
+                  <span
+                    >Mình chưa có kiến thức lập trình nào nhưng đam mê với lĩnh
+                    vực này. Khóa học này đã giúp mình bắt đầu hành trình lập
+                    trình từ con số 0 một cách bài bản và hiệu quả. Thầy cô
+                    giảng dạy rất tâm huyết, luôn sẵn sàng giải đáp thắc mắc cho
+                    học viên. Mình rất hài lòng với khóa học và sẽ tiếp tục theo
+                    đuổi đam mê lập trình của mình.</span
+                  >
+                </div>
+              </div>
+              <div class="inner-review">
+                <div class="profile">
+                  <div class="avt"><span>NT</span></div>
+                  <div class="name">
+                    <span>Trần Ngọc Thạch</span>
+                    <div><img src="/assets/images/rating-5.webp" alt="" /></div>
+                  </div>
+                </div>
+                <div class="comment">
+                  <span
+                    >Trước khi bắt đầu khoá học em gần như không thể code được
+                    theo luồng mình nghĩ ra. Nhưng sau khi học gần xong khoá học
+                    thì em đã có thể tự viết được dự án cho riêng mình. Em thấy
+                    chất lượng đào tạo bên mình rất tốt, giảng viên giảng dạy dễ
+                    hiểu.</span
+                  >
+                </div>
+              </div>
+              <div class="inner-review">
+                <div class="profile">
+                  <div class="avt"><span>VK</span></div>
+                  <div class="name">
+                    <span>Nguyễn Viết Kiên</span>
+                    <div><img src="/assets/images/rating-5.webp" alt="" /></div>
+                  </div>
+                </div>
+                <div class="comment">
+                  <span
+                    >Mình đang làm trái ngành và muốn chuyển đổi nghề nghiệp
+                    sang lập trình. Khóa học này đã giúp mình học lập trình
+                    backend một cách nhanh chóng và hiệu quả. Nhờ tham gia các
+                    dự án thực tế, mình đã rèn luyện được kỹ năng thực hành và
+                    tự tin hơn vào khả năng của bản thân. Cảm ơn khóa học đã
+                    giúp mình mở ra cánh cửa mới trong sự nghiệp.</span
+                  >
+                </div>
+              </div>
+              <div class="inner-review">
+                <div class="profile">
+                  <div class="avt"><span>VĐ</span></div>
+                  <div class="name">
+                    <span>Việt Đức</span>
+                    <div><img src="/assets/images/rating-5.webp" alt="" /></div>
+                  </div>
+                </div>
+                <div class="comment">
+                  <span
+                    >Mình đang đi làm lập trình viên backend nhưng muốn cải
+                    thiện kiến thức và kỹ năng để trở thành senior. Khóa học này
+                    đã giúp mình nâng cao kiến thức chuyên môn và rèn luyện được
+                    nhiều kỹ năng mới. Các bài giảng cập nhật những kiến thức
+                    mới nhất trong lĩnh vực lập trình backend, giúp mình theo
+                    kịp xu hướng thị trường và cạnh tranh tốt hơn trong công
+                    việc. Rất hữu ích!</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="side-bar-sticky">
+            <div class="inner-images">
+              <img src="/assets/images/khoa-hoc-backend.webp" alt="" />
+            </div>
+            <div class="inner-price">
+              <div class="price">
+                30.000.000 đ<span class="price-del"
+                  ><del>32.000.000 đ</del></span
+                >
+              </div>
+              <!-- Button trigger modal -->
+              <button
+                type="button"
+                class="btn btn-primary button"
+                data-toggle="modal"
+                data-target="#exampleModal"
+              >
+                Tư Vấn Ngay
+              </button>
+              <button class="button cart">Thêm Vào Giỏ</button>
+              <div class="desc">
+                <p>Khóa học này bao gồm</p>
+                <ul>
+                  <li>
+                    <i class="fa-regular fa-clock"></i> Thời lượng 68 buổi (9-11
+                    tháng)
+                  </li>
+                  <li>
+                    <i class="fa-regular fa-calendar"></i> 2-3 buổi/tuần (2.5
+                    tiếng/buổi)
+                  </li>
+                  <li>
+                    <i class="fa-solid fa-code"></i> 250 bài tập thực hành
+                  </li>
+                  <li>
+                    <i class="fa-regular fa-circle-question"></i> Hỗ trợ riêng
+                    1-1
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- section-two end-->
+    <!-- footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="inner-addres">
+            <div class="img">
+              <a href=""><img src="/assets/images/LetDiv.webp" alt="" /></a>
+              <p class="content">
+                CÔNG TY TNHH LẬP TRÌNH LETDIV VIỆT NAM <br />
+                <strong>Mã số thuế:</strong> 0317429951 <br /><strong
+                  >Địa chỉ:</strong
+                >
+                5B Phổ Quang, Phường Tân Sơn Hòa, Hồ Chí Minh. <br /><strong
+                  >Điện thoại:</strong
+                >
+                0914 991 139 <br />
+                <strong>Email:</strong> letdiv.innovation@gmail.com
+              </p>
+            </div>
+          </div>
+          <div class="inner-info">
+            <h3>Thông Tin</h3>
+            <p><a href="/contact/contact.html">Liên hệ</a></p>
+            <p><a href="/about/introduce.html">Giới thiệu</a></p>
+            <p><a href="/policies/policy.html">Chính sách bảo mật</a></p>
+            <div class="img">
+              <a
+                href="https://www.dmca.com/Protection/Status.aspx?ID=5ed68dec-8566-4fcf-b1d7-70668621b032&refurl=https://letdiv.com/"
+                target="_blank"
+                ><img src="/assets/images/DMCA_logo-grn-btn120w.png" alt=""
+              /></a>
+            </div>
+          </div>
+          <div class="inner-social">
+            <h3>Mạng Xã Hội</h3>
+            <div class="icon">
+              <a
+                href="https://www.facebook.com/letdiv.innovation"
+                target="_blank"
+                ><i class="fa-brands fa-facebook"></i
+              ></a>
+              <a href="https://www.tiktok.com/@letdiv" target="_blank"
+                ><i class="fa-brands fa-tiktok"></i
+              ></a>
+              <a href="https://www.youtube.com/@letdiv" target="_blank"
+                ><i class="fa-brands fa-youtube"></i
+              ></a>
+            </div>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d31352.53490692094!2d106.66647100000002!3d10.806191000000002!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d7e2e9c2d4b1%3A0xa1e7de28f1b06563!2zQ8O0bmcgVHkgVE5ISCBM4bqtcCBUcsOsbmggTGV0RGl2!5e0!3m2!1sen!2sus!4v1789548029411!5m2!1sen!2sus"
+              width="100%"
+              height="300"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- footer end -->
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="/assets/bootstrap/jquery.slim.min.js"></script>
+    <script src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/header-auth.js"></script>
+  </body>
+</html>

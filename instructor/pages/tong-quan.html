@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tổng quan - LetDiv Instructor</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <!-- Dùng chung giao diện với trang Admin + phần bổ sung riêng của Instructor -->
+    <link rel="stylesheet" href="../../admin/css/pages.css" />
+    <link rel="stylesheet" href="../css/pages-extra.css" />
+  </head>
+  <body>
+
+    <main class="page">
+      <div class="page-head">
+        <div>
+          <h1>Tổng quan</h1>
+          <p id="today-text">Chào mừng bạn quay lại trang giảng dạy LetDiv.</p>
+        </div>
+      </div>
+
+      <!-- Cảnh báo bài nộp chờ chấm -->
+      <div id="pending-alert"></div>
+
+      <!-- 4 thẻ thống kê -->
+      <div class="stat-grid" id="stat-grid"></div>
+
+      <div class="grid-2">
+        <!-- Học viên đăng ký gần đây -->
+        <div class="card">
+          <div class="card-head">
+            <h2>Học viên đăng ký gần đây</h2>
+            <a href="hoc-vien.html">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <div class="card-body" style="padding-top: 8px; padding-left: 0; padding-right: 0; padding-bottom: 6px">
+            <div class="table-wrap" id="recent-students"></div>
+          </div>
+        </div>
+
+        <!-- Khóa học nhiều học viên nhất -->
+        <div class="card">
+          <div class="card-head">
+            <h2>Khóa học nhiều học viên nhất</h2>
+            <a href="khoa-hoc-cua-toi.html">Xem tất cả <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <div class="card-body" style="padding-top: 8px">
+            <ul class="rank-list" id="top-courses"></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <!-- Khóa học đang phụ trách -->
+        <div class="card">
+          <div class="card-head">
+            <h2>Khóa học đang phụ trách</h2>
+            <a href="khoa-hoc-cua-toi.html">Quản lý <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <div class="card-body" style="padding-top: 8px; padding-left: 0; padding-right: 0; padding-bottom: 6px">
+            <div class="table-wrap" id="my-courses"></div>
+          </div>
+        </div>
+
+        <!-- Bài học vừa cập nhật -->
+        <div class="card">
+          <div class="card-head">
+            <h2>Bài học vừa được cập nhật</h2>
+            <a href="ql-bai-hoc.html">Quản lý <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <div class="card-body" style="padding-top: 8px">
+            <ul class="rank-list plain" id="recent-lessons"></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="note" style="justify-content: space-between; align-items: center; flex-wrap: wrap">
+        <span>
+          <i class="fa-solid fa-circle-info"></i>
+          Chỉ hiển thị khóa học admin phân công cho bạn và học viên trong các đợt học bạn phụ trách. Dữ liệu lưu trong localStorage.
+        </span>
+      </div>
+    </main>
+
+    <script src="../../admin/js/seed-data.js"></script>
+    <script src="../../admin/js/store.js"></script>
+    <script src="../../assets/js/auth-store.js"></script>
+    <script src="../../admin/js/ui.js"></script>
+    <script src="../../assets/js/learning-store.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/tong-quan.js"></script>
+  </body>
+</html>

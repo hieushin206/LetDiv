@@ -1,0 +1,185 @@
+/* header */
+.header {
+  border-bottom: 1px solid var(--color-two);
+  background-color: #172554;
+}
+
+.header .inner-wrap {
+  display: flex;
+  justify-content: space-between;
+  min-height: 100px;
+  align-items: center;
+}
+.header .inner-wrap .header-logo a h1 {
+  color: #fff;
+  font-weight: 700;
+  font-size: 30px;
+}
+.header .inner-wrap .header-logo a h1 .fa-graduation-cap {
+  color: #92c3fb;
+}
+.header .inner-wrap .header-action .btn-bell,
+.header-action .btn-user {
+  background-color: #172554;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+}
+/*  */
+.header .inner-wrap .header-action .btn-bell:hover i {
+  animation: ring 0.5s ease-in-out infinite;
+}
+@keyframes ring {
+  0% {
+    transform: rotate(0);
+  }
+
+  15% {
+    transform: rotate(15deg);
+  }
+
+  30% {
+    transform: rotate(-15deg);
+  }
+
+  45% {
+    transform: rotate(12deg);
+  }
+
+  60% {
+    transform: rotate(-12deg);
+  }
+
+  75% {
+    transform: rotate(6deg);
+  }
+
+  100% {
+    transform: rotate(0);
+  }
+}
+/*  */
+.header .inner-wrap .header-action .action {
+  display: flex;
+  gap: 10px;
+}
+/* layout */
+.section-instructor .instructor-layout {
+  display: flex;
+  height: calc(100vh - 101px); /* trừ chiều cao header */
+  min-height: 560px;
+}
+.section-instructor .instructor-layout .side-bar {
+  width: 260px;
+  flex-shrink: 0;
+  padding: 22px 14px;
+  background-color: #f0f4f8;
+  border-right: 1px solid var(--color-two);
+  overflow-y: auto;
+}
+.section-instructor .instructor-layout .side-bar .title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #868e96;
+  padding-left: 14px;
+}
+.section-instructor .instructor-layout .side-bar .nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 14px;
+}
+.section-instructor .instructor-layout .side-bar .nav a {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-weight: 600;
+  padding: 11px 14px;
+  border-radius: 10px;
+  color: var(--color-three);
+  transition: 0.2s;
+  border-left: 3px solid transparent;
+}
+.section-instructor .instructor-layout .side-bar .nav a i {
+  width: 20px;
+  text-align: center;
+}
+.section-instructor .instructor-layout .side-bar .nav a:hover {
+  background-color: #fff;
+  color: var(--color-one);
+}
+.section-instructor .instructor-layout .side-bar .nav a.active {
+  background-color: #fff;
+  color: var(--color-one);
+  border-left-color: var(--color-one);
+  box-shadow: 0 2px 8px rgba(23, 37, 84, 0.08);
+}
+/* Vùng nội dung bên phải */
+.section-instructor .instructor-layout .main-content {
+  flex: 1;
+  min-width: 0;
+  background-color: #f4f7fb;
+  overflow: hidden;
+}
+.main-content iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: #f4f7fb;
+}
+
+@media (max-width: 767.98px) {
+  .section-instructor .instructor-layout {
+    flex-direction: column;
+    height: auto;
+  }
+  .section-instructor .instructor-layout .side-bar {
+    width: 100%;
+    padding: 12px;
+  }
+  .section-instructor .instructor-layout .side-bar .nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .main-content iframe {
+    height: 85vh;
+  }
+}
+/* ---------- Nhóm menu có mục con (Quản lý bài học > Bài tập, Bài nộp) ---------- */
+.section-instructor .instructor-layout .side-bar .nav .sub-nav {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  margin-left: 24px;
+  padding-left: 8px;
+  border-left: 2px solid #d5deea;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition:
+    max-height 0.3s ease,
+    opacity 0.3s ease,
+    margin-top 0.3s ease;
+}
+.section-instructor .instructor-layout .side-bar .nav .nav-group.open .sub-nav {
+  max-height: 140px;
+  opacity: 1;
+  margin-top: 6px;
+}
+.section-instructor .instructor-layout .side-bar .nav .sub-nav a {
+  font-size: 14px;
+  padding: 8px 12px;
+}
+/* Mục cha hơi sáng khi đang ở trong mục con */
+.section-instructor .instructor-layout .side-bar .nav a.parent-active {
+  background-color: rgba(255, 255, 255, 0.75);
+  color: var(--color-one);
+  border-left-color: #a5d8ff;
+}
+/* Mục con chưa có trang để mở (chưa chọn bài học / bài tập) */
+.section-instructor .instructor-layout .side-bar .nav a.disabled {
+  opacity: 0.45;
+  pointer-events: none;
+}

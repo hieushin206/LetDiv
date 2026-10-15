@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài nộp của học viên - LetDiv Instructor</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <!-- Dùng chung giao diện với trang Admin + phần bổ sung riêng của Instructor -->
+    <link rel="stylesheet" href="../../admin/css/pages.css" />
+    <link rel="stylesheet" href="../css/pages-extra.css" />
+  </head>
+  <body>
+
+    <main class="page">
+      <div class="crumb" id="crumb"></div>
+      <div class="page-head">
+        <div>
+          <h1>Bài nộp của học viên</h1>
+          <p id="as-text"></p>
+        </div>
+        <div class="page-actions">
+          <a class="btn btn-outline" id="btn-back" href="ql-bai-hoc.html"><i class="fa-solid fa-arrow-left"></i> Về danh sách bài tập</a>
+        </div>
+      </div>
+
+      <div id="main-area">
+        <div class="stat-grid" id="stat-grid"></div>
+
+        <div class="card info-strip" id="info-strip"></div>
+
+        <div class="card">
+          <div class="toolbar">
+            <div class="search-box">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="search" placeholder="Tìm theo tên, email hoặc mã học viên..." />
+            </div>
+          </div>
+          <div class="tabs" id="status-tabs"></div>
+          <div id="list-area"></div>
+          <div class="table-foot" id="pager"></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal chấm điểm -->
+    <div class="modal-overlay" id="grade-modal" data-static>
+      <div class="modal-box">
+        <div class="modal-header">
+          <h3 id="grade-title">Chấm bài</h3>
+          <button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <div class="user-cell" style="margin-bottom: 16px" id="g-student"></div>
+          <div class="quote-box" id="g-assignment"></div>
+          <div class="form-group">
+            <label>Bài làm của học viên</label>
+            <div id="g-link"></div>
+          </div>
+          <div class="form-group">
+            <label>Điểm (<span id="g-range">0 - 10</span>) <span class="req">*</span></label>
+            <input type="number" id="f-score" class="score-input" min="0" step="0.25" />
+            <div class="error-text" id="e-score"></div>
+          </div>
+          <div class="form-group" style="margin-bottom: 0">
+            <label>Nhận xét của giảng viên</label>
+            <textarea id="f-comment" maxlength="500" placeholder="VD: Cần bổ sung kiểm tra dữ liệu email."></textarea>
+            <div class="hint" id="g-graded-at"></div>
+            <div class="error-text" id="e-comment"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" data-close>Hủy</button>
+          <button class="btn btn-success" id="btn-save"><i class="fa-solid fa-check"></i> Lưu kết quả</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../../admin/js/seed-data.js"></script>
+    <script src="../../admin/js/store.js"></script>
+    <script src="../../assets/js/auth-store.js"></script>
+    <script src="../../admin/js/ui.js"></script>
+    <script src="../../assets/js/learning-store.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/bai-nop.js"></script>
+  </body>
+</html>

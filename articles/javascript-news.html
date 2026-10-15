@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Đến AI cũng BÓ TAY! 10 Tính năng JavaScript mới CỰC ĐỈNH 2026 - LetDiv
+    </title>
+    <link rel="icon" href="/assets/images/icon-logo-cropped.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/base.css" />
+    <link rel="stylesheet" href="/assets/css/header.css" />
+    <link rel="stylesheet" href="/assets/css/footer.css" />
+    <link rel="stylesheet" href="css/news-details.css" />
+  </head>
+  <body>
+    <!-- header -->
+    <header class="header">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="header-logo">
+            <a href="/index.html"
+              ><img src="/assets/images/LetDiv.webp" alt="logo"
+            /></a>
+          </div>
+          <div class="header-navbar">
+            <div class="navbar-menu">
+              <ul>
+                <li><a href="/index.html">Trang Chủ</a></li>
+                <li><a href="/courses/course.html">Khóa Học</a></li>
+                <li><a href="/articles/news.html">Tin Tức</a></li>
+                <li><a href="/about/introduce.html">Giới Thiệu</a></li>
+              </ul>
+              <div class="inner-btn">
+                <!-- Button trigger modal -->
+                <button
+                  type="button"
+                  class="btn btn-primary button"
+                  data-toggle="modal"
+                  data-target="#exampleModal"
+                >
+                  Tư Vấn Ngay
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="header-action">
+            <div class="action">
+              <div class="cart-shop">
+                <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+              </div>
+              <!-- Button trigger modal -->
+              <div class="login">
+                <button
+                  type="button"
+                  class="btn"
+                  data-toggle="modal"
+                  data-target="#loginModal"
+                >
+                  <i class="fa-solid fa-user"></i>
+                </button>
+              </div>
+              <div class="navbar-icon"><i class="fa-solid fa-bars"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="header-modal">
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Liên hệ</h5>
+              <div class="btn-close">
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="btn-contact">
+                <button
+                  class="button-change-color"
+                  onclick="
+                    window.open('https://zalo.me/2219221277314619603', '_blank')
+                  "
+                >
+                  Nhắn tin Zalo OA
+                </button>
+                <button
+                  class="button-change-color"
+                  onclick="
+                    window.open(
+                      'https://www.facebook.com/letdiv.innovation',
+                      '_blank',
+                    )
+                  "
+                >
+                  Nhắn tin Facebook
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- login Modal -->
+    <div class="login-modal">
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="loginModal"
+        tabindex="-1"
+        aria-labelledby="loginModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="loginModalLabel">Đăng Nhập</h5>
+              <div class="btn-close">
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <form action="" method="post">
+                <div class="form-group">
+                  <label for="exampleInputText1" class="label"
+                    >Tài khoản <span style="color: red">*</span></label
+                  >
+                  <span class="icon"><i class="fa-solid fa-user"></i></span>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="exampleInputText1"
+                    aria-describedby="textHelp"
+                    placeholder="Ví dụ: nguyenvana"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1" class="label"
+                    >Mật khẩu <span style="color: red">*</span></label
+                  >
+                  <span class="icon"><i class="fa-solid fa-lock"></i></span>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="exampleInputPassword1"
+                  />
+                </div>
+                <button class="button-change-color">Đăng nhập</button>
+              </form>
+              <div class="forgot-pass">
+                <a href="/auth/forgot-password.html">Quên mật khẩu ?</a>
+              </div>
+              <div class="register text-center">
+                Bạn chưa có tài khoản?
+                <a href="/auth/register.html">Đăng ký ngay</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- login Modal end-->
+
+    <!-- header end -->
+
+    <!-- section-one -->
+    <div class="section-one">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="inner-title">
+            <h1 class="title">
+              Đến AI cũng BÓ TAY! 10 Tính năng JavaScript mới CỰC ĐỈNH 2026
+            </h1>
+          </div>
+          <div class="inner-image">
+            <img
+              src="/assets/images/10-tinh-nang-javascript-moi-nhat-2026-1024x577.webp"
+              alt=""
+            />
+          </div>
+          <div class="inner-content">
+            <p>
+              Nếu bạn đang mải mê copy-paste từ AI và tưởng rằng code của nó
+              luôn tốt nhất?
+            </p>
+
+            <p><strong>Thì bạn nhầm to rồi!</strong></p>
+            <p>
+              Bạn có biết là JavaScript vừa tung ra những tính năng mới đến mức
+              dữ liệu của AI còn chưa kịp update không?
+            </p>
+            <p>
+              Mà thật ra nếu nó có update rồi, thì tỷ lệ cao AI vẫn trả về
+              <strong>những cú pháp lỗi thời</strong> do chúng đã quá phổ biến,
+              trừ khi bạn ra lệnh cụ thể bắt nó dùng cú pháp mới.
+            </p>
+            <p>
+              Đừng để bản thân bị tụt hậu lại phía sau. Ngay sau đây, chúng ta
+              hãy cùng nhau khám phá
+              <strong>10 tính năng JavaScript mới CỰC ĐỈNH</strong> của năm 2026
+              nhé!
+            </p>
+            <h2 class="heading">
+              1. Các phương thức mới của <span class="highlight">Set</span>
+            </h2>
+            <p>
+              Trước đây, bạn phải tự viết logic thủ công rất mất thời gian để xử
+              lý tập hợp trên Set. Giờ đây, JavaScript đã tích hợp sẵn hàng loạt
+              phương thức cực tiện lợi:
+            </p>
+            <ul>
+              <li>
+                <span class="highlight">union():</span> Gộp hai tập hợp, tự động
+                lọc trùng.
+              </li>
+              <li>
+                <span class="highlight">intersection():</span> Lấy các phần tử
+                trùng nhau giữa hai tập hợp.
+              </li>
+              <li>
+                <span class="highlight">difference():</span> Loại bỏ các phần tử
+                trùng với tập hợp kia.
+              </li>
+              <li>
+                <span class="highlight">symmetricDifference():</span> Lấy các
+                phần tử chỉ xuất hiện ở một bên.
+              </li>
+              <li>
+                <span class="highlight">isSubsetOf():</span> Kiểm tra quan hệ
+                tập con.
+              </li>
+            </ul>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                const setA = new Set([1, 2, 3, 4, 5]);
+                const setB = new Set([3, 4, 5, 6, 7]);
+
+                // Hợp 2 tập hợp (lấy tất cả giá trị không trùng lặp)
+                console.log(setA.union(setB)); // Set {1, 2, 3, 4, 5, 6, 7}
+
+                // Giao 2 tập hợp (chỉ lấy phần tử chung)
+                console.log(setA.intersection(setB)); // Set {3, 4, 5}
+                // Hiệu (những phần tử có trong setA nhưng không có trong setB)
+                console.log(setA.difference(setB)); // Set {1, 2}
+
+                // Hiệu đối xứng (loại bỏ các phần tử chung của cả 2)
+                console.log(setA.symmetricDifference(setB)); // Set {1, 2, 6, 7}
+
+                // Kiểm tra tập con
+                const setC = new Set([1, 2]);
+                console.log(setC.isSubsetOf(setA)); // true
+              </script>
+            </div>
+            <h2 class="heading">2. Iterator Helpers</h2>
+            <p>
+              Làm việc với Generators và Iterators trước đây rất cồng kềnh. Giờ
+              đây, bạn có thể gọi trực tiếp các hàm quen thuộc của Array như
+              <span class="highlight">.map()</span>,
+              <span class="highlight">.filter()</span>, và
+              <span class="highlight">.take()</span> ngay trên Iterator mà
+              <strong>không cần ép kiểu về mảng.</strong>
+            </p>
+            <p>
+              Tính năng này cực kỳ đáng giá khi xử lý các
+              <strong>vòng lặp vô hạn</strong> vì nó giúp code vừa sạch, vừa tối
+              ưu bộ nhớ đáng kể.
+            </p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                // Tạo một vòng lặp số vô hạn
+                function* numberGenerator(){
+                  let i = 0;
+                  while (true) yield i++;
+                }
+
+                const numbers = numberGenerator();
+
+                // Lấy 5 số đầu tiên, nhân 2 và chuyển thành mảng
+                const result = numbers
+                  .map(n => n * 2)
+                  .take(5) // Lấy 5 phần tử để tránh lặp vô hạn
+                  .toArray();
+
+                console.log(result); // [0, 2, 4, 6, 8]
+              </script>
+            </div>
+            <h2 class="heading">3. Promise.try</h2>
+            <p>
+              Khi bạn có một hàm có thể ném ra lỗi đồng bộ (synchronous) hoặc
+              trả về một Promise (asynchronous), việc xử lý lỗi bằng try/catch
+              truyền thống có thể khiến code trở nên lộn xộn:
+            </p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                try {
+                  // 1. Lỗi đồng bộ: Phát hiện lỗi logic và ném ra ngay lập tức
+                  if (!id) throw new Error("ID không hợp lệ!");
+
+                  // 2. Lỗi bất đồng bộ: Đợi kết nối và tải dữ liệu từ server
+                  fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
+                    .then(res => res.json())
+                    .catch(err => console.log("Mức 1 - Chỉ bắt được lỗi server:", err));
+
+                } catch (err) {
+                  // 3. Khối catch này BẮT BUỘC phải có để hứng lỗi logic ở bước 1
+                  console.log("Mức 2 - Chỉ bắt được lỗi logic:", err);
+                }
+              </script>
+            </div>
+            <p>
+              <span class="highlight">Promise.try</span> giúp bạn gom tất cả các
+              loại lỗi về cùng một chỗ để xử lý chung bằng
+              <span class="highlight">.catch()</span>:
+            </p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                Promise.try(() => {
+                  // Gom cả 2 hành vi vào chung một khối xử lý
+                  if (!id) throw new Error("ID không hợp lệ!"); // Nếu lỗi logic -> nhảy thẳng xuống .catch()
+
+                  return fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
+                         .then(res => res.json()); // Nếu lỗi server -> cũng nhảy xuống .catch()
+                })
+                .then(user => console.log("Xử lý dữ liệu thành công:", user))
+                .catch(err => {
+                  // ĐÚNG MỘT NƠI DUY NHẤT: Gom trọn gói cả lỗi logic lẫn lỗi server!
+                  console.log("Bắt hết mọi loại lỗi tại đây:", err.message);
+                });
+              </script>
+            </div>
+            <h2 class="heading">4. Import Attributes (Import file JSON)</h2>
+            <p>
+              Bạn đã bao giờ muốn nạp một file JSON trực tiếp vào file
+              JavaScript mà
+              <strong>không cần thông qua bundler (như Webpack/Vite)</strong>
+              chưa?
+            </p>
+            <p>
+              Bây giờ bạn có thể làm điều đó trực tiếp
+              <strong>ở trình duyệt</strong> bằng cú pháp
+              <span class="highlight">with { type:'json' }.</span>
+            </p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                // import trực tiếp file dữ liệu JSON
+                import userData from './user.json' with { type: 'json' };
+
+                console.log(userData.name);
+              </script>
+            </div>
+            <h2 class="heading">5. RegExp.escape</h2>
+            <p>
+              Làm việc với Regular Expression (RegEx) thường gặp rủi ro khi
+              chuỗi đầu vào của người dùng chứa các ký tự đặc biệt (như ., *,
+              ?).
+            </p>
+            <p>
+              Tính năng <span class="highlight">RegExp.escape</span> tự động xử
+              lý và vô hiệu hóa các ký tự đặc biệt này, giúp bạn tìm kiếm chuỗi
+              chính xác.
+            </p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                const userInput = ".com";
+
+                // Thay vì tìm mọi ký tự theo sau chữ "com" (do đặc tính của dấu chấm),
+                // nó sẽ hiểu chính xác là chuỗi ".com"
+                const escapedInput = RegExp.escape(userInput);
+                const regex = new RegExp(`${escapedInput}$`);
+
+                console.log(regex.test("google.com")); // true
+                console.log(regex.test("google.org")); // false
+              </script>
+            </div>
+            <h2 class="heading">6. Array.fromAsync</h2>
+            <p>
+              <span class="highlight">Array.fromAsync()</span> hoạt động giống
+              như <span class="highlight">Array.from</span> nhưng dành cho dữ
+              liệu bất đồng bộ (<span class="highlight">Async Iterables</span>),
+              giúp tự động đợi và gom tất cả các kết quả trả về từ API thành một
+              mảng dữ liệu duy nhất.
+            </p>
+            <p>
+              <strong>Cách cũ:</strong> Phải kết hợp qua 2 bước (<span
+                class="highlight"
+                >Array.from</span
+              >
+              + <span class="highlight">Promise.all</span>):
+            </p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                // Danh sách các ID cần fetch dữ liệu
+                const userIds = [101, 102, 103];
+
+                // 1. Dùng Array.from để tạo ra một mảng chứa các Promise (chưa có dữ liệu thực)
+                const promises = Array.from(userIds, async (id) => {
+                  return fetch(`https://jsonplaceholder.typicode.com/users/${id}`).then(res => res.json());
+                });
+
+                // 2. Bắt buộc phải bọc thêm Promise.all để đợi tất cả các Promise này chạy xong
+                const allUsersOld = await Promise.all(promises);
+
+                console.log(allUsersOld); // Trả về mảng dữ liệu mong muốn
+              </script>
+            </div>
+            <p>
+              <strong>Cách mới:</strong> Xử lý gọn với
+              <span class="highlight">Array.fromAsync</span>:
+            </p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                const userIds = [101, 102, 103];
+
+                // Chỉ cần duy nhất 1 bước: Array.fromAsync sẽ tự động đợi (await)
+                // từng Promise chạy xong rồi mới gom kết quả vào mảng
+                const allUsersNew = await Array.fromAsync(userIds, async (id) => {
+                  return fetch(`https://jsonplaceholder.typicode.com/users/${id}`).then(res => res.json());
+                });
+
+                console.log(allUsersNew);
+              </script>
+            </div>
+            <h2 class="heading">7. Error.isError()</h2>
+            <p>
+              Trước đây, việc kiểm tra một biến có phải là lỗi hay không bằng cú
+              pháp <span class="highlight">instanceof Error</span> rất dễ bị sai
+              sót (bug) khi chạy trên các môi trường như iFrames hay Worker:
+            </p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                try {
+                  throw new Error("Lỗi hệ thống!");
+                } catch (e) {
+                  if (error instanceof Error) {
+                    // -> Có thể trả về FALSE vì khác ngữ cảnh bộ nhớ (execution context)
+                    console.log(error.message);
+                  }
+                }
+              </script>
+            </div>
+            <p>
+              <span class="highlight">Error.isError()</span> ra đời để chấm dứt
+              sự bất tiện này. Nó giúp bạn kiểm tra chính xác 100% một đối tượng
+              có phải là <span class="highlight">Error</span> hay không, bất kể
+              nó đến từ môi trường nào:
+            </p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                try {
+                  throw new Error("Lỗi hệ thống!");
+                } catch (e) {
+                  // Thay thế cho: e instanceof Error
+                  if (Error.isError(e)) {
+                    console.log("Đây là một Error chuẩn:", e.message);
+                  }
+                }
+              </script>
+            </div>
+            <h2 class="heading">
+              8. Map: Thêm nhanh phần tử không lo trùng lặp
+            </h2>
+            <p>
+              Cấu trúc dữ liệu <span class="highlight">Map</span> giờ đây thông
+              minh hơn với khả năng <strong>Upsert</strong> (Cập nhật hoặc Thêm
+              mới) chỉ trong một dòng code, chính thức khai tử các câu lệnh
+              <span class="highlight">if...else</span> check key tồn tại rườm
+              rà:
+            </p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                const cache = new Map();
+
+                // 1. getOrInsert: Lấy ra dùng ngay, nếu KEY chưa có thì tự động chèn GIÁ TRỊ TĨNH
+                const user = cache.getOrInsert("user_1", "Khách khách");
+                console.log(user); // "Khách"
+
+                // 2. getOrInsertComputed: Giống hàm trên, nhưng tối ưu hơn cho các tác vụ NẶNG
+                const expensiveData = cache.getOrInsertComputed("fibonacci_100", () => {
+                  // Hàm callback này CHỈ CHẠY khi key chưa tồn tại, giúp tiết kiệm tài nguyên hệ thống
+                  return calculateFibonacci(100);
+                });
+              </script>
+            </div>
+            <h2 class="heading">9. Math.sumPrecise</h2>
+            <p>
+              Lỗi cộng số thập phân (<span class="highlight"
+                >0.1 + 0.2 = 0.30000000000000004</span
+              >) luôn là “cơn ác mộng” kinh điển trong JavaScript do giới hạn
+              lưu trữ của máy tính:
+            </p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                const numbers = [0.1, 0.2];
+                const totalOld = numbers.reduce((sum, num) => sum + num, 0);
+
+                console.log(totalOld); // 0.30000000000000004
+              </script>
+            </div>
+            <p>
+              Để giải quyết triệt để việc này, JavaScript đang phát triển hàm
+              <span class="highlight">Math.sumPrecise()</span>. Hàm này tự động
+              tính tổng chính xác tuyệt đối từ một mảng số nhờ thuật toán xử lý
+              sai số ngầm bên dưới, giúp bạn loại bỏ hoàn toàn các hàm làm tròn
+              thủ công rườm rà:
+            </p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                const numbers = [0.1, 0.2];
+                const totalNew = Math.sumPrecise(numbers);
+
+                console.log(totalNew); // 0.3
+              </script>
+            </div>
+            <p>
+              <i
+                ><strong>Lưu ý:</strong> Tính năng này đang ở giai đoạn đề xuất
+                nâng cấp, bạn cần dùng thư viện polyfill như
+                <span class="highlight">core-js</span> nếu muốn chạy thử ngay
+                lúc này.</i
+              >
+            </p>
+            <h2 class="heading">10. Temporal API</h2>
+            <p>
+              Ngày tàn của các thư viện như
+              <span class="highlight">moment.js</span> hay
+              <span class="highlight">date-fns</span> đã đến!
+            </p>
+            <p>
+              Temporal API là chuẩn mực mới thay thế hoàn toàn object
+              <span class="highlight">Date</span> cũ kỹ của JavaScript. Nó cung
+              cấp mọi thứ bạn cần từ thao tác cộng/trừ ngày, so sánh, cho đến xử
+              lý timezones một cách tự nhiên.
+            </p>
+            <p><strong>Cách cũ:</strong></p>
+
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                const nowOld = new Date();
+
+                // Để cộng thêm 1 tháng và 10 ngày, bạn phải tự "set" thủ công rất rườm rà
+                // Nguy hiểm hơn: Hàm này làm thay đổi trực tiếp giá trị của biến nowOld gốc (Mutable)
+                nowOld.setMonth(nowOld.getMonth() + 1);
+                nowOld.setDate(nowOld.getDate() + 10);
+
+                console.log("Cách cũ:", nowOld.toISOString())
+              </script>
+            </div>
+            <p><strong>Cách mới:</strong></p>
+            <div class="inner-code">
+              <script type="text/plain" class="source-code">
+                // Lấy thời gian hiện tại
+                const now = Temporal.Now.plainDateTimeISO();
+                console.log("Hiện tại:", now.toString());
+
+                // Cộng thêm 1 tháng và 10 ngày cực kì dễ hiểu
+                const futureDate = now.add({ months: 1, days: 10 });
+                console.log("Tương lai:", futureDate.toString());
+              </script>
+            </div>
+            <h2 class="heading">Kết luận</h2>
+            <p>
+              JavaScript ngày càng phát triển, và đang “khai tử” hàng loạt thư
+              viện rườm rà để mang lại những tính năng tích hợp sẵn vô cùng mạnh
+              mẽ.
+            </p>
+            <p>
+              Cập nhật những tính năng này không chỉ giúp dự án của bạn
+              <strong>tối ưu hơn</strong>, mà còn là cách để bạn
+              <strong>nâng cấp tư duy lập trình</strong> của chính mình mỗi
+              ngày.
+            </p>
+            <p>
+              Nếu bạn muốn <strong>đảm bảo</strong> việc học của mình,
+              <strong>học đến đâu chắc đến đó</strong> từ con số 0. Hãy tham
+              khảo ngay
+              <a href="/courses/course.html">các khóa học lập trình 1 Kèm 1</a>
+              của LetDiv nhé!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- section-one end -->
+
+    <!-- footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="inner-wrap">
+          <div class="inner-addres">
+            <div class="img">
+              <a href=""><img src="/assets/images/LetDiv.webp" alt="" /></a>
+              <p class="content">
+                CÔNG TY TNHH LẬP TRÌNH LETDIV VIỆT NAM <br />
+                <strong>Mã số thuế:</strong> 0317429951 <br /><strong
+                  >Địa chỉ:</strong
+                >
+                5B Phổ Quang, Phường Tân Sơn Hòa, Hồ Chí Minh. <br /><strong
+                  >Điện thoại:</strong
+                >
+                0914 991 139 <br />
+                <strong>Email:</strong> letdiv.innovation@gmail.com
+              </p>
+            </div>
+          </div>
+          <div class="inner-info">
+            <h3>Thông Tin</h3>
+            <p><a href="/contact/contact.html">Liên hệ</a></p>
+            <p><a href="/about/introduce.html">Giới thiệu</a></p>
+            <p><a href="/policies/policy.html">Chính sách bảo mật</a></p>
+            <div class="img">
+              <a
+                href="https://www.dmca.com/Protection/Status.aspx?ID=5ed68dec-8566-4fcf-b1d7-70668621b032&refurl=https://letdiv.com/"
+                target="_blank"
+                ><img src="/assets/images/DMCA_logo-grn-btn120w.png" alt=""
+              /></a>
+            </div>
+          </div>
+          <div class="inner-social">
+            <h3>Mạng Xã Hội</h3>
+            <div class="icon">
+              <a
+                href="https://www.facebook.com/letdiv.innovation"
+                target="_blank"
+                ><i class="fa-brands fa-facebook"></i
+              ></a>
+              <a href="https://www.tiktok.com/@letdiv" target="_blank"
+                ><i class="fa-brands fa-tiktok"></i
+              ></a>
+              <a href="https://www.youtube.com/@letdiv" target="_blank"
+                ><i class="fa-brands fa-youtube"></i
+              ></a>
+            </div>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d31352.53490692094!2d106.66647100000002!3d10.806191000000002!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d7e2e9c2d4b1%3A0xa1e7de28f1b06563!2zQ8O0bmcgVHkgVE5ISCBM4bqtcCBUcsOsbmggTGV0RGl2!5e0!3m2!1sen!2sus!4v1789548029411!5m2!1sen!2sus"
+              width="100%"
+              height="300"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- footer end -->
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="/assets/bootstrap/jquery.slim.min.js"></script>
+    <script src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="js/format-code.js"></script>
+    <script src="/assets/js/header-auth.js"></script>
+  </body>
+</html>

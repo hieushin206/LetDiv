@@ -1,0 +1,171 @@
+/* header */
+.header {
+  border-bottom: 1px solid var(--color-two);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background-color: #fff;
+}
+.header .inner-wrap {
+  display: flex;
+  justify-content: space-between;
+  min-height: 80px;
+  align-items: center;
+}
+.header img {
+  height: auto;
+  max-width: 122px;
+}
+
+.header .navbar-menu ul {
+  display: flex;
+  margin: 0;
+  list-style-type: none;
+}
+.header .navbar-menu ul li {
+  padding-right: 35px;
+}
+.header .navbar-menu ul li a {
+  font-weight: 600;
+}
+.header .navbar-menu ul li a:hover {
+  color: var(--color-one);
+}
+.header .navbar-menu {
+  display: flex;
+  align-items: center;
+}
+
+.header-modal .modal-body .button-change-color {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.login-modal .modal-body .button-change-color {
+  width: 100%;
+}
+
+.header-modal .modal-body .button-change-color a {
+  color: #fff;
+  font-weight: 500;
+}
+.header-modal .modal-body .button-change-color a:hover {
+  color: var(--color-one);
+  font-weight: 500;
+}
+.header-modal .modal-header,
+.login-modal .modal-header {
+  position: relative;
+}
+.header .btn {
+  box-shadow: none;
+}
+.header .login .btn {
+  padding: 0;
+}
+/*  */
+.modal-header .btn-close {
+  position: absolute;
+  background-color: black;
+
+  border-radius: 50%;
+  padding: 1px 6px;
+  top: -10px;
+  right: -10px;
+}
+.modal-header .btn-close .close {
+  color: #fff;
+  opacity: 1;
+  padding: 0;
+  margin: 0;
+}
+.modal-header .btn-close .close span {
+  font-size: 26px;
+}
+
+/*  */
+
+.header .inner-wrap .action {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+.header .inner-wrap .header-action .fa-solid {
+  font-size: 20px;
+}
+
+.header .inner-wrap .header-action .navbar-icon {
+  display: none;
+}
+.header .inner-wrap .header-action a:hover,
+.header .inner-wrap .header-action .btn:hover {
+  color: var(--color-one);
+}
+/* higtlight menu */
+
+.header .navbar-menu ul li.active a {
+  color: var(--color-one);
+}
+/*  */
+.modal-header .modal-title {
+  font-weight: 700;
+  color: #00165a;
+  font-size: 30px;
+}
+.login-modal .modal-body .form-group .label {
+  font-weight: 500;
+  color: #00165a;
+  font-size: 17px;
+}
+
+.login-modal .modal-body .form-group .form-control {
+  min-height: 50px;
+  background-color: #e8f0fe;
+  padding: 15px 15px 15px 45px;
+}
+.login-modal .modal-body .form-group .form-control:focus {
+  box-shadow: none;
+  border: 2px solid black;
+}
+/*  */
+.login-modal .modal-body .form-group {
+  position: relative;
+}
+.login-modal .modal-body .form-group .icon {
+  position: absolute;
+  top: 46px;
+  left: 16px;
+}
+/*  */
+.login-modal .modal-body .forgot-pass {
+  padding-top: 10px;
+  font-weight: 500;
+}
+.login-modal .modal-body .forgot-pass a:hover {
+  color: var(--color-one);
+}
+.login-modal .modal-body .register {
+  padding-top: 10px;
+}
+.login-modal .modal-body .register a {
+  color: #00165a;
+  font-weight: 700;
+}
+
+/*  */
+@media (max-width: 991.98px) {
+  .header .inner-wrap .header-action .navbar-icon {
+    display: block;
+  }
+  .header .inner-wrap .header-action .navbar-icon:hover {
+    color: var(--color-one);
+  }
+  .header .navbar-menu {
+    display: none;
+  }
+}
+@media (max-width: 575.98px) {
+  .header .inner-wrap {
+    flex-wrap: wrap;
+  }
+}
+/* header end */

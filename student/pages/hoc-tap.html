@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Học tập - LetDiv Student</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <link rel="stylesheet" href="../../admin/css/pages.css" />
+    <link rel="stylesheet" href="../css/pages-extra.css" />
+  </head>
+  <body>
+    <main class="learn-page">
+      <div id="no-course"></div>
+      <div id="learn-area">
+        <div class="learn-top">
+          <div style="flex: 1 1 320px"><select id="course-select"></select></div>
+          <div class="cell-sub" id="learn-hint">Chọn bài học ở bên trái để bắt đầu.</div>
+        </div>
+        <div class="learn-layout">
+          <aside class="card lesson-side">
+            <div class="ls-head" id="ls-head"></div>
+            <div class="ls-body" id="ls-body"></div>
+          </aside>
+          <section class="card lesson-main" id="lesson-main"></section>
+        </div>
+      </div>
+    </main>
+
+    <script src="../../admin/js/seed-data.js"></script>
+    <script src="../../admin/js/store.js"></script>
+    <script src="../../assets/js/auth-store.js"></script>
+    <script src="../../admin/js/ui.js"></script>
+    <script src="../../assets/js/learning-store.js"></script>
+    <script src="../js/student-store.js"></script>
+    <script src="../js/student-ui.js"></script>
+    <script src="../js/hoc-tap.js"></script>
+  </body>
+</html>

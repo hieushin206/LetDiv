@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đợt học - LetDiv Admin</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <link rel="stylesheet" href="../css/pages.css" />
+  </head>
+  <body>
+    <main class="page">
+      <div class="page-head">
+        <div>
+          <h1>Quản lý đợt học</h1>
+          <p>
+            Chia mỗi khóa học thành nhiều đợt (giảng viên + ngày bắt đầu / kết thúc). Học viên được phân vào đợt ở trang
+            <b>Đơn hàng</b>; giảng viên quản lý bài học, bài tập riêng cho từng đợt.
+          </p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-primary" id="btn-add"><i class="fa-solid fa-plus"></i> Tạo đợt học</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="toolbar">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="search" placeholder="Tìm theo tên đợt, khóa học, giảng viên..." />
+          </div>
+          <select id="filter-course" style="width: 300px; max-width: 100%"></select>
+        </div>
+        <div class="tabs" id="status-tabs"></div>
+        <div id="list-area"></div>
+        <div class="table-foot" id="pager"></div>
+      </div>
+    </main>
+
+    <!-- Modal tạo / sửa đợt học -->
+    <div class="modal-overlay" id="batch-modal">
+      <div class="modal-box">
+        <div class="modal-header">
+          <h3 id="batch-modal-title">Tạo đợt học</h3>
+          <button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Khóa học <span class="req">*</span></label>
+            <select id="f-courseId"></select>
+            <div class="error-text" id="e-courseId"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Tên đợt <span class="req">*</span></label>
+              <input type="text" id="f-name" maxlength="40" placeholder="VD: Đợt 1" />
+              <div class="error-text" id="e-name"></div>
+            </div>
+            <div class="form-group">
+              <label>Giảng viên phụ trách <span class="req">*</span></label>
+              <select id="f-instructor"></select>
+              <div class="hint" id="h-instructor">Chọn trong số giảng viên đã phân công cho khóa học.</div>
+              <div class="error-text" id="e-instructor"></div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Ngày bắt đầu <span class="req">*</span></label>
+              <input type="date" id="f-startDate" />
+              <div class="error-text" id="e-startDate"></div>
+            </div>
+            <div class="form-group">
+              <label>Ngày kết thúc <span class="req">*</span></label>
+              <input type="date" id="f-endDate" />
+              <div class="error-text" id="e-endDate"></div>
+            </div>
+          </div>
+          <div class="hint" style="margin: -6px 0 14px">
+            Các đợt của cùng một khóa có thể nối tiếp, học trước hoặc xen kẽ nhau tùy bạn chọn ngày.
+          </div>
+          <div class="form-group" id="g-content" style="margin-bottom: 0">
+            <label>Bài học &amp; bài tập ban đầu của đợt</label>
+            <select id="f-content"></select>
+            <div class="hint">Mỗi đợt có bài học, bài tập riêng. Sao chép chỉ tạo bản sao độc lập, sửa ở đợt này không đổi đợt kia.</div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" data-close>Hủy</button>
+          <button class="btn btn-primary" id="btn-save"><i class="fa-solid fa-floppy-disk"></i> Lưu đợt học</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal danh sách học viên của đợt -->
+    <div class="modal-overlay" id="students-modal">
+      <div class="modal-box modal-lg">
+        <div class="modal-header">
+          <h3 id="students-title">Học viên của đợt</h3>
+          <button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body" id="students-body"></div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" data-close>Đóng</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/seed-data.js"></script>
+    <script src="../js/store.js"></script>
+    <script src="../js/ui.js"></script>
+    <script src="../../assets/js/auth-store.js"></script>
+    <script src="../../assets/js/learning-store.js"></script>
+    <script src="../js/dot-hoc.js"></script>
+  </body>
+</html>

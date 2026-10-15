@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài tập của tôi - LetDiv Student</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../../assets/css/base.css" />
+    <link rel="stylesheet" href="../../admin/css/pages.css" />
+    <link rel="stylesheet" href="../css/pages-extra.css" />
+  </head>
+  <body>
+    <main class="page">
+      <div class="page-head">
+        <div>
+          <h1>Bài tập của tôi</h1>
+          <p>Bài tập giảng viên giao trong các khóa học bạn đã mua. Nộp bằng đường dẫn GitHub / CodePen.</p>
+        </div>
+      </div>
+
+      <div id="no-course"></div>
+      <div class="card" id="main-card">
+        <div class="toolbar">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="search" placeholder="Tìm theo tên bài tập hoặc bài học..." />
+          </div>
+          <select id="filter-course" style="width: 260px"><option value="">Tất cả khóa học</option></select>
+        </div>
+        <div class="tabs" id="tabs"></div>
+        <div id="list-area"></div>
+        <div class="table-foot" id="pager"></div>
+      </div>
+    </main>
+
+    <!-- Chi tiết + nộp bài -->
+    <div class="modal-overlay" id="assign-modal">
+      <div class="modal-box modal-lg">
+        <div class="modal-header">
+          <h3 id="assign-title">Bài tập</h3>
+          <button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body" id="assign-body"></div>
+      </div>
+    </div>
+
+    <script src="../../admin/js/seed-data.js"></script>
+    <script src="../../admin/js/store.js"></script>
+    <script src="../../assets/js/auth-store.js"></script>
+    <script src="../../admin/js/ui.js"></script>
+    <script src="../../assets/js/learning-store.js"></script>
+    <script src="../js/student-store.js"></script>
+    <script src="../js/student-ui.js"></script>
+    <script src="../js/bai-tap-cua-toi.js"></script>
+  </body>
+</html>
