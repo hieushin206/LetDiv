@@ -17,7 +17,7 @@
 
    3 nhóm dữ liệu trong localStorage:
      letdiv_accounts      : danh sách tài khoản đã đăng ký
-     letdiv_current_user  : người đang đăng nhập
+     letdiv_current_user  : người đang đăng nhập (lưu bằng sessionStorage => đóng tab / thoát trình duyệt là tự đăng xuất)
      letdiv_reset_codes   : mã xác nhận quên mật khẩu (giả lập gửi email)
    ========================================================= */
 
@@ -334,10 +334,16 @@ const AuthStore = {
     // Session chỉ lưu tên tài khoản + giờ đăng nhập; thông tin còn lại luôn đọc mới từ
     // danh sách tài khoản => admin đổi quyền / người dùng sửa hồ sơ là có hiệu lực ngay
     const loginAt = new Date().toISOString();
-    this.write(AUTH_KEYS.session, {
-      username: account.username,
-      loginAt: loginAt,
-    });
+    // Lưu bằng sessionStorage: đóng tab / thoát trình duyệt thì phiên đăng nhập tự mất (tự đăng xuất)
+    try {
+      sessionStorage.setItem(
+        AUTH_KEYS.session,
+        JSON.stringify({ username: account.username, loginAt: loginAt }),
+      );
+      localStorage.removeItem(AUTH_KEYS.session); // xóa phiên kiểu cũ (nếu còn) để không bị đăng nhập lại
+    } catch (e) {
+      console.error("Không lưu được phiên đăng nhập:", e);
+    }
     return { ok: true, user: this.toUser(account, loginAt) };
   },
 
@@ -365,7 +371,11 @@ const AuthStore = {
 
   // Người đang đăng nhập (null nếu chưa đăng nhập hoặc tài khoản không còn hợp lệ)
   currentUser() {
-    const session = this.read(AUTH_KEYS.session, null);
+    let session = null;
+    try {
+      session = JSON.parse(sessionStorage.getItem(AUTH_KEYS.session));
+    } catch (e) {}
+    localStorage.removeItem(AUTH_KEYS.session); // phiên kiểu cũ lưu ở localStorage không còn được dùng
     if (!session || !session.username) return null;
     const account = this.getAccounts().find(
       (a) => a.usernameKey === session.username.toLowerCase(),
@@ -378,6 +388,7 @@ const AuthStore = {
   },
 
   logout() {
+    sessionStorage.removeItem(AUTH_KEYS.session);
     localStorage.removeItem(AUTH_KEYS.session);
   },
 
