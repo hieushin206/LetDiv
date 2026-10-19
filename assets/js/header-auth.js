@@ -178,7 +178,8 @@ function AuthReady(callback) {
       '<a href="/account/profile.html" class="ud-item"><i class="fa-regular fa-id-card"></i> Chỉnh sửa hồ sơ</a>' +
       (isStaff
         ? ""
-        : '<a href="/account/my-courses.html" class="ud-item"><i class="fa-solid fa-graduation-cap"></i> Khóa học đã mua</a>') +
+        : '<a href="/account/my-courses.html" class="ud-item"><i class="fa-solid fa-graduation-cap"></i> Khóa học đã mua</a>' +
+          '<a href="/account/my-vouchers.html" class="ud-item"><i class="fa-solid fa-ticket"></i> Mã giảm giá</a>') +
       '<a href="#" class="ud-item ud-logout"><i class="fa-solid fa-right-from-bracket"></i> Thoát</a>' +
       "</div></div>";
 

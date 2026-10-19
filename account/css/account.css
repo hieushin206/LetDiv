@@ -18,7 +18,9 @@
   background: #fff;
   border: 1px solid #e6eaf0;
   border-radius: 16px;
-  box-shadow: 0 1px 2px rgba(23, 37, 84, 0.05), 0 6px 20px rgba(23, 37, 84, 0.06);
+  box-shadow:
+    0 1px 2px rgba(23, 37, 84, 0.05),
+    0 6px 20px rgba(23, 37, 84, 0.06);
   padding: 26px 28px;
   margin-bottom: 22px;
 }
@@ -138,7 +140,9 @@
   background: #fff;
   border: 1px solid #e6eaf0;
   border-radius: 16px;
-  box-shadow: 0 1px 2px rgba(23, 37, 84, 0.05), 0 6px 20px rgba(23, 37, 84, 0.06);
+  box-shadow:
+    0 1px 2px rgba(23, 37, 84, 0.05),
+    0 6px 20px rgba(23, 37, 84, 0.06);
   padding: 8px;
   margin-top: 18px;
 }
@@ -454,7 +458,9 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 1px 2px rgba(23, 37, 84, 0.05), 0 6px 20px rgba(23, 37, 84, 0.06);
+  box-shadow:
+    0 1px 2px rgba(23, 37, 84, 0.05),
+    0 6px 20px rgba(23, 37, 84, 0.06);
   transition: 0.2s;
 }
 .mc-card:hover {
@@ -605,5 +611,155 @@
   }
   .acc-title h1 {
     font-size: 23px;
+  }
+}
+
+/* ---------- Mã giảm giá của khách hàng ---------- */
+.vc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 18px;
+}
+.vc-card {
+  display: flex;
+  background: #fff;
+  border: 1px solid #e6eaf0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 1px 2px rgba(23, 37, 84, 0.05),
+    0 6px 20px rgba(23, 37, 84, 0.06);
+  transition: 0.2s;
+}
+.vc-card:not(.disabled):hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(23, 37, 84, 0.14);
+}
+.vc-card.disabled {
+  opacity: 0.6;
+}
+.vc-left {
+  flex: none;
+  width: 108px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 14px 8px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--color-one), #1e3a8a);
+  border-right: 2px dashed rgba(255, 255, 255, 0.55);
+}
+.vc-left b {
+  font-size: 22px;
+  line-height: 1.2;
+}
+.vc-left span {
+  font-size: 12px;
+  opacity: 0.9;
+  margin-top: 2px;
+}
+.vc-card.disabled .vc-left {
+  background: #adb5bd;
+}
+.vc-body {
+  flex: 1;
+  min-width: 0;
+  padding: 14px 16px;
+}
+.vc-code-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.vc-code {
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.6px;
+  padding: 3px 11px;
+  border: 1.5px dashed var(--color-one);
+  color: var(--color-one);
+  background: #e7f1fd;
+  border-radius: 8px;
+}
+.vc-note {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: #fff4dc;
+  color: #b87500;
+}
+.vc-note.expired,
+.vc-note.soldout {
+  background: #ffe8e8;
+  color: #c92a2a;
+}
+.vc-note.upcoming {
+  background: #e7f1fd;
+  color: #1c5fb0;
+}
+.vc-desc {
+  color: #172554;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+.vc-meta {
+  color: #868e96;
+  font-size: 12.5px;
+  margin-top: 3px;
+}
+.vc-meta i {
+  width: 16px;
+  text-align: center;
+}
+.vc-action {
+  flex: none;
+  display: flex;
+  align-items: center;
+  padding-right: 16px;
+}
+.vc-copy {
+  border: 0;
+  border-radius: 10px;
+  padding: 9px 14px;
+  font-weight: 600;
+  font-size: 13.5px;
+  color: #fff;
+  background: var(--color-one);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: 0.2s;
+}
+.vc-copy:hover:not(:disabled) {
+  background: #1c7ed6;
+}
+.vc-copy.copied {
+  background: #12b886;
+}
+.vc-copy:disabled {
+  background: #ced4da;
+  cursor: not-allowed;
+}
+@media (max-width: 575px) {
+  .vc-grid {
+    grid-template-columns: 1fr;
+  }
+  .vc-card {
+    flex-wrap: wrap;
+  }
+  .vc-left {
+    width: 90px;
+  }
+  .vc-action {
+    width: 100%;
+    padding: 0 16px 14px;
+  }
+  .vc-copy {
+    width: 100%;
   }
 }

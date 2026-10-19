@@ -31,7 +31,12 @@ const ORDER_STATUS = {
   cancelled: "Đã hủy",
 };
 
-const PAYMENT_METHODS = ["Chuyển khoản ngân hàng", "Ví MoMo", "VNPay", "Thẻ Visa / Mastercard"];
+const PAYMENT_METHODS = [
+  "Chuyển khoản ngân hàng",
+  "Ví MoMo",
+  "VNPay",
+  "Thẻ Visa / Mastercard",
+];
 
 /* ---------- Hàm tiện ích thuần (không phụ thuộc localStorage) ---------- */
 
@@ -44,7 +49,8 @@ function parseDay(str) {
 // Số tiền giảm của 1 mã khuyến mãi với tổng tiền subtotal
 function calcDiscount(promo, subtotal) {
   let discount = 0;
-  if (promo.type === "percent") discount = Math.round((subtotal * promo.value) / 100);
+  if (promo.type === "percent")
+    discount = Math.round((subtotal * promo.value) / 100);
   else discount = promo.value;
   return Math.min(discount, subtotal); // không giảm quá tổng tiền
 }
@@ -94,14 +100,19 @@ const Store = {
     }
     // v3: học viên phải được phân vào ĐỢT HỌC -> bỏ các phân lớp cũ chưa có đợt (học viên sẽ về "chưa phân đợt")
     if (!localStorage.getItem(KEYS.migrated3)) {
-      this.set("classes", this.get("classes").filter((k) => k.batchId));
+      this.set(
+        "classes",
+        this.get("classes").filter((k) => k.batchId),
+      );
       localStorage.setItem(KEYS.migrated3, "1");
     }
     if (localStorage.getItem(KEYS.migrated)) return;
     const orders = this.get("orders");
     let changed = false;
     orders.forEach((o) => {
-      const hasPending = o.status === "pending" || (o.history || []).some((h) => h.status === "pending");
+      const hasPending =
+        o.status === "pending" ||
+        (o.history || []).some((h) => h.status === "pending");
       if (!hasPending) return;
       const cancelled = (o.history || []).find((h) => h.status === "cancelled");
       if (o.status === "pending") o.status = "completed";
@@ -139,14 +150,37 @@ const Store = {
     } catch (e) {}
     const real = new Set(accounts.map((a) => a.studentId).filter(Boolean));
     const students = this.get("students");
-    const demo = new Set(students.filter((s) => !real.has(s.id)).map((s) => s.id));
+    const demo = new Set(
+      students.filter((s) => !real.has(s.id)).map((s) => s.id),
+    );
     if (demo.size > 0) {
-      this.set("students", students.filter((s) => !demo.has(s.id)));
-      this.set("orders", this.get("orders").filter((o) => !demo.has(o.studentId)));
-      this.set("classes", this.get("classes").filter((k) => !demo.has(k.studentId)));
+      this.set(
+        "students",
+        students.filter((s) => !demo.has(s.id)),
+      );
+      this.set(
+        "orders",
+        this.get("orders").filter((o) => !demo.has(o.studentId)),
+      );
+      this.set(
+        "classes",
+        this.get("classes").filter((k) => !demo.has(k.studentId)),
+      );
     }
-    const demoCodes = ["WELCOME10", "HOCVIEN200", "LETDIV20", "SUMMER15", "NAMMOI500", "FLASH5"];
-    this.set("promos", this.get("promos").filter((p) => !demoCodes.includes(String(p.code).toUpperCase())));
+    const demoCodes = [
+      "WELCOME10",
+      "HOCVIEN200",
+      "LETDIV20",
+      "SUMMER15",
+      "NAMMOI500",
+      "FLASH5",
+    ];
+    this.set(
+      "promos",
+      this.get("promos").filter(
+        (p) => !demoCodes.includes(String(p.code).toUpperCase()),
+      ),
+    );
   },
 
   // Sinh mã mới: nextId("KH", list, 3) -> "KH021"
@@ -178,7 +212,9 @@ const Store = {
     else if (name.length > 40) errors.name = "Tên danh mục tối đa 40 ký tự.";
     else {
       const key = name.toLowerCase();
-      const dup = this.get("categories").some((c) => c.id !== ignoreId && c.name.toLowerCase() === key);
+      const dup = this.get("categories").some(
+        (c) => c.id !== ignoreId && c.name.toLowerCase() === key,
+      );
       if (dup) errors.name = "Tên danh mục đã tồn tại.";
     }
     return errors;
@@ -208,7 +244,9 @@ const Store = {
 
   // Số khóa học dùng danh mục (tính cả khóa đã xóa mềm nếu withDeleted = true)
   countCoursesInCategory(id, withDeleted) {
-    return this.get("courses").filter((c) => c.categoryId === id && (withDeleted || !c.deleted)).length;
+    return this.get("courses").filter(
+      (c) => c.categoryId === id && (withDeleted || !c.deleted),
+    ).length;
   },
 
   // Các khóa học (chưa xóa) thuộc 1 danh mục
@@ -230,7 +268,13 @@ const Store = {
   deleteCategory(id) {
     const using = this.countCoursesInCategory(id, false);
     if (using > 0) {
-      return { ok: false, error: "Danh mục đang có " + using + " khóa học. Hãy chuyển các khóa học sang danh mục khác trước khi xóa." };
+      return {
+        ok: false,
+        error:
+          "Danh mục đang có " +
+          using +
+          " khóa học. Hãy chuyển các khóa học sang danh mục khác trước khi xóa.",
+      };
     }
     // Khóa học đã xóa mềm không còn hiển thị -> gỡ liên kết để khi khôi phục sẽ là "Chưa phân loại"
     const courses = this.get("courses");
@@ -238,7 +282,10 @@ const Store = {
       if (c.categoryId === id) c.categoryId = "";
     });
     this.set("courses", courses);
-    this.set("categories", this.get("categories").filter((c) => c.id !== id));
+    this.set(
+      "categories",
+      this.get("categories").filter((c) => c.id !== id),
+    );
     return { ok: true };
   },
 
@@ -261,12 +308,16 @@ const Store = {
     if (name.length < 3) errors.name = "Tên khóa học tối thiểu 3 ký tự.";
     else {
       const key = name.toLowerCase();
-      const dup = this.getCourses(false).some((c) => c.id !== ignoreId && c.name.toLowerCase() === key);
+      const dup = this.getCourses(false).some(
+        (c) => c.id !== ignoreId && c.name.toLowerCase() === key,
+      );
       if (dup) errors.name = "Đã có khóa học trùng tên.";
     }
-    if (!data.categoryId || !this.getCategory(data.categoryId)) errors.categoryId = "Vui lòng chọn danh mục.";
+    if (!data.categoryId || !this.getCategory(data.categoryId))
+      errors.categoryId = "Vui lòng chọn danh mục.";
     if (!(data.price > 0)) errors.price = "Giá phải lớn hơn 0.";
-    if (data.oldPrice && data.oldPrice < data.price) errors.oldPrice = "Giá gốc phải lớn hơn hoặc bằng giá bán.";
+    if (data.oldPrice && data.oldPrice < data.price)
+      errors.oldPrice = "Giá gốc phải lớn hơn hoặc bằng giá bán.";
     if (!data.image) errors.image = "Vui lòng chọn hoặc tải lên ảnh khóa học.";
     return errors;
   },
@@ -338,7 +389,8 @@ const Store = {
     const key = text.toLowerCase();
     const dup =
       this.getImageLibrary().some((i) => i.name.toLowerCase() === key) ||
-      (typeof PRESET_IMAGES !== "undefined" && PRESET_IMAGES.some((p) => p.label.toLowerCase() === key));
+      (typeof PRESET_IMAGES !== "undefined" &&
+        PRESET_IMAGES.some((p) => p.label.toLowerCase() === key));
     return dup ? "Đã có ảnh trùng tên, hãy đặt tên khác." : "";
   },
 
@@ -346,15 +398,28 @@ const Store = {
     const err = this.validateLibraryImage(name, src);
     if (err) return { ok: false, error: err };
     const list = this.getImageLibrary();
-    const item = { id: this.nextId("IMG", list, 3), name: name.trim(), src: src, createdAt: new Date().toISOString() };
+    const item = {
+      id: this.nextId("IMG", list, 3),
+      name: name.trim(),
+      src: src,
+      createdAt: new Date().toISOString(),
+    };
     list.push(item);
-    if (!this.set("images", list)) return { ok: false, error: "Bộ nhớ trình duyệt đã đầy. Hãy xóa bớt ảnh hoặc chọn ảnh nhỏ hơn." };
+    if (!this.set("images", list))
+      return {
+        ok: false,
+        error:
+          "Bộ nhớ trình duyệt đã đầy. Hãy xóa bớt ảnh hoặc chọn ảnh nhỏ hơn.",
+      };
     return { ok: true, image: item };
   },
 
   // Xóa ảnh khỏi lựa chọn. Khóa học đang dùng ảnh này vẫn giữ nguyên ảnh của nó
   deleteLibraryImage(id) {
-    return this.set("images", this.getImageLibrary().filter((i) => i.id !== id));
+    return this.set(
+      "images",
+      this.getImageLibrary().filter((i) => i.id !== id),
+    );
   },
 
   setCourseStatus(id, status) {
@@ -406,7 +471,8 @@ const Store = {
   registerStudent(data) {
     const list = this.get("students");
     const email = (data.email || "").trim().toLowerCase();
-    if (list.some((s) => s.email.toLowerCase() === email)) return { ok: false, error: "Email đã được đăng ký." };
+    if (list.some((s) => s.email.toLowerCase() === email))
+      return { ok: false, error: "Email đã được đăng ký." };
     const item = {
       id: this.nextId("HV", list, 3),
       name: data.name.trim(),
@@ -432,7 +498,9 @@ const Store = {
     const result = [];
     this.ordersOfStudent(studentId).forEach((o) => {
       if (o.status !== "completed") return;
-      o.items.forEach((it) => result.push({ ...it, orderId: o.id, date: o.createdAt }));
+      o.items.forEach((it) =>
+        result.push({ ...it, orderId: o.id, date: o.createdAt }),
+      );
     });
     return result;
   },
@@ -457,12 +525,20 @@ const Store = {
      ======================================================= */
   // Bản ghi phân lớp của 1 khóa trong 1 đơn
   classOf(orderId, courseId) {
-    return this.get("classes").find((k) => k.orderId === orderId && k.courseId === courseId) || null;
+    return (
+      this.get("classes").find(
+        (k) => k.orderId === orderId && k.courseId === courseId,
+      ) || null
+    );
   },
 
   // Lớp hiện tại của học viên với 1 khóa học (theo đơn chưa hủy)
   classOfStudent(studentId, courseId) {
-    return this.get("classes").find((k) => k.studentId === studentId && k.courseId === courseId) || null;
+    return (
+      this.get("classes").find(
+        (k) => k.studentId === studentId && k.courseId === courseId,
+      ) || null
+    );
   },
 
   // Giảng viên (tên đăng nhập) được phân công cho khóa học
@@ -475,26 +551,47 @@ const Store = {
   assignClass(orderId, courseId, batchId) {
     const order = this.getOrder(orderId);
     if (!order) return { ok: false, error: "Không tìm thấy đơn hàng." };
-    if (order.status !== "completed") return { ok: false, error: "Chỉ phân đợt cho đơn hàng đã hoàn thành." };
-    if (!order.items.some((it) => it.courseId === courseId)) return { ok: false, error: "Đơn hàng không có khóa học này." };
+    if (order.status !== "completed")
+      return { ok: false, error: "Chỉ phân đợt cho đơn hàng đã hoàn thành." };
+    if (!order.items.some((it) => it.courseId === courseId))
+      return { ok: false, error: "Đơn hàng không có khóa học này." };
     const batch = this.getBatch(batchId);
     if (!batch) return { ok: false, error: "Vui lòng chọn đợt học." };
-    if (batch.courseId !== courseId) return { ok: false, error: "Đợt học này không thuộc khóa học đã mua." };
+    if (batch.courseId !== courseId)
+      return { ok: false, error: "Đợt học này không thuộc khóa học đã mua." };
 
-    const list = this.get("classes").filter((k) => !(k.orderId === orderId && k.courseId === courseId));
-    list.push({ orderId: orderId, courseId: courseId, studentId: order.studentId, batchId: batch.id, instructor: batch.instructor, assignedAt: new Date().toISOString() });
-    return this.set("classes", list) ? { ok: true } : { ok: false, error: "Không lưu được." };
+    const list = this.get("classes").filter(
+      (k) => !(k.orderId === orderId && k.courseId === courseId),
+    );
+    list.push({
+      orderId: orderId,
+      courseId: courseId,
+      studentId: order.studentId,
+      batchId: batch.id,
+      instructor: batch.instructor,
+      assignedAt: new Date().toISOString(),
+    });
+    return this.set("classes", list)
+      ? { ok: true }
+      : { ok: false, error: "Không lưu được." };
   },
 
   unassignClass(orderId, courseId) {
-    return this.set("classes", this.get("classes").filter((k) => !(k.orderId === orderId && k.courseId === courseId)));
+    return this.set(
+      "classes",
+      this.get("classes").filter(
+        (k) => !(k.orderId === orderId && k.courseId === courseId),
+      ),
+    );
   },
 
   // Khi gỡ 1 giảng viên khỏi khóa học: các học viên trong lớp của họ trở về "chưa phân lớp". Trả về số học viên bị ảnh hưởng
   removeClassesOfInstructor(courseId, username) {
     const key = String(username).toLowerCase();
     const list = this.get("classes");
-    const keep = list.filter((k) => !(k.courseId === courseId && k.instructor === key));
+    const keep = list.filter(
+      (k) => !(k.courseId === courseId && k.instructor === key),
+    );
     this.set("classes", keep);
     return list.length - keep.length;
   },
@@ -502,7 +599,9 @@ const Store = {
   // Số học viên (đơn chưa hủy) trong lớp của 1 giảng viên ở 1 khóa
   classSize(courseId, username) {
     const key = String(username).toLowerCase();
-    return this.get("classes").filter((k) => k.courseId === courseId && k.instructor === key).length;
+    return this.get("classes").filter(
+      (k) => k.courseId === courseId && k.instructor === key,
+    ).length;
   },
 
   // Các lượt mua (đơn hoàn thành) chưa được phân lớp: [{ order, item }]
@@ -510,7 +609,8 @@ const Store = {
     const result = [];
     this.completedOrders().forEach((o) => {
       o.items.forEach((it) => {
-        if (!this.classOf(o.id, it.courseId)) result.push({ order: o, item: it });
+        if (!this.classOf(o.id, it.courseId))
+          result.push({ order: o, item: it });
       });
     });
     return result;
@@ -523,7 +623,10 @@ const Store = {
   getBatches(courseId) {
     return this.get("batches")
       .filter((b) => !courseId || b.courseId === courseId)
-      .sort((a, b) => a.startDate.localeCompare(b.startDate) || a.id.localeCompare(b.id));
+      .sort(
+        (a, b) =>
+          a.startDate.localeCompare(b.startDate) || a.id.localeCompare(b.id),
+      );
   },
 
   getBatch(id) {
@@ -539,7 +642,12 @@ const Store = {
   // Sắp diễn ra / Đang diễn ra / Đã kết thúc (so với hôm nay)
   batchStatus(b) {
     const d = new Date();
-    const today = d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+    const today =
+      d.getFullYear() +
+      "-" +
+      String(d.getMonth() + 1).padStart(2, "0") +
+      "-" +
+      String(d.getDate()).padStart(2, "0");
     if (today < b.startDate) return "upcoming";
     if (today > b.endDate) return "ended";
     return "running";
@@ -561,14 +669,23 @@ const Store = {
     const name = (data.name || "").trim();
     if (name.length < 2) errors.name = "Tên đợt tối thiểu 2 ký tự.";
     else if (name.length > 40) errors.name = "Tên đợt tối đa 40 ký tự.";
-    else if (this.getBatches(data.courseId).some((b) => b.id !== ignoreId && b.name.toLowerCase() === name.toLowerCase())) errors.name = "Khóa học này đã có đợt trùng tên.";
+    else if (
+      this.getBatches(data.courseId).some(
+        (b) => b.id !== ignoreId && b.name.toLowerCase() === name.toLowerCase(),
+      )
+    )
+      errors.name = "Khóa học này đã có đợt trùng tên.";
     const key = String(data.instructor || "").toLowerCase();
     if (!key) errors.instructor = "Vui lòng chọn giảng viên phụ trách.";
-    else if (course && !this.courseInstructors(data.courseId).includes(key)) errors.instructor = "Giảng viên này chưa được phân công cho khóa học.";
-    const okDate = (s) => /^\d{4}-\d{2}-\d{2}$/.test(s || "") && !isNaN(new Date(s));
-    if (!okDate(data.startDate)) errors.startDate = "Vui lòng chọn ngày bắt đầu.";
+    else if (course && !this.courseInstructors(data.courseId).includes(key))
+      errors.instructor = "Giảng viên này chưa được phân công cho khóa học.";
+    const okDate = (s) =>
+      /^\d{4}-\d{2}-\d{2}$/.test(s || "") && !isNaN(new Date(s));
+    if (!okDate(data.startDate))
+      errors.startDate = "Vui lòng chọn ngày bắt đầu.";
     if (!okDate(data.endDate)) errors.endDate = "Vui lòng chọn ngày kết thúc.";
-    if (!errors.startDate && !errors.endDate && data.endDate < data.startDate) errors.endDate = "Ngày kết thúc không được nhỏ hơn ngày bắt đầu.";
+    if (!errors.startDate && !errors.endDate && data.endDate < data.startDate)
+      errors.endDate = "Ngày kết thúc không được nhỏ hơn ngày bắt đầu.";
     return errors;
   },
 
@@ -606,8 +723,16 @@ const Store = {
 
   // Chỉ xóa được đợt chưa có học viên (bài học / bài tập của đợt do LearningStore.removeBatchContent dọn)
   deleteBatch(id) {
-    if (this.batchSize(id) > 0) return { ok: false, error: "Đợt học còn học viên. Hãy chuyển học viên sang đợt khác trước khi xóa." };
-    this.set("batches", this.get("batches").filter((b) => b.id !== id));
+    if (this.batchSize(id) > 0)
+      return {
+        ok: false,
+        error:
+          "Đợt học còn học viên. Hãy chuyển học viên sang đợt khác trước khi xóa.",
+      };
+    this.set(
+      "batches",
+      this.get("batches").filter((b) => b.id !== id),
+    );
     return { ok: true };
   },
 
@@ -615,46 +740,95 @@ const Store = {
      KHUYẾN MÃI
      ======================================================= */
   getPromo(code) {
-    const key = String(code || "").trim().toUpperCase();
+    const key = String(code || "")
+      .trim()
+      .toUpperCase();
     return this.get("promos").find((p) => p.code === key);
   },
 
   // Số lần mã đã dùng = số đơn (chưa hủy) có áp mã đó => luôn khớp với đơn hàng
   promoUsage(code) {
-    return this.get("orders").filter((o) => o.promoCode === code && o.status !== "cancelled").length;
+    return this.get("orders").filter(
+      (o) => o.promoCode === code && o.status !== "cancelled",
+    ).length;
   },
 
   // Trạng thái hiển thị của mã
   promoState(p) {
     const today = parseDay(this.todayString());
     if (!p.active) return { key: "off", label: "Tạm tắt" };
-    if (today < parseDay(p.startDate)) return { key: "upcoming", label: "Sắp diễn ra" };
-    if (today > parseDay(p.endDate)) return { key: "expired", label: "Hết hạn" };
-    if (p.quantity > 0 && this.promoUsage(p.code) >= p.quantity) return { key: "soldout", label: "Hết lượt" };
+    if (today < parseDay(p.startDate))
+      return { key: "upcoming", label: "Sắp diễn ra" };
+    if (today > parseDay(p.endDate))
+      return { key: "expired", label: "Hết hạn" };
+    if (p.quantity > 0 && this.promoUsage(p.code) >= p.quantity)
+      return { key: "soldout", label: "Hết lượt" };
     return { key: "running", label: "Đang hoạt động" };
+  },
+
+  // Mã dành cho tất cả khách hàng hay chỉ định? (mã cũ chưa có trường audience => coi là tất cả)
+  promoAudience(p) {
+    return p.audience === "specific" ? "specific" : "all";
+  },
+
+  // Mã này có dùng được cho học viên studentId không?
+  promoAppliesTo(p, studentId) {
+    if (this.promoAudience(p) === "all") return true;
+    return !!studentId && (p.studentIds || []).includes(studentId);
+  },
+
+  // Các mã khách hàng được xem / dùng: mã cho tất cả + mã chỉ định cho riêng khách này.
+  // Bỏ mã admin đã tắt. Mã đang chạy xếp trước.
+  promosForStudent(studentId) {
+    const order = { running: 0, upcoming: 1, soldout: 2, expired: 3 };
+    return this.get("promos")
+      .filter((p) => p.active && this.promoAppliesTo(p, studentId))
+      .map((p) => ({ promo: p, state: this.promoState(p) }))
+      .sort(
+        (a, b) =>
+          order[a.state.key] - order[b.state.key] ||
+          a.promo.endDate.localeCompare(b.promo.endDate),
+      );
   },
 
   todayString() {
     const d = new Date();
-    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+    return (
+      d.getFullYear() +
+      "-" +
+      String(d.getMonth() + 1).padStart(2, "0") +
+      "-" +
+      String(d.getDate()).padStart(2, "0")
+    );
   },
 
   validatePromoForm(data, ignoreCode) {
     const errors = {};
     const code = (data.code || "").trim().toUpperCase();
-    if (!/^[A-Z0-9]{4,20}$/.test(code)) errors.code = "Mã gồm 4-20 ký tự chữ hoặc số, không dấu, không khoảng trắng.";
-    else if (code !== ignoreCode && this.getPromo(code)) errors.code = "Mã khuyến mãi đã tồn tại.";
+    if (!/^[A-Z0-9]{4,20}$/.test(code))
+      errors.code =
+        "Mã gồm 4-20 ký tự chữ hoặc số, không dấu, không khoảng trắng.";
+    else if (code !== ignoreCode && this.getPromo(code))
+      errors.code = "Mã khuyến mãi đã tồn tại.";
 
     if (data.type === "percent") {
-      if (!(data.value >= 1 && data.value <= 100)) errors.value = "Phần trăm giảm phải từ 1 đến 100.";
+      if (!(data.value >= 1 && data.value <= 100))
+        errors.value = "Phần trăm giảm phải từ 1 đến 100.";
     } else if (!(data.value >= 1000)) {
       errors.value = "Số tiền giảm tối thiểu 1.000 đ.";
     }
     if (data.minOrder < 0) errors.minOrder = "Đơn tối thiểu không được âm.";
-    if (data.quantity < 0) errors.quantity = "Số lượng không được âm (nhập 0 nếu không giới hạn).";
+    if (data.quantity < 0)
+      errors.quantity = "Số lượng không được âm (nhập 0 nếu không giới hạn).";
     if (!data.startDate) errors.startDate = "Chọn ngày bắt đầu.";
     if (!data.endDate) errors.endDate = "Chọn ngày kết thúc.";
-    else if (data.startDate && data.endDate < data.startDate) errors.endDate = "Ngày kết thúc phải sau ngày bắt đầu.";
+    else if (data.startDate && data.endDate < data.startDate)
+      errors.endDate = "Ngày kết thúc không được nhỏ hơn ngày bắt đầu.";
+    if (
+      data.audience === "specific" &&
+      !(data.studentIds && data.studentIds.length > 0)
+    )
+      errors.audience = "Hãy chọn ít nhất 1 khách hàng được dùng mã.";
     return errors;
   },
 
@@ -670,6 +844,11 @@ const Store = {
       startDate: data.startDate,
       endDate: data.endDate,
       active: !!data.active,
+      audience: data.audience === "specific" ? "specific" : "all",
+      studentIds:
+        data.audience === "specific"
+          ? Array.from(new Set(data.studentIds || []))
+          : [],
     });
     return this.set("promos", list);
   },
@@ -687,6 +866,11 @@ const Store = {
     item.startDate = data.startDate;
     item.endDate = data.endDate;
     item.active = !!data.active;
+    item.audience = data.audience === "specific" ? "specific" : "all";
+    item.studentIds =
+      item.audience === "specific"
+        ? Array.from(new Set(data.studentIds || []))
+        : [];
     return this.set("promos", list);
   },
 
@@ -700,33 +884,68 @@ const Store = {
 
   // Mã đã được dùng trong đơn hàng thì không xóa (chỉ tắt) để giữ lịch sử
   deletePromo(code) {
-    const usedInOrders = this.get("orders").filter((o) => o.promoCode === code).length;
+    const usedInOrders = this.get("orders").filter(
+      (o) => o.promoCode === code,
+    ).length;
     if (usedInOrders > 0) {
-      return { ok: false, error: "Mã đã xuất hiện trong " + usedInOrders + " đơn hàng nên không thể xóa. Bạn có thể tắt mã để ngừng áp dụng." };
+      return {
+        ok: false,
+        error:
+          "Mã đã xuất hiện trong " +
+          usedInOrders +
+          " đơn hàng nên không thể xóa. Bạn có thể tắt mã để ngừng áp dụng.",
+      };
     }
-    this.set("promos", this.get("promos").filter((p) => p.code !== code));
+    this.set(
+      "promos",
+      this.get("promos").filter((p) => p.code !== code),
+    );
     return { ok: true };
   },
 
   /*
    * KIỂM TRA MÃ KHUYẾN MÃI (trang giỏ hàng của học viên cũng gọi hàm này)
    * Trả về { valid, message, discount, total, promo }
-   * Kiểm tra: tồn tại -> đang bật -> thời hạn -> đơn tối thiểu -> số lượng
+   * Kiểm tra: tồn tại -> đang bật -> đúng đối tượng -> thời hạn -> đơn tối thiểu -> số lượng
+   * studentId: học viên đang dùng mã (bắt buộc với mã chỉ định cho khách hàng cụ thể)
    */
-  validatePromo(code, subtotal) {
-    const fail = (message) => ({ valid: false, message: message, discount: 0, total: subtotal, promo: null });
-    const key = String(code || "").trim().toUpperCase();
+  validatePromo(code, subtotal, studentId) {
+    const fail = (message) => ({
+      valid: false,
+      message: message,
+      discount: 0,
+      total: subtotal,
+      promo: null,
+    });
+    const key = String(code || "")
+      .trim()
+      .toUpperCase();
     if (!key) return fail("Vui lòng nhập mã khuyến mãi.");
 
     const p = this.getPromo(key);
     if (!p) return fail("Mã khuyến mãi không tồn tại.");
     if (!p.active) return fail("Mã khuyến mãi đang tạm tắt.");
+    if (!this.promoAppliesTo(p, studentId)) {
+      return fail(
+        studentId
+          ? "Mã khuyến mãi này không dành cho tài khoản của bạn."
+          : "Mã này chỉ dành cho khách hàng được chỉ định. Hãy chọn khách hàng để thử.",
+      );
+    }
 
     const today = parseDay(this.todayString());
-    if (today < parseDay(p.startDate)) return fail("Mã chưa đến thời gian áp dụng (từ " + formatDay(p.startDate) + ").");
-    if (today > parseDay(p.endDate)) return fail("Mã đã hết hạn vào " + formatDay(p.endDate) + ".");
-    if (subtotal < p.minOrder) return fail("Đơn hàng cần tối thiểu " + formatVnd(p.minOrder) + " để dùng mã này.");
-    if (p.quantity > 0 && this.promoUsage(p.code) >= p.quantity) return fail("Mã đã hết lượt sử dụng.");
+    if (today < parseDay(p.startDate))
+      return fail(
+        "Mã chưa đến thời gian áp dụng (từ " + formatDay(p.startDate) + ").",
+      );
+    if (today > parseDay(p.endDate))
+      return fail("Mã đã hết hạn vào " + formatDay(p.endDate) + ".");
+    if (subtotal < p.minOrder)
+      return fail(
+        "Đơn hàng cần tối thiểu " + formatVnd(p.minOrder) + " để dùng mã này.",
+      );
+    if (p.quantity > 0 && this.promoUsage(p.code) >= p.quantity)
+      return fail("Mã đã hết lượt sử dụng.");
 
     const discount = calcDiscount(p, subtotal);
     return {
@@ -759,15 +978,19 @@ const Store = {
   createOrder(input) {
     const student = this.getStudent(input.studentId);
     if (!student) return { ok: false, error: "Vui lòng chọn học viên." };
-    if (student.status !== "active") return { ok: false, error: "Tài khoản học viên đang bị vô hiệu hóa." };
-    if (!input.courseIds || input.courseIds.length === 0) return { ok: false, error: "Vui lòng chọn ít nhất 1 khóa học." };
+    if (student.status !== "active")
+      return { ok: false, error: "Tài khoản học viên đang bị vô hiệu hóa." };
+    if (!input.courseIds || input.courseIds.length === 0)
+      return { ok: false, error: "Vui lòng chọn ít nhất 1 khóa học." };
 
     const owned = this.ownedCourseIds(student.id);
     const items = [];
     for (const id of input.courseIds) {
       const c = this.getCourse(id);
-      if (!c || c.deleted || c.status !== "active") return { ok: false, error: "Khóa học " + id + " hiện không được bán." };
-      if (owned.includes(id)) return { ok: false, error: "Học viên đã mua khóa \"" + c.name + "\"." };
+      if (!c || c.deleted || c.status !== "active")
+        return { ok: false, error: "Khóa học " + id + " hiện không được bán." };
+      if (owned.includes(id))
+        return { ok: false, error: 'Học viên đã mua khóa "' + c.name + '".' };
       items.push({
         courseId: c.id,
         name: c.name,
@@ -783,7 +1006,7 @@ const Store = {
     let promoCode = "";
     let discount = 0;
     if (input.promoCode && input.promoCode.trim()) {
-      const check = this.validatePromo(input.promoCode, subtotal);
+      const check = this.validatePromo(input.promoCode, subtotal, student.id);
       if (!check.valid) return { ok: false, error: check.message };
       promoCode = check.promo.code;
       discount = check.discount;
@@ -821,7 +1044,15 @@ const Store = {
     const order = orders.find((o) => o.id === id);
     if (!order) return { ok: false, error: "Không tìm thấy đơn hàng." };
     if (!this.allowedNextStatuses(order.status).includes(newStatus)) {
-      return { ok: false, error: "Không thể chuyển từ \"" + ORDER_STATUS[order.status] + "\" sang \"" + ORDER_STATUS[newStatus] + "\"." };
+      return {
+        ok: false,
+        error:
+          'Không thể chuyển từ "' +
+          ORDER_STATUS[order.status] +
+          '" sang "' +
+          ORDER_STATUS[newStatus] +
+          '".',
+      };
     }
     const now = new Date().toISOString();
     order.status = newStatus;
@@ -829,7 +1060,11 @@ const Store = {
     order.history.push({ status: newStatus, at: now });
     this.set("orders", orders);
     // Đơn đã hủy thì học viên không còn trong lớp nào của đơn đó
-    if (newStatus === "cancelled") this.set("classes", this.get("classes").filter((k) => k.orderId !== id));
+    if (newStatus === "cancelled")
+      this.set(
+        "classes",
+        this.get("classes").filter((k) => k.orderId !== id),
+      );
     return { ok: true, order: order };
   },
 
@@ -838,7 +1073,9 @@ const Store = {
      QUY TẮC DOANH THU: chỉ tính đơn HOÀN THÀNH.
      ======================================================= */
   completedOrders(orders) {
-    return (orders || this.get("orders")).filter((o) => o.status === "completed");
+    return (orders || this.get("orders")).filter(
+      (o) => o.status === "completed",
+    );
   },
 
   sumTotal(orders) {
@@ -857,12 +1094,22 @@ const Store = {
     const map = {};
     orders.forEach((o) => {
       o.items.forEach((it) => {
-        if (!map[it.courseId]) map[it.courseId] = { courseId: it.courseId, name: it.name, image: it.image, categoryName: it.categoryName, count: 0, revenue: 0 };
+        if (!map[it.courseId])
+          map[it.courseId] = {
+            courseId: it.courseId,
+            name: it.name,
+            image: it.image,
+            categoryName: it.categoryName,
+            count: 0,
+            revenue: 0,
+          };
         map[it.courseId].count += 1;
         map[it.courseId].revenue += this.lineRevenue(o, it);
       });
     });
-    return Object.values(map).sort((a, b) => b.count - a.count || b.revenue - a.revenue);
+    return Object.values(map).sort(
+      (a, b) => b.count - a.count || b.revenue - a.revenue,
+    );
   },
 
   // Thống kê theo danh mục (nhóm theo mã danh mục, hiển thị tên hiện tại nếu còn)
@@ -873,13 +1120,20 @@ const Store = {
         const key = it.categoryId || it.categoryName;
         if (!map[key]) {
           const current = this.getCategory(it.categoryId);
-          map[key] = { key: key, name: current ? current.name : it.categoryName || "Chưa phân loại", count: 0, revenue: 0 };
+          map[key] = {
+            key: key,
+            name: current ? current.name : it.categoryName || "Chưa phân loại",
+            count: 0,
+            revenue: 0,
+          };
         }
         map[key].count += 1;
         map[key].revenue += this.lineRevenue(o, it);
       });
     });
-    return Object.values(map).sort((a, b) => b.count - a.count || b.revenue - a.revenue);
+    return Object.values(map).sort(
+      (a, b) => b.count - a.count || b.revenue - a.revenue,
+    );
   },
 
   // Danh sách n tháng gần nhất (cũ -> mới): [{ key: "2026-05", label: "05/2026", start: Date }]
@@ -890,7 +1144,8 @@ const Store = {
       const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
       result.push({
         key: monthKey(d),
-        label: String(d.getMonth() + 1).padStart(2, "0") + "/" + d.getFullYear(),
+        label:
+          String(d.getMonth() + 1).padStart(2, "0") + "/" + d.getFullYear(),
         start: d,
       });
     }

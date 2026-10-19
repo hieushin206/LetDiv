@@ -43,10 +43,19 @@ const CartUI = {
       box.id = "uc-toast-box";
       document.body.appendChild(box);
     }
-    const icon = { success: "fa-circle-check", error: "fa-circle-exclamation", info: "fa-circle-info" }[type || "success"];
+    const icon = {
+      success: "fa-circle-check",
+      error: "fa-circle-exclamation",
+      info: "fa-circle-info",
+    }[type || "success"];
     const el = document.createElement("div");
     el.className = "uc-toast uc-toast-" + (type || "success");
-    el.innerHTML = '<i class="fa-solid ' + icon + '"></i><span>' + this.esc(message) + "</span>";
+    el.innerHTML =
+      '<i class="fa-solid ' +
+      icon +
+      '"></i><span>' +
+      this.esc(message) +
+      "</span>";
     box.appendChild(el);
     setTimeout(() => el.classList.add("hide"), 3000);
     setTimeout(() => el.remove(), 3400);
@@ -120,7 +129,7 @@ const CartUI = {
   addToCart(courseId) {
     const res = CartStore.add(courseId);
     if (res.ok) {
-      this.toast("Đã thêm \"" + res.course.name + "\" vào giỏ hàng.");
+      this.toast('Đã thêm "' + res.course.name + '" vào giỏ hàng.');
       this.refreshBadge();
       this.open("cart");
       return res;
@@ -142,19 +151,32 @@ const CartUI = {
     if (window.jQuery && document.getElementById("loginModal")) {
       window.jQuery("#loginModal").modal("show");
     } else {
-      location.href = "/auth/login.html?next=" + encodeURIComponent(location.pathname);
+      location.href =
+        "/auth/login.html?next=" + encodeURIComponent(location.pathname);
     }
   },
 
   /* ---------- Vẽ nội dung theo màn hình ---------- */
   render() {
     const user = AuthStore.currentUser();
-    if (!user) return this.renderMessage("fa-lock", "Bạn chưa đăng nhập", "Hãy đăng nhập để thêm khóa học vào giỏ hàng và thanh toán.", '<button class="cd-btn-pay" data-act="login"><i class="fa-solid fa-right-to-bracket"></i> Đăng nhập ngay</button>');
+    if (!user)
+      return this.renderMessage(
+        "fa-lock",
+        "Bạn chưa đăng nhập",
+        "Hãy đăng nhập để thêm khóa học vào giỏ hàng và thanh toán.",
+        '<button class="cd-btn-pay" data-act="login"><i class="fa-solid fa-right-to-bracket"></i> Đăng nhập ngay</button>',
+      );
     if (!CartStore.canBuy()) {
-      return this.renderMessage("fa-user-shield", "Tài khoản không có giỏ hàng", "Chỉ tài khoản có quyền Khách hàng mới mua được khóa học.", "");
+      return this.renderMessage(
+        "fa-user-shield",
+        "Tài khoản không có giỏ hàng",
+        "Chỉ tài khoản có quyền Khách hàng mới mua được khóa học.",
+        "",
+      );
     }
     if (this.view === "success") return this.renderSuccess();
-    if (this.view === "checkout" && CartStore.count() > 0) return this.renderCheckout();
+    if (this.view === "checkout" && CartStore.count() > 0)
+      return this.renderCheckout();
     this.view = "cart";
     this.renderCart();
   },
@@ -162,8 +184,12 @@ const CartUI = {
   head(title, backButton) {
     return (
       '<div class="cd-head">' +
-      (backButton ? '<button class="cd-back" data-act="back" aria-label="Quay lại"><i class="fa-solid fa-arrow-left"></i></button>' : "") +
-      '<h3><i class="fa-solid fa-cart-shopping"></i> ' + title + "</h3>" +
+      (backButton
+        ? '<button class="cd-back" data-act="back" aria-label="Quay lại"><i class="fa-solid fa-arrow-left"></i></button>'
+        : "") +
+      '<h3><i class="fa-solid fa-cart-shopping"></i> ' +
+      title +
+      "</h3>" +
       '<button class="cd-close" data-act="close" aria-label="Đóng"><i class="fa-solid fa-xmark"></i></button></div>'
     );
   },
@@ -171,8 +197,16 @@ const CartUI = {
   renderMessage(icon, title, text, extra) {
     this.drawer.innerHTML =
       this.head("Giỏ hàng") +
-      '<div class="cd-body"><div class="cd-empty"><div class="cd-empty-icon"><i class="fa-solid ' + icon + '"></i></div>' +
-      "<h4>" + title + "</h4><p>" + text + "</p>" + extra + "</div></div>";
+      '<div class="cd-body"><div class="cd-empty"><div class="cd-empty-icon"><i class="fa-solid ' +
+      icon +
+      '"></i></div>' +
+      "<h4>" +
+      title +
+      "</h4><p>" +
+      text +
+      "</p>" +
+      extra +
+      "</div></div>";
   },
 
   // Tính tiền (tạm tính, giảm giá, tổng) và kiểm tra lại mã khuyến mãi đang áp dụng
@@ -180,7 +214,11 @@ const CartUI = {
     const subtotal = CartStore.subtotal(courses);
     let discount = 0;
     if (this.promoCode) {
-      const check = Store.validatePromo(this.promoCode, subtotal);
+      const check = Store.validatePromo(
+        this.promoCode,
+        subtotal,
+        (AuthStore.currentUser() || {}).studentId,
+      );
       if (check.valid) {
         discount = check.discount;
       } else {
@@ -190,14 +228,28 @@ const CartUI = {
         this.promoCode = "";
       }
     }
-    return { subtotal: subtotal, discount: discount, total: subtotal - discount };
+    return {
+      subtotal: subtotal,
+      discount: discount,
+      total: subtotal - discount,
+    };
   },
 
   summaryHtml(sum) {
     return (
-      '<div class="cd-sum"><div><span>Tạm tính</span><b>' + formatVnd(sum.subtotal) + "</b></div>" +
-      (sum.discount > 0 ? '<div class="cd-discount"><span>Giảm giá (' + this.esc(this.promoCode) + ")</span><b>- " + formatVnd(sum.discount) + "</b></div>" : "") +
-      '<div class="cd-total"><span>Tổng cộng</span><b>' + formatVnd(sum.total) + "</b></div></div>"
+      '<div class="cd-sum"><div><span>Tạm tính</span><b>' +
+      formatVnd(sum.subtotal) +
+      "</b></div>" +
+      (sum.discount > 0
+        ? '<div class="cd-discount"><span>Giảm giá (' +
+          this.esc(this.promoCode) +
+          ")</span><b>- " +
+          formatVnd(sum.discount) +
+          "</b></div>"
+        : "") +
+      '<div class="cd-total"><span>Tổng cộng</span><b>' +
+      formatVnd(sum.total) +
+      "</b></div></div>"
     );
   },
 
@@ -218,24 +270,58 @@ const CartUI = {
     const itemsHtml = courses
       .map(
         (c) =>
-          '<div class="cd-item"><a href="' + this.esc(this.courseLink(c)) + '"><img src="' + this.esc(this.img(c.image)) + '" alt=""></a>' +
-          '<div class="cd-info"><a class="cd-name" href="' + this.esc(this.courseLink(c)) + '">' + this.esc(c.name) + "</a>" +
-          '<div class="cd-ins"><i class="fa-solid fa-chalkboard-user"></i> ' + this.esc(c.instructor) + "</div>" +
-          '<div class="cd-price">' + formatVnd(c.price) + (c.oldPrice > c.price ? "<del>" + formatVnd(c.oldPrice) + "</del>" : "") + "</div></div>" +
-          '<button class="cd-remove" data-remove="' + this.esc(c.id) + '" title="Xóa khỏi giỏ" aria-label="Xóa khỏi giỏ"><i class="fa-regular fa-trash-can"></i></button></div>'
+          '<div class="cd-item"><a href="' +
+          this.esc(this.courseLink(c)) +
+          '"><img src="' +
+          this.esc(this.img(c.image)) +
+          '" alt=""></a>' +
+          '<div class="cd-info"><a class="cd-name" href="' +
+          this.esc(this.courseLink(c)) +
+          '">' +
+          this.esc(c.name) +
+          "</a>" +
+          '<div class="cd-ins"><i class="fa-solid fa-chalkboard-user"></i> ' +
+          this.esc(c.instructor) +
+          "</div>" +
+          '<div class="cd-price">' +
+          formatVnd(c.price) +
+          (c.oldPrice > c.price
+            ? "<del>" + formatVnd(c.oldPrice) + "</del>"
+            : "") +
+          "</div></div>" +
+          '<button class="cd-remove" data-remove="' +
+          this.esc(c.id) +
+          '" title="Xóa khỏi giỏ" aria-label="Xóa khỏi giỏ"><i class="fa-regular fa-trash-can"></i></button></div>',
       )
       .join("");
 
     const promoBox = this.promoCode
-      ? '<div class="cd-promo-applied"><i class="fa-solid fa-ticket"></i> Mã <b>' + this.esc(this.promoCode) + '</b> đã được áp dụng<button data-act="remove-promo" title="Bỏ mã">Bỏ</button></div>'
+      ? '<div class="cd-promo-applied"><i class="fa-solid fa-ticket"></i> Mã <b>' +
+        this.esc(this.promoCode) +
+        '</b> đã được áp dụng<button data-act="remove-promo" title="Bỏ mã">Bỏ</button></div>'
       : '<div class="cd-promo"><input type="text" id="cd-promo" placeholder="Nhập mã khuyến mãi" autocomplete="off"><button data-act="apply-promo">Áp dụng</button></div>';
-    const promoMsg = this.promoMsg ? '<div class="cd-promo-msg ' + this.promoMsgType + '">' + this.esc(this.promoMsg) + "</div>" : "";
+    const promoMsg = this.promoMsg
+      ? '<div class="cd-promo-msg ' +
+        this.promoMsgType +
+        '">' +
+        this.esc(this.promoMsg) +
+        "</div>"
+      : "";
 
     this.drawer.innerHTML =
-      this.head("Giỏ hàng <span class=\"cd-count\">" + courses.length + "</span>") +
-      '<div class="cd-body">' + itemsHtml + "</div>" +
-      '<div class="cd-foot">' + promoBox + promoMsg + this.summaryHtml(sum) +
-      '<button class="cd-btn-pay" data-act="to-checkout"><i class="fa-solid fa-credit-card"></i> Thanh toán tất cả (' + courses.length + " khóa học)</button></div>";
+      this.head(
+        'Giỏ hàng <span class="cd-count">' + courses.length + "</span>",
+      ) +
+      '<div class="cd-body">' +
+      itemsHtml +
+      "</div>" +
+      '<div class="cd-foot">' +
+      promoBox +
+      promoMsg +
+      this.summaryHtml(sum) +
+      '<button class="cd-btn-pay" data-act="to-checkout"><i class="fa-solid fa-credit-card"></i> Thanh toán tất cả (' +
+      courses.length +
+      " khóa học)</button></div>";
     this.promoMsg = ""; // chỉ hiện 1 lần
   },
 
@@ -243,38 +329,71 @@ const CartUI = {
     const n = String(name).toLowerCase();
     if (n.indexOf("momo") >= 0) return "fa-wallet";
     if (n.indexOf("vnpay") >= 0) return "fa-qrcode";
-    if (n.indexOf("visa") >= 0 || n.indexOf("master") >= 0) return "fa-credit-card";
+    if (n.indexOf("visa") >= 0 || n.indexOf("master") >= 0)
+      return "fa-credit-card";
     return "fa-building-columns";
   },
 
   renderCheckout() {
     const courses = CartStore.items();
     const sum = this.calc(courses);
-    if (!this.payment || PAYMENT_METHODS.indexOf(this.payment) < 0) this.payment = PAYMENT_METHODS[0];
+    if (!this.payment || PAYMENT_METHODS.indexOf(this.payment) < 0)
+      this.payment = PAYMENT_METHODS[0];
 
     const listHtml = courses
-      .map((c) => '<div class="cd-line"><span>' + this.esc(c.name) + "</span><b>" + formatVnd(c.price) + "</b></div>")
+      .map(
+        (c) =>
+          '<div class="cd-line"><span>' +
+          this.esc(c.name) +
+          "</span><b>" +
+          formatVnd(c.price) +
+          "</b></div>",
+      )
       .join("");
     const payHtml = PAYMENT_METHODS.map(
       (m) =>
-        '<label class="cd-pay ' + (m === this.payment ? "active" : "") + '"><input type="radio" name="cd-payment" value="' + this.esc(m) + '"' + (m === this.payment ? " checked" : "") + ">" +
-        '<i class="fa-solid ' + this.paymentIcon(m) + '"></i><span>' + this.esc(m) + "</span></label>"
+        '<label class="cd-pay ' +
+        (m === this.payment ? "active" : "") +
+        '"><input type="radio" name="cd-payment" value="' +
+        this.esc(m) +
+        '"' +
+        (m === this.payment ? " checked" : "") +
+        ">" +
+        '<i class="fa-solid ' +
+        this.paymentIcon(m) +
+        '"></i><span>' +
+        this.esc(m) +
+        "</span></label>",
     ).join("");
 
     this.drawer.innerHTML =
       this.head("Thanh toán", true) +
-      '<div class="cd-body"><h4 class="cd-sub">Khóa học (' + courses.length + ")</h4>" + listHtml +
-      '<h4 class="cd-sub">Phương thức thanh toán</h4><div class="cd-pays">' + payHtml + "</div>" +
+      '<div class="cd-body"><h4 class="cd-sub">Khóa học (' +
+      courses.length +
+      ")</h4>" +
+      listHtml +
+      '<h4 class="cd-sub">Phương thức thanh toán</h4><div class="cd-pays">' +
+      payHtml +
+      "</div>" +
       '<p class="cd-note"><i class="fa-solid fa-circle-info"></i> Đây là website demo: thanh toán được giả lập, không trừ tiền thật.</p></div>' +
-      '<div class="cd-foot">' + this.summaryHtml(sum) +
-      '<button class="cd-btn-pay" data-act="confirm-pay"><i class="fa-solid fa-lock"></i> Xác nhận thanh toán ' + formatVnd(sum.total) + "</button></div>";
+      '<div class="cd-foot">' +
+      this.summaryHtml(sum) +
+      '<button class="cd-btn-pay" data-act="confirm-pay"><i class="fa-solid fa-lock"></i> Xác nhận thanh toán ' +
+      formatVnd(sum.total) +
+      "</button></div>";
 
-    this.drawer.querySelectorAll('input[name="cd-payment"]').forEach((radio) => {
-      radio.addEventListener("change", () => {
-        this.payment = radio.value;
-        this.drawer.querySelectorAll(".cd-pay").forEach((l) => l.classList.toggle("active", l.querySelector("input").checked));
+    this.drawer
+      .querySelectorAll('input[name="cd-payment"]')
+      .forEach((radio) => {
+        radio.addEventListener("change", () => {
+          this.payment = radio.value;
+          this.drawer
+            .querySelectorAll(".cd-pay")
+            .forEach((l) =>
+              l.classList.toggle("active", l.querySelector("input").checked),
+            );
+        });
       });
-    });
   },
 
   renderSuccess() {
@@ -283,13 +402,30 @@ const CartUI = {
       this.view = "cart";
       return this.renderCart();
     }
-    const items = o.items.map((it) => '<div class="cd-line"><span>' + this.esc(it.name) + "</span><b>" + formatVnd(it.price) + "</b></div>").join("");
+    const items = o.items
+      .map(
+        (it) =>
+          '<div class="cd-line"><span>' +
+          this.esc(it.name) +
+          "</span><b>" +
+          formatVnd(it.price) +
+          "</b></div>",
+      )
+      .join("");
     this.drawer.innerHTML =
       this.head("Giỏ hàng") +
       '<div class="cd-body"><div class="cd-success"><div class="cd-success-icon"><i class="fa-solid fa-check"></i></div>' +
       "<h4>Thanh toán thành công!</h4>" +
-      "<p>Mã đơn hàng <b>" + this.esc(o.id) + "</b> · " + this.esc(o.payment) + "</p>" +
-      '<div class="cd-success-list">' + items + '<div class="cd-line cd-total"><span>Đã thanh toán</span><b>' + formatVnd(o.total) + "</b></div></div>" +
+      "<p>Mã đơn hàng <b>" +
+      this.esc(o.id) +
+      "</b> · " +
+      this.esc(o.payment) +
+      "</p>" +
+      '<div class="cd-success-list">' +
+      items +
+      '<div class="cd-line cd-total"><span>Đã thanh toán</span><b>' +
+      formatVnd(o.total) +
+      "</b></div></div>" +
       '<a class="cd-btn-pay" href="/account/my-courses.html"><i class="fa-solid fa-graduation-cap"></i> Xem khóa học đã mua</a>' +
       '<button class="cd-btn-ghost" data-act="close">Tiếp tục xem khóa học</button></div></div>';
   },
@@ -298,7 +434,11 @@ const CartUI = {
   applyPromo() {
     const input = document.getElementById("cd-promo");
     const code = input ? input.value.trim() : "";
-    const check = Store.validatePromo(code, CartStore.subtotal());
+    const check = Store.validatePromo(
+      code,
+      CartStore.subtotal(),
+      (AuthStore.currentUser() || {}).studentId,
+    );
     if (check.valid) {
       this.promoCode = check.promo.code;
       this.promoMsg = check.message;
@@ -316,11 +456,15 @@ const CartUI = {
     const btn = this.drawer.querySelector('[data-act="confirm-pay"]');
     if (btn) {
       btn.disabled = true;
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang xử lý thanh toán...';
+      btn.innerHTML =
+        '<i class="fa-solid fa-spinner fa-spin"></i> Đang xử lý thanh toán...';
     }
     // Giả lập chờ cổng thanh toán xử lý
     setTimeout(() => {
-      const res = CartStore.checkout({ payment: this.payment, promoCode: this.promoCode });
+      const res = CartStore.checkout({
+        payment: this.payment,
+        promoCode: this.promoCode,
+      });
       this.busy = false;
       if (!res.ok) {
         this.toast(res.error, "error");

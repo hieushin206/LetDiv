@@ -32,7 +32,7 @@ const Account = {
     ).toUpperCase();
   },
 
-  // active: "profile" | "courses"
+  // active: "profile" | "courses" | "vouchers"
   renderSide(user, active) {
     const box = document.getElementById("acc-side");
     if (!box) return;
@@ -42,7 +42,10 @@ const Account = {
       user.role === "customer"
         ? '<a href="/account/my-courses.html" class="' +
           (active === "courses" ? "active" : "") +
-          '"><i class="fa-solid fa-graduation-cap"></i> Khóa học đã mua</a>'
+          '"><i class="fa-solid fa-graduation-cap"></i> Khóa học đã mua</a>' +
+          '<a href="/account/my-vouchers.html" class="' +
+          (active === "vouchers" ? "active" : "") +
+          '"><i class="fa-solid fa-ticket"></i> Mã giảm giá</a>'
         : "";
 
     box.innerHTML =

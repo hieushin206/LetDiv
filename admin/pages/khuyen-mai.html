@@ -22,24 +22,50 @@
           <p>Tạo và theo dõi mã giảm giá áp dụng tại giỏ hàng của học viên.</p>
         </div>
         <div class="page-actions">
-          <button class="btn btn-primary" id="btn-add"><i class="fa-solid fa-plus"></i> Thêm mã khuyến mãi</button>
+          <button class="btn btn-primary" id="btn-add">
+            <i class="fa-solid fa-plus"></i> Thêm mã khuyến mãi
+          </button>
         </div>
       </div>
 
       <!-- Giả lập giỏ hàng: thử kiểm tra mã -->
       <div class="card" style="margin-bottom: 18px">
-        <div class="card-head"><h2><i class="fa-solid fa-flask" style="color: var(--color-one)"></i> Thử mã tại giỏ hàng</h2></div>
+        <div class="card-head">
+          <h2>
+            <i class="fa-solid fa-flask" style="color: var(--color-one)"></i>
+            Thử mã tại giỏ hàng
+          </h2>
+        </div>
         <div class="card-body">
           <div class="test-box">
             <div class="form-group">
               <label>Mã khuyến mãi</label>
-              <input type="text" id="t-code" placeholder="Nhập mã, VD: WELCOME10" style="text-transform: uppercase" />
+              <input
+                type="text"
+                id="t-code"
+                placeholder="Nhập mã, VD: WELCOME10"
+                style="text-transform: uppercase"
+              />
             </div>
             <div class="form-group">
               <label>Tổng tiền giỏ hàng (đ)</label>
-              <input type="number" id="t-amount" value="5000000" min="0" step="100000" />
+              <input
+                type="number"
+                id="t-amount"
+                value="5000000"
+                min="0"
+                step="100000"
+              />
             </div>
-            <button class="btn btn-primary" id="btn-test"><i class="fa-solid fa-check"></i> Kiểm tra</button>
+            <div class="form-group">
+              <label>Thử với khách hàng</label>
+              <select id="t-student">
+                <option value="">Khách bất kỳ</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" id="btn-test">
+              <i class="fa-solid fa-check"></i> Kiểm tra
+            </button>
           </div>
           <div id="t-result"></div>
         </div>
@@ -49,7 +75,11 @@
         <div class="toolbar">
           <div class="search-box">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" id="search" placeholder="Tìm theo mã hoặc mô tả..." />
+            <input
+              type="text"
+              id="search"
+              placeholder="Tìm theo mã hoặc mô tả..."
+            />
           </div>
         </div>
         <div id="list-area"></div>
@@ -61,19 +91,34 @@
       <div class="modal-box modal-lg">
         <div class="modal-header">
           <h3 id="promo-modal-title">Thêm mã khuyến mãi</h3>
-          <button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button>
+          <button class="modal-close" data-close>
+            <i class="fa-solid fa-xmark"></i>
+          </button>
         </div>
         <div class="modal-body">
           <div class="form-row">
             <div class="form-group">
               <label>Mã khuyến mãi <span class="req">*</span></label>
-              <input type="text" id="f-code" maxlength="20" placeholder="VD: WELCOME10" style="text-transform: uppercase" />
-              <div class="hint" id="code-hint">4-20 ký tự chữ/số, viết liền, không dấu.</div>
+              <input
+                type="text"
+                id="f-code"
+                maxlength="20"
+                placeholder="VD: WELCOME10"
+                style="text-transform: uppercase"
+              />
+              <div class="hint" id="code-hint">
+                4-20 ký tự chữ/số, viết liền, không dấu.
+              </div>
               <div class="error-text" id="e-code"></div>
             </div>
             <div class="form-group">
               <label>Mô tả</label>
-              <input type="text" id="f-description" maxlength="100" placeholder="VD: Giảm 10% cho học viên mới" />
+              <input
+                type="text"
+                id="f-description"
+                maxlength="100"
+                placeholder="VD: Giảm 10% cho học viên mới"
+              />
             </div>
           </div>
           <div class="form-row">
@@ -85,7 +130,9 @@
               </select>
             </div>
             <div class="form-group">
-              <label id="value-label">Giá trị giảm (%) <span class="req">*</span></label>
+              <label id="value-label"
+                >Giá trị giảm (%) <span class="req">*</span></label
+              >
               <input type="number" id="f-value" min="0" step="1" />
               <div class="error-text" id="e-value"></div>
             </div>
@@ -93,37 +140,80 @@
           <div class="form-row">
             <div class="form-group">
               <label>Đơn hàng tối thiểu (đ)</label>
-              <input type="number" id="f-minOrder" min="0" step="100000" value="0" />
+              <input
+                type="number"
+                id="f-minOrder"
+                min="0"
+                step="100000"
+                value="0"
+              />
               <div class="hint">Nhập 0 nếu không yêu cầu.</div>
               <div class="error-text" id="e-minOrder"></div>
             </div>
             <div class="form-group">
               <label>Số lượng mã</label>
               <input type="number" id="f-quantity" min="0" step="1" value="0" />
-              <div class="hint">Số lượt dùng tối đa. Nhập 0 nếu không giới hạn.</div>
+              <div class="hint">
+                Số lượt dùng tối đa. Nhập 0 nếu không giới hạn.
+              </div>
               <div class="error-text" id="e-quantity"></div>
             </div>
+          </div>
+          <div class="form-group">
+            <label>Đối tượng áp dụng</label>
+            <select id="f-audience">
+              <option value="all">Tất cả khách hàng</option>
+              <option value="specific">Khách hàng chỉ định</option>
+            </select>
+            <div class="error-text" id="e-audience"></div>
+          </div>
+          <div class="form-group student-picker" id="student-picker" hidden>
+            <div class="sp-head">
+              <input
+                type="text"
+                id="sp-search"
+                placeholder="Tìm khách hàng theo tên, email, mã..."
+              />
+              <span class="sp-count" id="sp-count">Đã chọn 0</span>
+            </div>
+            <div class="sp-actions">
+              <button type="button" class="link-btn" id="sp-all">
+                Chọn tất cả đang hiển thị
+              </button>
+              <button type="button" class="link-btn" id="sp-none">
+                Bỏ chọn tất cả
+              </button>
+            </div>
+            <div class="sp-list" id="sp-list"></div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <label>Ngày bắt đầu <span class="req">*</span></label>
               <input type="date" id="f-startDate" />
+              <div class="hint">Mặc định là hôm nay.</div>
               <div class="error-text" id="e-startDate"></div>
             </div>
             <div class="form-group">
               <label>Ngày kết thúc <span class="req">*</span></label>
               <input type="date" id="f-endDate" />
+              <div class="hint">Không được nhỏ hơn ngày bắt đầu.</div>
               <div class="error-text" id="e-endDate"></div>
             </div>
           </div>
           <label class="switch-wrap">
-            <span class="switch"><input type="checkbox" id="f-active" checked /><span class="slider"></span></span>
+            <span class="switch"
+              ><input type="checkbox" id="f-active" checked /><span
+                class="slider"
+              ></span
+            ></span>
             <span>Kích hoạt mã này</span>
           </label>
         </div>
         <div class="modal-footer">
           <button class="btn btn-outline" data-close>Hủy</button>
-          <button class="btn btn-primary" id="btn-save"><i class="fa-solid fa-floppy-disk"></i> Lưu mã</button>
+          <button class="btn btn-primary" id="btn-save">
+            <i class="fa-solid fa-floppy-disk"></i> Lưu mã
+          </button>
         </div>
       </div>
     </div>
