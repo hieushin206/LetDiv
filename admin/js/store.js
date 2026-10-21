@@ -753,6 +753,18 @@ const Store = {
     ).length;
   },
 
+  // Khách studentId đang "giữ" mã này không? = có đơn CHƯA HỦY đã áp mã đó.
+  // Mỗi khách chỉ được dùng 1 lần; đơn bị hủy => mã được trả lại, khách dùng lại được.
+  promoUsedByStudent(code, studentId) {
+    if (!studentId) return false;
+    return this.get("orders").some(
+      (o) =>
+        o.studentId === studentId &&
+        o.promoCode === code &&
+        o.status !== "cancelled",
+    );
+  },
+
   // Trạng thái hiển thị của mã
   promoState(p) {
     const today = parseDay(this.todayString());
@@ -906,7 +918,7 @@ const Store = {
   /*
    * KIỂM TRA MÃ KHUYẾN MÃI (trang giỏ hàng của học viên cũng gọi hàm này)
    * Trả về { valid, message, discount, total, promo }
-   * Kiểm tra: tồn tại -> đang bật -> đúng đối tượng -> thời hạn -> đơn tối thiểu -> số lượng
+   * Kiểm tra: tồn tại -> đang bật -> đúng đối tượng -> thời hạn -> đơn tối thiểu -> số lượng -> khách chưa dùng mã (1 lần/khách)
    * studentId: học viên đang dùng mã (bắt buộc với mã chỉ định cho khách hàng cụ thể)
    */
   validatePromo(code, subtotal, studentId) {
@@ -946,6 +958,10 @@ const Store = {
       );
     if (p.quantity > 0 && this.promoUsage(p.code) >= p.quantity)
       return fail("Mã đã hết lượt sử dụng.");
+    if (this.promoUsedByStudent(p.code, studentId))
+      return fail(
+        "Bạn đã sử dụng mã này rồi. Mỗi khách hàng chỉ được dùng 1 lần (nếu đơn bị hủy, bạn sẽ được dùng lại).",
+      );
 
     const discount = calcDiscount(p, subtotal);
     return {
