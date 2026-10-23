@@ -98,36 +98,8 @@ function learnRandom(seed) {
   };
 }
 
-/* ---------- Nội dung bài học mẫu theo danh mục ---------- */
+/* ---------- Nội dung bài học mẫu ---------- */
 const LESSON_TEMPLATES = {
-  DM01: [
-    "Tổng quan lộ trình Full Stack",
-    "HTML Form",
-    "Vòng lặp trong JavaScript",
-    "Xây dựng API với NodeJS",
-    "Kết nối cơ sở dữ liệu MySQL",
-  ],
-  DM02: [
-    "Giới thiệu Backend và giao thức HTTP",
-    "Xây dựng server đầu tiên",
-    "Thiết kế RESTful API",
-    "Làm việc với cơ sở dữ liệu",
-    "Xác thực và phân quyền",
-  ],
-  DM03: [
-    "Giới thiệu Frontend",
-    "HTML Form",
-    "Bố cục với CSS Flexbox",
-    "Vòng lặp trong JavaScript",
-    "Thao tác DOM và xử lý sự kiện",
-  ],
-  DM04: [
-    "Làm quen với lập trình",
-    "Cài đặt môi trường lập trình",
-    "Biến và kiểu dữ liệu",
-    "Câu lệnh điều kiện",
-    "Vòng lặp và hàm",
-  ],
   default: [
     "Giới thiệu khóa học",
     "Kiến thức nền tảng",
@@ -773,10 +745,10 @@ const LearningStore = {
   /* =======================================================
      NỘI DUNG CỦA ĐỢT HỌC (dùng khi admin tạo / xóa đợt)
      ======================================================= */
-  // Tạo sẵn vài bài học + bài tập mẫu cho 1 đợt (theo danh mục của khóa học)
+  // Tạo sẵn vài bài học + bài tập mẫu cho 1 đợt 
   seedBatchContent(batch) {
     const course = Store.getCourse(batch.courseId);
-    const names = (course && LESSON_TEMPLATES[course.categoryId]) || LESSON_TEMPLATES.default;
+    const names = LESSON_TEMPLATES.default;
     names.forEach((name, i) => {
       const lesson = this.addLesson(batch, {
         name: name,

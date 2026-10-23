@@ -59,9 +59,7 @@ function initMyCoursesPage() {
       esc(CartUI.img(it.image)) +
       '" alt="">' +
       '<span class="mc-paid"><i class="fa-solid fa-circle-check"></i> Đã thanh toán</span></div>' +
-      '<div class="mc-body"><div class="mc-cat">' +
-      esc(it.categoryName || "Khóa học") +
-      "</div>" +
+      '<div class="mc-body">' +
       '<h3 class="mc-name">' +
       (href
         ? '<a href="' + esc(href) + '">' + esc(it.name) + "</a>"

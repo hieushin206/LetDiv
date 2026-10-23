@@ -149,7 +149,7 @@ function initOrderPage() {
     const itemsHtml = o.items
       .map((it, i) => {
         return (
-          "<tr><td>" + (i + 1) + "</td><td><b>" + UI.esc(it.name) + '</b><div class="cell-sub">' + UI.esc(it.categoryName || "—") + "</div></td>" +
+          "<tr><td>" + (i + 1) + "</td><td><b>" + UI.esc(it.name) + "</b></td>" +
           '<td class="num">' + UI.money(it.price) + "</td><td>" + classCell(o, it, i) + "</td></tr>"
         );
       })

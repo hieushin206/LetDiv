@@ -87,24 +87,11 @@ function initReportPage() {
       })
       .join("") + '<div class="hint" style="margin-top:14px">Tổng ' + orders.length + " đơn hàng trong kỳ.</div>";
 
-    /* ----- Danh mục có nhiều lượt mua ----- */
-    const cats = Store.categorySales(completed);
-    const totalBuys = cats.reduce((s, c) => s + c.count, 0);
-    $("category-box").innerHTML = cats.length
-      ? cats
-          .map((c, i) => {
-            const pct = totalBuys ? Math.round((c.count / totalBuys) * 100) : 0;
-            const cls = ["", "green", "violet", "amber"][i % 4];
-            return '<div class="bar-row"><div class="bar-top"><span><b>' + UI.esc(c.name) + "</b></span><span><b>" + c.count + "</b> lượt · " + pct + '%</span></div><div class="progress ' + cls + '"><span style="width:' + pct + '%"></span></div></div>';
-          })
-          .join("")
-      : '<div class="empty-state" style="padding:20px"><h3>Chưa có dữ liệu</h3></div>';
-
     /* ----- Khóa học bán chạy nhất ----- */
     const top = Store.courseSales(completed).slice(0, 5);
     $("top-courses").innerHTML = top.length
       ? top
-          .map((c, i) => '<li class="rank-item"><span class="rank-num">' + (i + 1) + '</span><div class="rank-info"><div class="cell-title" title="' + UI.esc(c.name) + '">' + UI.esc(c.name) + '</div><div class="cell-sub">' + UI.esc(c.categoryName) + '</div></div><div class="rank-value">' + c.count + " lượt<small>" + UI.money(c.revenue) + "</small></div></li>")
+          .map((c, i) => '<li class="rank-item"><span class="rank-num">' + (i + 1) + '</span><div class="rank-info"><div class="cell-title" title="' + UI.esc(c.name) + '">' + UI.esc(c.name) + '</div></div><div class="rank-value">' + c.count + " lượt<small>" + UI.money(c.revenue) + "</small></div></li>")
           .join("")
       : '<div class="empty-state" style="padding:20px"><h3>Chưa có dữ liệu</h3></div>';
 

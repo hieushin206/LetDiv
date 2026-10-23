@@ -3,8 +3,7 @@
    ---------------------------------------------------------
    - Website tĩnh nên toàn bộ dữ liệu lưu trong localStorage.
    - Mỗi nhóm dữ liệu là 1 mảng JSON lưu dưới 1 key riêng.
-   - Mọi quy tắc nghiệp vụ (xóa mềm, không xóa danh mục đang dùng,
-     lưu snapshot đơn hàng, kiểm tra mã khuyến mãi...) nằm ở đây
+   - Mọi quy tắc nghiệp vụ (xóa mềm, lưu snapshot đơn hàng, kiểm tra mã khuyến mãi...) nằm ở đây
      để các trang dùng chung => số liệu luôn thống nhất.
 
    Cần load sau seed-data.js và trước các file js của từng trang.
@@ -12,7 +11,6 @@
 
 const KEYS = {
   courses: "letdiv_courses",
-  categories: "letdiv_categories",
   students: "letdiv_students",
   orders: "letdiv_orders",
   promos: "letdiv_promos",
@@ -22,6 +20,7 @@ const KEYS = {
   migrated3: "letdiv_migrated_v3",
   seeded: "letdiv_seeded_v1",
   migrated: "letdiv_migrated_v2",
+  migrated5: "letdiv_migrated_v5", // gỡ dữ liệu danh mục cũ còn sót trong trình duyệt
   migrated4: "letdiv_migrated_v4", // dọn dữ liệu mẫu (học viên / đơn hàng / mã khuyến mãi giả) còn sót trong trình duyệt
 };
 
@@ -85,7 +84,7 @@ const Store = {
     }
   },
 
-  // Lần đầu truy cập: nạp danh mục + khóa học của website (không còn học viên / đơn hàng / khuyến mãi mẫu)
+  // Lần đầu truy cập: nạp khóa học của website (không còn học viên / đơn hàng / khuyến mãi mẫu)
   init() {
     if (!localStorage.getItem(KEYS.seeded)) this.seedBase();
     this.migrate();
@@ -93,10 +92,29 @@ const Store = {
 
   // Dữ liệu cũ trong trình duyệt: đơn "Chờ xác nhận" -> "Hoàn thành" (chạy 1 lần duy nhất)
   migrate() {
+    // v5: bỏ chức năng danh mục -> xóa danh mục + categoryId / categoryName cũ (chạy 1 lần duy nhất)
+    if (!localStorage.getItem(KEYS.migrated5)) {
+      try {
+        localStorage.removeItem("letdiv_categories");
+        const courses = this.get("courses");
+        courses.forEach((c) => delete c.categoryId);
+        this.set("courses", courses);
+        const orders = this.get("orders");
+        orders.forEach((o) =>
+          (o.items || []).forEach((it) => {
+            delete it.categoryId;
+            delete it.categoryName;
+          }),
+        );
+        this.set("orders", orders);
+      } catch (e) {}
+      localStorage.setItem(KEYS.migrated5, "1");
+    }
     // v4: xóa dữ liệu mẫu cũ còn lại trong trình duyệt (chạy 1 lần duy nhất)
     if (!localStorage.getItem(KEYS.migrated4)) {
       this.purgeDemoData();
       localStorage.setItem(KEYS.migrated4, "1");
+      localStorage.setItem(KEYS.migrated5, "1");
     }
     // v3: học viên phải được phân vào ĐỢT HỌC -> bỏ các phân lớp cũ chưa có đợt (học viên sẽ về "chưa phân đợt")
     if (!localStorage.getItem(KEYS.migrated3)) {
@@ -124,10 +142,9 @@ const Store = {
     localStorage.setItem(KEYS.migrated, "1");
   },
 
-  // Lần đầu: chỉ nạp danh mục + khóa học; học viên, đơn hàng, khuyến mãi, đợt học đều để trống
+  // Lần đầu: chỉ nạp khóa học; học viên, đơn hàng, khuyến mãi, đợt học đều để trống
   seedBase() {
     const data = buildSeedData();
-    this.set("categories", data.categories);
     this.set("courses", data.courses);
     this.set("students", []);
     this.set("promos", []);
@@ -194,102 +211,6 @@ const Store = {
   },
 
   /* =======================================================
-     DANH MỤC
-     ======================================================= */
-  getCategory(id) {
-    return this.get("categories").find((c) => c.id === id);
-  },
-
-  categoryName(id) {
-    const c = this.getCategory(id);
-    return c ? c.name : "Chưa phân loại";
-  },
-
-  validateCategory(data, ignoreId) {
-    const errors = {};
-    const name = (data.name || "").trim();
-    if (name.length < 2) errors.name = "Tên danh mục tối thiểu 2 ký tự.";
-    else if (name.length > 40) errors.name = "Tên danh mục tối đa 40 ký tự.";
-    else {
-      const key = name.toLowerCase();
-      const dup = this.get("categories").some(
-        (c) => c.id !== ignoreId && c.name.toLowerCase() === key,
-      );
-      if (dup) errors.name = "Tên danh mục đã tồn tại.";
-    }
-    return errors;
-  },
-
-  addCategory(data) {
-    const list = this.get("categories");
-    const item = {
-      id: this.nextId("DM", list, 2),
-      name: data.name.trim(),
-      description: (data.description || "").trim(),
-      createdAt: new Date().toISOString(),
-    };
-    list.push(item);
-    this.set("categories", list);
-    return item;
-  },
-
-  updateCategory(id, data) {
-    const list = this.get("categories");
-    const item = list.find((c) => c.id === id);
-    if (!item) return false;
-    item.name = data.name.trim();
-    item.description = (data.description || "").trim();
-    return this.set("categories", list);
-  },
-
-  // Số khóa học dùng danh mục (tính cả khóa đã xóa mềm nếu withDeleted = true)
-  countCoursesInCategory(id, withDeleted) {
-    return this.get("courses").filter(
-      (c) => c.categoryId === id && (withDeleted || !c.deleted),
-    ).length;
-  },
-
-  // Các khóa học (chưa xóa) thuộc 1 danh mục
-  getCoursesInCategory(id) {
-    return this.get("courses").filter((c) => !c.deleted && c.categoryId === id);
-  },
-
-  // Đưa khóa học vào danh mục (categoryId = "" nghĩa là gỡ khỏi danh mục -> "Chưa phân loại")
-  moveCourseToCategory(courseId, categoryId) {
-    if (categoryId && !this.getCategory(categoryId)) return false;
-    const list = this.get("courses");
-    const item = list.find((c) => c.id === courseId);
-    if (!item) return false;
-    item.categoryId = categoryId;
-    return this.set("courses", list);
-  },
-
-  // QUY TẮC: không xóa danh mục khi vẫn còn khóa học đang dùng
-  deleteCategory(id) {
-    const using = this.countCoursesInCategory(id, false);
-    if (using > 0) {
-      return {
-        ok: false,
-        error:
-          "Danh mục đang có " +
-          using +
-          " khóa học. Hãy chuyển các khóa học sang danh mục khác trước khi xóa.",
-      };
-    }
-    // Khóa học đã xóa mềm không còn hiển thị -> gỡ liên kết để khi khôi phục sẽ là "Chưa phân loại"
-    const courses = this.get("courses");
-    courses.forEach((c) => {
-      if (c.categoryId === id) c.categoryId = "";
-    });
-    this.set("courses", courses);
-    this.set(
-      "categories",
-      this.get("categories").filter((c) => c.id !== id),
-    );
-    return { ok: true };
-  },
-
-  /* =======================================================
      KHÓA HỌC  (xóa = xóa mềm: chỉ đánh dấu deleted = true)
      ======================================================= */
   // Mặc định chỉ lấy khóa học chưa bị xóa
@@ -313,8 +234,6 @@ const Store = {
       );
       if (dup) errors.name = "Đã có khóa học trùng tên.";
     }
-    if (!data.categoryId || !this.getCategory(data.categoryId))
-      errors.categoryId = "Vui lòng chọn danh mục.";
     if (!(data.price > 0)) errors.price = "Giá phải lớn hơn 0.";
     if (data.oldPrice && data.oldPrice < data.price)
       errors.oldPrice = "Giá gốc phải lớn hơn hoặc bằng giá bán.";
@@ -330,7 +249,6 @@ const Store = {
       image: data.image,
       price: data.price,
       oldPrice: data.oldPrice || 0,
-      categoryId: data.categoryId,
       instructor: (data.instructor || "").trim(),
       instructors: data.instructors || [],
       description: (data.description || "").trim(),
@@ -351,7 +269,6 @@ const Store = {
     item.image = data.image;
     item.price = data.price;
     item.oldPrice = data.oldPrice || 0;
-    item.categoryId = data.categoryId;
     // Chỉ đổi giảng viên khi được truyền vào (phân công giảng viên có nút riêng, không làm mất khi sửa thông tin)
     if (Array.isArray(data.instructors)) {
       item.instructors = data.instructors;
@@ -987,7 +904,7 @@ const Store = {
   },
 
   /*
-   * Tạo đơn hàng. QUY TẮC: lưu SNAPSHOT (tên, giá, danh mục... tại thời điểm mua)
+   * Tạo đơn hàng. QUY TẮC: lưu SNAPSHOT (tên, giá... tại thời điểm mua)
    * để sau này sửa/xóa khóa học, đổi tên học viên cũng không làm sai lịch sử.
    * input: { studentId, courseIds: [...], promoCode, payment, status }
    */
@@ -1011,8 +928,6 @@ const Store = {
         courseId: c.id,
         name: c.name,
         price: c.price,
-        categoryId: c.categoryId,
-        categoryName: this.categoryName(c.categoryId),
         instructor: c.instructor,
         image: c.image,
       });
@@ -1115,36 +1030,11 @@ const Store = {
             courseId: it.courseId,
             name: it.name,
             image: it.image,
-            categoryName: it.categoryName,
             count: 0,
             revenue: 0,
           };
         map[it.courseId].count += 1;
         map[it.courseId].revenue += this.lineRevenue(o, it);
-      });
-    });
-    return Object.values(map).sort(
-      (a, b) => b.count - a.count || b.revenue - a.revenue,
-    );
-  },
-
-  // Thống kê theo danh mục (nhóm theo mã danh mục, hiển thị tên hiện tại nếu còn)
-  categorySales(orders) {
-    const map = {};
-    orders.forEach((o) => {
-      o.items.forEach((it) => {
-        const key = it.categoryId || it.categoryName;
-        if (!map[key]) {
-          const current = this.getCategory(it.categoryId);
-          map[key] = {
-            key: key,
-            name: current ? current.name : it.categoryName || "Chưa phân loại",
-            count: 0,
-            revenue: 0,
-          };
-        }
-        map[key].count += 1;
-        map[key].revenue += this.lineRevenue(o, it);
       });
     });
     return Object.values(map).sort(

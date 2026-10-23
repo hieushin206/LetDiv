@@ -70,7 +70,7 @@ function initDashboard() {
         return (
           '<li class="rank-item"><span class="rank-num">' + (i + 1) + "</span>" +
           '<img class="thumb" src="' + UI.esc(UI.img(c.image)) + '" alt="">' +
-          '<div class="rank-info"><div class="cell-title" title="' + UI.esc(c.name) + '">' + UI.esc(c.name) + '</div><div class="cell-sub">' + UI.esc(c.categoryName) + "</div></div>" +
+          '<div class="rank-info"><div class="cell-title" title="' + UI.esc(c.name) + '">' + UI.esc(c.name) + '</div></div>' +
           '<div class="rank-value">' + c.count + " lượt<small>" + UI.money(c.revenue) + "</small></div></li>"
         );
       })

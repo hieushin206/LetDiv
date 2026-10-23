@@ -78,7 +78,7 @@ function initDashboard() {
         return (
           '<li class="rank-item"><span class="rank-num">' + (i + 1) + "</span>" +
           '<img class="thumb" src="' + UI.esc(UI.img(c.image)) + '" alt="">' +
-          '<div class="rank-info"><div class="cell-title" title="' + UI.esc(c.name) + '">' + UI.esc(c.name) + '</div><div class="cell-sub">' + UI.esc(Store.categoryName(c.categoryId)) + "</div></div>" +
+          '<div class="rank-info"><div class="cell-title" title="' + UI.esc(c.name) + '">' + UI.esc(c.name) + '</div><div class="cell-sub">' + UI.esc(c.id) + "</div></div>" +
           '<div class="rank-value">' + r.count + " học viên</div></li>"
         );
       })
@@ -95,7 +95,7 @@ function initDashboard() {
         .map((c) => {
           return (
             '<tr><td><div class="user-cell"><img class="thumb" style="width: 64px; height: 40px" src="' + UI.esc(UI.img(c.image)) + '" alt="">' +
-            '<div><div class="cell-title clamp-2 cell-wide">' + UI.esc(c.name) + '</div><div class="cell-sub">' + UI.esc(Store.categoryName(c.categoryId)) + "</div></div></div></td>" +
+            '<div><div class="cell-title clamp-2 cell-wide">' + UI.esc(c.name) + '</div><div class="cell-sub">' + UI.esc(c.id) + "</div></div></div></td>" +
             '<td class="num">' + LearningStore.getLessonsOfBatches(myBatches.filter((b) => b.courseId === c.id).map((b) => b.id)).length + '</td><td class="num">' + LearningStore.courseStudentCount(c.id, Ins.user) + "</td>" +
             '<td class="actions"><a class="icon-btn" title="Quản lý bài học" href="ql-bai-hoc.html?course=' + c.id + '"><i class="fa-regular fa-pen-to-square"></i></a></td></tr>'
           );

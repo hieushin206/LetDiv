@@ -1,21 +1,20 @@
 /* =========================================================
    khoa-hoc.js - Trang "Khóa học"
-   Chức năng: danh sách (bảng / thẻ), tìm kiếm, lọc danh mục + trạng thái,
-   sửa thông tin (tên, danh mục, giá, ảnh, mô tả), PHÂN CÔNG NHIỀU giảng viên cho 1 khóa học,
+   Chức năng: danh sách (bảng / thẻ), tìm kiếm, lọc trạng thái,
+   sửa thông tin (tên, giá, ảnh, mô tả), PHÂN CÔNG NHIỀU giảng viên cho 1 khóa học,
    bật/tắt hiển thị. Không có thêm / xóa khóa học trong admin: danh sách khóa học lấy từ file HTML
    của website (xem site-sync.js) - thêm / sửa / xóa khối khóa học trong HTML thì admin tự cập nhật.
    Giảng viên được chọn từ các tài khoản có quyền "Giảng viên" (AuthStore).
    Sửa tên / ảnh / giá hoặc ẩn khóa học ở đây thì các trang chính đổi theo (course-sync.js).
    ========================================================= */
 function initCoursePage() {
-  const FIELDS = ["name", "categoryId", "price", "oldPrice", "image"];
+  const FIELDS = ["name", "price", "oldPrice", "image"];
   let pendingImage = ""; // ảnh vừa chọn từ máy, chưa lưu vào thư viện
   const VIEW_KEY = "letdiv_admin_course_view";
 
   // Trạng thái bộ lọc hiện tại của trang
   const state = {
     search: "",
-    category: "",
     status: "all", // all | active | hidden
     view: localStorage.getItem(VIEW_KEY) || "table",
     page: 1,
@@ -29,7 +28,6 @@ function initCoursePage() {
   function getFiltered() {
     let list = Store.get("courses").filter((c) => !c.deleted);
     if (state.status === "active" || state.status === "hidden") list = list.filter((c) => c.status === state.status);
-    if (state.category) list = list.filter((c) => c.categoryId === state.category);
     const kw = UI.normalize(state.search);
     if (kw) list = list.filter((c) => UI.normalize(c.name + " " + c.id + " " + c.instructor).includes(kw));
     return list.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // mới nhất trước
@@ -84,7 +82,6 @@ function initCoursePage() {
           '<tr>' +
           '<td><img class="thumb" src="' + UI.esc(UI.img(c.image)) + '" alt=""></td>' +
           '<td><div class="cell-title">' + UI.esc(c.name) + '</div><div class="cell-sub">' + c.id + " · GV: " + UI.esc(c.instructor || "Chưa phân công") + "</div></td>" +
-          '<td><span class="badge badge-info no-dot">' + UI.esc(Store.categoryName(c.categoryId)) + "</span></td>" +
           '<td class="num">' + priceHtml(c) + "</td>" +
           '<td class="num">' + (sold[c.id] || 0) + "</td>" +
           "<td>" + statusCell(c) + "</td>" +
@@ -93,7 +90,7 @@ function initCoursePage() {
       })
       .join("");
     return (
-      '<div class="table-wrap"><table class="data-table"><thead><tr><th>Ảnh</th><th>Khóa học</th><th>Danh mục</th><th class="num">Giá</th><th class="num">Đã bán</th><th>Trạng thái</th><th class="num">Thao tác</th></tr></thead><tbody>' +
+      '<div class="table-wrap"><table class="data-table"><thead><tr><th>Ảnh</th><th>Khóa học</th><th class="num">Giá</th><th class="num">Đã bán</th><th>Trạng thái</th><th class="num">Thao tác</th></tr></thead><tbody>' +
       rows + "</tbody></table></div>"
     );
   }
@@ -105,7 +102,7 @@ function initCoursePage() {
         .map((c) => {
           return (
             '<div class="course-card">' +
-            '<div class="cc-img"><img src="' + UI.esc(UI.img(c.image)) + '" alt=""><span class="badge badge-info no-dot">' + UI.esc(Store.categoryName(c.categoryId)) + "</span></div>" +
+            '<div class="cc-img"><img src="' + UI.esc(UI.img(c.image)) + '" alt=""></div>' +
             '<div class="cc-body"><div class="cc-title">' + UI.esc(c.name) + "</div>" +
             '<div class="cc-meta"><span><i class="fa-solid fa-chalkboard-user"></i> ' + UI.esc(c.instructor || "Chưa phân công") + '</span><span><i class="fa-solid fa-cart-shopping"></i> ' + (sold[c.id] || 0) + " đã bán</span></div>" +
             "<div>" + priceHtml(c) + "</div></div>" +
@@ -144,17 +141,6 @@ function initCoursePage() {
   }
 
   /* ---------- Form thêm / sửa ---------- */
-  function fillSelects() {
-    $("f-categoryId").innerHTML =
-      '<option value="">— Chọn danh mục —</option>' +
-      Store.get("categories").map((c) => '<option value="' + c.id + '">' + UI.esc(c.name) + "</option>").join("");
-
-    $("filter-category").innerHTML =
-      '<option value="">Tất cả danh mục</option>' +
-      Store.get("categories").map((c) => '<option value="' + c.id + '">' + UI.esc(c.name) + "</option>").join("");
-    $("filter-category").value = state.category;
-  }
-
   /* ---------- Giảng viên: chọn nhiều từ tài khoản giảng viên ---------- */
   function instructorAccounts() {
     return AuthStore.getAccounts().filter((a) => AuthStore.roleOf(a) === "instructor");
@@ -232,10 +218,8 @@ function initCoursePage() {
     if (!c) return;
     editingId = id;
     UI.clearErrors(FIELDS);
-    fillSelects();
     $("course-modal-title").textContent = "Sửa khóa học " + c.id;
     $("f-name").value = c.name;
-    $("f-categoryId").value = c.categoryId;
     $("f-price").value = c.price;
     $("f-oldPrice").value = c.oldPrice ? c.oldPrice : "";
     $("f-description").value = c.description;
@@ -250,7 +234,6 @@ function initCoursePage() {
   function saveForm() {
     const data = {
       name: $("f-name").value,
-      categoryId: $("f-categoryId").value,
       price: Number($("f-price").value) || 0,
       oldPrice: Number($("f-oldPrice").value) || 0,
       image: $("f-image").value,
@@ -381,11 +364,6 @@ function initCoursePage() {
       render();
     }, 200)
   );
-  $("filter-category").addEventListener("change", (e) => {
-    state.category = e.target.value;
-    state.page = 1;
-    render();
-  });
   $("status-tabs").addEventListener("click", (e) => {
     const tab = e.target.closest("[data-status]");
     if (!tab) return;
@@ -420,13 +398,11 @@ function initCoursePage() {
     render();
   });
 
-  fillSelects();
   render();
 
   // Đọc lại file HTML của website: khối khóa học thêm / sửa / xóa trong HTML thì danh sách ở đây tự cập nhật
   SiteSync.run().then((r) => {
     if (!r.changed) return;
-    fillSelects();
     render();
     UI.toast(SiteSync.describe(r), "info");
   });

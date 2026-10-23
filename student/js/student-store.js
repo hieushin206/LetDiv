@@ -117,7 +117,6 @@ const StudentStore = {
           image: live ? live.image : it.image,
           instructor: this.instructorLabel(studentId, it.courseId),
           batch: this.batchOf(studentId, it.courseId),
-          categoryName: live ? Store.categoryName(live.categoryId) : it.categoryName || "Khóa học",
           description: live ? live.description : "",
           href: live ? live.href : "",
           orderId: o.id,

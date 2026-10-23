@@ -6,7 +6,7 @@
    (khối .inner-price). Mỗi lần mở trang Admin, SiteSync.run() đọc lại file HTML:
 
      - THÊM 1 khối khóa học mới trong HTML  -> admin tự có khóa học mới
-       (chưa có danh mục: vào trang Danh mục để thêm vào danh mục).
+       (mặc định hiển thị, chưa phân công giảng viên).
      - SỬA tên / ảnh / giá trong HTML        -> admin cập nhật theo.
      - XÓA khối khỏi HTML                    -> khóa học VẪN GIỮ trong admin (không còn mục "Đã gỡ khỏi website").
        Muốn khóa không hiện trên website thì dùng công tắc Hiển thị / Đang ẩn ở trang Khóa học.
@@ -122,7 +122,6 @@ const SiteSync = {
           image: f.image,
           price: d ? d.price : 0,
           oldPrice: d ? d.oldPrice : 0,
-          categoryId: "",
           instructor: "",
           instructors: [],
           description: d ? d.description : "",

@@ -1,6 +1,6 @@
 /* =========================================================
    khoa-hoc-cua-toi.js - Danh sách khóa học do giảng viên phụ trách
-   Chỉ xem: ảnh, tên, danh mục, giá, số bài học, số học viên.
+   Chỉ xem: ảnh, tên, giá, số bài học, số học viên.
    (Thêm / sửa / xóa khóa học là quyền của Admin.)
    ========================================================= */
 function initMyCourses() {
@@ -39,7 +39,7 @@ function initMyCourses() {
     return (
       '<div class="course-card"><div class="cc-img"><img src="' + UI.esc(UI.img(c.image)) + '" alt="">' + statusBadge(c) + "</div>" +
       '<div class="cc-body"><div class="cc-title" title="' + UI.esc(c.name) + '">' + UI.esc(c.name) + "</div>" +
-      '<div class="cc-meta"><span><i class="fa-solid fa-tag"></i> ' + UI.esc(Store.categoryName(c.categoryId)) + "</span><span>" + UI.esc(c.id) + "</span></div>" +
+      '<div class="cc-meta"><span>' + UI.esc(c.id) + "</span></div>" +
       '<div class="cc-meta"><span><i class="fa-regular fa-calendar"></i> ' + r.batches + ' đợt học</span><span><i class="fa-solid fa-list-ol"></i> ' + r.lessons + ' bài học</span><span><i class="fa-solid fa-user-graduate"></i> ' + r.students + " học viên</span></div></div>" +
       '<div class="cc-foot">' + priceHtml(c) +
       '<div><a class="icon-btn" title="Xem học viên" href="hoc-vien.html?course=' + c.id + '"><i class="fa-solid fa-users"></i></a> ' +
@@ -49,14 +49,13 @@ function initMyCourses() {
 
   function tableHtml(rows) {
     return (
-      '<div class="table-wrap"><table class="data-table"><thead><tr><th>Khóa học</th><th>Danh mục</th><th class="num">Giá bán</th><th class="num">Đợt học</th><th class="num">Số bài học</th><th class="num">Học viên</th><th class="actions"></th></tr></thead><tbody>' +
+      '<div class="table-wrap"><table class="data-table"><thead><tr><th>Khóa học</th><th class="num">Giá bán</th><th class="num">Đợt học</th><th class="num">Số bài học</th><th class="num">Học viên</th><th class="actions"></th></tr></thead><tbody>' +
       rows
         .map((r) => {
           const c = r.course;
           return (
             '<tr><td><div class="user-cell"><img class="thumb" src="' + UI.esc(UI.img(c.image)) + '" alt="">' +
             '<div><div class="cell-title clamp-2 cell-wide">' + UI.esc(c.name) + '</div><div class="cell-sub">' + UI.esc(c.id) + "</div></div></div></td>" +
-            "<td>" + UI.esc(Store.categoryName(c.categoryId)) + "</td>" +
             '<td class="num">' + priceHtml(c) + "</td>" +
             '<td class="num">' + r.batches + '</td><td class="num">' + r.lessons + '</td><td class="num">' + r.students + "</td>" +
             '<td class="actions"><a class="icon-btn" title="Xem học viên" href="hoc-vien.html?course=' + c.id + '"><i class="fa-solid fa-users"></i></a>' +

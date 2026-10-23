@@ -54,7 +54,7 @@ function initMyCoursesPage() {
           return (
             '<div class="sc-card"><div class="sc-img"><img src="' + UI.esc(UI.img(c.image)) + '" alt="">' + SUI.statusBadge(p) + "</div>" +
             '<div class="sc-body"><div class="sc-title">' + UI.esc(c.name) + "</div>" +
-            '<div class="sc-meta"><div><i class="fa-solid fa-chalkboard-user"></i> ' + UI.esc(c.instructor) + '</div>' + (c.batch ? '<div><i class="fa-regular fa-calendar"></i> ' + UI.esc(c.batch.name) + " · " + c.batch.range + "</div>" : "") + '<div><i class="fa-solid fa-tag"></i> ' + UI.esc(c.categoryName) + '</div><div><i class="fa-regular fa-calendar"></i> Ngày mua: ' + UI.date(c.boughtAt) + "</div></div>" +
+            '<div class="sc-meta"><div><i class="fa-solid fa-chalkboard-user"></i> ' + UI.esc(c.instructor) + '</div>' + (c.batch ? '<div><i class="fa-regular fa-calendar"></i> ' + UI.esc(c.batch.name) + " · " + c.batch.range + "</div>" : "") + '<div><i class="fa-regular fa-calendar"></i> Ngày mua: ' + UI.date(c.boughtAt) + "</div></div>" +
             '<div class="sc-prog"><div class="top"><span>Tiến độ: <b>' + p.percent + "%</b></span><span>" + p.done + "/" + p.total + " bài học</span></div>" + SUI.progressBar(p) + "</div></div>" +
             '<div class="sc-foot">' +
             (c.next ? '<a class="btn btn-primary btn-sm" href="' + StudentStore.learnUrl(c.courseId, c.next.id) + '"><i class="fa-solid fa-play"></i> ' + (p.status === "done" ? "Học lại" : "Tiếp tục học") + "</a>" : '<span class="btn btn-outline btn-sm" style="opacity:.6;cursor:default">Chưa có bài học</span>') +
@@ -76,7 +76,6 @@ function initMyCoursesPage() {
     $("course-body").innerHTML =
       '<div class="info-grid"><div class="info-box"><h4>Thông tin khóa học</h4>' +
       '<div class="info-line"><span>Giảng viên</span><span>' + UI.esc(c.instructor) + "</span></div>" +
-      '<div class="info-line"><span>Danh mục</span><span>' + UI.esc(c.categoryName) + "</span></div>" +
       '<div class="info-line"><span>Ngày mua</span><span>' + UI.date(c.boughtAt) + "</span></div>" +
       '<div class="info-line"><span>Mã đơn hàng</span><span>' + UI.esc(c.orderId) + "</span></div></div>" +
       '<div class="info-box"><h4>Tiến độ học</h4><div class="info-line"><span>Hoàn thành</span><span>' + p.done + " / " + p.total + " bài (" + p.percent + "%)</span></div>" +
