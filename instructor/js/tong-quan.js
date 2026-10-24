@@ -9,7 +9,8 @@ function initDashboard() {
   const courses = Ins.courses();
   const courseIds = courses.map((c) => c.id);
   const myBatches = Ins.batches(); // các đợt học tôi phụ trách
-  const lessons = LearningStore.getLessonsOfBatches(myBatches.map((b) => b.id));
+  // Bài học thuộc các khóa tôi phụ trách (tạo 1 lần trên khóa, chọn đợt để hiển thị)
+  const lessons = courseIds.reduce((all, id) => all.concat(LearningStore.getLessonsOfCourse(id)), []);
   const enrolls = LearningStore.enrollments(courseIds, Ins.user);
   const active = enrolls.filter((e) => e.status === "completed");
   const studentCount = new Set(active.map((e) => e.studentId)).size;
@@ -96,7 +97,7 @@ function initDashboard() {
           return (
             '<tr><td><div class="user-cell"><img class="thumb" style="width: 64px; height: 40px" src="' + UI.esc(UI.img(c.image)) + '" alt="">' +
             '<div><div class="cell-title clamp-2 cell-wide">' + UI.esc(c.name) + '</div><div class="cell-sub">' + UI.esc(c.id) + "</div></div></div></td>" +
-            '<td class="num">' + LearningStore.getLessonsOfBatches(myBatches.filter((b) => b.courseId === c.id).map((b) => b.id)).length + '</td><td class="num">' + LearningStore.courseStudentCount(c.id, Ins.user) + "</td>" +
+            '<td class="num">' + LearningStore.getLessonsOfCourse(c.id).length + '</td><td class="num">' + LearningStore.courseStudentCount(c.id, Ins.user) + "</td>" +
             '<td class="actions"><a class="icon-btn" title="Quản lý bài học" href="ql-bai-hoc.html?course=' + c.id + '"><i class="fa-regular fa-pen-to-square"></i></a></td></tr>'
           );
         })
@@ -112,10 +113,10 @@ function initDashboard() {
     $("recent-lessons").innerHTML = latest
       .map((l) => {
         const c = courses.find((x) => x.id === l.courseId);
-        const b = Store.getBatch(l.batchId);
+        const shown = myBatches.filter((b) => (l.batchIds || []).includes(b.id)).map((b) => b.name);
         return (
           '<li class="rank-item"><span class="rank-num">' + l.order + "</span>" +
-          '<div class="rank-info"><div class="cell-title" title="' + UI.esc(l.name) + '">' + UI.esc(l.name) + '</div><div class="cell-sub">' + UI.esc((c ? c.name : "") + (b ? " · " + b.name : "")) + "</div></div>" +
+          '<div class="rank-info"><div class="cell-title" title="' + UI.esc(l.name) + '">' + UI.esc(l.name) + '</div><div class="cell-sub">' + UI.esc((c ? c.name : "") + (shown.length ? " · " + shown.join(", ") : " · chưa chọn đợt")) + "</div></div>" +
           '<div class="rank-value" style="font-weight: 600; font-size: 13px">' + UI.date(l.updatedAt) + "<small>" + UI.time(l.updatedAt) + "</small></div></li>"
         );
       })

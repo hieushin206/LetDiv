@@ -18,6 +18,7 @@ function initMyVouchersPage() {
 
   // Còn bao nhiêu ngày đến hết hạn (hôm nay = 0)
   function daysLeft(p) {
+    if (!p.endDate) return Infinity; // không giới hạn thời gian
     return Math.round(
       (parseDay(p.endDate) - parseDay(Store.todayString())) / 86400000,
     );
@@ -38,13 +39,21 @@ function initMyVouchersPage() {
     if (Store.promoAudience(p) === "specific") conds.push("Dành riêng cho bạn");
     conds.push("Mỗi khách dùng 1 lần");
 
-    let timeText = "Từ " + dayText(p.startDate) + " đến " + dayText(p.endDate);
+    let timeText = Store.promoUnlimited(p)
+      ? "Không giới hạn thời gian"
+      : p.startDate && p.endDate
+        ? "Từ " + dayText(p.startDate) + " đến " + dayText(p.endDate)
+        : p.startDate
+          ? "Từ " + dayText(p.startDate)
+          : "Đến " + dayText(p.endDate);
     let note = "";
     if (usedByMe) note = "Bạn đã dùng mã này";
     else if (key === "running") {
       const d = daysLeft(p);
       note = d === 0 ? "Hết hạn hôm nay" : d <= 3 ? "Còn " + d + " ngày" : "";
-    } else if (key === "upcoming") note = "Bắt đầu " + dayText(p.startDate);
+    } else if (key === "upcoming" && p.startDate)
+      note = "Bắt đầu " + dayText(p.startDate);
+    else if (key === "upcoming") note = "Sắp diễn ra";
     else if (key === "expired") note = "Đã hết hạn";
     else if (key === "soldout") note = "Đã hết lượt";
 

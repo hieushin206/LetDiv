@@ -77,9 +77,9 @@ function initPromoPage() {
               : '<span class="text-muted">Không</span>') +
             "</td>" +
             "<td>" +
-            formatDay(p.startDate) +
-            " → " +
-            formatDay(p.endDate) +
+            (Store.promoUnlimited(p)
+              ? '<span class="audience-tag"><i class="fa-solid fa-infinity"></i> Không giới hạn</span>'
+              : UI.esc(Store.promoPeriodText(p))) +
             "</td>" +
             "<td>" +
             usedHtml +
@@ -167,12 +167,25 @@ function initPromoPage() {
   }
 
   /* ---------- Thời gian: bắt đầu mặc định hôm nay, kết thúc không nhỏ hơn bắt đầu ---------- */
+  // Gõ / chọn ngày kết thúc nhỏ hơn ngày bắt đầu => báo lỗi ngay dưới ô ngày
+  const range = linkDateRange($("f-startDate"), $("f-endDate"), (msg) => {
+    $("e-endDate").textContent = msg;
+  });
   function syncDates() {
-    const start = $("f-startDate").value;
-    $("f-endDate").min = start || "";
-    // Đang chọn ngày kết thúc nhỏ hơn ngày bắt đầu => kéo lên bằng ngày bắt đầu
-    if (start && $("f-endDate").value && $("f-endDate").value < start)
-      $("f-endDate").value = start;
+    range.sync();
+  }
+
+  // Bật "Không giới hạn thời gian" => ẩn 2 ô ngày (không cần nhập)
+  function updateUnlimited() {
+    const unlimited = $("f-unlimited").checked;
+    $("date-row").hidden = unlimited;
+    if (unlimited) {
+      $("e-startDate").textContent = "";
+      $("e-endDate").textContent = "";
+    } else if (!$("f-startDate").value) {
+      $("f-startDate").value = Store.todayString();
+    }
+    syncDates();
   }
 
   /* ---------- Form ---------- */
@@ -201,8 +214,13 @@ function initPromoPage() {
     $("f-value").value = p ? p.value : "";
     $("f-minOrder").value = p ? p.minOrder : 0;
     $("f-quantity").value = p ? p.quantity : 0;
-    $("f-startDate").value = p ? p.startDate : Store.todayString();
-    $("f-endDate").value = p ? p.endDate : "";
+    const unlimited = p ? Store.promoUnlimited(p) : false;
+    $("f-unlimited").checked = unlimited;
+    $("f-startDate").value = p
+      ? p.startDate || (unlimited ? "" : Store.todayString())
+      : Store.todayString();
+    $("f-endDate").value = p ? p.endDate || "" : "";
+    $("date-row").hidden = unlimited;
     $("f-active").checked = p ? p.active : true;
     $("f-audience").value = p ? Store.promoAudience(p) : "all";
     selected = new Set(p ? p.studentIds || [] : []);
@@ -222,8 +240,9 @@ function initPromoPage() {
       value: Number($("f-value").value) || 0,
       minOrder: Number($("f-minOrder").value) || 0,
       quantity: Number($("f-quantity").value) || 0,
-      startDate: $("f-startDate").value,
-      endDate: $("f-endDate").value,
+      unlimited: $("f-unlimited").checked,
+      startDate: $("f-unlimited").checked ? "" : $("f-startDate").value,
+      endDate: $("f-unlimited").checked ? "" : $("f-endDate").value,
       active: $("f-active").checked,
       audience: $("f-audience").value,
       studentIds: Array.from(selected),
@@ -274,8 +293,7 @@ function initPromoPage() {
   $("f-type").addEventListener("change", updateValueLabel);
   $("btn-test").addEventListener("click", testPromo);
   $("f-audience").addEventListener("change", updateAudience);
-  $("f-startDate").addEventListener("change", syncDates);
-  $("f-endDate").addEventListener("change", syncDates);
+  $("f-unlimited").addEventListener("change", updateUnlimited);
   $("sp-search").addEventListener(
     "input",
     UI.debounce(renderStudentPicker, 150),

@@ -238,21 +238,27 @@ function initOrderPage() {
       render();
     }, 200)
   );
-  $("date-from").addEventListener("change", (e) => {
-    state.from = e.target.value;
-    state.page = 1;
-    render();
-  });
-  $("date-to").addEventListener("change", (e) => {
-    state.to = e.target.value;
-    state.page = 1;
-    render();
-  });
+  // Lọc theo ngày: ngày kết thúc không được nhỏ hơn ngày bắt đầu (chặn ở ô chọn ngày, gõ tay sai thì báo lỗi + tự sửa)
+  const dateRange = linkDateRange(
+    $("date-from"),
+    $("date-to"),
+    (msg) => {
+      $("e-range").textContent = msg;
+    },
+    () => {
+      state.from = $("date-from").value;
+      state.to = $("date-to").value;
+      state.page = 1;
+      render();
+    },
+  );
   $("btn-clear").addEventListener("click", () => {
     state.status = "all";
     state.search = state.from = state.to = "";
     state.page = 1;
     $("search").value = $("date-from").value = $("date-to").value = "";
+    $("e-range").textContent = "";
+    dateRange.sync();
     render();
   });
   $("list-area").addEventListener("click", (e) => {

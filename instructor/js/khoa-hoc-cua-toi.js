@@ -15,7 +15,7 @@ function initMyCourses() {
     return {
       course: c,
       batches: batches.length,
-      lessons: LearningStore.getLessonsOfBatches(batches.map((b) => b.id)).length,
+      lessons: LearningStore.getLessonsOfCourse(c.id).length,
       students: LearningStore.courseStudentCount(c.id, Ins.user),
     };
   });

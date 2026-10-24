@@ -103,6 +103,10 @@
       batchName[b.id] = b.name;
     });
     const assignments = {};
+    const lessons = {};
+    LearningStore.getLessonsOfBatches(batches.map(function (b) { return b.id; })).forEach(function (l) {
+      lessons[l.id] = l;
+    });
     LearningStore.getAssignmentsOfBatches(batches.map(function (b) { return b.id; })).forEach(function (a) {
       assignments[a.id] = a;
     });
@@ -110,13 +114,14 @@
     LearningStore.read("submissions").forEach(function (s) {
       const a = assignments[s.assignmentId];
       // isMyStudent đã loại học viên bị vô hiệu hóa / không thuộc đợt của giảng viên
-      if (!a || !LearningStore.isMyStudent(user, a.batchId, s.studentId)) return;
+      if (!a || !LearningStore.isMyStudentOfLesson(user, lessons[a.lessonId], s.studentId)) return;
       const st = Store.getStudent(s.studentId);
+      const bId = LearningStore.batchIdOfStudent(s.studentId, a.courseId);
       list.push({
         id: "sub:" + s.id + ":" + s.submittedAt, // nộp lại => thông báo mới
         icon: "fa-inbox",
         title: (st ? st.name : s.studentId) + " đã nộp bài",
-        text: a.name + " · " + (batchName[a.batchId] || ""),
+        text: a.name + " · " + (batchName[bId] || ""),
         time: s.submittedAt,
         url: "pages/bai-nop.html?assignment=" + encodeURIComponent(a.id),
       });

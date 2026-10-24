@@ -24,16 +24,72 @@ function initReportPage() {
     labelEl.innerHTML = items.map((i) => "<span>" + i.label + "</span>").join("");
   }
 
-  function render() {
-    const n = Number($("period").value);
-    const months = Store.lastMonths(n);
-    const startTime = months[0].start.getTime();
-    const keys = months.map((m) => m.key);
+  /* ---------- Bộ lọc ngày ---------- */
+  const RANGE_MSG = "Ngày kết thúc không được nhỏ hơn ngày bắt đầu.";
+  // Ô kết thúc có min = ngày bắt đầu; gõ tay sai thì báo lỗi và tự sửa lại cho hợp lệ
+  const range = linkDateRange($("date-from"), $("date-to"), (msg) => {
+    $("e-range").textContent = msg;
+  }, () => render());
 
-    // Chỉ lấy đơn / học viên nằm trong khoảng thời gian đã chọn
-    const orders = Store.get("orders").filter((o) => new Date(o.createdAt).getTime() >= startTime);
+  // "YYYY-MM-DD" theo giờ địa phương từ chuỗi ISO / Date
+  function dayStr(d) {
+    d = new Date(d);
+    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  }
+  const fmtDay = (s) => s.split("-").reverse().join("/");
+
+  // Mặc định: từ ngày 1 của tháng cách đây 5 tháng đến hôm nay (= 6 tháng gần nhất)
+  function setDefaultRange() {
+    const now = new Date();
+    $("date-from").value = dayStr(new Date(now.getFullYear(), now.getMonth() - 5, 1));
+    $("date-to").value = dayStr(now);
+    range.sync();
+  }
+
+  // Các cột của biểu đồ: theo NGÀY nếu khoảng lọc <= 31 ngày, ngược lại theo THÁNG
+  function buildBuckets(from, to) {
+    const a = parseDay(from);
+    const b = parseDay(to);
+    const days = Math.round((b - a) / 86400000) + 1;
+    const list = [];
+    if (days <= 31) {
+      for (let d = new Date(a); d <= b; d.setDate(d.getDate() + 1)) {
+        const k = dayStr(d);
+        list.push({ key: k, label: k.slice(8) + "/" + k.slice(5, 7), unit: "day" });
+      }
+    } else {
+      for (let d = new Date(a.getFullYear(), a.getMonth(), 1); d <= b; d.setMonth(d.getMonth() + 1)) {
+        list.push({ key: monthKey(d), label: String(d.getMonth() + 1).padStart(2, "0") + "/" + d.getFullYear(), unit: "month" });
+      }
+    }
+    return list;
+  }
+
+  function render() {
+    const from = $("date-from").value;
+    const to = $("date-to").value;
+    // Phải chọn đủ 2 ngày và ngày kết thúc không nhỏ hơn ngày bắt đầu
+    let error = "";
+    if (!from || !to) error = "Vui lòng chọn đủ ngày bắt đầu và ngày kết thúc.";
+    else if (to < from) error = RANGE_MSG;
+    $("e-range").textContent = error;
+    if (error) return; // giữ nguyên số liệu của lần lọc hợp lệ gần nhất
+
+    const months = buildBuckets(from, to); // mỗi phần tử = 1 cột biểu đồ (ngày hoặc tháng)
+    const unit = months[0].unit;
+    const unitName = unit === "day" ? "ngày" : "tháng";
+    const bucketKey = unit === "day" ? (iso) => dayStr(iso) : (iso) => monthKey(iso);
+    const keys = months.map((m) => m.key);
+    const inRange = (iso) => {
+      const d = dayStr(iso);
+      return d >= from && d <= to;
+    };
+    $("revenue-title").textContent = "Doanh thu theo " + unitName + " (" + fmtDay(from) + " - " + fmtDay(to) + ")";
+
+    // Chỉ lấy đơn / học viên nằm trong khoảng ngày đã chọn
+    const orders = Store.get("orders").filter((o) => inRange(o.createdAt));
     const completed = Store.completedOrders(orders);
-    const students = Store.get("students").filter((s) => new Date(s.createdAt).getTime() >= startTime);
+    const students = Store.get("students").filter((s) => inRange(s.createdAt));
 
     /* ----- 4 chỉ số tổng ----- */
     const revenue = Store.sumTotal(completed);
@@ -51,7 +107,7 @@ function initReportPage() {
     const byMonth = {};
     keys.forEach((k) => (byMonth[k] = { revenue: 0, orders: 0 }));
     completed.forEach((o) => {
-      const k = monthKey(o.createdAt);
+      const k = bucketKey(o.createdAt);
       if (byMonth[k]) {
         byMonth[k].revenue += o.total;
         byMonth[k].orders += 1;
@@ -60,7 +116,7 @@ function initReportPage() {
     drawBars($("revenue-chart"), $("revenue-labels"), months.map((m) => ({ label: m.label, value: byMonth[m.key].revenue, text: shortMoney(byMonth[m.key].revenue) })), "");
 
     $("revenue-table").innerHTML =
-      '<table class="mini-table"><thead><tr><th>Tháng</th><th class="num">Đơn hoàn thành</th><th class="num">Doanh thu</th><th class="num">So với tháng trước</th></tr></thead><tbody>' +
+      '<table class="mini-table"><thead><tr><th>' + (unit === "day" ? "Ngày" : "Tháng") + '</th><th class="num">Đơn hoàn thành</th><th class="num">Doanh thu</th><th class="num">So với ' + unitName + ' trước</th></tr></thead><tbody>' +
       months
         .map((m, i) => {
           const cur = byMonth[m.key].revenue;
@@ -85,7 +141,7 @@ function initReportPage() {
           '<div class="bar-row"><div class="bar-top"><span>' + UI.orderBadge(k) + "</span><span><b>" + count + "</b> đơn · " + pct + '%</span></div><div class="progress ' + colors[k] + '"><span style="width:' + pct + '%"></span></div></div>'
         );
       })
-      .join("") + '<div class="hint" style="margin-top:14px">Tổng ' + orders.length + " đơn hàng trong kỳ.</div>";
+      .join("") + '<div class="hint" style="margin-top:14px">Tổng ' + orders.length + " đơn hàng từ " + fmtDay(from) + " đến " + fmtDay(to) + ".</div>";
 
     /* ----- Khóa học bán chạy nhất ----- */
     const top = Store.courseSales(completed).slice(0, 5);
@@ -99,13 +155,17 @@ function initReportPage() {
     const stuByMonth = {};
     keys.forEach((k) => (stuByMonth[k] = 0));
     students.forEach((s) => {
-      const k = monthKey(s.createdAt);
+      const k = bucketKey(s.createdAt);
       if (k in stuByMonth) stuByMonth[k] += 1;
     });
     drawBars($("student-chart"), $("student-labels"), months.map((m) => ({ label: m.label, value: stuByMonth[m.key], text: stuByMonth[m.key] })), "green");
   }
 
-  $("period").addEventListener("change", render);
+  $("btn-reset").addEventListener("click", () => {
+    setDefaultRange();
+    render();
+  });
+  setDefaultRange();
   render();
 }
 

@@ -86,6 +86,8 @@ function initStudentPage() {
     const assignments = LearningStore.getAssignmentsOfBatches(Ins.batches().map((b) => b.id));
     const works = [];
     assignments.forEach((a) => {
+      // Chỉ tính bài tập của bài học đang hiển thị ở đợt của học viên này (và đợt đó do tôi phụ trách)
+      if (!LearningStore.isMyStudentOfLesson(Ins.user, LearningStore.getLesson(a.lessonId), studentId)) return;
       const sub = LearningStore.submissionOf(studentId, a.id);
       if (sub) works.push({ a: a, sub: sub, result: results[sub.id] || null });
     });

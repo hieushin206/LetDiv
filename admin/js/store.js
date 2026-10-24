@@ -45,6 +45,36 @@ function parseDay(str) {
   return new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
 }
 
+// Liên kết 2 ô chọn ngày "từ - đến": ngày kết thúc không được nhỏ hơn ngày bắt đầu.
+//  - Ô kết thúc luôn có min = ngày bắt đầu (trình duyệt không cho chọn ngày nhỏ hơn)
+//  - Ô bắt đầu có max = ngày kết thúc (nếu đã chọn)
+//  - Gõ tay ngày sai thì báo lỗi: onInvalid(message) và trả ô vừa sửa về giá trị hợp lệ.
+//  onChange() được gọi sau khi giá trị hợp lệ thay đổi.
+function linkDateRange(startEl, endEl, onInvalid, onChange) {
+  const MSG = "Ngày kết thúc không được nhỏ hơn ngày bắt đầu.";
+  function sync() {
+    endEl.min = startEl.value || "";
+    startEl.max = endEl.value || "";
+  }
+  function check(changed) {
+    const a = startEl.value;
+    const b = endEl.value;
+    const invalid = !!(a && b && b < a);
+    if (invalid) {
+      // Sửa ngày vừa đổi: ô kết thúc bị xóa; ô bắt đầu bị đổi thì kéo ngày kết thúc lên bằng ngày bắt đầu
+      if (changed === startEl) endEl.value = a;
+      else endEl.value = "";
+    }
+    sync();
+    if (onChange) onChange(); // vẽ lại trước, rồi mới hiện thông báo (để không bị vẽ lại xóa mất)
+    if (onInvalid) onInvalid(invalid ? MSG : "");
+  }
+  startEl.addEventListener("change", () => check(startEl));
+  endEl.addEventListener("change", () => check(endEl));
+  sync();
+  return { sync: sync, message: MSG };
+}
+
 // Số tiền giảm của 1 mã khuyến mãi với tổng tiền subtotal
 function calcDiscount(promo, subtotal) {
   let discount = 0;
@@ -682,14 +712,31 @@ const Store = {
     );
   },
 
+  // Mã không giới hạn thời gian: dùng được bất cứ lúc nào (không có ngày bắt đầu / kết thúc)
+  promoUnlimited(p) {
+    return p.unlimited === true || (!p.startDate && !p.endDate);
+  },
+
+  // Chuỗi thời gian áp dụng để hiển thị: "Không giới hạn" hoặc "10/10/2026 → 20/10/2026"
+  promoPeriodText(p) {
+    if (this.promoUnlimited(p)) return "Không giới hạn thời gian";
+    return (
+      (p.startDate ? formatDay(p.startDate) : "...") +
+      " → " +
+      (p.endDate ? formatDay(p.endDate) : "...")
+    );
+  },
+
   // Trạng thái hiển thị của mã
   promoState(p) {
     const today = parseDay(this.todayString());
     if (!p.active) return { key: "off", label: "Tạm tắt" };
-    if (today < parseDay(p.startDate))
-      return { key: "upcoming", label: "Sắp diễn ra" };
-    if (today > parseDay(p.endDate))
-      return { key: "expired", label: "Hết hạn" };
+    if (!this.promoUnlimited(p)) {
+      if (p.startDate && today < parseDay(p.startDate))
+        return { key: "upcoming", label: "Sắp diễn ra" };
+      if (p.endDate && today > parseDay(p.endDate))
+        return { key: "expired", label: "Hết hạn" };
+    }
     if (p.quantity > 0 && this.promoUsage(p.code) >= p.quantity)
       return { key: "soldout", label: "Hết lượt" };
     return { key: "running", label: "Đang hoạt động" };
@@ -716,7 +763,9 @@ const Store = {
       .sort(
         (a, b) =>
           order[a.state.key] - order[b.state.key] ||
-          a.promo.endDate.localeCompare(b.promo.endDate),
+          (a.promo.endDate || "9999-12-31").localeCompare(
+            b.promo.endDate || "9999-12-31",
+          ), // mã không giới hạn thời gian xếp cuối nhóm
       );
   },
 
@@ -749,10 +798,13 @@ const Store = {
     if (data.minOrder < 0) errors.minOrder = "Đơn tối thiểu không được âm.";
     if (data.quantity < 0)
       errors.quantity = "Số lượng không được âm (nhập 0 nếu không giới hạn).";
-    if (!data.startDate) errors.startDate = "Chọn ngày bắt đầu.";
-    if (!data.endDate) errors.endDate = "Chọn ngày kết thúc.";
-    else if (data.startDate && data.endDate < data.startDate)
-      errors.endDate = "Ngày kết thúc không được nhỏ hơn ngày bắt đầu.";
+    // "Không giới hạn thời gian" thì không cần chọn ngày
+    if (!data.unlimited) {
+      if (!data.startDate) errors.startDate = "Chọn ngày bắt đầu.";
+      if (!data.endDate) errors.endDate = "Chọn ngày kết thúc.";
+      else if (data.startDate && data.endDate < data.startDate)
+        errors.endDate = "Ngày kết thúc không được nhỏ hơn ngày bắt đầu.";
+    }
     if (
       data.audience === "specific" &&
       !(data.studentIds && data.studentIds.length > 0)
@@ -770,8 +822,9 @@ const Store = {
       value: data.value,
       minOrder: data.minOrder || 0,
       quantity: data.quantity || 0,
-      startDate: data.startDate,
-      endDate: data.endDate,
+      unlimited: !!data.unlimited,
+      startDate: data.unlimited ? "" : data.startDate,
+      endDate: data.unlimited ? "" : data.endDate,
       active: !!data.active,
       audience: data.audience === "specific" ? "specific" : "all",
       studentIds:
@@ -792,8 +845,9 @@ const Store = {
     item.value = data.value;
     item.minOrder = data.minOrder || 0;
     item.quantity = data.quantity || 0;
-    item.startDate = data.startDate;
-    item.endDate = data.endDate;
+    item.unlimited = !!data.unlimited;
+    item.startDate = data.unlimited ? "" : data.startDate;
+    item.endDate = data.unlimited ? "" : data.endDate;
     item.active = !!data.active;
     item.audience = data.audience === "specific" ? "specific" : "all";
     item.studentIds =
@@ -862,13 +916,15 @@ const Store = {
       );
     }
 
-    const today = parseDay(this.todayString());
-    if (today < parseDay(p.startDate))
-      return fail(
-        "Mã chưa đến thời gian áp dụng (từ " + formatDay(p.startDate) + ").",
-      );
-    if (today > parseDay(p.endDate))
-      return fail("Mã đã hết hạn vào " + formatDay(p.endDate) + ".");
+    if (!this.promoUnlimited(p)) {
+      const today = parseDay(this.todayString());
+      if (p.startDate && today < parseDay(p.startDate))
+        return fail(
+          "Mã chưa đến thời gian áp dụng (từ " + formatDay(p.startDate) + ").",
+        );
+      if (p.endDate && today > parseDay(p.endDate))
+        return fail("Mã đã hết hạn vào " + formatDay(p.endDate) + ".");
+    }
     if (subtotal < p.minOrder)
       return fail(
         "Đơn hàng cần tối thiểu " + formatVnd(p.minOrder) + " để dùng mã này.",

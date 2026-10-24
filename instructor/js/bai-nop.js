@@ -10,13 +10,13 @@ function initSubmissionPage() {
   const $ = (id) => document.getElementById(id);
   const PAGE_SIZE = 10;
 
-  // Bài tập phải thuộc 1 ĐỢT HỌC mà giảng viên phụ trách
+  // Bài tập phải thuộc khóa học giảng viên phụ trách
   const assignment = LearningStore.getAssignment(Ins.param("assignment"));
-  const batch = assignment ? LearningStore.ownBatch(Ins.user, assignment.batchId) : null;
-  const course = batch ? Store.getCourse(batch.courseId) : null;
-  if (!assignment || !batch || !course) {
+  const course = assignment ? LearningStore.ownCourse(Ins.user, assignment.courseId) : null;
+  const lessonOfAssignment = assignment ? LearningStore.getLesson(assignment.lessonId) : null;
+  if (!assignment || !course || !lessonOfAssignment) {
     $("main-area").innerHTML =
-      '<div class="card"><div class="empty-state"><i class="fa-solid fa-triangle-exclamation"></i><h3>Không tìm thấy bài tập</h3><p>Bài tập không tồn tại hoặc không thuộc đợt học bạn phụ trách.</p>' +
+      '<div class="card"><div class="empty-state"><i class="fa-solid fa-triangle-exclamation"></i><h3>Không tìm thấy bài tập</h3><p>Bài tập không tồn tại hoặc không thuộc khóa học bạn phụ trách.</p>' +
       '<a class="btn btn-primary" href="ql-bai-hoc.html">Về danh sách bài học</a></div></div>';
     return;
   }
@@ -27,13 +27,9 @@ function initSubmissionPage() {
   $("crumb").innerHTML =
     '<a href="ql-bai-hoc.html?course=' +
     course.id +
-    "&batch=" +
-    batch.id +
     '">' +
     UI.esc(course.name) +
-    '</a><i class="fa-solid fa-chevron-right"></i><span>' +
-    UI.esc(batch.name) +
-    '</span><i class="fa-solid fa-chevron-right"></i>' +
+    '</a><i class="fa-solid fa-chevron-right"></i>' +
     '<a href="ql-bai-tap.html?lesson=' +
     assignment.lessonId +
     '">' +
@@ -43,13 +39,25 @@ function initSubmissionPage() {
     "</span>";
   $("as-text").textContent = assignment.name;
 
-  const state = { keyword: "", filter: "all", page: 1, gradingId: null };
-  const totalStudents = LearningStore.batchStudentCount(batch.id);
+  // Các đợt của tôi đang hiển thị bài học này: chỉ học viên của các đợt đó nộp / được chấm bài
+  const shownBatches = Ins.batches(course.id).filter((b) => (lessonOfAssignment.batchIds || []).includes(b.id));
+  const fromUrlBatch = Ins.param("batch");
+  const state = { keyword: "", filter: "all", page: 1, gradingId: null, batchId: shownBatches.some((b) => b.id === fromUrlBatch) ? fromUrlBatch : "" };
+
+  $("filter-batch").innerHTML =
+    '<option value="">Tất cả đợt (' + shownBatches.length + ")</option>" + Ins.batchOptions(shownBatches, state.batchId);
+  $("filter-batch").disabled = shownBatches.length === 0;
+
+  // Số học viên cần nộp bài: học viên của đợt đang chọn (hoặc tất cả đợt đang hiển thị bài học)
+  function totalStudentsNow() {
+    const ids = state.batchId ? [state.batchId] : shownBatches.map((b) => b.id);
+    return ids.reduce((t, id) => t + LearningStore.batchStudentCount(id), 0);
+  }
 
   // Ghép bài nộp + học viên + kết quả thành các dòng để hiển thị
   function buildRows() {
     const results = LearningStore.resultMap();
-    return LearningStore.getSubmissionsOfAssignment(assignment.id, Ins.user).map((s) => {
+    return LearningStore.getSubmissionsOfAssignment(assignment.id, Ins.user, state.batchId).map((s) => {
       const st = Store.getStudent(s.studentId);
       return {
         sub: s,
@@ -76,7 +84,7 @@ function initSubmissionPage() {
         color: "ic-blue",
         label: "Đã nộp bài",
         value: rows.length,
-        sub: "trên " + totalStudents + " học viên của đợt",
+        sub: "trên " + totalStudentsNow() + " học viên " + (state.batchId ? "của đợt" : "các đợt đang hiển thị"),
       },
       {
         icon: "fa-hourglass-half",
@@ -117,8 +125,8 @@ function initSubmissionPage() {
       .join("");
 
     $("info-strip").innerHTML =
-      '<div><div class="lb">Đợt học</div><div class="vl">' +
-      UI.esc(Ins.batchLabel(batch)) +
+      '<div><div class="lb">Hiển thị ở đợt</div><div class="vl">' +
+      (shownBatches.length ? UI.esc(shownBatches.map((b) => b.name).join(", ")) : "Chưa chọn đợt nào") +
       "</div></div>" +
       '<div><div class="lb">Hạn nộp</div><div class="vl ' +
       (LearningStore.isOverdue(assignment) ? "overdue-text" : "") +
@@ -316,6 +324,12 @@ function initSubmissionPage() {
     if (btn) openGrade(btn.dataset.grade);
   });
   $("btn-save").addEventListener("click", saveGrade);
+  $("filter-batch").addEventListener("change", (e) => {
+    state.batchId = e.target.value;
+    state.page = 1;
+    Ins.setParam("batch", state.batchId);
+    render();
+  });
 
   render();
 }

@@ -23,6 +23,7 @@ const LEARN_KEYS = {
   profiles: "letdiv_instructor_profiles",
   seeded: "letdiv_learning_seeded_v1",
   batchMigrated: "letdiv_learning_batches_v3", // đã dọn dữ liệu cũ chưa có đợt học
+  courseLessonMigrated: "letdiv_learning_course_lessons_v4", // bài học chuyển từ "thuộc 1 đợt" sang "thuộc khóa học, chọn đợt để hiển thị"
 };
 
 const LESSON_STATUS = { visible: "Đang hiển thị", hidden: "Đã ẩn" };
@@ -154,17 +155,48 @@ const LearningStore = {
   // Không còn nạp dữ liệu mẫu: giảng viên tự tạo, hoặc admin chọn "tạo bài học mẫu / sao chép" khi tạo đợt.
   init() {
     if (typeof Store === "undefined") return;
-    if (localStorage.getItem(LEARN_KEYS.batchMigrated)) return;
-    const lessons = this.read("lessons").filter((l) => l.batchId);
-    const keepAssign = this.read("assignments").filter((a) => a.batchId);
-    const ids = new Set(keepAssign.map((a) => a.id));
-    const subs = this.read("submissions").filter((s) => ids.has(s.assignmentId));
-    const subIds = new Set(subs.map((s) => s.id));
-    this.write("lessons", lessons);
-    this.write("assignments", keepAssign);
-    this.write("submissions", subs);
-    this.write("results", this.read("results").filter((r) => subIds.has(r.submissionId)));
-    localStorage.setItem(LEARN_KEYS.batchMigrated, "1");
+    // v3 chạy TRƯỚC (dữ liệu quá cũ chưa có đợt thì bỏ), rồi mới chuyển sang mô hình mới (v4)
+    if (!localStorage.getItem(LEARN_KEYS.batchMigrated)) {
+      const lessons = this.read("lessons").filter((l) => l.batchId);
+      const keepAssign = this.read("assignments").filter((a) => a.batchId);
+      const ids = new Set(keepAssign.map((a) => a.id));
+      const subs = this.read("submissions").filter((s) =>
+        ids.has(s.assignmentId),
+      );
+      const subIds = new Set(subs.map((s) => s.id));
+      this.write("lessons", lessons);
+      this.write("assignments", keepAssign);
+      this.write("submissions", subs);
+      this.write(
+        "results",
+        this.read("results").filter((r) => subIds.has(r.submissionId)),
+      );
+      localStorage.setItem(LEARN_KEYS.batchMigrated, "1");
+    }
+    this.migrateCourseLessons();
+  },
+
+  // Mô hình mới: bài học / bài tập thuộc KHÓA HỌC; mỗi bài học có danh sách đợt được hiển thị (batchIds).
+  // Dữ liệu cũ (bài học gắn 1 đợt) được đổi thành: batchIds = [đợt cũ]. Chạy 1 lần duy nhất.
+  migrateCourseLessons() {
+    if (localStorage.getItem(LEARN_KEYS.courseLessonMigrated)) return;
+    const lessons = this.read("lessons");
+    const list = lessons.map((l) => {
+      if (!Array.isArray(l.batchIds)) l.batchIds = l.batchId ? [l.batchId] : [];
+      delete l.batchId;
+      return l;
+    });
+    this.write("lessons", list);
+    const lessonById = {};
+    list.forEach((l) => (lessonById[l.id] = l));
+    const assignments = this.read("assignments");
+    assignments.forEach((a) => {
+      if (!a.courseId && lessonById[a.lessonId])
+        a.courseId = lessonById[a.lessonId].courseId;
+      delete a.batchId;
+    });
+    this.write("assignments", assignments);
+    localStorage.setItem(LEARN_KEYS.courseLessonMigrated, "1");
   },
 
   /* =======================================================
@@ -196,12 +228,16 @@ const LearningStore = {
     const all = Store.getCourses(false);
     if (user.role === "admin") return all;
     const me = String(user.username).toLowerCase();
-    return all.filter((c) => Array.isArray(c.instructors) && c.instructors.includes(me));
+    return all.filter(
+      (c) => Array.isArray(c.instructors) && c.instructors.includes(me),
+    );
   },
 
   // Các đợt học giảng viên phụ trách (admin xem thử thì thấy tất cả)
   myBatches(user) {
-    return user.role === "admin" ? Store.getBatches() : Store.batchesOfInstructor(user.username);
+    return user.role === "admin"
+      ? Store.getBatches()
+      : Store.batchesOfInstructor(user.username);
   },
 
   // Trả về đợt nếu thuộc quyền giảng viên, ngược lại undefined
@@ -211,7 +247,9 @@ const LearningStore = {
 
   // Học viên có đang học trong đợt này không?
   inBatch(studentId, batchId) {
-    return Store.get("classes").some((k) => k.studentId === studentId && k.batchId === batchId);
+    return Store.get("classes").some(
+      (k) => k.studentId === studentId && k.batchId === batchId,
+    );
   },
 
   // Học viên có thuộc 1 đợt của giảng viên này không? (admin: luôn đúng)
@@ -219,7 +257,26 @@ const LearningStore = {
     if (user.role === "admin") return true;
     if (this.isStudentDisabled(studentId)) return false; // tài khoản bị vô hiệu hóa => không hiện ở trang giảng viên
     const batch = Store.getBatch(batchId);
-    return !!batch && batch.instructor === String(user.username).toLowerCase() && this.inBatch(studentId, batchId);
+    return (
+      !!batch &&
+      batch.instructor === String(user.username).toLowerCase() &&
+      this.inBatch(studentId, batchId)
+    );
+  },
+
+  // Đợt học của học viên ở 1 khóa (null nếu chưa được phân đợt)
+  batchIdOfStudent(studentId, courseId) {
+    const rec = Store.classOfStudent(studentId, courseId);
+    return rec && rec.batchId ? rec.batchId : "";
+  },
+
+  // Học viên có thuộc đợt của giảng viên này VÀ bài học đang được hiển thị ở đợt đó không?
+  // (dùng cho bài tập / bài nộp: giảng viên chỉ thấy bài nộp của đúng học viên trong đợt có hiển thị bài học)
+  isMyStudentOfLesson(user, lesson, studentId) {
+    if (!lesson) return false;
+    const batchId = this.batchIdOfStudent(studentId, lesson.courseId);
+    if (!batchId || !(lesson.batchIds || []).includes(batchId)) return false;
+    return this.isMyStudent(user, batchId, studentId);
   },
 
   // Học viên có đang bị admin vô hiệu hóa không?
@@ -230,7 +287,13 @@ const LearningStore = {
 
   // Số học viên của 1 đợt (không tính học viên bị vô hiệu hóa)
   batchStudentCount(batchId) {
-    return new Set(Store.get("classes").filter((k) => k.batchId === batchId && !this.isStudentDisabled(k.studentId)).map((k) => k.studentId)).size;
+    return new Set(
+      Store.get("classes")
+        .filter(
+          (k) => k.batchId === batchId && !this.isStudentDisabled(k.studentId),
+        )
+        .map((k) => k.studentId),
+    ).size;
   },
 
   myCourseIds(user) {
@@ -254,7 +317,8 @@ const LearningStore = {
       o.items.forEach((it) => {
         if (!set.has(it.courseId)) return;
         const rec = Store.classOf(o.id, it.courseId);
-        if (user && !(rec && this.isMyStudent(user, rec.batchId, o.studentId))) return;
+        if (user && !(rec && this.isMyStudent(user, rec.batchId, o.studentId)))
+          return;
         const s = Store.getStudent(o.studentId);
         const batch = rec ? Store.getBatch(rec.batchId) : null;
         rows.push({
@@ -276,12 +340,16 @@ const LearningStore = {
 
   // Học viên đã thanh toán (đơn hoàn thành) - dùng để đếm và cho phép nộp bài
   activeEnrollments(courseIds, user) {
-    return this.enrollments(courseIds, user).filter((r) => r.status === "completed");
+    return this.enrollments(courseIds, user).filter(
+      (r) => r.status === "completed",
+    );
   },
 
   // Số học viên của khóa (truyền user để chỉ đếm học viên thuộc các đợt của giảng viên đó)
   courseStudentCount(courseId, user) {
-    return new Set(this.activeEnrollments([courseId], user).map((r) => r.studentId)).size;
+    return new Set(
+      this.activeEnrollments([courseId], user).map((r) => r.studentId),
+    ).size;
   },
 
   /* =======================================================
@@ -289,15 +357,26 @@ const LearningStore = {
      Mỗi bài học thuộc 1 ĐỢT HỌC (batchId). Thứ tự luôn liền mạch 1..n trong mỗi đợt:
      thêm / sửa / xóa xong hệ thống tự đánh số lại (chỉ trong đợt đó).
      ======================================================= */
-  getLessons(batchId) {
+  // Tất cả bài học của 1 khóa (giảng viên tạo sẵn), theo thứ tự
+  getLessonsOfCourse(courseId) {
     return this.read("lessons")
-      .filter((l) => l.batchId === batchId)
+      .filter((l) => l.courseId === courseId)
       .sort((a, b) => a.order - b.order);
   },
 
+  // Bài học đang được hiển thị ở 1 ĐỢT (đã chọn đợt đó), theo thứ tự
+  getLessons(batchId) {
+    return this.read("lessons")
+      .filter((l) => (l.batchIds || []).includes(batchId))
+      .sort((a, b) => a.order - b.order);
+  },
+
+  // Bài học hiển thị ở ít nhất 1 trong các đợt
   getLessonsOfBatches(batchIds) {
     const set = new Set(batchIds);
-    return this.read("lessons").filter((l) => set.has(l.batchId));
+    return this.read("lessons").filter((l) =>
+      (l.batchIds || []).some((id) => set.has(id)),
+    );
   },
 
   getLesson(id) {
@@ -322,10 +401,10 @@ const LearningStore = {
     return errors;
   },
 
-  // Đặt bài học vào đúng vị trí rồi đánh số lại 1..n
-  _place(all, batchId, item, wantedOrder) {
+  // Đặt bài học vào đúng vị trí rồi đánh số lại 1..n (trong cùng khóa học)
+  _place(all, courseId, item, wantedOrder) {
     const others = all
-      .filter((l) => l.batchId === batchId && l.id !== item.id)
+      .filter((l) => l.courseId === courseId && l.id !== item.id)
       .sort((a, b) => a.order - b.order);
     const pos = Math.min(
       Math.max(1, wantedOrder || others.length + 1),
@@ -335,24 +414,41 @@ const LearningStore = {
     others.forEach((l, i) => (l.order = i + 1));
   },
 
-  addLesson(batch, data) {
+  // Các đợt (id) mà giảng viên được phép chọn cho bài học của khóa này
+  allowedBatchIds(user, courseId) {
+    return this.myBatches(user)
+      .filter((b) => b.courseId === courseId)
+      .map((b) => b.id);
+  },
+
+  // Gộp lựa chọn đợt của giảng viên vào danh sách đợt hiện có của bài học:
+  // chỉ thay đổi các đợt thuộc quyền giảng viên, giữ nguyên đợt do giảng viên khác phụ trách
+  mergeBatchIds(user, courseId, oldIds, chosenIds) {
+    const mine = new Set(this.allowedBatchIds(user, courseId));
+    const keep = (oldIds || []).filter((id) => !mine.has(id));
+    const add = (chosenIds || []).filter((id) => mine.has(id));
+    return Array.from(new Set(keep.concat(add)));
+  },
+
+  // course: khóa học; data.batchIds: các đợt được hiển thị (có thể rỗng = chưa hiển thị đợt nào)
+  addLesson(course, data) {
     const all = this.read("lessons");
     const now = new Date().toISOString();
     const item = {
       id: this.nextId("BH", all, 3),
-      batchId: batch.id,
-      courseId: batch.courseId,
+      courseId: course.id,
       name: data.name.trim(),
       description: (data.description || "").trim(),
       content: (data.content || "").trim(),
       videoUrl: (data.videoUrl || "").trim(),
       order: data.order,
       status: data.status === "hidden" ? "hidden" : "visible",
+      batchIds: Array.from(new Set(data.batchIds || [])),
       createdAt: now,
       updatedAt: now,
     };
     all.push(item);
-    this._place(all, batch.id, item, data.order);
+    this._place(all, course.id, item, data.order);
     return this.write("lessons", all) ? item : null;
   },
 
@@ -365,8 +461,20 @@ const LearningStore = {
     item.content = (data.content || "").trim();
     item.videoUrl = (data.videoUrl || "").trim();
     item.status = data.status === "hidden" ? "hidden" : "visible";
+    if (Array.isArray(data.batchIds))
+      item.batchIds = Array.from(new Set(data.batchIds));
     item.updatedAt = new Date().toISOString();
-    this._place(all, item.batchId, item, data.order);
+    this._place(all, item.courseId, item, data.order);
+    return this.write("lessons", all);
+  },
+
+  // Chọn đợt hiển thị nhanh (không sửa nội dung bài học)
+  setLessonBatches(id, batchIds) {
+    const all = this.read("lessons");
+    const item = all.find((l) => l.id === id);
+    if (!item) return false;
+    item.batchIds = Array.from(new Set(batchIds || []));
+    item.updatedAt = new Date().toISOString();
     return this.write("lessons", all);
   },
 
@@ -401,7 +509,7 @@ const LearningStore = {
       .forEach((a) => this.deleteAssignment(a.id));
     const rest = all.filter((l) => l.id !== id);
     rest
-      .filter((l) => l.batchId === item.batchId)
+      .filter((l) => l.courseId === item.courseId)
       .sort((a, b) => a.order - b.order)
       .forEach((l, i) => (l.order = i + 1));
     return this.write("lessons", rest);
@@ -420,9 +528,12 @@ const LearningStore = {
       .sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
   },
 
+  // Bài tập của các bài học đang hiển thị ở ít nhất 1 trong các đợt
   getAssignmentsOfBatches(batchIds) {
-    const set = new Set(batchIds);
-    return this.read("assignments").filter((a) => set.has(a.batchId));
+    const lessonIds = new Set(
+      this.getLessonsOfBatches(batchIds).map((l) => l.id),
+    );
+    return this.read("assignments").filter((a) => lessonIds.has(a.lessonId));
   },
 
   isOverdue(a) {
@@ -479,8 +590,8 @@ const LearningStore = {
     const all = this.read("assignments");
     const item = {
       id: this.nextId("BT", all, 3),
-      batchId: lesson.batchId, // bài tập thuộc đúng đợt của bài học
-      courseId: lesson.courseId,
+      courseId: lesson.courseId, // bài tập thuộc bài học (và khóa học); đợt nào thấy bài học thì thấy bài tập
+
       lessonId: lesson.id,
       name: data.name.trim(),
       description: data.description.trim(),
@@ -539,13 +650,24 @@ const LearningStore = {
     return this.read("submissions").find((s) => s.id === id);
   },
 
-  // Truyền user (giảng viên) để chỉ lấy bài nộp của học viên thuộc đợt của người đó
-  getSubmissionsOfAssignment(assignmentId, user) {
-    const a = user ? this.getAssignment(assignmentId) : null;
+  // Truyền user (giảng viên) để chỉ lấy bài nộp của học viên thuộc đợt của người đó (và đợt có hiển thị bài học).
+  // Truyền batchId để chỉ lấy bài nộp của học viên đúng đợt đó.
+  getSubmissionsOfAssignment(assignmentId, user, batchId) {
+    const a = this.getAssignment(assignmentId);
+    const lesson = a ? this.getLesson(a.lessonId) : null;
     return this.read("submissions")
       .filter((s) => s.assignmentId === assignmentId)
-      .filter((s) => !user || (a && this.isMyStudent(user, a.batchId, s.studentId)))
-      .sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
+      .filter(
+        (s) =>
+          !user ||
+          (lesson && this.isMyStudentOfLesson(user, lesson, s.studentId)),
+      )
+      .filter(
+        (s) =>
+          !batchId ||
+          (a && this.batchIdOfStudent(s.studentId, a.courseId) === batchId),
+      )
+      .sort((x, y) => new Date(y.submittedAt) - new Date(x.submittedAt));
   },
 
   submissionOf(studentId, assignmentId) {
@@ -578,8 +700,10 @@ const LearningStore = {
   submitWork(studentId, assignmentId, link) {
     const a = this.getAssignment(assignmentId);
     if (!a) return { ok: false, error: "Không tìm thấy bài tập." };
-    // Chỉ học viên thuộc ĐÚNG đợt của bài tập mới nộp được (đợt khác thì không)
-    if (!this.inBatch(studentId, a.batchId))
+    // Chỉ học viên thuộc đợt đang được hiển thị bài học này mới nộp được (đợt khác thì không)
+    const lessonOfA = this.getLesson(a.lessonId);
+    const myBatch = this.batchIdOfStudent(studentId, a.courseId);
+    if (!lessonOfA || !myBatch || !(lessonOfA.batchIds || []).includes(myBatch))
       return {
         ok: false,
         error: "Bài tập này không thuộc đợt học của bạn.",
@@ -631,13 +755,18 @@ const LearningStore = {
     const sub = this.getSubmission(submissionId);
     if (!sub) return { ok: false, error: "Không tìm thấy bài nộp." };
     const a = this.getAssignment(sub.assignmentId);
-    if (!a || !this.ownBatch(user, a.batchId))
+    const lessonOfA = a ? this.getLesson(a.lessonId) : null;
+    if (
+      !a ||
+      !lessonOfA ||
+      !this.myCourses(user).some((c) => c.id === a.courseId)
+    )
       return {
         ok: false,
-        error: "Bạn không phụ trách đợt học của bài tập này.",
+        error: "Bạn không phụ trách khóa học của bài tập này.",
       };
 
-    if (!this.isMyStudent(user, a.batchId, sub.studentId))
+    if (!this.isMyStudentOfLesson(user, lessonOfA, sub.studentId))
       return { ok: false, error: "Học viên này không thuộc đợt học của bạn." };
 
     const errors = this.validateResult(data, a.maxScore);
@@ -677,14 +806,26 @@ const LearningStore = {
     };
   },
 
-  // Các bài nộp chờ chấm thuộc những đợt học của giảng viên (mới nộp trước)
+  // Các bài nộp chờ chấm của học viên thuộc những đợt học của giảng viên (mới nộp trước)
   pendingSubmissions(user) {
-    const batchOf = {};
-    this.getAssignmentsOfBatches(this.myBatches(user).map((b) => b.id)).forEach((a) => (batchOf[a.id] = a.batchId));
+    const lessons = {};
+    this.getLessonsOfBatches(this.myBatches(user).map((b) => b.id)).forEach(
+      (l) => (lessons[l.id] = l),
+    );
+    const asg = {};
+    this.getAssignmentsOfBatches(this.myBatches(user).map((b) => b.id)).forEach(
+      (a) => (asg[a.id] = a),
+    );
     const map = this.resultMap();
     return this.read("submissions")
-      .filter((s) => batchOf[s.assignmentId] && !map[s.id])
-      .filter((s) => this.isMyStudent(user, batchOf[s.assignmentId], s.studentId))
+      .filter((s) => asg[s.assignmentId] && !map[s.id])
+      .filter((s) =>
+        this.isMyStudentOfLesson(
+          user,
+          lessons[asg[s.assignmentId].lessonId],
+          s.studentId,
+        ),
+      )
       .sort((a, b) => new Date(a.submittedAt) - new Date(b.submittedAt));
   },
 
@@ -696,9 +837,18 @@ const LearningStore = {
     const purchased = Store.purchasedCourses(studentId);
     const names = {};
     purchased.forEach((p) => (names[p.courseId] = p.name));
-    const batchIds = Store.get("classes").filter((k) => k.studentId === studentId && k.batchId).map((k) => k.batchId);
+    const batchIds = Store.get("classes")
+      .filter((k) => k.studentId === studentId && k.batchId)
+      .map((k) => k.batchId);
     const lessons = {};
-    this.getLessonsOfBatches(batchIds).forEach((l) => (lessons[l.id] = l));
+    // Chỉ bài học đang hiển thị ở ĐÚNG đợt của học viên (đợt học viên được phân cho khóa đó)
+    this.getLessonsOfBatches(batchIds)
+      .filter((l) =>
+        (l.batchIds || []).includes(
+          this.batchIdOfStudent(studentId, l.courseId),
+        ),
+      )
+      .forEach((l) => (lessons[l.id] = l));
     const results = this.resultMap();
     const mySubs = this.read("submissions").filter(
       (s) => s.studentId === studentId,
@@ -731,7 +881,9 @@ const LearningStore = {
     const courses = Store.get("courses");
     let changed = false;
     courses.forEach((c) => {
-      const names = String(c.instructor || "").split(",").map((n) => n.trim());
+      const names = String(c.instructor || "")
+        .split(",")
+        .map((n) => n.trim());
       const i = names.findIndex((n) => learnNorm(n) === learnNorm(oldName));
       if (i >= 0) {
         names[i] = newName;
@@ -743,62 +895,22 @@ const LearningStore = {
   },
 
   /* =======================================================
-     NỘI DUNG CỦA ĐỢT HỌC (dùng khi admin tạo / xóa đợt)
+     ĐỢT HỌC <-> BÀI HỌC
+     Bài học thuộc khóa học; đợt chỉ "được hiển thị". Xóa đợt chỉ gỡ đợt khỏi danh sách hiển thị,
+     không xóa bài học (bài học vẫn dùng được cho đợt khác).
      ======================================================= */
-  // Tạo sẵn vài bài học + bài tập mẫu cho 1 đợt 
-  seedBatchContent(batch) {
-    const course = Store.getCourse(batch.courseId);
-    const names = LESSON_TEMPLATES.default;
-    names.forEach((name, i) => {
-      const lesson = this.addLesson(batch, {
-        name: name,
-        description: 'Nội dung bài "' + name + '"' + (course ? " thuộc khóa học " + course.name : "") + ".",
-        content: "Mục tiêu bài học:\n- Nắm khái niệm chính của bài.\n- Làm theo ví dụ trong video.\n- Tự thực hành lại sau khi học xong.",
-        videoUrl: "",
-        order: i + 1,
-        status: "visible",
-      });
-      if (lesson && (i === 1 || i === 3)) {
-        const dl = new Date(batch.startDate + "T23:59");
-        dl.setDate(dl.getDate() + 14 * (i === 1 ? 1 : 3));
-        this.addAssignment(lesson, {
-          name: "Bài tập: " + name,
-          description: 'Thực hành theo nội dung bài "' + name + '". Đưa mã nguồn lên GitHub hoặc CodePen rồi nộp đường dẫn.',
-          guide: "Xem lại video bài giảng và làm theo từng bước trong phần nội dung bài học.",
-          deadline: toLocalInput(dl),
-          maxScore: DEFAULT_MAX_SCORE,
-        });
-      }
-    });
+  // Số bài học đang hiển thị ở 1 đợt
+  batchLessonCount(batchId) {
+    return this.getLessons(batchId).length;
   },
 
-  // Sao chép bài học + bài tập từ đợt cũ sang đợt mới (bản sao độc lập, không chép bài nộp / điểm)
-  copyBatchContent(fromBatchId, toBatch) {
-    this.getLessons(fromBatchId).forEach((l) => {
-      const copy = this.addLesson(toBatch, {
-        name: l.name,
-        description: l.description,
-        content: l.content,
-        videoUrl: l.videoUrl,
-        order: l.order,
-        status: l.status,
-      });
-      if (!copy) return;
-      this.getAssignmentsOfLesson(l.id).forEach((a) => {
-        this.addAssignment(copy, {
-          name: a.name,
-          description: a.description,
-          guide: a.guide,
-          deadline: a.deadline,
-          maxScore: a.maxScore,
-        });
-      });
-    });
-  },
-
-  // Xóa toàn bộ bài học, bài tập, bài nộp, điểm của 1 đợt (khi admin xóa đợt)
+  // Gỡ đợt khỏi mọi bài học (khi admin xóa đợt)
   removeBatchContent(batchId) {
-    this.getLessons(batchId).forEach((l) => this.deleteLesson(l.id));
+    const all = this.read("lessons");
+    all.forEach((l) => {
+      l.batchIds = (l.batchIds || []).filter((id) => id !== batchId);
+    });
+    return this.write("lessons", all);
   },
 };
 

@@ -143,7 +143,8 @@ const StudentStore = {
   visibleLessons(courseId, studentId) {
     const rec = Store.classOfStudent(studentId || this.currentStudentId(), courseId);
     if (!rec || !rec.batchId) return [];
-    return LearningStore.getLessons(rec.batchId).map(LearnAdapter.lesson).filter((l) => l.status === "visible");
+    // Chỉ bài học đang hiển thị ở ĐỢT của học viên (giảng viên đã chọn đợt này cho bài học) và không bị ẩn
+    return LearningStore.getLessons(rec.batchId).map(LearnAdapter.lesson).filter((l) => l.status === "visible" && l.courseId === courseId);
   },
 
   // Nhóm bài học theo "chương học". Bài không ghi chương thuộc nhóm chung
@@ -180,7 +181,7 @@ const StudentStore = {
   setLessonDone(studentId, lessonId, done) {
     const lesson = this.getLesson(lessonId);
     if (!lesson || lesson.status !== "visible") return { ok: false, error: "Bài học không khả dụng." };
-    if (!LearningStore.inBatch(studentId, lesson.batchId)) return { ok: false, error: "Bài học này không thuộc đợt học của bạn." };
+    if (!(lesson.batchIds || []).includes(LearningStore.batchIdOfStudent(studentId, lesson.courseId))) return { ok: false, error: "Bài học này không thuộc đợt học của bạn." };
     const list = this.read(STUDENT_KEYS.progress, []);
     const idx = list.findIndex((p) => p.studentId === studentId && p.lessonId === lessonId);
     if (done && idx < 0) list.push({ studentId: studentId, courseId: lesson.courseId, lessonId: lessonId, completedAt: new Date().toISOString() });
@@ -322,7 +323,7 @@ const StudentStore = {
     if (!a) return { ok: false, error: "Không tìm thấy bài tập." };
     const lesson = this.getLesson(a.lessonId);
     if (!lesson || lesson.status !== "visible") return { ok: false, error: "Bài tập này hiện không khả dụng." };
-    if (!LearningStore.inBatch(studentId, lesson.batchId)) return { ok: false, error: "Bài tập này không thuộc đợt học của bạn." };
+    if (!(lesson.batchIds || []).includes(LearningStore.batchIdOfStudent(studentId, lesson.courseId))) return { ok: false, error: "Bài tập này không thuộc đợt học của bạn." };
     const existing = this.mySubmissions(studentId).find((s) => s.assignmentId === assignmentId);
     if (existing && existing.status === "graded") return { ok: false, error: "Bài đã được chấm điểm nên không thể nộp lại." };
     return LearningStore.submitWork(studentId, assignmentId, link);

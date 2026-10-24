@@ -22,7 +22,7 @@
       <div class="page-head">
         <div>
           <h1>Quản lý bài học</h1>
-          <p>Chọn khóa học và đợt học bạn phụ trách. Bài học của mỗi đợt riêng biệt: thêm, sửa, xóa ở đợt này không ảnh hưởng đợt khác.</p>
+          <p>Tạo sẵn bài học trên khóa học bạn phụ trách, rồi chỉ cần chọn đợt học để hiển thị bài học đó cho học viên của đợt.</p>
         </div>
         <div class="page-actions">
           <button class="btn btn-primary" id="btn-add"><i class="fa-solid fa-plus"></i> Thêm bài học</button>
@@ -32,7 +32,7 @@
       <div class="card">
         <div class="toolbar">
           <select id="course-select" style="width: 300px; max-width: 100%"></select>
-          <select id="batch-select" style="width: 270px; max-width: 100%"></select>
+          <select id="filter-batch" style="width: 270px; max-width: 100%" title="Lọc bài học theo đợt được hiển thị"></select>
           <div class="search-box">
             <i class="fa-solid fa-magnifying-glass"></i>
             <input type="text" id="search" placeholder="Tìm bài học theo tên..." />
@@ -58,7 +58,7 @@
               <input type="text" id="f-id" readonly />
             </div>
             <div class="form-group">
-              <label>Khóa học · Đợt học</label>
+              <label>Khóa học</label>
               <input type="text" id="f-course" readonly />
             </div>
           </div>
@@ -98,10 +98,32 @@
               </select>
             </div>
           </div>
+          <div class="form-group" style="margin: 16px 0 0">
+            <label>Hiển thị ở đợt học</label>
+            <div class="batch-checks" id="f-batches"></div>
+            <div class="hint">Chỉ học viên thuộc đợt được chọn mới thấy bài học và nộp bài; bạn chỉ xem được bài nộp của học viên trong các đợt này. Có thể để trống và chọn sau.</div>
+          </div>
         </div>
         <div class="modal-footer">
           <button class="btn btn-outline" data-close>Hủy</button>
           <button class="btn btn-primary" id="btn-save"><i class="fa-solid fa-floppy-disk"></i> Lưu bài học</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal chọn nhanh đợt hiển thị -->
+    <div class="modal-overlay" id="batch-modal" data-static>
+      <div class="modal-box">
+        <div class="modal-header">
+          <h3 id="batch-modal-title">Chọn đợt hiển thị</h3>
+          <button class="modal-close" data-close><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="modal-body">
+          <div class="batch-checks" id="q-batches"></div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline" data-close>Hủy</button>
+          <button class="btn btn-primary" id="btn-save-batches"><i class="fa-solid fa-floppy-disk"></i> Lưu</button>
         </div>
       </div>
     </div>

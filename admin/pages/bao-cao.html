@@ -21,19 +21,22 @@
           <h1>Báo cáo thống kê</h1>
           <p>Số liệu được tính trực tiếp từ các đơn hàng và học viên đã lưu.</p>
         </div>
-        <div class="page-actions">
-          <select id="period" style="width: 200px">
-            <option value="3">3 tháng gần nhất</option>
-            <option value="6" selected>6 tháng gần nhất</option>
-            <option value="12">12 tháng gần nhất</option>
-          </select>
+        <div class="page-actions" style="flex-wrap: wrap">
+          <div class="field-inline">
+            Từ ngày <input type="date" id="date-from" style="width: 155px" />
+            đến ngày <input type="date" id="date-to" style="width: 155px" />
+          </div>
+          <button class="btn btn-outline" id="btn-reset">
+            <i class="fa-solid fa-rotate-left"></i> 6 tháng gần nhất
+          </button>
         </div>
       </div>
+      <div class="error-text" id="e-range" style="margin: -8px 0 14px"></div>
 
       <div class="stat-grid" id="stat-grid"></div>
 
       <div class="card" style="margin-bottom: 18px">
-        <div class="card-head"><h2>Doanh thu theo tháng</h2><span class="text-muted" style="font-size: 13px">Chỉ tính đơn Hoàn thành</span></div>
+        <div class="card-head"><h2 id="revenue-title">Doanh thu theo tháng</h2><span class="text-muted" style="font-size: 13px">Chỉ tính đơn Hoàn thành</span></div>
         <div class="card-body">
           <div class="chart" id="revenue-chart"></div>
           <div class="chart-labels" id="revenue-labels"></div>

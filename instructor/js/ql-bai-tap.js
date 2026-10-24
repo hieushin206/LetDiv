@@ -8,24 +8,27 @@ function initAssignmentPage() {
   const $ = (id) => document.getElementById(id);
   const FIELDS = ["name", "description", "guide", "deadline", "maxScore"];
 
-  // Bài học phải thuộc khóa học mà giảng viên phụ trách
-  // Bài học phải thuộc 1 ĐỢT HỌC mà giảng viên phụ trách
+  // Bài học phải thuộc khóa học mà giảng viên phụ trách (bài học thuộc khóa, đợt chỉ quyết định hiển thị)
   const lesson = LearningStore.getLesson(Ins.param("lesson"));
-  const batch = lesson ? LearningStore.ownBatch(Ins.user, lesson.batchId) : null;
-  const course = batch ? Store.getCourse(batch.courseId) : null;
-  if (!lesson || !batch || !course) {
+  const course = lesson ? LearningStore.ownCourse(Ins.user, lesson.courseId) : null;
+  if (!lesson || !course) {
     $("main-card").innerHTML =
-      '<div class="empty-state"><i class="fa-solid fa-triangle-exclamation"></i><h3>Không tìm thấy bài học</h3><p>Bài học không tồn tại hoặc không thuộc đợt học bạn phụ trách.</p>' +
+      '<div class="empty-state"><i class="fa-solid fa-triangle-exclamation"></i><h3>Không tìm thấy bài học</h3><p>Bài học không tồn tại hoặc không thuộc khóa học bạn phụ trách.</p>' +
       '<a class="btn btn-primary" href="ql-bai-hoc.html">Về danh sách bài học</a></div>';
     $("btn-add").disabled = true;
     return;
   }
 
-  const back = "ql-bai-hoc.html?course=" + course.id + "&batch=" + batch.id;
+  const back = "ql-bai-hoc.html?course=" + course.id;
   $("btn-back").href = back;
+  const shownIn = Ins.batches(course.id)
+    .filter((b) => (lesson.batchIds || []).includes(b.id))
+    .map((b) => b.name);
   $("crumb").innerHTML =
-    '<a href="' + back + '">' + UI.esc(course.name) + '</a><i class="fa-solid fa-chevron-right"></i><span>' + UI.esc(batch.name) + '</span><i class="fa-solid fa-chevron-right"></i><span>Bài ' + lesson.order + ": " + UI.esc(lesson.name) + "</span>";
-  $("lesson-text").textContent = "Các bài tập của bài học \"" + lesson.name + "\".";
+    '<a href="' + back + '">' + UI.esc(course.name) + '</a><i class="fa-solid fa-chevron-right"></i><span>Bài ' + lesson.order + ": " + UI.esc(lesson.name) + "</span>";
+  $("lesson-text").textContent =
+    "Các bài tập của bài học \"" + lesson.name + "\". " +
+    (shownIn.length ? "Đang hiển thị ở: " + shownIn.join(", ") + "." : "Bài học chưa được chọn đợt nào nên học viên chưa thấy.");
 
   let editingId = null;
 
